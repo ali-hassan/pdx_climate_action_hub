@@ -378,8 +378,17 @@ ActiveRecord::Schema.define(version: 20160823120845) do
 
   add_index "emails", ["address", "community_id"], name: "index_emails_on_address_and_community_id", unique: true, using: :btree
   add_index "emails", ["address"], name: "index_emails_on_address", using: :btree
-  add_index "emails", ["community_id"], name: "index_emails_on_community_id", using: :btree
   add_index "emails", ["person_id"], name: "index_emails_on_person_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "listing_id", limit: 4
+  end
+
+  add_index "events", ["listing_id"], name: "index_listing_id", using: :btree
 
   create_table "feature_flags", force: :cascade do |t|
     t.integer  "community_id", limit: 4,                  null: false
@@ -549,6 +558,7 @@ ActiveRecord::Schema.define(version: 20160823120845) do
     t.boolean  "pickup_enabled",                                default: false
     t.integer  "shipping_price_cents",            limit: 4
     t.integer  "shipping_price_additional_cents", limit: 4
+    t.string   "external_payment_link",           limit: 256
   end
 
   add_index "listings", ["category_id"], name: "index_listings_on_new_category_id", using: :btree
@@ -873,12 +883,6 @@ ActiveRecord::Schema.define(version: 20160823120845) do
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true, using: :btree
   add_index "people", ["username", "community_id"], name: "index_people_on_username_and_community_id", unique: true, using: :btree
   add_index "people", ["username"], name: "index_people_on_username", using: :btree
-
-  create_table "prospect_emails", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255,   null: false

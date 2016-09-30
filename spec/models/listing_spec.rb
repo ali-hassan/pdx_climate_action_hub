@@ -44,6 +44,7 @@
 #  pickup_enabled                  :boolean          default(FALSE)
 #  shipping_price_cents            :integer
 #  shipping_price_additional_cents :integer
+#  external_payment_link           :string(256)
 #
 # Indexes
 #
