@@ -89,16 +89,18 @@ tr-TR:
         favicon: Favicon
         favicon_info_text: "Favicon default Sharetribe logosunun yerini alacaktır. Ebatlar 32x32 piksel olmalıdır ve yüklenen görseller bu boya getirilecektir."
         community_custom_color1: "Ana renk"
-        community_custom_color2: "İkincil renk"
+        new_listing_button_custom_color: ~
         logo_instructions_text_with_dimensions: "Masaüstü logo ebatları %{width}x%{height} olmalıdır. Büyük ekrana sahip üyelere gösterilecektir."
+        logo_instructions_text_with_dimensions_no_placing: ~
         logo_icon_instructions_text_with_dimensions: "Mobil logo kare şeklinde, tercihen %{width}x%{height} px ebatlarında olmalıdır. Küçük ekrana sahip kullanıcılara gösterilecektir."
+        logo_icon_instructions_text_with_dimensions_no_placing: ~
         cover_photo_visibility: "Kapak fotoğrafı ana sayfada giriş yapmamış kullanıcılara gösterilecektir."
         cover_photo_instructions_text_with_dimensions: "Görsel %{width}x%{height} piksel boyutlarında küçültülecek ve uzun görseller ortadan kesilecektir. %{see_how_it_looks_like}."
         small_cover_photo_visibility: "Küçük kapak fotoğrafı ana sayfadaki giriş yapmamış kullanıcılar hariç bütün sayfalarda gösterilir."
         small_cover_photo_instructions_text_with_dimensions: "Görsel %{width}x%{height} piksel boyutlarında küçültülecek ve uzun görseller ortadan kesilecektir."
         main_content_width: "Kapak fotoğrafı seçerken, ana sayfa içeriğinin azami %{main_width} piksel olduğunu unutmayın. Aynı zamanda kapak fotoğrafınızın küçük ekranlarda nasıl görüntülendiğini kontrol edin (örneğin; dar bir tarayıcı penceresi)."
         custom_color1_instructions_text: "Kullanıcı arayüzünün ana rengini onaltılık renk değeri girerek değiştirebilirsiniz. <a href=\"http://www.colorpicker.com/?colorcode=D96E21\" target=\"_blank\" rel=\"noreferrer\">ColorPicker.com</a> rengi seçip kodu buraya yapıştırmanıza yardım edecektir."
-        custom_color2_instructions_text: ~
+        new_listing_button_instructions_text: ~
         default_browse_view: "Default tarayıcı görünümü"
         default_browse_view_instructions_text: "Default tarayıcı görünümü ana sayfada listelemelerin default olarak nasıl görüntülendiğini görmek için kullanılır."
         grid: Grid
@@ -275,6 +277,10 @@ tr-TR:
         all: ~
         max_number_of_links_info: ~
         about_page: ~
+      topbar:
+        topbar: ~
+        new_listing_button_label: ~
+        invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: ~
         transactions: "İşlemleri görüntüle"
@@ -372,6 +378,11 @@ tr-TR:
       subscription: ~
       preview: ~
     listing_shapes:
+      availability_title: ~
+      allow_availability_management: ~
+      per_day_availability: ~
+      per_night_availability: ~
+      pricing_units_disabled_info: ~
       index:
         listing_shapes: ~
         description: ~
@@ -839,7 +850,6 @@ tr-TR:
       title_link_text: "%{community_name}"
       intro_paragraph: "Son %{time_since_last_update} içinde %{community_link}'deki etkinliklerden bazıları."
       intro_paragraph_link_text: "%{community_name}"
-      post_a_new_listing: "Yeni İlan Ekle"
       reduce_email_footer_text: "Çok fazla e-posta mı alıyorsunuz? %{settings_link} ya da %{unsubscribe_link}."
       settings_link_text: "E-posta ayarlarınızı buradan düzenleyin"
       unsubscribe_link_text: "Aboneliği sonlandır"
@@ -870,23 +880,6 @@ tr-TR:
       love_marketplace_crew: "Sevgiler, <br /><i>%{service_name} ekibi</i>"
       welcome_email_footer_text: "%{service_name}'den hangi e-postaları almak istiyorsunuz? %{settings_link}"
       settings_link_text: "Ayarlarınızı kontrol ediniz"
-      welcome_email_subject_for_marketplace_creator: "Sharetribe'a hoş geldiniz"
-      welcome_to_marketplace_creator: "%{name}, Sharetribe'a hoş geldin!"
-      congrats_for_creating_your_marketplace: "Pazarınızı oluşturduğunuz için sizi tebrik ederiz. Bu hiç de zor olmadı, değil mi?"
-      here_is_your_account_information: "Hesap bilgileriniz burada."
-      your_email_address: "Giriş yaparken kullandığınız e-posta adresi:"
-      your_marketplace_address: "Pazar adresiniz:"
-      your_marketplace_admin_area: "Pazar yöneticisi alanınız:"
-      just_follow_details: "Bağlantıları takip edin ve pazarınızı oluşturmak için ayrıntılı bilgileri bulacaksınız!"
-      we_will_guide_you_along_the_way: "Bu işlem süresince size yardımcı olacağız."
-      are_you_new_to_online_marketplaces: "Çevrimiçi pazarlarda yeni misiniz? Merak etmeyin, biz burada size yardımcı olmak için varız. Sharetribe'dan en iyi şekilde faydalanabilmeniz ve başarılı bir pazar işi kurabilmeniz için size yardım edecek çeşitli e-postalar göndereceğiz. İlk kısım en kısa zaman içerisinde elinizde olacak."
-      have_questions: "Sorularınız mı var?"
-      our_happiness_team_is_here_to_help: "Mutluluk ekibimiz sizin için burada! %{knowledge_base_link} ya da destek ekibimizle iletişime geçin."
-      love: "Sevgiler,"
-      sharetribe_crew: "Sharetribe ekibi"
-      knowledge_base_link_text: "Bilgi veri tabanımıza göz atın"
-      contact_support_link_text: "destek ile bağlantıya geç."
-      admin_panel_link_text: "yönetici paneli"
     new_listing_by_followed_person:
       subject: "%{author_name} %{service_name} pazar yerine yeni bir listeleme ekledi."
       has_posted_a_new_listing: "%{author_name} yeni bir listeleme ekledi."
@@ -898,6 +891,9 @@ tr-TR:
       person_name: Ad
       person_email: ~
   error_messages:
+    booking:
+      booking_failed_payment_voided: ~
+      double_booking_payment_voided: ~
     onboarding:
       server_rendering: ~
     listings:
@@ -1343,6 +1339,9 @@ tr-TR:
       open_in_google_maps: "Google Maps üzerinde aç."
     error:
       something_went_wrong: ~
+      something_went_wrong_plain: ~
+      create_failed_to_connect_to_booking_service: ~
+      update_failed_to_connect_to_booking_service: ~
     follow_links:
       follow: "Yeni yorumları e-posta olarak al"
       unfollow: "Yeni yorumları e-posta olarak alma"
@@ -1490,8 +1489,8 @@ tr-TR:
       booking_to: "'a"
       how_paypal_works: "PayPal Nasıl Çalışır"
       payment_help: ~
+      unable_load_availability: ~
     new:
-      post_a_new_listing: "Yeni İlan Ekle"
       listing: ilan
       selected_category: "Kategori: %{category}"
       selected_subcategory: "Alt kategori: %{subcategory}"
@@ -1565,6 +1564,8 @@ tr-TR:
       verification_required: "Doğrulama gerekli"
   listing_conversations:
     preauthorize:
+      dates_not_available: ~
+      error_in_checking_availability: ~
       details: Ayrıntılar
       by: "%{author} tarafından %{listing}"
       payment: Ödeme
@@ -1572,6 +1573,9 @@ tr-TR:
       you_will_be_charged: "Ödeme sadece %{author} kişisi işlemi kabul ettiğinde hesabınızdan düşülür. %{author} işlemi %{expiration_period} gün içerisinde kabul etmelidir. %{author} reddeder ya da cevap vermezse, hesabınızdan kesinti olmayacaktır."
       day: gün
       days: günler
+      night: ~
+      nights: ~
+      invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: Görüntüle.
   mapview:
@@ -1611,6 +1615,7 @@ tr-TR:
     connected_account: "'%{email}' PayPal hesabı başarıyla eklendi."
     paypal_receive_funds_info_label_australia_only: ~
     paypal_receive_funds_info_label: ~
+    paypal_receive_funds_info_australia_only: ~
     paypal_receive_funds_info: ~
     upgrade_paypal_account_link_text: ~
     admin_account_not_connected: ~
@@ -1994,7 +1999,9 @@ tr-TR:
   transactions:
     initiate:
       booked_days: ~
+      booked_nights: ~
       price_per_day: "Günlük ücret:"
+      price_per_night: ~
       quantity: "Adet:"
       subtotal: "Ara Toplam:"
       shipping-price: "Kargo:"
@@ -2007,6 +2014,19 @@ tr-TR:
     day: gün
     days: günler
   web:
+    listings:
+      pricing_units:
+        piece: ~
+        hour: ~
+        day: ~
+        night: ~
+        week: ~
+        month: ~
+    no_listings:
+      sorry: ~
+      try_other_search_terms: ~
+    listing_card:
+      no_picture: ~
     topbar:
       menu: ~
       more: ~
@@ -2022,6 +2042,13 @@ tr-TR:
       signup: ~
       admin_dashboard: ~
       language: ~
+    utils:
+      km: ~
+      mi: ~
+    branding:
+      powered_by: ~
+      create_own: ~
+      learn_more: ~
   will_paginate:
     models:
       person:

@@ -99,16 +99,18 @@ cs:
         favicon: "Ikona webové stránky"
         favicon_info_text: "Ikona webové stránky nahradí výchozí Sharetribe logo. Rozlišení by mělo být 32x32 pixelů a nahraný obrázek bude přizpůsoben těmto rozměrům."
         community_custom_color1: "Základní barva"
-        community_custom_color2: "Druhá barva"
+        new_listing_button_custom_color: ~
         logo_instructions_text_with_dimensions: "Logo pozadí by mělo být %{width}x%{height}px. Toto logo se zobrazí uživatelům s většími obrazovkami."
+        logo_instructions_text_with_dimensions_no_placing: ~
         logo_icon_instructions_text_with_dimensions: "Toto čtvercové logo se zobrazí v případě, pokud lidé sdílí Vaše stránky na Facebooku, když si je prohlížejí na mobilním zařízení nebo když nastaví Vaše stránky jako domovskou stránku na jejich mobilním zařízení. Rozměry by měly být (alespoň) %{width}x%{height}px."
+        logo_icon_instructions_text_with_dimensions_no_placing: ~
         cover_photo_visibility: "Úvodní fotka se zobrazí na domovské stránce nepřihlášeným uživatelům."
         cover_photo_instructions_text_with_dimensions: "Fotografie budou přizpůsobeny velikosti %{width}x%{height} pixelů a větší snímky budou ořezány. %{see_how_it_looks_like}"
         small_cover_photo_visibility: "Malá úvodní fotka se zobrazí nepřihlášeným uživatelům na všech stránkách kromě domovské stránky."
         small_cover_photo_instructions_text_with_dimensions: "Fotografie bude přizpůsobena velikosti %{width}x%{height} pixelů a větší obrázky budou ořezány."
         main_content_width: "Při výběru úvodních fotek vezměte na vědomí, že rozlišení hlavní stránky je maximálně %{main_width} pixelů na šířku. Nezapomeňte také zkontrolovat, jak bude Vaše úvodní fotografie vypadat na menších obrazovkách. (např. použitím užších oken vyhledávačů)."
         custom_color1_instructions_text: "Můžete změnit základní barvu uživatelského rozhraní zadáním hodnoty hexa barvy. Na <a href=\"http://www.colorpicker.com/?colorcode=D96E21\" target=\"_blank\" rel=\"noreferrer\">ColorPicker.com</a> si můžete vybrat barvu a následně sem bude zkopírován kód barvy."
-        custom_color2_instructions_text: ~
+        new_listing_button_instructions_text: ~
         default_browse_view: "Výchozí zobrazení prohlížeče"
         default_browse_view_instructions_text: "Výchozí zobrazení prohlížeče se používá na domovské stránce k nastavení, jak mají být inzeráty zobrazeny ve výchozím nastavení."
         grid: Mřížka
@@ -285,6 +287,10 @@ cs:
         all: ~
         max_number_of_links_info: ~
         about_page: ~
+      topbar:
+        topbar: ~
+        new_listing_button_label: ~
+        invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: "Exportovat vše do formátu CSV"
         transactions: Transakce
@@ -382,6 +388,11 @@ cs:
       subscription: ~
       preview: ~
     listing_shapes:
+      availability_title: ~
+      allow_availability_management: ~
+      per_day_availability: ~
+      per_night_availability: ~
+      pricing_units_disabled_info: ~
       index:
         listing_shapes: "Typy objednávek"
         description: "Zde můžete nastavit, jak bude Vaše stránka fungovat. Můžete se rozhodnout, zda Vaši uživatelé mohou pronajímat nebo prodávat nebo pouze přidávat příspěvky a komunikovat přes zprávy."
@@ -863,7 +874,6 @@ cs:
       title_link_text: "%{community_name}"
       intro_paragraph: "Zde jsou některé věci, které se staly na %{community_link} od %{time_since_last_update}."
       intro_paragraph_link_text: "%{community_name}"
-      post_a_new_listing: "Přidat nový inzerát!"
       reduce_email_footer_text: "Příliš mnoho e-mailů? %{settings_link} nebo %{unsubscribe_link}"
       settings_link_text: "Upravte nastavení Vašeho e-mailu zde"
       unsubscribe_link_text: "se odhlašte"
@@ -894,23 +904,6 @@ cs:
       love_marketplace_crew: "S pozdravem,<br /><i>%{service_name}</i>"
       welcome_email_footer_text: "Jaký druh e-mailů chcete dostávat od %{service_name}? %{settings_link}"
       settings_link_text: "Zkontrolujte si nastavení"
-      welcome_email_subject_for_marketplace_creator: "Vítejte v Sharetribe"
-      welcome_to_marketplace_creator: "Vítejte v Sharetribe, %{name}!"
-      congrats_for_creating_your_marketplace: "Gratulujeme k vytvoření Vašeho tržiště! Bylo to snadné, že?"
-      here_is_your_account_information: "Zde jsou informace o Vašem účtu."
-      your_email_address: "Pomocí této e-mailové adresy se budete přihlašovat:"
-      your_marketplace_address: "Adresa Vašeho tržiště:"
-      your_marketplace_admin_area: "Správce Vašeho tržiště:"
-      just_follow_details: "Stačí si projít tyto odkazy a zjistíte více informací o tom, jak začít budovat Vaše tržiště!"
-      we_will_guide_you_along_the_way: "Provedeme Vás."
-      are_you_new_to_online_marketplaces: "Potřebujete pomoci? Žádné obavy, jsme tu, abychom Vám pomohli! Pošleme Vám několik e-mailů, které Vám pomohou zjistit co nejvíce o Sharetribe a jak z tržiště úspěšně vybudovat podnikání. První část Vám brzy pošleme."
-      have_questions: "Máte nějaké otázky?"
-      our_happiness_team_is_here_to_help: "Náš tým je tu pro Vás! Buď %{knowledge_base_link} nebo kontaktujte %{admin_panel_link}."
-      love: "S pozdravem,"
-      sharetribe_crew: Sharetribe
-      knowledge_base_link_text: "se podívejte na naše podklady"
-      contact_support_link_text: "kontaktujte naši zákaznickou podporu"
-      admin_panel_link_text: "naši zákaznickou podporu"
     new_listing_by_followed_person:
       subject: "Uživatel %{author_name} přidal nový inzerát v %{service_name}"
       has_posted_a_new_listing: "Uživatel %{author_name} přidal nový inzerát:"
@@ -922,6 +915,9 @@ cs:
       person_name: ~
       person_email: ~
   error_messages:
+    booking:
+      booking_failed_payment_voided: ~
+      double_booking_payment_voided: ~
     onboarding:
       server_rendering: ~
     listings:
@@ -1367,6 +1363,9 @@ cs:
       open_in_google_maps: "Otevřít v Google Maps"
     error:
       something_went_wrong: "Něco se nezdařilo, kód chyby: %{error_code}"
+      something_went_wrong_plain: ~
+      create_failed_to_connect_to_booking_service: ~
+      update_failed_to_connect_to_booking_service: ~
     follow_links:
       follow: "Dostávat e-maily o nových příspěvcích"
       unfollow: "Nedostávat e-maily o nových příspěvcích"
@@ -1514,8 +1513,8 @@ cs:
       booking_to: Komu
       how_paypal_works: "Jak PayPal funguje"
       payment_help: "Nápověda k platbě"
+      unable_load_availability: ~
     new:
-      post_a_new_listing: "Přidat nový inzerát"
       listing: inzerát
       selected_category: "Kategorie: %{category}"
       selected_subcategory: "Podkategorie: %{subcategory}"
@@ -1589,6 +1588,8 @@ cs:
       verification_required: "Ověření požadováno"
   listing_conversations:
     preauthorize:
+      dates_not_available: ~
+      error_in_checking_availability: ~
       details: Podrobnosti
       by: "%{listing} od uživatele %{author}"
       payment: Platba
@@ -1596,6 +1597,9 @@ cs:
       you_will_be_charged: "Platba Vám bude zaúčtována pouze, když uživatel %{author} přijme podmínky transakce. Uživatel %{author} musí tyto podmínky přijmout do %{expiration_period} dní. Pokud tak uživatel %{author} neučiní či podmínky odmítne, tak platba nebude provedena."
       day: den
       days: dní
+      night: ~
+      nights: ~
+      invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: Zobrazit.
   mapview:
@@ -1635,6 +1639,7 @@ cs:
     connected_account: "Přihlášení k PayPal účtu %{email} proběhlo úspěšně."
     paypal_receive_funds_info_label_australia_only: ~
     paypal_receive_funds_info_label: ~
+    paypal_receive_funds_info_australia_only: ~
     paypal_receive_funds_info: ~
     upgrade_paypal_account_link_text: ~
     admin_account_not_connected: ~
@@ -2039,7 +2044,9 @@ cs:
   transactions:
     initiate:
       booked_days: "Zarezervované dny:"
+      booked_nights: ~
       price_per_day: "Cena za den:"
+      price_per_night: ~
       quantity: "Množství:"
       subtotal: "Mezisoučet:"
       shipping-price: "Doprava:"
@@ -2052,6 +2059,19 @@ cs:
     day: den
     days: dny
   web:
+    listings:
+      pricing_units:
+        piece: ~
+        hour: ~
+        day: ~
+        night: ~
+        week: ~
+        month: ~
+    no_listings:
+      sorry: ~
+      try_other_search_terms: ~
+    listing_card:
+      no_picture: ~
     topbar:
       menu: ~
       more: ~
@@ -2067,6 +2087,13 @@ cs:
       signup: ~
       admin_dashboard: ~
       language: ~
+    utils:
+      km: ~
+      mi: ~
+    branding:
+      powered_by: ~
+      create_own: ~
+      learn_more: ~
   will_paginate:
     models:
       person:

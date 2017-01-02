@@ -57,6 +57,10 @@ FactoryGirl.define do
     SecureRandom.urlsafe_base64
   end
 
+  sequence :uuid do
+    UUIDUtils.create_raw
+  end
+
   sequence :username do |n|
     "kassi_tester#{n}"
   end
@@ -108,6 +112,7 @@ FactoryGirl.define do
     privacy "public"
     listing_shape_id 123
     price Money.new(20, "USD")
+    uuid
   end
 
   factory :transaction do
@@ -120,6 +125,10 @@ FactoryGirl.define do
     commission_from_seller 0
     automatic_confirmation_after_days 14
     listing_quantity 1
+    listing_uuid { listing.uuid } # raw UUID
+    community_uuid { community.uuid } # raw UUID
+    starter_uuid { starter.uuid } # raw UUID
+    listing_author_uuid { listing.author.uuid } # raw UUID
   end
 
   factory :conversation do
@@ -183,6 +192,8 @@ FactoryGirl.define do
     has_many(:community_customizations) do |community|
       FactoryGirl.build(:community_customization, community: community)
     end
+
+    uuid
   end
 
   factory :community_customization do

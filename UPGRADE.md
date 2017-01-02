@@ -12,7 +12,6 @@ When updating, always run the following commands to update gem set, database str
 bundle install
 npm install
 RAILS_ENV=production rake db:migrate
-RAILS_ENV=production rake sharetribe:generate_customization_stylesheets_immediately
 
 # if running on local instance (localhost), you need to precompile assets using once update is done:
 rake assets:precompile
@@ -33,6 +32,24 @@ heroku config:set next_maintenance_at="2016-04-29 17:15:00 +0000" --app=<your ap
 See instructions how to set application in [maintenance mode in Heroku](https://devcenter.heroku.com/articles/maintenance-mode).
 
 ## Unreleased
+
+## Upgrade from 6.0.0 to 6.1.0
+
+In this release we are introducing layout changes that require new image styles. Therefore, a migration is added to reprocess all images from open listings into new styles. This does not require any precautions, but if your marketplace has a lot of open listings the time required for image reprocessing can be reduced by increasing the number of workers until all `CreateSquareImagesJob` jobs have been processed.
+
+This release updates Node.js to the latest LTS (long term support) version 6.9. You should update your local Node.js to the same version and run `npm install` to update the NPM packages. There is now a strict enforcement for the Node.js version, and building the frontend bundles fail when using an unsupported version of Node.js.
+
+Alongside the updated NPM packages, also the `react_on_rails` gem is updated to match the NPM package version, and requires running `bundle install` to install the latest version.
+
+## Upgrade from 5.12.0 to 6.0.0
+
+Release 6.0.0 drops official support for MySQL server version 5.6. Please upgrade to 5.7 when upgrading Sharetribe. See the upgrade notes from release 5.12.0 below for more information.
+
+## Upgrade from 5.11.0 to 5.12.0
+
+**IMPORTANT:** This release deprecates use of MySQL server version 5.6.x. Please, consider upgrading to MySQL 5.7. Support for MySQL 5.6 will be dropped with the next release of Sharetribe. From this point onward, versions other than 5.7 might work, but are not guaranteed to work with Sharetribe. Make sure to back up your database before upgrading MySQL server. For general upgrade instructions, see [the official MySQL upgrade instructions](http://dev.mysql.com/doc/refman/5.7/en/upgrading.html).
+
+If you are using S3 and are using an AWS region other than `us-east-1`, you need to update your `config.yml` file and set the `s3_region` configuration option to the AWS region you are using. As with all configuration options, you can also pass it as an environment variable.
 
 ## Upgrade from 5.10.0 to 5.11.0
 

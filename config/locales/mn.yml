@@ -79,16 +79,18 @@ mn:
         favicon: ~
         favicon_info_text: ~
         community_custom_color1: ~
-        community_custom_color2: ~
+        new_listing_button_custom_color: ~
         logo_instructions_text_with_dimensions: ~
+        logo_instructions_text_with_dimensions_no_placing: ~
         logo_icon_instructions_text_with_dimensions: ~
+        logo_icon_instructions_text_with_dimensions_no_placing: ~
         cover_photo_visibility: ~
         cover_photo_instructions_text_with_dimensions: ~
         small_cover_photo_visibility: ~
         small_cover_photo_instructions_text_with_dimensions: ~
         main_content_width: ~
         custom_color1_instructions_text: ~
-        custom_color2_instructions_text: ~
+        new_listing_button_instructions_text: ~
         default_browse_view: ~
         default_browse_view_instructions_text: ~
         grid: ~
@@ -265,6 +267,10 @@ mn:
         all: ~
         max_number_of_links_info: ~
         about_page: ~
+      topbar:
+        topbar: ~
+        new_listing_button_label: ~
+        invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: ~
         transactions: ~
@@ -362,6 +368,11 @@ mn:
       subscription: ~
       preview: ~
     listing_shapes:
+      availability_title: ~
+      allow_availability_management: ~
+      per_day_availability: ~
+      per_night_availability: ~
+      pricing_units_disabled_info: ~
       index:
         listing_shapes: ~
         description: ~
@@ -823,7 +834,6 @@ mn:
       title_link_text: ~
       intro_paragraph: ~
       intro_paragraph_link_text: ~
-      post_a_new_listing: Зарах
       reduce_email_footer_text: ~
       settings_link_text: ~
       unsubscribe_link_text: ~
@@ -854,23 +864,6 @@ mn:
       love_marketplace_crew: ~
       welcome_email_footer_text: ~
       settings_link_text: ~
-      welcome_email_subject_for_marketplace_creator: ~
-      welcome_to_marketplace_creator: ~
-      congrats_for_creating_your_marketplace: ~
-      here_is_your_account_information: ~
-      your_email_address: ~
-      your_marketplace_address: ~
-      your_marketplace_admin_area: ~
-      just_follow_details: ~
-      we_will_guide_you_along_the_way: ~
-      are_you_new_to_online_marketplaces: ~
-      have_questions: ~
-      our_happiness_team_is_here_to_help: ~
-      love: ~
-      sharetribe_crew: ~
-      knowledge_base_link_text: ~
-      contact_support_link_text: ~
-      admin_panel_link_text: ~
     new_listing_by_followed_person:
       subject: ~
       has_posted_a_new_listing: ~
@@ -882,6 +875,9 @@ mn:
       person_name: ~
       person_email: ~
   error_messages:
+    booking:
+      booking_failed_payment_voided: ~
+      double_booking_payment_voided: ~
     onboarding:
       server_rendering: ~
     listings:
@@ -1327,6 +1323,9 @@ mn:
       open_in_google_maps: "Google Maps-г нээх:"
     error:
       something_went_wrong: ~
+      something_went_wrong_plain: ~
+      create_failed_to_connect_to_booking_service: ~
+      update_failed_to_connect_to_booking_service: ~
     follow_links:
       follow: ~
       unfollow: ~
@@ -1474,8 +1473,8 @@ mn:
       booking_to: ~
       how_paypal_works: ~
       payment_help: ~
+      unable_load_availability: ~
     new:
-      post_a_new_listing: Зарах
       listing: ~
       selected_category: ~
       selected_subcategory: ~
@@ -1549,6 +1548,8 @@ mn:
       verification_required: ~
   listing_conversations:
     preauthorize:
+      dates_not_available: ~
+      error_in_checking_availability: ~
       details: ~
       by: ~
       payment: ~
@@ -1556,6 +1557,9 @@ mn:
       you_will_be_charged: ~
       day: ~
       days: ~
+      night: ~
+      nights: ~
+      invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: ~
   mapview:
@@ -1595,6 +1599,7 @@ mn:
     connected_account: ~
     paypal_receive_funds_info_label_australia_only: ~
     paypal_receive_funds_info_label: ~
+    paypal_receive_funds_info_australia_only: ~
     paypal_receive_funds_info: ~
     upgrade_paypal_account_link_text: ~
     admin_account_not_connected: ~
@@ -1974,7 +1979,9 @@ mn:
   transactions:
     initiate:
       booked_days: ~
+      booked_nights: ~
       price_per_day: ~
+      price_per_night: ~
       quantity: ~
       subtotal: ~
       shipping-price: ~
@@ -1987,6 +1994,19 @@ mn:
     day: ~
     days: ~
   web:
+    listings:
+      pricing_units:
+        piece: ~
+        hour: ~
+        day: ~
+        night: ~
+        week: ~
+        month: ~
+    no_listings:
+      sorry: ~
+      try_other_search_terms: ~
+    listing_card:
+      no_picture: ~
     topbar:
       menu: ~
       more: ~
@@ -2002,6 +2022,13 @@ mn:
       signup: ~
       admin_dashboard: ~
       language: ~
+    utils:
+      km: ~
+      mi: ~
+    branding:
+      powered_by: ~
+      create_own: ~
+      learn_more: ~
   will_paginate:
     previous_label: ~
     next_label: ~

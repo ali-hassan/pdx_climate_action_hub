@@ -93,9 +93,11 @@ hu:
         favicon: Favicon
         favicon_info_text: "A favicon az alapértelmezett Sharetribe logo helyébe fog lépni. Nagyága 32x32 pixel lehet és a feltöltött kép is ekkorára lesz újraméretezve."
         community_custom_color1: "Fő szín"
-        community_custom_color2: "%{post_new_listing} gomb színe"
+        new_listing_button_custom_color: ~
         logo_instructions_text_with_dimensions: "A logó mérete %{width}x%{height}px legyen. Ezt a nagyobb képernyőt használók láthatják majd."
+        logo_instructions_text_with_dimensions_no_placing: ~
         logo_icon_instructions_text_with_dimensions: "Ez a négyzet alakú logó jelenik majd meg amikor a felhasználók megosztják oldalát a Facebook-on. Valamint amikor mobil eszközön tekintik meg az oldalt vagy könyvjelzővel a mobil eszközük kezdőlapján. A méretek (legalább) %{width}x%{height}pixel nagyságúak legyenek."
+        logo_icon_instructions_text_with_dimensions_no_placing: ~
         cover_photo_visibility: "A borítókép a nyitóoldalon jelenik meg azok számára akik nincsenek bejelentkezve."
         cover_photo_instructions_text_with_dimensions: "A kép újr lesz méretve %{width}x%{height} pixel nagyságúra és a magasabb képek félbe lesznek vágva. %{see_how_it_looks_like}"
         small_cover_photo_visibility: "A kis borítókép az összes oldalon megjelenik a nyitóoldal kivételével ahol a felhasználók nincsenek bejelentkezve."
@@ -104,7 +106,7 @@ hu:
         custom_color1_instructions_text: |-
             Ön megváltoztathatja az oldal elsődleges színét egy színkód megadásával.<a href="http://www.colorpicker.com/?colorcode=D96E21" target="_blank" rel="noreferrer">
             A ColorPicker.com</a>  segítségével kiválaszthatja a színt és bemásohatja a színkódot ide.
-        custom_color2_instructions_text: "Ön meg tudja változtatni a %{post_new_listing} gomb színét a hexadecimális színérték hozáadásával.<a href=\"http://www.colorpicker.com/?colorcode=00a26c\" target=\"_blank\" rel=\"noreferrer\"> A ColorPicker.com</a> segítségével választhat színt és bemásolhatja a kódot ide."
+        new_listing_button_instructions_text: ~
         default_browse_view: "Alapértelmezett keresési nézet"
         default_browse_view_instructions_text: "Az alapértelmezett keresési nézet a kezdőlapon arra használható, hogy beállítsuk a hírdetések alapértelmezett nézetét."
         grid: "Magazin nézet"
@@ -281,6 +283,10 @@ hu:
         all: Összes
         max_number_of_links_info: "A link a %{about_page} oldalhoz mindig az első menüpontban kerül megjelenínétésre."
         about_page: rólunk
+      topbar:
+        topbar: ~
+        new_listing_button_label: ~
+        invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: "Az öszes exportálása CSV-ként"
         transactions: "Mutassa a tranzakciókat"
@@ -378,6 +384,11 @@ hu:
       subscription: Feliratkozás
       preview: "A honlap előnézete"
     listing_shapes:
+      availability_title: ~
+      allow_availability_management: ~
+      per_day_availability: ~
+      per_night_availability: ~
+      pricing_units_disabled_info: ~
       index:
         listing_shapes: Ajánlattípusok
         description: |-
@@ -853,7 +864,6 @@ hu:
       title_link_text: "%{community_name}"
       intro_paragraph: "Ezek történtek a %{community_link} oldalán az utolsó frissítés óta %{time_since_last_update}."
       intro_paragraph_link_text: "%{community_name}"
-      post_a_new_listing: "Adjon fel új hirdetést!"
       reduce_email_footer_text: "Túl sok e-mailt kapott? %{settings_link} vagy %{unsubscribe_link}"
       settings_link_text: "E-mail beállítások szerkesztése itt"
       unsubscribe_link_text: Leiratkozás
@@ -886,23 +896,6 @@ hu:
           Milyen jellegű e-maileket szeretne kapni %{service_name} -tól?
           %{settings_link}
       settings_link_text: "Ellenőrizze a beállításokat"
-      welcome_email_subject_for_marketplace_creator: "Üdvözli a Sharetribe"
-      welcome_to_marketplace_creator: "Üdvözli a  Sharetribe, %{name}!"
-      congrats_for_creating_your_marketplace: "Gratulálunk a piactere elkészítéséhez! Igaz milyen egyszerű volt?"
-      here_is_your_account_information: "Itt találja a fiók információit."
-      your_email_address: "A bejelentkezéshez használt e-mailcím:"
-      your_marketplace_address: "Az Ön piacterének címe:"
-      your_marketplace_admin_area: "A piactere rendszergazda területe:"
-      just_follow_details: "Ezeknek a linkeknek a követése soran megtudhatja, hogyan kezdje el piacterét építeni!"
-      we_will_guide_you_along_the_way: "Folyamatos útmutatást fogunk biztosítani."
-      are_you_new_to_online_marketplaces: "Szeretne segítséget a piacteréhez? Ne aggódjon! Azért vagyunk, hogy segítsünk önnek. E-mailben egy oktaó sorozatot fogunk küldeni amely segítségére lesz abban, hogy a legtöbbet kapja a Sharetribe-tól és sikeres piacteret tudjon építeni. Hamarosan küldjük az első részt."
-      have_questions: "Kérdései vannak?"
-      our_happiness_team_is_here_to_help: "A mi boldogság csapatunk itt van hogy segítsen. A tudásbázisunk %{knowledge_base_link}  vagy akár a rendszergazdánk is %{admin_panel_link}."
-      love: "Szeretettel,"
-      sharetribe_crew: "A Sharetribe csapata"
-      knowledge_base_link_text: "Nézze meg a tudásbázisunkat."
-      contact_support_link_text: "Lépjen kapcsolatba a rendszergazdával"
-      admin_panel_link_text: "Rendszergazda felület"
     new_listing_by_followed_person:
       subject: "%{author_name} új hirdetést adott fel a %{service_name} oldalon."
       has_posted_a_new_listing: "%{author_name} új hirdetést adott fel:"
@@ -914,6 +907,9 @@ hu:
       person_name: "Név:"
       person_email: "E-mail:"
   error_messages:
+    booking:
+      booking_failed_payment_voided: ~
+      double_booking_payment_voided: ~
     onboarding:
       server_rendering: "Az útmutató kezdőknek betőltése sikertelen. Tisztában vagyunk a problémával és igyekszünk kijavítani."
     listings:
@@ -959,7 +955,7 @@ hu:
       kassi_does_not_currently_work_without_javascript: "%{service_name} nem tud megfelelően működni JavaScript nélkül. A böngésző beállításokban engedélyezze a JavaSript-et és frissítse az oldalt."
       contact_us: "Lépjen velünk kapcsolatba"
       send_feedback: "Üzenet küldése"
-      your_feedback_to_admins: ~
+      your_feedback_to_admins: "Üzenet a %{service_name} csapatának"
     send: Küldés
     your_email_address: "Az ön email címe"
   errors:
@@ -1152,7 +1148,7 @@ hu:
     application:
       join_this_community: "Csatlakozás a piactérhez"
       read_more: Bővebben
-      feedback: ~
+      feedback: "Üzenet a %{service_name} csapatának"
       dont_use_to_contact_support: ~
       feedback_forum: "Értékelések fóruma"
       feedback_handle: Értékelés
@@ -1363,6 +1359,9 @@ hu:
       open_in_google_maps: "Megnyitása Google Maps-szal"
     error:
       something_went_wrong: "Hiba történt, hibakód: %{error_code}"
+      something_went_wrong_plain: ~
+      create_failed_to_connect_to_booking_service: ~
+      update_failed_to_connect_to_booking_service: ~
     follow_links:
       follow: "E-mail értesítést kérek új hozzászólás esetén"
       unfollow: "Nem kérek e-mail értesítést új hozzászólás esetén"
@@ -1510,8 +1509,8 @@ hu:
       booking_to: "Adott időpontig"
       how_paypal_works: "Hogyan működik a PayPal"
       payment_help: "Segítség a fizetéshez"
+      unable_load_availability: ~
     new:
-      post_a_new_listing: "Új hirdetés feladása"
       listing: Hirdetés
       selected_category: "Kategória: %{category}"
       selected_subcategory: "Alkategória: %{subcategory}"
@@ -1585,6 +1584,8 @@ hu:
       verification_required: "Visszaigazolás szükséges"
   listing_conversations:
     preauthorize:
+      dates_not_available: ~
+      error_in_checking_availability: ~
       details: Részletek
       by: "%{listing} %{author} hirdetőtől"
       payment: Fizetés
@@ -1592,6 +1593,9 @@ hu:
       you_will_be_charged: "Ön akkor fog fizetni ha %{author} elfogadja a tranzakciót. %{expiration_period} napon belül kell %{author} felhasználónak elfogadnia a tranzakciót. Amennyiben %{author} felhasználó elutasítja a tranzakciót vagy nem válaszol, nem kerül sor utalásra."
       day: day
       days: napok
+      night: ~
+      nights: ~
+      invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: Nézet
   mapview:
@@ -1631,6 +1635,7 @@ hu:
     connected_account: "PayPal fiók  <%{email}> csatlakozás sikeres"
     paypal_receive_funds_info_label_australia_only: "Az ön PayPal fiókjának alkalmasnak kell lennie utalások fogadására. Ehhez valószínűleg Premier vagy Üzleti/Business PayPal fiókra lesz szüksége."
     paypal_receive_funds_info_label: "Az ön PayPal fiókjának alkalmasnak kell lennie utalások fogadására. Ehhez valószínűleg Üzleti/Business PayPal fiókra lesz szüksége."
+    paypal_receive_funds_info_australia_only: ~
     paypal_receive_funds_info: "Amennyiben fiókjához való csatlakozáskor hiba merül fel a %{service_name} oldalán, PayPal fiókja frissítésre szorul %{upgrade_paypal_account_link}. Ez ingyenes és könnyű. Amennyiben magánszemélyként használja a PayPal-t adja meg saját nevét mint cégnév."
     upgrade_paypal_account_link_text: "Belépés és a frissítés linkre kattintás"
     admin_account_not_connected: |-
@@ -2025,7 +2030,9 @@ hu:
   transactions:
     initiate:
       booked_days: "Lefoglalt napok:"
+      booked_nights: ~
       price_per_day: "Napi díja"
+      price_per_night: ~
       quantity: "Mennyisége:"
       subtotal: "Végösszeg:"
       shipping-price: "Szállítás:"
@@ -2038,6 +2045,19 @@ hu:
     day: nap
     days: napok
   web:
+    listings:
+      pricing_units:
+        piece: ~
+        hour: ~
+        day: ~
+        night: ~
+        week: ~
+        month: ~
+    no_listings:
+      sorry: ~
+      try_other_search_terms: ~
+    listing_card:
+      no_picture: "Nincs kép"
     topbar:
       menu: Menü
       more: Bővebben
@@ -2053,6 +2073,13 @@ hu:
       signup: Regisztráció
       admin_dashboard: "Rendszergazda kezelőpult"
       language: Nyelv
+    utils:
+      km: km
+      mi: mérföld
+    branding:
+      powered_by: ~
+      create_own: ~
+      learn_more: ~
   will_paginate:
     models:
       person:

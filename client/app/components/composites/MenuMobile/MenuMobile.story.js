@@ -1,13 +1,15 @@
 import r from 'r-dom';
-import { storiesOf } from '@kadira/storybook';
 import { storify, defaultRailsContext } from '../../Styleguide/withProps';
+
+import { Image } from '../../../models/ImageModel';
 
 import MenuMobile from './MenuMobile';
 
+const { storiesOf } = storybookFacade;
 const containerStyle = { style: { minWidth: '100px', background: 'white', height: '768px' } };
 
-storiesOf('MenuMobile')
-  .add('Basic state ', () => (
+storiesOf('Top bar')
+  .add('MenuMobile: basic state', () => (
       r(storify(
         r(MenuMobile,
           {
@@ -109,7 +111,7 @@ storiesOf('MenuMobile')
               ],
             },
             avatar: {
-              image: 'https://www.gravatar.com/avatar/d0865b2133d55fd507639a0fd1692b9a',
+              image: new Image({ url: 'https://www.gravatar.com/avatar/d0865b2133d55fd507639a0fd1692b9a' }),
               url: '#',
             },
             newListingButton: {

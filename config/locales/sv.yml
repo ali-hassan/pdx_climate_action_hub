@@ -94,16 +94,18 @@ sv:
         favicon: Favicon
         favicon_info_text: "Favicon kommer att ersätta Sharetribes standardlogotyp. Dimensionerna ska vara 32x32 pixlar och den uppladdade bilden kommer att skalas till den dimensionen."
         community_custom_color1: Huvudfärg
-        community_custom_color2: "Den andra färgen"
+        new_listing_button_custom_color: ~
         logo_instructions_text_with_dimensions: "Desktoplogotypens storlek ska vara %{width}x%{height}px. Den kommer att visas för användare med större skärm."
+        logo_instructions_text_with_dimensions_no_placing: ~
         logo_icon_instructions_text_with_dimensions: "Denna fyrkantiga logotyp kommer att visas när folk delar din sida på Facebook, när de ser din sida på en mobil enhet eller när de lägger ett bokmärke av din sida till hemmaskärmen på mobila enheter. Dimensionerna måste vara (minst) %{width}x%{height}px."
+        logo_icon_instructions_text_with_dimensions_no_placing: ~
         cover_photo_visibility: "Omslagsbild visas på startsidan för ej inloggade användare."
         cover_photo_instructions_text_with_dimensions: "Bilden kommer att skalas ner till %{width}x%{height} pixlar och större bilder kommer att beskäras i mitten. %{see_how_it_looks_like}."
         small_cover_photo_visibility: "Liten omslagsbild visas på alla sidor förutom på startsidan för ej inloggade användare."
         small_cover_photo_instructions_text_with_dimensions: "Bilden kommer att skalas ner till %{height}x%{width} pixlar och större bilder kommer att beskäras i mitten."
         main_content_width: "När du väljer en omslagsbild så notera att huvudsidans innehåll är %{main_width} pixlar brett som mest. Kom även ihåg att se hur omslagsbilden ser ut på mindre skärmar (t ex så kan du göra din webbläsares fönster mindre)."
         custom_color1_instructions_text: "Du kan ändra huvudfärgen på användargränssnittet genom att skriva in ett hex-värde. <a href=\"http://www.colorpicker.com/?colorcode=D96E21\" target=\"_blank\" rel=\"noreferrer\">ColorPicker.com</a> kan hjälpa dig att välja en färg och kopiera koden här."
-        custom_color2_instructions_text: ~
+        new_listing_button_instructions_text: ~
         default_browse_view: "Standard bläddervy"
         default_browse_view_instructions_text: "Standard visningsläge används på startsidan för att se hur annonserna visas som standard."
         grid: Rutnätsvy
@@ -280,6 +282,10 @@ sv:
         all: ~
         max_number_of_links_info: ~
         about_page: ~
+      topbar:
+        topbar: ~
+        new_listing_button_label: ~
+        invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: ~
         transactions: "Visa transaktioner"
@@ -377,6 +383,11 @@ sv:
       subscription: ~
       preview: ~
     listing_shapes:
+      availability_title: ~
+      allow_availability_management: ~
+      per_day_availability: ~
+      per_night_availability: ~
+      pricing_units_disabled_info: ~
       index:
         listing_shapes: Ordertyper
         description: "Ordertyper bestämmer hur orderprocessen fungerar på din sida. Du kan välja om dina användare ska hyra, sälja eller kanske bara skicka meddelanden och kommunicera via gratismeddelanden."
@@ -854,7 +865,6 @@ sv:
       title_link_text: "%{community_name}"
       intro_paragraph: "Här är några saker som har hänt på %{community_link} under de senaste %{time_since_last_update}."
       intro_paragraph_link_text: "%{community_name}"
-      post_a_new_listing: "Skapa annons!"
       reduce_email_footer_text: "För många e-postmeddelanden? %{settings_link} eller %{unsubscribe_link}"
       settings_link_text: "Ändra dina e-postinställningar här"
       unsubscribe_link_text: avprenumerera
@@ -887,23 +897,6 @@ sv:
           Vilken typ av e-postmeddelanden vill du få från %{service_name}?
           %{settings_link}
       settings_link_text: "Kontrollera dina inställningar"
-      welcome_email_subject_for_marketplace_creator: "Välkommen till Sharetribe"
-      welcome_to_marketplace_creator: "Välkommen till Sharetribe, %{name}!"
-      congrats_for_creating_your_marketplace: "Grattis till skapandet av din marknadsplats! Det var enkelt, var det inte?"
-      here_is_your_account_information: "Här är din kontoinformation."
-      your_email_address: "E-postadressen du använder för att logga in:"
-      your_marketplace_address: "Din marknadsplatsadress:"
-      your_marketplace_admin_area: "Adminområdet på din marknadsplats:"
-      just_follow_details: "Följ bara dessa länkar och du kommer att få mer information hur du bygger din marknadsplats!"
-      we_will_guide_you_along_the_way: "Vi kommer att guida dig på vägen."
-      are_you_new_to_online_marketplaces: "Behöver du hjälp med din marknadsplats? Inga problem, vi är här för att hjälpa dig! Vi kommer att skicka dig några e-postmeddelanden som kommer att hjälpa dig att få reda på det mesta om Sharetribe och hur du bygger en lyckad marknadsplats. Vi kommer snart att skicka Del 1."
-      have_questions: "Har du några frågor?"
-      our_happiness_team_is_here_to_help: "Vårt glada gäng är här för dig! Antingen %{knowledge_base_link} eller kontakta supporten via %{admin_panel_link}."
-      love: "Varma hälsningar,"
-      sharetribe_crew: Sharetribe-gänget
-      knowledge_base_link_text: "kolla vår kunskapsbas"
-      contact_support_link_text: "kontakta vår support"
-      admin_panel_link_text: adminpanel
     new_listing_by_followed_person:
       subject: "%{author_name} har skapat en ny annons på %{service_name}"
       has_posted_a_new_listing: "%{author_name} har skapat en ny annons:"
@@ -915,6 +908,9 @@ sv:
       person_name: ~
       person_email: ~
   error_messages:
+    booking:
+      booking_failed_payment_voided: ~
+      double_booking_payment_voided: ~
     onboarding:
       server_rendering: ~
     listings:
@@ -959,8 +955,8 @@ sv:
       javascript_is_disabled_in_your_browser: "Javascript har avaktiverats i din webbläsare"
       kassi_does_not_currently_work_without_javascript: "Tyvärr %{service_name} fungerar inte utan Javascript. Försök att aktivera Javascript i din webbläsare och ladda om sidan."
       contact_us: "kontakta oss"
-      send_feedback: ~
-      your_feedback_to_admins: ~
+      send_feedback: "Skicka meddelande"
+      your_feedback_to_admins: "Ditt meddelande till %{service_name} -teamet"
     send: Skicka
     your_email_address: "Din e-postadress"
   errors:
@@ -1134,9 +1130,9 @@ sv:
   landing_page:
     hero:
       search: ~
-      signup: ~
+      signup: "Gå med"
       search_placeholder: ~
-      search_location_placeholder: ~
+      search_location_placeholder: Plats
     listings:
       no_listing_image: ~
   layouts:
@@ -1149,17 +1145,17 @@ sv:
     no_tribe:
       inbox: Inkorg
       settings: Inställningar
-      feedback: ~
+      feedback: "Kontakta team %{service_name}"
     application:
       join_this_community: "Gå med marknadsplatsen"
       read_more: "Läs mer"
-      feedback: ~
+      feedback: "Ditt meddelande till %{service_name} -teamet"
       dont_use_to_contact_support: ~
       feedback_forum: "forum för feedback"
       feedback_handle: Feedback
       give_feedback: "Kontakta oss"
       or_check_our: "...eller kolla vår"
-      send_feedback_to_admin: ~
+      send_feedback_to_admin: "Skicka meddelande"
       to_see_what_others_have_suggested: "för att se vad andra användare har föreslagit, rösta på idéerna där."
       your_email_address: "Din e-postadress (för att kontakta dig)"
       connect: "Gå med"
@@ -1360,6 +1356,9 @@ sv:
       open_in_google_maps: ~
     error:
       something_went_wrong: "Något gick fel, felmeddelande: %{error_code}"
+      something_went_wrong_plain: ~
+      create_failed_to_connect_to_booking_service: ~
+      update_failed_to_connect_to_booking_service: ~
     follow_links:
       follow: "Få e-post om nya kommentarer"
       unfollow: "Få inga meddelanden om nya kommentarer"
@@ -1507,8 +1506,8 @@ sv:
       booking_to: Till
       how_paypal_works: "Hur PayPal fungerar"
       payment_help: Betalningshjälp
+      unable_load_availability: ~
     new:
-      post_a_new_listing: "Skapa annons"
       listing: annons
       selected_category: "Kategori: %{category}"
       selected_subcategory: "Underkategori: %{subcategory}"
@@ -1582,6 +1581,8 @@ sv:
       verification_required: "Verifiering krävs"
   listing_conversations:
     preauthorize:
+      dates_not_available: ~
+      error_in_checking_availability: ~
       details: Detaljer
       by: "%{listing} av %{author}"
       payment: Betalning
@@ -1589,6 +1590,9 @@ sv:
       you_will_be_charged: "OBS! Du debiteras endast om %{author} accepterar ditt köp. %{author} behöver acceptera köpet inom %{expiration_period} dagar. Om %{author} avvisar eller inte svarar så sker ingen debitering."
       day: dag
       days: dagar
+      night: ~
+      nights: ~
+      invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: Visa
   mapview:
@@ -1621,15 +1625,16 @@ sv:
   paypal_accounts:
     payout_info_title: Utbetalningsinformation
     paypal_account_email_connected: "<del>1. Anslut PayPal konto</del> Klart!"
-    payout_info_paypal: ~
+    payout_info_paypal: "%{service_name} använder PayPal för hantering av betalningar. Du behöver ett %{create_paypal_account_link} som är anslutet till Campify för att ta emot betalningar från dina annonser. Du behöver också ge %{service_name} tillåtelse att ta ut en serviceavgift."
     paypal_billing_agreement_made: "<del>2. Ge %{service_name} tillåtelse att ta ut en serviceavgift</del> Klart!"
     commission_permission_needed: ~
-    create_paypal_account_link_text: ~
-    connected_account: "PayPal konto %{email} kopplades korrekt."
+    create_paypal_account_link_text: PayPal-konto
+    connected_account: "PayPal-kontot '%{email}' är anslutet."
     paypal_receive_funds_info_label_australia_only: ~
-    paypal_receive_funds_info_label: ~
-    paypal_receive_funds_info: ~
-    upgrade_paypal_account_link_text: ~
+    paypal_receive_funds_info_label: "Ditt PayPal-konto måste kunna ta emot betalningar. Detta kan kräva att du har ett \"Business account\"."
+    paypal_receive_funds_info_australia_only: ~
+    paypal_receive_funds_info: "Om du får ett felmeddelande när du försöker ansluta ditt PayPal-konto to %{service_name} kan du uppgradera ditt konto genom att %{upgrade_paypal_account_link}. Det är gratis och enkelt att uppdatera. Om du är privatperson rekommenderar PayPal att du använder ditt eget namn som \"Business Name\"."
+    upgrade_paypal_account_link_text: "logga in och klicka på uppgraderings-länken"
     admin_account_not_connected: ~
     contact_admin_link_text: ~
     you_are_ready_to_accept_payments: "Du är redo att ta emot betalningar!"
@@ -1645,12 +1650,12 @@ sv:
       create_paypal_account: "klicka här"
       upgrade_paypal_account: "logga in till ditt PayPal konto"
       paypal_account_billing_agreement: "2. Ge %{service_name} tillåtelse att ta ut en serviceavgift."
-      follow_steps: ~
+      follow_steps: "Följ stegen nedan för att börja ta emot betalningar:"
       connect_paypal_account_title: ~
-      connect_paypal_account_title_with_step: ~
-      connect_paypal_account_instructions: ~
+      connect_paypal_account_title_with_step: "Steg %{current_step}/%{total_steps}: Anslut ditt PayPal-konto"
+      connect_paypal_account_instructions: "Klicka på knappen nedan för att logga in på PayPal och ansluta ditt konto till %{service_name}."
       connect_paypal_account: "Koppla ditt PayPal konto"
-      paypal_account_billing_agreement_with_step: ~
+      paypal_account_billing_agreement_with_step: "Steg %{current_step}/%{total_steps}: Tillåt debitering av serviceavgift"
       paypal_account_billing_agreement_info_both: "När du gör en försäljning på %{service_name}, så kommer en serviceavgift på %{commission_from_seller} av det totala priset (exkl. frakt), minsta avgift %{minimum_commission} att dras från ditt PayPalkonto. Du behöver tillåta betalningar på %{service_name}, och du behöver godkänna att denna avgift tas. Avgiften inkluderar inte %{paypal_info_link}."
       paypal_account_billing_agreement_info_fixed: "När du gör en försäljning på %{service_name}, så kommer en serviceavgift på %{minimum_commission} att dras från ditt PayPalkonto. För att acceptera betalningar på %{service_name} så behöver du tillåta att denna avgift tas. Avgiften inkluderar inte %{paypal_info_link}."
       paypal_account_billing_agreement_info_relative: "När du gör en försäljning på %{service_name}, så kommer en serviceavgift på %{commission_from_seller} av det totala priset (exkl. frakt) att dras från ditt PayPalkonto. För att godkänna betalningar på %{service_name} så behöver du tillåta att denna avgift tas. Avgiften inkluderar inte %{paypal_info_link}"
@@ -1667,17 +1672,17 @@ sv:
       something_went_wrong: "Något gick fel. Vänligen försök igen. Om problemet kvarstår kontakta sidans administratör."
       account_not_verified: "Du har inte verifierat ditt PayPal-konto. Du behöver gå till www.paypal.com och verifiera ditt konto innan du kan gå vidare."
       account_restricted: "Ditt PayPalkonto är begränsat och kan inte kopplas. Vänligen logga in på PayPal.com och hitta vad detta beror på eller kontakta PayPals användarsupport för att lösa detta."
-    paypal_account_connected_title: ~
-    paypal_account_connected: ~
+    paypal_account_connected_title: "PayPal-kontot är anslutet"
+    paypal_account_connected: "PayPal-kontot <%{email}> är nu anslutet till %{service_name}."
     change_account: "Byt konto"
     missing: "Du har öppna annonser, men ditt PayPal-konto är inte inställt för att ta emot betalningar. Koppla ditt PayPal-konto och ge %{service_name} tillåtelse at ta en transaktionsavgift från din %{settings_link}."
     from_your_payment_settings_link_text: betalningsinställningar
-    redirect_message: ~
-    redirect_link_text: ~
-    paypal_account_all_set_up: ~
-    can_receive_payments: ~
-    paypal_account_connected_summary: ~
-    paypal_permission_granted_summary: ~
+    redirect_message: "Skickar dig vidare till PayPal. Klicka %{redirect_link} om sidan inte öppnas automatiskt."
+    redirect_link_text: här
+    paypal_account_all_set_up: "Hurra, allting är klart!"
+    can_receive_payments: "Du kan nu ta emot betalning för dina annonser."
+    paypal_account_connected_summary: "PayPal-kontot <%{email}> är anslutet"
+    paypal_permission_granted_summary: "Villkoren för serviceavgifter har godkänts"
   paypal:
     pay_with_paypal: "Fortsätt till betalning"
     checkout_with_paypal: "Gå till kassan med PayPal"
@@ -2026,7 +2031,9 @@ sv:
   transactions:
     initiate:
       booked_days: "Bokade dagar:"
+      booked_nights: ~
       price_per_day: "Pris per dag:"
+      price_per_night: ~
       quantity: "Antal:"
       subtotal: "Delsumma:"
       shipping-price: "Frakt:"
@@ -2039,21 +2046,41 @@ sv:
     day: dag
     days: dagar
   web:
+    listings:
+      pricing_units:
+        piece: ~
+        hour: ~
+        day: ~
+        night: ~
+        week: ~
+        month: ~
+    no_listings:
+      sorry: ~
+      try_other_search_terms: ~
+    listing_card:
+      no_picture: ~
     topbar:
-      menu: ~
+      menu: Meny
       more: ~
       search_placeholder: ~
-      search_location_placeholder: ~
+      search_location_placeholder: Plats
       user: ~
-      inbox: ~
-      profile: ~
+      inbox: Inkorg
+      profile: Profil
       manage_listings: ~
-      settings: ~
-      logout: ~
-      login: ~
-      signup: ~
+      settings: Inställningar
+      logout: "Logga ut"
+      login: "Logga in"
+      signup: "Gå med"
       admin_dashboard: ~
       language: ~
+    utils:
+      km: ~
+      mi: ~
+    branding:
+      powered_by: ~
+      create_own: ~
+      learn_more: ~
   will_paginate:
     models:
       person:

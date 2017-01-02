@@ -5,27 +5,40 @@ const fontSizeSmaller = '12px';
 const fontSizeSmall = '13px';
 const fontSize = '14px';
 const fontSizeBig = '16px';
+const fontSizeBigger = '19px';
 
 const fontSizeMobileSmaller = '14px';
 const fontSizeMobileSmall = '15px';
 const fontSizeMobile = '17px';
 
+const fontWeightMedium = '500';
+const fontWeightSemibold = '600';
+
+const lineHeight = 22;
+
 const textColor = 'rgb(82, 89, 97)';
 const textColorFocus = 'rgb(0, 0, 0)';
 const textColorGrey = 'rgb(122, 125, 128)';
 const textColorLight = 'rgb(255, 255, 255)';
+const textColorDark = 'rgb(28, 30, 33)';
 const textColorSelected = '#4a4a4a';
+const textColorNotification = 'rgb(85,95,106)';
+const textColorNotificationHover = 'rgb(34,44,55)';
 const backgroundLightColor = 'white';
 const backgroundLightColorHover = 'rgba(169, 172, 176, 0.07)';
 const backgroundColorGrey = '#F7F7F7';
 const customColorFallback = '#4a90e2';
-const customColor2Fallback = '#2ab865';
+const customColor2Fallback = '#2ab  865';
 const alertColor = '#ff4e36';
 
-const topbarBorderColor = 'rgba(169, 172, 176, 0.5)';
-const topbarItemHeight = '44px';
+const minimumButtonSize = 44;
+const borderColor = 'rgba(169, 172, 176, 0.5)';
+const borderColorNotification = '#e1e1e1';
+const topbarItemHeight = `${minimumButtonSize}px`;
 const topbarMediumItemHeight = '36px';
 const bodyPadding = '24px';
+
+const searchPageShadow = '0 2px 3px 0 rgba(0, 0, 0, 0.1)';
 
 // With minimum z-index we try to avoid most clashes with rails components
 const zIndexMinimum = 5;
@@ -138,6 +151,7 @@ module.exports = {
   '--Topbar_fontSizeMobile': fontSizeMobile,
 
   '--Topbar_avatarSize': topbarItemHeight,
+  '--Topbar_avatarMediumSize': topbarMediumItemHeight,
   '--Topbar_avatarPadding': '18px 0',
   '--Topbar_avatarTabletPadding': '12px 0',
   '--Topbar_avatarMobilePadding': '8px 0',
@@ -147,7 +161,7 @@ module.exports = {
   '--SearchBar_width': `${searchBarWidth}px`,
   '--SearchBar_mobileHeight': '50px',
   '--SearchBar_height': topbarItemHeight,
-  '--SearchBar_borderColor': topbarBorderColor,
+  '--SearchBar_borderColor': borderColor,
   '--SearchBar_borderColorActive': textColorGrey,
   '--SearchBar_textColor': textColorGrey,
   '--SearchBar_textColorActive': 'rgb(82, 89, 97)',
@@ -160,8 +174,9 @@ module.exports = {
   '--SearchBar_sidePaddingMobile': '1.13em',
   '--SearchBar_sidePadding': '1.715em',
   '--SearchBar_inputFontWeight': '500',
-  '--SearchBar_keywordInputWidth': '63%',
-  '--SearchBar_keywordInputFocusWidth': '78%',
+  '--SearchBar_keywordInputWidthNarrow': '68%',
+  '--SearchBar_keywordInputWidth': '55%',
+  '--SearchBar_keywordInputFocusWidth': '75%',
   '--SearchBar_formZIndex': zIndexMinimum + 1,
   '--SearchBar_focusContainerZIndex': zIndexMinimum,
   '--SearchBar_childZIndex': zIndexMinimum + 1,
@@ -175,9 +190,9 @@ module.exports = {
   '--SearchBar_iconTopMarginFix': '4px',
 
   // ProfileDropdown
-  '--ProfileDropdown_border': `1px solid ${topbarBorderColor}`,
-  '--ProfileDropdown_borderColor': topbarBorderColor,
-  '--ProfileDropdown_zIndex': zIndexMinimum,
+  '--ProfileDropdown_border': `1px solid ${borderColor}`,
+  '--ProfileDropdown_borderColor': borderColor,
+  '--ProfileDropdown_zIndex': zIndexMinimum + 1,
   '--ProfileDropdown_rightOffset': bodyPadding,
   '--ProfileDropdown_textColor': textColor,
   '--ProfileDropdown_textColorFocus': textColorFocus,
@@ -189,9 +204,10 @@ module.exports = {
   '--ProfileDropdown_lineWidth': '2px',
   '--ProfileDropdown_fontSizeNotification': fontSizeSmaller,
 
-  '--MenuItem_borderColor': topbarBorderColor,
+  '--MenuItem_borderColor': borderColor,
   '--MenuItem_backgroundColorHover': backgroundLightColorHover,
   '--MenuItem_paddingTopbarVertical': pxToEms(13, 14),
+  '--MenuItem_paddingTopbarHorizontalMin': pxToEms(13, 14),
   '--MenuItem_paddingTopbarHorizontal': pxToEms(24, 14),
   '--MenuItem_paddingOffScreenVertical': pxToEms(10, 17),
   '--MenuItem_paddingOffScreenHorizontal': pxToEms(24, 17),
@@ -208,7 +224,7 @@ module.exports = {
   '--Menu_textColor': textColor,
   '--Menu_textColorFocus': textColorFocus,
   '--Menu_colorBackground': backgroundLightColor,
-  '--Menu_borderColor': topbarBorderColor,
+  '--Menu_borderColor': borderColor,
   '--Menu_boxShadow': '0px 2px 4px 0px rgba(0, 0, 0, 0.1)',
   '--Menu_iconPadding': pxToEms(5, 14),
   '--Menu_zIndex': zIndexMinimum,
@@ -238,7 +254,7 @@ module.exports = {
   '--MobileMenu_labelPaddingVertical': '18px',
   '--MobileMenu_labelPaddingHorizontal': '18px',
   '--MobileMenu_offscreenMenuWidth': '288px',
-  '--MobileMenu_offscreenHeaderItemHeight': '44px',
+  '--MobileMenu_offscreenHeaderItemHeight': `${minimumButtonSize}px`,
   '--MobileMenu_offscreenFooterBackgroundColor': backgroundColorGrey,
   '--MobileMenu_offscreenFooterMarginTop': pxToEms(14, 17),
 
@@ -273,4 +289,60 @@ module.exports = {
   '--AddNewListingButton_textColor': '#fff',
   '--AddNewListingButton_maxTextWidth': '15em',
   '--AddNewListingButton_textPadding': '1.5em',
+
+  // SEARCH PAGE
+  '--SearchPage_backgroundColor': backgroundColorGrey,
+
+  '--ListingCard_noImageText': textColor,
+  '--ListingCard_fontSize': fontSize,
+  '--ListingCard_fontSizeTitle': fontSizeBig,
+  '--ListingCard_fontSizeDistance': fontSizeSmaller,
+  '--ListingCard_fontSizePrice': fontSizeBigger,
+  '--ListingCard_lineHeight': '26px',
+  '--ListingCard_lineHeightTitle': `${lineHeight}px`,
+  '--ListingCard_colorTitle': textColorDark,
+  '--ListingCard_colorDistance': textColorGrey,
+  '--ListingCard_colorBackground': backgroundLightColor,
+  '--ListingCard_spacingHorizontal': '20px',
+  '--ListingCard_spacingVertical': '16px',
+  '--ListingCard_avatarSize': '42px',
+  '--ListingCard_spacingAvatar': '16px',
+  '--ListingCard_textSpacing': '6px',
+  '--ListingCard_letterSpacing': '0.2px',
+  '--ListingCard_fontWeightMedium': fontWeightMedium,
+  '--ListingCard_fontWeightSemibold': fontWeightSemibold,
+  '--ListingCard_shadow': searchPageShadow,
+
+  '--ListingCardPanel_gutterSpacing': bodyPadding,
+
+  '--RoundButton_shadow': searchPageShadow,
+
+  '--NoResults_textColor': textColorDark,
+  '--NoResults_fontSize': fontSizeBig,
+  '--NoResults_lineHeight': `${lineHeight}px`,
+  '--NoResults_spacing': bodyPadding,
+
+  '--Branding_textColor': textColor,
+  '--Branding_borderColor': borderColor,
+
+  '--Avatar_textColor': textColorLight,
+  '--Avatar_backgroundColor': 'hsl(210, 40%, 70%)',
+
+  '--FlashNotification_spacingOutside': '12px',
+  '--FlashNotification_spacingInside': '14px',
+  '--FlashNotification_zIndex': zIndexMinimum + 10,
+  '--FlashNotification_border': borderColorNotification,
+  '--FlashNotification_boxShadow': '0 3px 20px 0 rgba(0,0,0,0.2)',
+  '--FlashNotification_errorColor': 'rgb(237, 79, 46)',
+  '--FlashNotification_textColor': textColorNotification,
+  '--FlashNotification_textColorHover': textColorNotificationHover,
+  '--FlashNotification_errorTextColor': textColorLight,
+  '--FlashNotification_errorTextColorHover': '#ccc',
+  '--FlashNotification_fontSize': fontSizeBig,
+  '--FlashNotification_lineHeight': '1.375rem',
+  '--FlashNotification_contentPadding': '18px 8px 20px 24px',
+  '--FlashNotification_fontSizeClose': '10px',
+  '--FlashNotification_closeIconSize': `${minimumButtonSize}px`,
+  '--FlashNotification_closeIconExtraSpace': '20px',
+
 };

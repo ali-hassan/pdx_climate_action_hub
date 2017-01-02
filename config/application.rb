@@ -9,6 +9,8 @@ require File.expand_path('../config_loader', __FILE__)
 
 require File.expand_path('../available_locales', __FILE__)
 
+require File.expand_path('../facebook_sdk_version', __FILE__)
+
 # Load the logger
 require File.expand_path('../../lib/sharetribe_logger', __FILE__)
 
@@ -18,6 +20,11 @@ require File.expand_path('../../lib/method_deprecator', __FILE__)
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+# Require Transit. This needs to be done manually, because the gem name
+# (transit-ruby) doesn't match to the module name (Transit) and that's
+# why Bundler doesn't know how to autoload it
+require 'transit'
 
 module Kassi
   class Application < Rails::Application
@@ -86,7 +93,7 @@ module Kassi
     config.middleware.insert_before ActionDispatch::Cookies, "CustomCookieRenamer"
 
     # Resolve current marketplace and append it to env
-    config.middleware.use "CurrentMarketplaceAppender"
+    config.middleware.use "MarketplaceLookup"
 
     # Map of removed locales and their fallbacks
     config.REMOVED_LOCALE_FALLBACKS = Sharetribe::REMOVED_LOCALE_FALLBACKS
@@ -121,7 +128,7 @@ module Kassi
 
     # Speed up schema loading. No need to use rake when creating database schema
     # from SQL dump.
-    config.active_record.schema_format = :ruby
+    config.active_record.schema_format = :sql
 
     # Configure generators values. Many other options are available, be sure to check the documentation.
     # config.generators do |g|
@@ -153,11 +160,20 @@ module Kassi
 
     if (APP_CONFIG.s3_bucket_name && APP_CONFIG.aws_access_key_id && APP_CONFIG.aws_secret_access_key)
       # S3 is in use for uploaded images
+      s3_domain = "amazonaws.com"
+      # us-east-1 has special S3 endpoint, see http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+      s3_host_name = if APP_CONFIG.s3_region == "us-east-1"
+                       "s3.#{s3_domain}"
+                     else
+                       "s3-#{APP_CONFIG.s3_region}.#{s3_domain}"
+                     end
       paperclip_options.merge!({
         :path => "images/:class/:attachment/:id/:style/:filename",
         :url => ":s3_domain_url",
         :storage => :s3,
+        :s3_region => APP_CONFIG.s3_region,
         :s3_protocol => 'https',
+        :s3_host_name => s3_host_name,
         :s3_headers => {
             "cache-control" => "public, max-age=#{APP_CONFIG.s3_cache_max_age}",
             "expires" => APP_CONFIG.s3_cache_max_age.to_i.seconds.from_now.httpdate,

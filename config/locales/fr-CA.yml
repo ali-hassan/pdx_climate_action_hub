@@ -94,16 +94,18 @@ fr-CA:
         favicon: Favicon
         favicon_info_text: "Le favicon remplacera celui par défaut dans Sharetribe. Les dimensions doivent être de 32x32 pixels et l'image téléchargée sera redimensionnée à ces dimensions."
         community_custom_color1: "Couleur principale"
-        community_custom_color2: "Couleur secondaire"
+        new_listing_button_custom_color: ~
         logo_instructions_text_with_dimensions: "Le logo large doit avoir des dimensions de %{width}x%{height} pixels. Il sera affiché sur les grands écrans."
+        logo_instructions_text_with_dimensions_no_placing: ~
         logo_icon_instructions_text_with_dimensions: "Ce logo carré sera utilisé lorsque des gens partageront votre site sur Facebook, quand ils navigueront sur votre site depuis un appareil mobile ou en tant qu'image lorsqu'ils mettront le site en favori. Les dimensions doivent être d'au moins %{width}x%{height} pixels."
+        logo_icon_instructions_text_with_dimensions_no_placing: ~
         cover_photo_visibility: "La photo de couverture est affichée aux utilisateurs non connectés sur la page d'accueil."
         cover_photo_instructions_text_with_dimensions: "La photo sera redimensionnée en %{width}x%{height} pixels et les images trop grandes seront coupées au centre. %{see_how_it_looks_like}."
         small_cover_photo_visibility: "La photo de couverture réduite est affichée sur toute les pages excepté pour les visiteurs non connectés sur la page d'accueil."
         small_cover_photo_instructions_text_with_dimensions: "La photo sera redimensionnée en %{width}x%{height} pixels et les images trop grandes seront coupées au centre."
         main_content_width: "Lorsque vous choisissez les photos de couverture, gardez à l'esprit que la page principale a une largeur maximale de %{main_width} pixels. N'oubliez pas non plus de vérifier comment s'affiche votre photo de couverture sur des petits écrans (par exemple en réduisant la taille de la fenêtre de votre navigateur)."
         custom_color1_instructions_text: "Vous pouvez changer la couleur principale de l'interface en entrant une valeur hexadécimale. <a href=\"http://www.colorpicker.com/?colorcode=D96E21\" target=\"_blank\" rel=\"noreferrer\">ColorPicker.com</a> peut vous aider à choisir cette valeur que pourrez alors copier ici."
-        custom_color2_instructions_text: ~
+        new_listing_button_instructions_text: ~
         default_browse_view: "Vue par défaut"
         default_browse_view_instructions_text: "La vue par défaut est utilisée sur la page d'accueil pour définir comment sont affichées les annonces par défaut."
         grid: Grille
@@ -280,6 +282,10 @@ fr-CA:
         all: ~
         max_number_of_links_info: ~
         about_page: ~
+      topbar:
+        topbar: ~
+        new_listing_button_label: ~
+        invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: ~
         transactions: "Voir les transactions"
@@ -377,6 +383,11 @@ fr-CA:
       subscription: ~
       preview: ~
     listing_shapes:
+      availability_title: ~
+      allow_availability_management: ~
+      per_day_availability: ~
+      per_night_availability: ~
+      pricing_units_disabled_info: ~
       index:
         listing_shapes: ~
         description: ~
@@ -842,7 +853,6 @@ fr-CA:
       title_link_text: "%{community_name}"
       intro_paragraph: "Voici une partie de ce qu'il s'est passé sur %{community_link} depuis %{time_since_last_update}."
       intro_paragraph_link_text: "%{community_name}"
-      post_a_new_listing: "Affichez une annonce !"
       reduce_email_footer_text: "Trop d'emails ? %{settings_link} ou %{unsubscribe_link}."
       settings_link_text: "Gérez vos paramètres d'email"
       unsubscribe_link_text: désabonnez-vous
@@ -873,23 +883,6 @@ fr-CA:
       love_marketplace_crew: "Love,<br /><i>L'équipe de %{service_name}</i>"
       welcome_email_footer_text: "Quels types d'emails souhaitez vous recevoir de la part de %{service_name} ? %{settings_link}"
       settings_link_text: "Vérifiez vos paramètres"
-      welcome_email_subject_for_marketplace_creator: "Bienvenue sur Sharetribe"
-      welcome_to_marketplace_creator: "Bienvenue sur Sharetribe, %{name} !"
-      congrats_for_creating_your_marketplace: "Félicitations pour la création de votre place de marché ! C'était simple, non ?"
-      here_is_your_account_information: "Voici les informations sur votre compte."
-      your_email_address: "L'adresse email que vous avez utilisée pour vous connecter : "
-      your_marketplace_address: "L'adresse de votre place de marché : "
-      your_marketplace_admin_area: "Le panneau d'administration de votre place de marché : "
-      just_follow_details: "Suivez ces liens et vous aurez plus de détails sur comment configurer votre place de marché !"
-      we_will_guide_you_along_the_way: "Nous vous guiderons tout au long de ces étapes."
-      are_you_new_to_online_marketplaces: "Besoin d'un coup de main avec votre place de marché ? Pas d'inquiétude, nous sommes là pour vous aider ! Nous allons vous envoyer plusieurs emails pour vous aider à utiliser Sharetribe au maximum et à construire une place de marché qui soit une réussite. Nous vous enverrons la première partie très bientôt."
-      have_questions: "Vous avez des questions ?"
-      our_happiness_team_is_here_to_help: "L'équipe chargée de votre bonheur est là pour vous ! Vous pouvez %{knowledge_base_link} ou contacter notre support depuis le %{admin_panel_link}."
-      love: "Love,"
-      sharetribe_crew: "l'équipe Sharetribe"
-      knowledge_base_link_text: "parcourir notre base de connaissance"
-      contact_support_link_text: "contacter notre support"
-      admin_panel_link_text: "panneau d'administration"
     new_listing_by_followed_person:
       subject: "%{author_name} a publié une nouvelle annonce sur %{service_name}"
       has_posted_a_new_listing: "%{author_name} a publié une nouvelle annonce : "
@@ -901,6 +894,9 @@ fr-CA:
       person_name: ~
       person_email: ~
   error_messages:
+    booking:
+      booking_failed_payment_voided: ~
+      double_booking_payment_voided: ~
     onboarding:
       server_rendering: ~
     listings:
@@ -1346,6 +1342,9 @@ fr-CA:
       open_in_google_maps: ~
     error:
       something_went_wrong: ~
+      something_went_wrong_plain: ~
+      create_failed_to_connect_to_booking_service: ~
+      update_failed_to_connect_to_booking_service: ~
     follow_links:
       follow: "Recevoir les nouveaux commentaires par email."
       unfollow: "Ne pas recevoir les nouveaux commentaires par email."
@@ -1493,8 +1492,8 @@ fr-CA:
       booking_to: Au
       how_paypal_works: "Comment fonctionne PayPal"
       payment_help: ~
+      unable_load_availability: ~
     new:
-      post_a_new_listing: "Affichez une annonce"
       listing: annonce
       selected_category: "Catégorie : %{category}"
       selected_subcategory: "Sous-catégorie : %{subcategory}"
@@ -1568,6 +1567,8 @@ fr-CA:
       verification_required: "Vérification nécessaire"
   listing_conversations:
     preauthorize:
+      dates_not_available: ~
+      error_in_checking_availability: ~
       details: Détails
       by: "%{listing} par %{author}"
       payment: Paiement
@@ -1575,6 +1576,9 @@ fr-CA:
       you_will_be_charged: "Vous ne serez prélevé que si %{author} accepte la transaction. %{author} doit accepter la transaction sous %{expiration_period} jours. Si %{author} refuse ou ne répond pas, aucun prélèvement ne sera effectué."
       day: jour
       days: jours
+      night: ~
+      nights: ~
+      invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: Lire.
   mapview:
@@ -1614,6 +1618,7 @@ fr-CA:
     connected_account: "Le compte PayPal '%{email}' est désormais connecté."
     paypal_receive_funds_info_label_australia_only: ~
     paypal_receive_funds_info_label: ~
+    paypal_receive_funds_info_australia_only: ~
     paypal_receive_funds_info: ~
     upgrade_paypal_account_link_text: ~
     admin_account_not_connected: ~
@@ -1999,7 +2004,9 @@ fr-CA:
   transactions:
     initiate:
       booked_days: ~
+      booked_nights: ~
       price_per_day: ~
+      price_per_night: ~
       quantity: ~
       subtotal: "Sous-total : "
       shipping-price: "Frais de livraison : "
@@ -2012,6 +2019,19 @@ fr-CA:
     day: jour
     days: jours
   web:
+    listings:
+      pricing_units:
+        piece: ~
+        hour: ~
+        day: ~
+        night: ~
+        week: ~
+        month: ~
+    no_listings:
+      sorry: ~
+      try_other_search_terms: ~
+    listing_card:
+      no_picture: ~
     topbar:
       menu: ~
       more: ~
@@ -2027,6 +2047,13 @@ fr-CA:
       signup: ~
       admin_dashboard: ~
       language: ~
+    utils:
+      km: ~
+      mi: ~
+    branding:
+      powered_by: ~
+      create_own: ~
+      learn_more: ~
   will_paginate:
     models:
       person:

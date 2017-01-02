@@ -8,6 +8,79 @@ This file follows the best practices from [keepachangelog.com](http://keepachang
 
 ## [Unreleased]
 
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [6.1.0] - 2016-10-31
+
+### Changed
+
+- Updated Node.js to the latest LTS (long term support) version 6.9 [#2655](https://github.com/sharetribe/sharetribe/pull/2665)
+- Updated NPM packages [#2655](https://github.com/sharetribe/sharetribe/pull/2665)
+- Update `react_on_rails` gem [#2655](https://github.com/sharetribe/sharetribe/pull/2665)
+- Upgrade Facebook SDK from v2.2 to v2.8 [#2666](https://github.com/sharetribe/sharetribe/pull/2666)
+- Instruct crawlers not to follow auth paths, add crawling delay for bots that support the directive [#2693](https://github.com/sharetribe/sharetribe/pull/2693)
+
+### Fixed
+
+- Avoid redirect to correct S3 bucket endpoint when bucket is not in `us-east-1` region [#2605](https://github.com/sharetribe/sharetribe/pull/2605)
+- Added missing database indexes [#2621](https://github.com/sharetribe/sharetribe/pull/2621), [#2634](https://github.com/sharetribe/sharetribe/pull/2634), [#2670](https://github.com/sharetribe/sharetribe/pull/2670)
+- Fix bug: `rake assets:precompile` fails if MySQL is not available. Issue fixed by upgrading `money-rails` gem from 1.3 to 1.4 [#2612](https://github.com/sharetribe/sharetribe/pull/2612) by [@nicolaracco](https://github.com/nicolaracco)
+
+### Security
+
+- Fixed insecure gem urls in Gemfile [#2635](https://github.com/sharetribe/sharetribe/pull/2635)
+
+## [6.0.0] - 2016-09-27
+
+### Removed
+
+- Dropped official support for MySQL server version 5.6. Only MySQL 5.7 is officialy supported. This release contains no other changes.
+
+## [5.12.0] - 2016-09-27
+
+### Added
+
+- Added date picker for "per night" listing unit type [#2481](https://github.com/sharetribe/sharetribe/pull/2481)
+- SEO: Added `rel=next` and `rel=prev` links to give a hint to crawlers about the paginated content [#2505](https://github.com/sharetribe/sharetribe/pull/2505)
+- Added _New layout_ admin page where marketplace admins can enable new layout designs for the whole marketplace or just for themselves to try out [#2338](https://github.com/sharetribe/sharetribe/pull/2338) and [#2469](https://github.com/sharetribe/sharetribe/pull/2469)
+- Added functionality to edit Post a new listing button text [#2448](https://github.com/sharetribe/sharetribe/pull/2448)
+- Sitemap [#2492](https://github.com/sharetribe/sharetribe/pull/2492), thanks Dan Moore ([@mooreds](https://github.com/mooreds)) for helping!
+- Mocha test setup for new frontend architecture [#2550](https://github.com/sharetribe/sharetribe/pull/2550)
+
+### Deprecated
+
+- Deprecated use of MySQL server version 5.6.x [2566](https://github.com/sharetribe/sharetribe/pull/2566)
+
+### Removed
+
+- Removed configuration for TravisCI (CircleCI now fully in use) [#2489](https://github.com/sharetribe/sharetribe/pull/2489)
+
+### Changed
+
+- Updated React on Rails to 6.0.5 [#2428](https://github.com/sharetribe/sharetribe/pull/2428) and [#2472](https://github.com/sharetribe/sharetribe/pull/2472)
+- Updated [React Storybook](https://github.com/kadirahq/react-storybook) to version 2.13.0 [#2528](https://github.com/sharetribe/sharetribe/pull/2528)
+- Changed ActiveRecord schema format to :sql [#2531](https://github.com/sharetribe/sharetribe/pull/2531)
+- Upgraded Paperclip and Delayed::Paperclip, dropped deprecated AWS SDK v1 [#2522](https://github.com/sharetribe/sharetribe/pull/2522)
+- Upgraded mysql2 dependency [#2565](https://github.com/sharetribe/sharetribe/pull/2565)
+
+### Fixed
+
+- Correctly add https or http to links generated in `community.rb` [#2459](https://github.com/sharetribe/sharetribe/pull/2459)
+- Transactions in `initiated` state showed wrong total price in the transaction page if the item quantity was more than one [#2452](https://github.com/sharetribe/sharetribe/pull/2452)
+- Fix bug in infinite scroll: The current page was not taken into account [#2532](https://github.com/sharetribe/sharetribe/pull/2532)
+- Fix bug: Testimonial reminders were sent even if user had disabled them [#2557](https://github.com/sharetribe/sharetribe/pull/2557)
+- Fix regression: Add quantity pickers to non-payment transactions [#2568](https://github.com/sharetribe/sharetribe/pull/2568)
+
 ## [5.11.0] - 2016-08-24
 
 ### Changed
@@ -249,7 +322,10 @@ This file follows the best practices from [keepachangelog.com](http://keepachang
 
 For older releases, see [RELEASE_NOTES.md](https://github.com/sharetribe/sharetribe/blob/v5.0.0/RELEASE_NOTES.md).
 
-[Unreleased]: https://github.com/sharetribe/sharetribe/compare/v5.11.0...HEAD
+[Unreleased]: https://github.com/sharetribe/sharetribe/compare/v6.1.0...HEAD
+[6.1.0]: https://github.com/sharetribe/sharetribe/compare/v6.0.0...v6.1.0
+[6.0.0]: https://github.com/sharetribe/sharetribe/compare/v5.12.0...v6.0.0
+[5.12.0]: https://github.com/sharetribe/sharetribe/compare/v5.11.0...v5.12.0
 [5.11.0]: https://github.com/sharetribe/sharetribe/compare/v5.10.0...v5.11.0
 [5.10.0]: https://github.com/sharetribe/sharetribe/compare/v5.9.0...v5.10.0
 [5.9.0]: https://github.com/sharetribe/sharetribe/compare/v5.8.0...v5.9.0
