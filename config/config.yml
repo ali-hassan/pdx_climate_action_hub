@@ -10,7 +10,6 @@
 
 development:
   # Add local `development` environment configuration overrides here
-  google_maps_key: AIzaSyCVDKY-luQ8iemBagIFepYlez_mF7AxsRw
 
 test:
   # Add local `test` environment configuration overrides here
