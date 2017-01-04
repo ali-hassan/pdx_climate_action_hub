@@ -94,6 +94,7 @@
 #
 #  index_communities_on_domain  (domain)
 #  index_communities_on_ident   (ident)
+#  index_communities_on_uuid    (uuid) UNIQUE
 #
 
 require 'spec_helper'

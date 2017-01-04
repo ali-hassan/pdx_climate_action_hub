@@ -4,10 +4,13 @@
 #
 #  id                                :integer          not null, primary key
 #  starter_id                        :string(255)      not null
+#  starter_uuid                      :binary(16)       not null
 #  listing_id                        :integer          not null
+#  listing_uuid                      :binary(16)       not null
 #  conversation_id                   :integer
 #  automatic_confirmation_after_days :integer          not null
 #  community_id                      :integer          not null
+#  community_uuid                    :binary(16)       not null
 #  created_at                        :datetime         not null
 #  updated_at                        :datetime         not null
 #  starter_skipped_feedback          :boolean          default(FALSE)
@@ -19,7 +22,8 @@
 #  minimum_commission_currency       :string(255)
 #  payment_gateway                   :string(255)      default("none"), not null
 #  listing_quantity                  :integer          default(1)
-#  listing_author_id                 :string(255)
+#  listing_author_id                 :string(255)      not null
+#  listing_author_uuid               :binary(16)       not null
 #  listing_title                     :string(255)
 #  unit_type                         :string(32)
 #  unit_price_cents                  :integer
@@ -29,6 +33,8 @@
 #  payment_process                   :string(31)       default("none")
 #  delivery_method                   :string(31)       default("none")
 #  shipping_price_cents              :integer
+#  availability                      :string(32)       default("none")
+#  booking_uuid                      :binary(16)
 #  deleted                           :boolean          default(FALSE)
 #
 # Indexes
@@ -37,34 +43,13 @@
 #  index_transactions_on_conversation_id     (conversation_id)
 #  index_transactions_on_deleted             (deleted)
 #  index_transactions_on_last_transition_at  (last_transition_at)
+#  index_transactions_on_listing_author_id   (listing_author_id)
 #  index_transactions_on_listing_id          (listing_id)
+#  index_transactions_on_starter_id          (starter_id)
 #  transactions_on_cid_and_deleted           (community_id,deleted)
 #
 
 class Transaction < ActiveRecord::Base
-  attr_accessible(
-    :community_id,
-    :starter_id,
-    :listing_id,
-    :automatic_confirmation_after_days,
-    :author_skipped_feedback,
-    :starter_skipped_feedback,
-    :payment_attributes,
-    :payment_gateway,
-    :payment_process,
-    :commission_from_seller,
-    :minimum_commission,
-    :listing_quantity,
-    :listing_title,
-    :listing_author_id,
-    :unit_type,
-    :unit_price,
-    :unit_tr_key,
-    :unit_selector_tr_key,
-    :shipping_price,
-    :delivery_method
-  )
-
   attr_accessor :contract_agreed
 
   belongs_to :community
@@ -91,6 +76,42 @@ class Transaction < ActiveRecord::Base
     joins(:listing)
     .where("listings.author_id = ? OR starter_id = ?", person.id, person.id)
   }
+
+  def booking_uuid_object
+    if self[:booking_uuid].nil?
+      nil
+    else
+      UUIDUtils.parse_raw(self[:booking_uuid])
+    end
+  end
+
+  def booking_uuid_object=(uuid)
+    self.booking_uuid = UUIDUtils.raw(uuid)
+  end
+
+  def community_uuid_object
+    if self[:community_uuid].nil?
+      nil
+    else
+      UUIDUtils.parse_raw(self[:community_uuid])
+    end
+  end
+
+  def starter_uuid_object
+    if self[:starter_uuid].nil?
+      nil
+    else
+      UUIDUtils.parse_raw(self[:starter_uuid])
+    end
+  end
+
+  def listing_author_uuid_object
+    if self[:listing_author_uuid].nil?
+      nil
+    else
+      UUIDUtils.parse_raw(self[:listing_author_uuid])
+    end
+  end
 
   def status
     current_state

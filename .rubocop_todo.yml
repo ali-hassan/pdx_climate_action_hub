@@ -22,7 +22,6 @@ Lint/AmbiguousRegexpLiteral:
 Lint/AssignmentInCondition:
   Exclude:
     - 'app/controllers/community_memberships_controller.rb'
-    - 'app/controllers/confirmations_controller.rb'
     - 'app/controllers/sessions_controller.rb'
     - 'app/models/category.rb'
     - 'app/models/community.rb'
@@ -231,6 +230,7 @@ Metrics/ModuleLength:
 # Offense count: 8
 # Configuration parameters: CountKeywordArgs.
 Metrics/ParameterLists:
+  CountKeywordArgs: false
   Max: 7
 
 # Offense count: 48
@@ -772,7 +772,6 @@ Style/HashSyntax:
 Style/IdenticalConditionalBranches:
   Exclude:
     - 'app/controllers/admin/communities_controller.rb'
-    - 'app/controllers/confirmations_controller.rb'
 
 # Offense count: 7
 Style/IfInsideElse:

@@ -199,6 +199,23 @@ class ListingsController < ApplicationController
       admin_getting_started_guide_path,
       Admin::OnboardingWizard.new(@current_community.id).setup_status)
 
+    blocked_dates_start_on = 1.day.ago.to_date
+    blocked_dates_end_on = 12.months.from_now.to_date
+
+    blocked_dates_result =
+      if FeatureFlagHelper.feature_enabled?(:availability) &&
+         @listing.availability.to_sym == :booking
+
+        get_blocked_dates(
+          start_on: blocked_dates_start_on,
+          end_on: blocked_dates_end_on,
+          community: @current_community,
+          user: @current_user,
+          listing: @listing)
+      else
+        Result::Success.new([])
+      end
+
     view_locals = {
       form_path: form_path,
       payment_gateway: payment_gateway,
@@ -210,7 +227,9 @@ class ListingsController < ApplicationController
       received_testimonials: received_testimonials,
       received_positive_testimonials: received_positive_testimonials,
       feedback_positive_percentage: feedback_positive_percentage,
-      youtube_link_ids: youtube_link_ids
+      youtube_link_ids: youtube_link_ids,
+      blocked_dates_result: blocked_dates_result,
+      blocked_dates_end_on: DateUtils.to_midnight_utc(blocked_dates_end_on)
     }
 
     render(locals: onboarding_popup_locals.merge(view_locals))
@@ -261,7 +280,24 @@ class ListingsController < ApplicationController
     params[:listing].delete("origin_loc_attributes") if params[:listing][:origin_loc_attributes][:address].blank?
 
     shape = get_shape(Maybe(params)[:listing][:listing_shape_id].to_i.or_else(nil))
+    listing_uuid = UUIDUtils.create
 
+    if FeatureFlagHelper.feature_enabled?(:availability) && shape.present? && shape[:availability] == :booking
+      auth_context = {
+        marketplace_id: @current_community.uuid_object,
+        actor_id: @current_user.uuid_object
+      }
+      bookable_res = create_bookable(@current_community.uuid_object, listing_uuid, @current_user.uuid_object, auth_context)
+      unless bookable_res.success
+        flash[:error] = t("listings.error.create_failed_to_connect_to_booking_service")
+        return redirect_to new_listing_path
+      end
+    end
+
+    create_listing(shape, listing_uuid)
+  end
+
+  def create_listing(shape, listing_uuid)
     listing_params = ListingFormViewUtils.filter(params[:listing], shape)
     listing_unit = Maybe(params)[:listing][:unit].map { |u| ListingViewUtils::Unit.deserialize(u) }.or_else(nil)
     listing_params = ListingFormViewUtils.filter_additional_shipping(listing_params, listing_unit)
@@ -276,11 +312,13 @@ class ListingsController < ApplicationController
     m_unit = select_unit(listing_unit, shape)
 
     listing_params = create_listing_params(listing_params).merge(
+        uuid_object: listing_uuid,
         community_id: @current_community.id,
         listing_shape_id: shape[:id],
         transaction_process_id: shape[:transaction_process_id],
         shape_name_tr_key: shape[:name_tr_key],
-        action_button_tr_key: shape[:action_button_tr_key]
+        action_button_tr_key: shape[:action_button_tr_key],
+        availability: shape[:availability]
     ).merge(unit_to_listing_opts(m_unit)).except(:unit)
 
     @listing = Listing.new(listing_params)
@@ -383,6 +421,22 @@ class ListingsController < ApplicationController
 
     shape = get_shape(params[:listing][:listing_shape_id])
 
+    if FeatureFlagHelper.feature_enabled?(:availability) &&
+       shape.present? &&
+       shape[:availability] == :booking
+
+      auth_context = {
+        marketplace_id: @current_community.uuid_object,
+        actor_id: @current_user.uuid_object
+      }
+
+      bookable_res = create_bookable(@current_community.uuid_object, @listing.uuid_object, @current_user.uuid_object, auth_context)
+      unless bookable_res.success
+        flash[:error] = t("listings.error.update_failed_to_connect_to_booking_service")
+        return redirect_to edit_listing_path(@listing)
+      end
+    end
+
     listing_params = ListingFormViewUtils.filter(params[:listing], shape)
     listing_unit = Maybe(params)[:listing][:unit].map { |u| ListingViewUtils::Unit.deserialize(u) }.or_else(nil)
     listing_params = ListingFormViewUtils.filter_additional_shipping(listing_params, listing_unit)
@@ -395,14 +449,16 @@ class ListingsController < ApplicationController
 
     listing_params = normalize_price_params(listing_params)
     m_unit = select_unit(listing_unit, shape)
+    listing_reopened = @listing.closed?
 
-    open_params = @listing.closed? ? {open: true} : {}
+    open_params = listing_reopened ? {open: true} : {}
 
     listing_params = create_listing_params(listing_params).merge(
       transaction_process_id: shape[:transaction_process_id],
       shape_name_tr_key: shape[:name_tr_key],
       action_button_tr_key: shape[:action_button_tr_key],
-      last_modified: DateTime.now
+      last_modified: DateTime.now,
+      availability: shape[:availability]
     ).merge(open_params).merge(unit_to_listing_opts(m_unit)).except(:unit)
 
     update_successful = @listing.update_fields(listing_params)
@@ -413,6 +469,7 @@ class ListingsController < ApplicationController
       @listing.location.update_attributes(params[:location]) if @listing.location
       flash[:notice] = t("layouts.notifications.listing_updated_successfully")
       Delayed::Job.enqueue(ListingUpdatedJob.new(@listing.id, @current_community.id))
+      reprocess_missing_image_styles(@listing) if listing_reopened
       redirect_to @listing
     else
       logger.error("Errors in editing listing: #{@listing.errors.full_messages.inspect}")
@@ -483,6 +540,55 @@ class ListingsController < ApplicationController
   end
 
   private
+
+  def create_bookable(community_uuid, listing_uuid, author_uuid, auth_context)
+    res = HarmonyClient.post(
+      :create_bookable,
+      body: {
+        marketplaceId: community_uuid,
+        refId: listing_uuid,
+        authorId: author_uuid
+      },
+      opts: {
+        max_attempts: 3,
+        auth_context: auth_context
+      })
+
+    if !res[:success] && res[:data][:status] == 409
+      Result::Success.new("Bookable for listing with UUID #{listing_uuid} already created")
+    else
+      res
+    end
+  end
+
+  def get_blocked_dates(start_on:, end_on:, community:, user:, listing:)
+    HarmonyClient.get(
+      :query_timeslots,
+      params: {
+        marketplaceId: community.uuid_object,
+        refId: listing.uuid_object,
+        start: start_on,
+        end: end_on
+      },
+      opts: {
+        auth_context: { marketplace_id: community.uuid_object,
+                        actor_id: user ? user.uuid_object : UUIDUtils.v0_uuid }
+      }
+    ).rescue {
+      Result::Error.new(nil, code: :harmony_api_error)
+    }.and_then { |res|
+      available_slots = dates_to_ts_set(
+        res[:body][:data].map { |timeslot| timeslot[:attributes][:start].to_date }
+      )
+      Result::Success.new(
+        dates_to_ts_set(start_on..end_on).subtract(available_slots)
+      )
+    }
+  end
+
+  def dates_to_ts_set(dates)
+    Set.new(dates.map { |d| DateUtils.to_midnight_utc(d) })
+  end
 
   def select_shape(shapes, id)
     if shapes.size == 1
@@ -912,5 +1018,13 @@ class ListingsController < ApplicationController
         price_info: ListingViewUtils.shipping_info(delivery_type, price, shipping_price_additional),
         default: true
       }
+  end
+
+  # Create image sizes that might be missing
+  # from a reopened listing
+  def reprocess_missing_image_styles(listing)
+    listing.listing_images.pluck(:id).each { |image_id|
+      Delayed::Job.enqueue(CreateSquareImagesJob.new(image_id))
+    }
   end
 end

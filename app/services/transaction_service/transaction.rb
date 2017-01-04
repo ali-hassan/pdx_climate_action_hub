@@ -1,8 +1,13 @@
 module TransactionService::Transaction
 
+  class IllegalTransactionStateException < Exception
+  end
+
   DataTypes = TransactionService::DataTypes::Transaction
+  ProcessStatus = TransactionService::DataTypes::ProcessStatus
 
   TxStore = TransactionService::Store::Transaction
+  ProcessTokenStore = TransactionService::Store::ProcessToken
 
   DEPRECATED_GATEWAYS = [:braintree, :checkout]
 
@@ -76,7 +81,7 @@ module TransactionService::Transaction
     Result::Success.new(result: set_adapter.configured?(community_id: community_id, author_id: author_id))
   end
 
-  def create(opts, paypal_async: false)
+  def create(opts, force_sync: true)
     opts_tx = opts[:transaction]
 
     set_adapter = settings_adapter(opts_tx[:payment_gateway])
@@ -89,11 +94,52 @@ module TransactionService::Transaction
     res = tx_process.create(tx: tx,
                             gateway_fields: opts[:gateway_fields],
                             gateway_adapter: gateway_adapter,
-                            prefer_async: paypal_async)
+                            force_sync: force_sync)
 
     res.maybe()
       .map { |gw_fields| Result::Success.new(DataTypes.create_transaction_response(query(tx[:id]), gw_fields)) }
       .or_else(res)
+  end
+
+  def finalize_create(community_id:, transaction_id:, force_sync: true)
+    tx = TxStore.get_in_community(community_id: community_id, transaction_id: transaction_id)
+
+    # Try to find existing process token
+    # This may happen if finalize_create action has been called already, for example
+    # as a reaction to payment event
+    proc_token = ProcessTokenStore.get_by_transaction(community_id: community_id,
+                                                      transaction_id: transaction_id,
+                                                      op_name: :do_finalize_create)
+
+    res =
+      if !force_sync && proc_token.present?
+        proc_status_response(proc_token)
+      elsif tx.nil?
+        # Transaction doesn't exist.
+        #
+        # This may happen if the finalize_create action has been called already, and it failed.
+        # If the finalization fails (e.g. booking fails), we void the payment and delete the
+        # transaction.
+        Result::Error.new("Can't find transaction, id: #{transaction_id}, community_id: #{community_id}", {code: :tx_not_existing})
+      else
+        tx_process = tx_process(tx[:payment_process])
+        gw = gateway_adapter(tx[:payment_gateway])
+
+        tx_process.finalize_create(
+          tx: tx,
+          gateway_adapter: gw,
+          force_sync: force_sync)
+      end
+
+    res.and_then { |tx_fields|
+      # Transaction may be nil, if it has been deleted due to voided payment
+      m_tx = Maybe(tx)
+
+      Result::Success.new(DataTypes.create_transaction_response(
+                            m_tx.map { |tx_val| query(tx_val[:id]) }.or_else(nil),
+                            {},
+                            tx_fields))
+    }
   end
 
   def reject(community_id:, transaction_id:, message: nil, sender_id: nil)
@@ -196,13 +242,16 @@ module TransactionService::Transaction
         payment_process: tx[:payment_process],
         payment_gateway: tx[:payment_gateway],
         community_id: tx[:community_id],
+        community_uuid: tx[:community_uuid],
         starter_id: tx[:starter_id],
         listing_id: tx[:listing_id],
+        listing_uuid: tx[:listing_uuid],
         listing_title: tx[:listing_title],
         listing_price: tx[:unit_price],
         unit_type: tx[:unit_type],
         unit_tr_key: tx[:unit_tr_key],
         unit_selector_tr_key: tx[:unit_selector_tr_key],
+        availability: tx[:availability],
         item_total: item_total,
         shipping_price: tx[:shipping_price],
         listing_author_id: tx[:listing_author_id],
@@ -240,5 +289,13 @@ module TransactionService::Transaction
 
   def paypal_billing_agreement_api
     PaypalService::API::Api.billing_agreements
+  end
+
+  def proc_status_response(proc_token)
+    Result::Success.new(
+      ProcessStatus.create_process_status({
+                                            process_token: proc_token[:process_token],
+                                            completed: proc_token[:op_completed],
+                                            result: proc_token[:op_output]}))
   end
 end

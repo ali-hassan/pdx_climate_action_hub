@@ -22,11 +22,8 @@
 
     = form_tag form_path, :method => :get, :id => "booking-dates" do
 
-      - # Currently we show the selectors only for preauth process.
-      - # However, there has been a plan to introduce these in other
-      - # Processes (free) as well - rap1ds, 2.6.2015
-      - if process == :preauthorize
-        - if @listing.unit_type == :day
+      - if [:day, :night].include?(@listing.quantity_selector&.to_sym)
+        - blocked_dates_result.on_success do |blocked_dates|
           - days = [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
           - months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
           - translated_days = days.map { |day_symbol| t("datepicker.days.#{day_symbol}") }.to_json
@@ -37,6 +34,11 @@
 
           - content_for :extra_javascript do
             :javascript
+
+              var disabledDates = [
+                #{blocked_dates.map { |d| "new Date(#{d.to_i * 1000})" }.join(",")}
+              ];
+
               $.fn.datepicker.dates['#{I18n.locale}'] = {
                 days: #{translated_days},
                 daysShort: #{translated_days_short},
@@ -48,8 +50,48 @@
                 clear: "#{t("datepicker.clear")}",
                 format: "#{t("datepicker.format")}"
               }
+              $.validator.addMethod("night_selected",
+                function(value, element, params) {
+                  var startVal = $(params.startOnSelector).val()
+                  if (!!startVal == false) {
+                    return true;
+                  } else {
+                    return startVal !== value
+                  }
+                });
+              $.validator.addMethod("availability_range",
+                function(value, element, params) {
+                  var startVal = $(params.startOnSelector).datepicker('getDates');
+                  var endVal = $(element).datepicker('getDates');
 
+                  if (!startVal || startVal.length !== 1 || !endVal || endVal.length !== 1) {
+                    return false;
+                  }
+
+                  var startDate = startVal[0].getTime();
+                  var endDate = endVal[0].getTime();
+
+                  // Validate that all booked dates are outside the selected range
+                  return disabledDates.every(function(d) {
+                    var date = d.getTime();
+                    if (startDate === endDate) {
+                      return date !== startDate;
+                    }
+                    return date < startDate || date >= endDate;
+                  });
+                });
+              var rules = #{@listing.quantity_selector&.to_sym == :night} ? {
+                "end_on": {
+                  night_selected: {startOnSelector: "#start-on"},
+                  availability_range: {startOnSelector: "#start-on"}
+                }
+              } : {
+                "end_on": {
+                  availability_range: {startOnSelector: "#start-on"}
+                }
+              };
               $("#booking-dates").validate({
+                rules: rules,
                 submitHandler: function(form) {
                   var $form = $(form);
                   $form.find("#start-on").attr("name", "");
@@ -59,7 +101,10 @@
                 }
               });
 
-              window.ST.initializeFromToDatePicker('datepicker');
+              var endDate = new Date(#{blocked_dates_end_on.to_i * 1000});
+              var nightPicker = #{@listing.quantity_selector.to_sym == :night};
+
+              window.ST.initializeFromToDatePicker('datepicker', {disabledDates: disabledDates, endDate: endDate, nightPicker: nightPicker });
           .input-daterange.input-group.clearfix#datepicker{:data => {:locale => I18n.locale, :dateformat => t("datepicker.format")}}
             .datepicker-start-wrapper
               = label_tag t(".booking_from")
@@ -70,39 +115,49 @@
               = label_tag t(".booking_to")
               %input.input-sm.form-control.required#end-on{:type => 'text', :name => "end_on", :placeholder => t("datepicker.format"), :data => { :output => "booking-end-output" }}
               %input#booking-end-output{:type => 'hidden', :name => 'end_on'}
-        - elsif listing_unit_type.present?
-          - delivery_type = delivery_opts.length > 0 ? delivery_opts.first[:name].to_s : ""
-          - shipping_price_additional = delivery_opts.length > 0 ? delivery_opts.first[:shipping_price_additional] : nil
-          - content_for :extra_javascript do
-            :javascript
-              $("#booking-dates").validate({
-                errorPlacement: function(error, element) {
-                  if (element.is("#quantity")) {
-                    error.insertAfter(".quantity-wrapper");
-                  } else {
-                    error.insertAfter(element);
-                  }
-                }
-              });
-              window.ST.initializeQuantityValidation({validate: "positiveIntegers", input: "quantity", errorMessage: "#{t("errors.messages.positive_number")}" });
-              if ("#{delivery_type}" == "shipping" && #{shipping_price_additional != nil}) {
-                window.ST.initializeShippingPriceTotal('#quantity', '.delivery-price-value', '#{Maybe(delivery_opts)[0][:price].currency.decimal_mark.or_else(".")}');
-              }
 
-          .quantity-wrapper.input-group.clearfix
-            .quantity-label-wrapper
-              %label.quantity-label{for: 'quantity'}
-                = ListingViewUtils.translate_quantity(@listing.unit_type, @listing.unit_selector_tr_key)
-            .quantity-input.input-sm.required
-              %input#quantity{type: 'number', placeholder: t("listings.quantity_placeholder"), name: 'quantity', value: 1, min: 1, step: 1}
+        - blocked_dates_result.on_error do
+          = t("listings.listing_actions.unable_load_availability")
+
+      - elsif listing_unit_type.present?
+        - delivery_type = delivery_opts.length > 0 ? delivery_opts.first[:name].to_s : ""
+        - shipping_price_additional = delivery_opts.length > 0 ? delivery_opts.first[:shipping_price_additional] : nil
+        - content_for :extra_javascript do
+          :javascript
+            $("#booking-dates").validate({
+              errorPlacement: function(error, element) {
+                if (element.is("#quantity")) {
+                  error.insertAfter(".quantity-wrapper");
+                } else {
+                  error.insertAfter(element);
+                }
+              }
+            });
+            window.ST.initializeQuantityValidation({validate: "positiveIntegers", input: "quantity", errorMessage: "#{t("errors.messages.positive_number")}" });
+            if ("#{delivery_type}" == "shipping" && #{shipping_price_additional != nil}) {
+              window.ST.initializeShippingPriceTotal('#quantity', '.delivery-price-value', '#{Maybe(delivery_opts)[0][:price].currency.decimal_mark.or_else(".")}');
+            }
+
+        .quantity-wrapper.input-group.clearfix
+          .quantity-label-wrapper
+            %label.quantity-label{for: 'quantity'}
+              = ListingViewUtils.translate_quantity(@listing.unit_type, @listing.unit_selector_tr_key)
+          .quantity-input.input-sm.required
+            %input#quantity{type: 'number', placeholder: t("listings.quantity_placeholder"), name: 'quantity', value: 1, min: 1, step: 1}
 
       = render partial: "delivery_opts", locals: { delivery_opts: delivery_opts, is_author: is_author }
 
       = hidden_field_tag(:listing_id, @listing.id)
 
-      %button.book-button
-        .content
-          = action_button_label(@listing)
+      - blocked_dates_result.on_success do
+        %button.enabled-book-button
+          .content
+            = action_button_label(@listing)
+
+      - blocked_dates_result.on_error do
+        %button.disabled-book-button{disabled: true}
+          .content
+            = action_button_label(@listing)
 
     - if payment_gateway == :paypal && process != :none
       .row

@@ -17,6 +17,7 @@
 #
 #  index_emails_on_address                   (address)
 #  index_emails_on_address_and_community_id  (address,community_id) UNIQUE
+#  index_emails_on_confirmation_token        (confirmation_token)
 #  index_emails_on_person_id                 (person_id)
 #
 

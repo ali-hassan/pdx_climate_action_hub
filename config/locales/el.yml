@@ -79,16 +79,18 @@ el:
         favicon: ~
         favicon_info_text: ~
         community_custom_color1: "Κυρίως χρώμα"
-        community_custom_color2: "Δεύτερο χρώμα"
+        new_listing_button_custom_color: ~
         logo_instructions_text_with_dimensions: "Το λογότυπο πρέπει να έχει μέγεθος %{width}x%{height}px."
+        logo_instructions_text_with_dimensions_no_placing: ~
         logo_icon_instructions_text_with_dimensions: "Το μέγεθος του λογότυπου πρέπει να είναι %{width}x%{height} px."
+        logo_icon_instructions_text_with_dimensions_no_placing: ~
         cover_photo_visibility: ~
         cover_photo_instructions_text_with_dimensions: "Το μέγεθος της φωτογραφίας εξώφυλλου θα γίνει %{width}x%{height} pixels και ψηλότερες εικόνες θα περικοπούν στο κέντρο."
         small_cover_photo_visibility: ~
         small_cover_photo_instructions_text_with_dimensions: ~
         main_content_width: ~
         custom_color1_instructions_text: "Μπορείτε να αλλάξετε το κυρίως χρώμα του περιβάλλοντος αυτής της κοινότητας εισάγοντας ένα χρώμα σε δεκαεξαδική μορφή. Στο <a href=\"http://www.colorpicker.com/?colorcode=D96E21\" target=\"_blank\" rel=\"noreferrer\">ColorPicker.com</a> μπορείτε να βρείτε το χρώμα που θέλετε και να αντιγράψετε τον κατάλληλο κωδικό εδώ."
-        custom_color2_instructions_text: ~
+        new_listing_button_instructions_text: ~
         default_browse_view: ~
         default_browse_view_instructions_text: ~
         grid: ~
@@ -167,7 +169,6 @@ el:
       settings:
         settings: Ρυθμίσεις
         general: Γενικά
-        users_can_review_each_other_after_transaction: "Οι χρήστες μπορούν να αφήνουν κριτική ο ένας στον αλλόν μετά απο την συναλλαγή"
         access: Πρόσβαση
         join_with_invite_only: ~
         users_can_invite_new_users: ~
@@ -194,7 +195,6 @@ el:
         google_analytics_key: ~
         twitter_handle: ~
         update_settings: ~
-        automatically_confirmed: ~
         automatically_confirmed_no_escrow: ~
         automatic_newsletter_frequency: ~
         newsletter_daily: ~
@@ -267,6 +267,10 @@ el:
         all: ~
         max_number_of_links_info: ~
         about_page: ~
+      topbar:
+        topbar: ~
+        new_listing_button_label: ~
+        invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: ~
         transactions: ~
@@ -291,15 +295,6 @@ el:
           initiated: ~
           pending_ext: ~
         not_available: ~
-      braintree_payment_gateway:
-        braintree_payment_gateway: ~
-        environment: ~
-        private_key: ~
-        public_key: ~
-        client_side_encryption_key: ~
-        merchant_id: ~
-        master_merchant_id: ~
-        commission_from_seller: ~
       paypal_account:
         paypal_admin_account: ~
     custom_fields:
@@ -373,6 +368,11 @@ el:
       subscription: ~
       preview: ~
     listing_shapes:
+      availability_title: ~
+      allow_availability_management: ~
+      per_day_availability: ~
+      per_night_availability: ~
+      pricing_units_disabled_info: ~
       index:
         listing_shapes: ~
         description: ~
@@ -535,8 +535,6 @@ el:
     accept:
       details: ~
       order_by: ~
-      respond_to_offer: "Απαντήστε σε μια προσφορά"
-      respond_to_request: "Απαντήστε σε ένα αίτημα"
       accept_offer: "Αποδεχτείτε την προσφορά"
       accept_request: "Αποδεχτείτε το αίτημα"
       reject_offer: "Όχι αυτή τη φορά"
@@ -545,9 +543,6 @@ el:
       update_later: "Η καταχώρηση να παραμείνει ανοιχτή"
       optional_message: "Προαιρετικό μήνυμα"
       price_to_pay: "Τελική τιμή"
-      you_need_to_fill_payout_details_before_accepting: "Πριν αποδεχτείτε το αίτημα και λάβετε την πληρωμή πρέπει να συμπληρώσετε τα στοιχεία για την πληρωμή σας. Πηγαίνετε στις %{payment_settings_link} για να τα συμπληρώσετε."
-      payment_settings_link: "ρυθμίσεις πληρωμών"
-      minimum_price_error_message: "Η τιμή δεν μπορεί να είναι μικρότερη από %{amount}."
       accept: ~
       decline: ~
       quantity_label: ~
@@ -628,7 +623,6 @@ el:
       last_message_at: "(τελευταίο μήνυμα %{time})"
       price: ~
       sum: ~
-      price_excludes_vat: ~
       total: ~
     status:
       payment_errored: ~
@@ -687,54 +681,11 @@ el:
       reject_preauthorized_request: ~
       confirm: Ολοκληρώθηκε
       cancel: "Δεν πραγματοποιήθηκε"
-  braintree_accounts:
-    new:
-      add_payout_details: "Προσθέστε τα στοιχεία σας για τις πληρωμές"
-      first_name: Όνομα
-      last_name: Επώνυμο
-      email: "Διεύθυνση email"
-      phone: Τηλέφωνο
-      address_street_address: "Ταχυδρομική διεύθυνση"
-      address_postal_code: "Ταχυδρομικός κώδικας"
-      address_locality: Πόλη
-      address_region: Νομός
-      date_of_birth: "Ημερομηνία γέννησης"
-      ssn: SSN
-      routing_number: "Routing number"
-      account_number: "Αριθμός λογαριασμού"
-      save: Αποθήκευση
-    show:
-      payout_details: "Τα στοιχεία πληρωμής σας"
-      first_name: Όνομα
-      last_name: Επώνυμο
-      email: "Διεύθυνση email"
-      phone: Τηλέφωνο
-      address_street_address: "Ταχυδρομική διεύθυνση"
-      address_postal_code: "Ταχυδρομικός κώδικας"
-      address_locality: Πόλη
-      address_region: Νομός
-      date_of_birth: "Ημερομηνία γέννησης"
-      ssn: SSN
-      routing_number: "Routing number"
-      account_number: "Αριθμός λογαριασμού"
-  braintree_payments:
-    edit:
-      new_credit_card_payment: ~
-      payment_receiver: ~
-      cardholder_name: "Κάτοχος κάρτας"
-      credit_card_number: "Αριθμός πιστωτικής κάρτας"
-      cvv: CVV
-      credit_card_expiration_date: "Ημερομηνία λήξης πιστωτικής κάρτας"
-      confirm_payment: "Επιβεβαίωση πληρωμής"
-      exp: ~
   feedback:
     feedback_subject: ~
     feedback_body: ~
     unlogged_user: ~
     anonymous_user: ~
-  preauthorize_payments:
-    edit:
-      confirm_payment: ~
   community_memberships:
     access_denied:
       access_denied: ~
@@ -769,23 +720,12 @@ el:
       powered_by: ~
       create_own: ~
       learn_more: ~
-    braintree_account_approved:
-      account_ready: "Είστε έτοιμοι να λάβετε πληρωμές"
-      message: "Τα στοιχεία πληρωμών σας έχουν επιβεβαιωθεί και πλέον είστε έτοιμοι να λάβετε πληρωμές στο %{service_name}"
     confirm_reminder:
       you_have_not_yet_confirmed_or_canceled_request: "Δεν έχετε ακόμα επιβεβαιώσει ή ακυρώσει το αίτημα %{request_link} που λάβατε στις %{date} από το χρήστη %{other_party_full_name}. Αν το αίτημα έχει ολοκληρωθεί θα πρέπει να το επιβεβαιώσετε έτσι ώστε να μπορέσετε να κάνετε κριτική για το χρήστη %{other_party_given_name}."
-      you_have_not_yet_confirmed_or_canceled_request_escrow_automatic_confirmation: ~
       remember_to_confirm_request: "Θυμηθείτε να επιβεβαιώσετε ή να ακυρώσετε ένα αίτημα"
       if_will_not_happen_you_should_cancel: "Αν πιστεύετε ότι αυτό το αίτημα για οποιοδήποτε λόγο δεν θα ολοκληρωθεί, μπορείτε να %{cancel_it_link}."
-      if_will_not_happen_you_should_cancel_escrow: ~
-      if_will_not_happen_you_should_cancel_escrow_automatic_confirmation: ~
       cancel_it_link_text: "το ακυρώσετε"
       automatic_confirmation: ~
-    payment_reminder:
-      remember_to_pay: "Θυμηθείτε να πληρώσετε για το %{listing_title}"
-      you_have_not_yet_paid: "Δεν έχετε ακόμα πληρώσει το %{listing_title} το οποίο δέχτηκε να σας προσφέρει ο/η %{other_party_name}."
-      if_will_not_happen_you_should_cancel: "Αν πιστεύετε ότι αυτό το αίτημα για οποιοδήποτε λόγο δεν θα ολοκληρωθεί, μπορείτε να %{cancel_it_link}."
-      cancel_it_link_text: "το ακυρώσετε"
     payment_settings_reminder:
       remember_to_add_payment_details: "Μην ξεχάσετε να προσθέσετε τα στοιχεία σας για να λαμβάνετε πληρωμές"
       you_have_added_listing_with_payment: "Έχετε κάνει μια καταχώρηση \"%{listing_link}\" με πληρωμή όμως δεν έχετε ακόμα συμπληρώσει τα στοιχεία σας. Για να λάβετε την πληρωμή σας πρέπει να συμπληρώσετε τις απαραίτητες πληροφορίες."
@@ -809,11 +749,6 @@ el:
       giving_feedback_is_good_idea: ~
       give_feedback_to: ~
       show_thread: ~
-    escrow_canceled:
-      subject: ~
-      has_marked_request_as_canceled: ~
-      if_this_was_error: ~
-      please_contant_admin_link: ~
     confirmation_instructions:
       confirmation_instructions_signature: "Χαιρετισμούς,<br>Η Ομάδα του %{service_name}"
       need_to_confirm: "Πρέπει να επιβεβαιώσετε την διεύθυνση ηλεκτρονικού ταχυδρομείου σας."
@@ -871,7 +806,6 @@ el:
       price_payer_paid: ~
       service_fee: ~
       you_will_get: ~
-      money_will_be_transferred: ~
     receipt_to_payer:
       receipt_of_payment: "Απόδειξη πληρωμής"
       you_have_made_new_payment: "Πληρώσατε <b>%{payment_sum}</b> για το <b>%{listing_title}</b> στον/στην %{recipient_full_name}. Ορίστε η απόδειξη πληρωμής."
@@ -900,7 +834,6 @@ el:
       title_link_text: "%{community_name}"
       intro_paragraph: "Δείτε κάποια από τα νέα του %{community_link} τις τελευταίες %{time_since_last_update}"
       intro_paragraph_link_text: "%{community_name}"
-      post_a_new_listing: "Κάντε μια νέα καταχώρηση!"
       reduce_email_footer_text: "Είναι πολλά τα email που λαμβάνετε; %{settings_link} ή %{unsubscribe_link}"
       settings_link_text: "Επεξεργαστείτε τις ρυθμίσεις ηλεκτρονικού ταχυδρομείου"
       unsubscribe_link_text: "διαγραφτείτε από τη λίστα ενημερώσεων"
@@ -931,23 +864,6 @@ el:
       love_marketplace_crew: ~
       welcome_email_footer_text: "Θέλετε να ελέγξετε τι μηνύματα θα λαμβάνετε από το %{service_name}; %{settings_link}"
       settings_link_text: "Δείτε τις ρυθμίσεις σας"
-      welcome_email_subject_for_marketplace_creator: ~
-      welcome_to_marketplace_creator: ~
-      congrats_for_creating_your_marketplace: ~
-      here_is_your_account_information: ~
-      your_email_address: ~
-      your_marketplace_address: ~
-      your_marketplace_admin_area: ~
-      just_follow_details: ~
-      we_will_guide_you_along_the_way: ~
-      are_you_new_to_online_marketplaces: ~
-      have_questions: ~
-      our_happiness_team_is_here_to_help: ~
-      love: ~
-      sharetribe_crew: ~
-      knowledge_base_link_text: ~
-      contact_support_link_text: ~
-      admin_panel_link_text: ~
     new_listing_by_followed_person:
       subject: ~
       has_posted_a_new_listing: ~
@@ -959,6 +875,9 @@ el:
       person_name: ~
       person_email: ~
   error_messages:
+    booking:
+      booking_failed_payment_voided: ~
+      double_booking_payment_voided: ~
     onboarding:
       server_rendering: ~
     listings:
@@ -1354,7 +1273,6 @@ el:
       you_must_log_in_to_view_your_settings: "Πρέπει να συνδεθείτε στο %{service_name} για να δείτε τις ρυθμίσεις σας."
       you_must_log_in_to_add_news_item: "Πρέπει να συνδεθείτε στο %{service_name} για να προσθέσετε ένα άρθρο."
       you_must_log_in_to_change_profile_settings: "Πρέπει να συνδεθείτε στο %{service_name} για να αλλάξετε τις ρυθμίσεις του προφίλ"
-      you_must_log_in_to_change_payment_settings: "Πρέπει να συνδεθείτε στο %{service_name} για να αλλάξετε τις ρυθμίσεις των πληρωμών"
       you_must_log_in_to_accept_or_reject: ~
       you_must_log_in_to_confirm_or_cancel: ~
       you_need_to_confirm_your_account_first: "Πρέπει να επιβεβαιώσετε την διεύθυνση ηλεκτρονικού ταχυδρομείου σας."
@@ -1364,8 +1282,6 @@ el:
       can_not_delete_email: "Δεν μπορείτε να αφαιρέσετε αυτή τη διεύθυνση email"
       user_does_not_have_email_to_delete: "Δεν έχετε τη διεύθυνση email που προσπαθείτε να αφαιρέσετε"
       email_deleted: "Η διεύθυνση email αφαιρέθηκε"
-      payment_details_add_successful: "Οι πληροφορίες των πληρωμών εισήχθησαν επιτυχώς"
-      payment_details_add_error: "Αποτυχία εισαγωγής στοιχείων πληρωμών"
       listing_author_payment_details_missing: ~
       images_are_processing: ~
       automatically_logged_out_please_sign_in: ~
@@ -1407,6 +1323,9 @@ el:
       open_in_google_maps: ~
     error:
       something_went_wrong: ~
+      something_went_wrong_plain: ~
+      create_failed_to_connect_to_booking_service: ~
+      update_failed_to_connect_to_booking_service: ~
     follow_links:
       follow: "Να ειδοποιούμαι για νέα σχόλια"
       unfollow: "Παύση ειδοποιήσεων για νέα σχόλια"
@@ -1469,8 +1388,6 @@ el:
         no_service_fee_you_will_get_paypal_text: ~
         after_service_fee_you_will_get_paypal_text: ~
         paypal_fee_info_link_text: ~
-        after_service_fee_you_will_get_vat: ~
-        price_excludes_vat: "Η τιμή δεν συμπεριλαμβάνει το ΦΠΑ."
         delivery: ~
         shipping: ~
         shipping_price: ~
@@ -1556,8 +1473,8 @@ el:
       booking_to: ~
       how_paypal_works: ~
       payment_help: ~
+      unable_load_availability: ~
     new:
-      post_a_new_listing: "Νέα καταχώρηση"
       listing: καταχώρηση
       selected_category: "Κατηγορία: %{category}"
       selected_subcategory: "Υποκατηγορία: %{subcategory}"
@@ -1609,7 +1526,6 @@ el:
       times: φορές
       times_viewed: Διαβάστηκε
       processing_uploaded_image: "(Γίνεται επεξεργασία της εικόνας...)"
-      price_excludes_vat: "(χωρίς ΦΠΑ)"
       listing_created_at: ~
       price:
         per_quantity_unit: ~
@@ -1632,6 +1548,8 @@ el:
       verification_required: ~
   listing_conversations:
     preauthorize:
+      dates_not_available: ~
+      error_in_checking_availability: ~
       details: ~
       by: ~
       payment: ~
@@ -1639,6 +1557,9 @@ el:
       you_will_be_charged: ~
       day: ~
       days: ~
+      night: ~
+      nights: ~
+      invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: ~
   mapview:
@@ -1668,26 +1589,6 @@ el:
   okl:
     member_id: ~
     member_id_or_email: "ID μέλους ή email"
-  payments:
-    new:
-      new_payment: "Νέα πληρωμή"
-      continue: Συνέχεια
-      payment_receiver: "Αποδέκτης πληρωμής:"
-      sum: "Ποσό πληρωμής:"
-    form:
-      total: Σύνολο
-      service_charge: "Χρέωση υπηρεσίας"
-      product: Προϊόν
-      price: Τιμή
-      price_for: ~
-      continue_to_pay: "Συνεχίστε στην πληρωμή"
-      invoice: Απόδειξη
-      service_fee: "Η χρέωση για το %{service_name} είναι:"
-      you_will_get: "Θα λάβετε:"
-    braintree:
-      terms:
-        braintree_terms_also_included: "Σημείωση: Το Braintree χρησιμοποιείται για την πραγματοποιήση των πληρωμών και με το να χρησιμοποιείτε αυτό το site αποδέχεστε %{terms_link_text} όπως επίσης και τους παρακάτω όρους."
-        terms_link_text: "τους όρους χρήσης του Braintree"
   paypal_accounts:
     payout_info_title: ~
     paypal_account_email_connected: ~
@@ -1698,6 +1599,7 @@ el:
     connected_account: ~
     paypal_receive_funds_info_label_australia_only: ~
     paypal_receive_funds_info_label: ~
+    paypal_receive_funds_info_australia_only: ~
     paypal_receive_funds_info: ~
     upgrade_paypal_account_link_text: ~
     admin_account_not_connected: ~
@@ -1924,7 +1826,6 @@ el:
       i_want_to_get_email_notification_when: "Θέλω να λαμβάνω ειδοποίηση με email όταν..."
       newsletters: Newsletters
       community_updates: "Νέα της κοινότητας"
-      email_about_accept_reminders: "... έχω ξεχάσει να αποδεχτώ μία προσφορά ή αίτημα"
       email_about_confirm_reminders: "... έχω ξεχάσει να επιβεβαιώσω μια ολοκληρωμένη καταχώρηση"
       email_about_new_comments_to_own_listing: "... κάποιος σχολιάζει την προσφορά ή το αίτημά μου"
       email_about_new_messages: "... κάποιος μου στέλνει μήνυμα"
@@ -1937,7 +1838,6 @@ el:
       email_when_conversation_rejected: "... κάποιος απορρίπτει την προσφορά ή το αίτημά μου"
       email_about_completed_transactions: "... κάποιος δηλώνει ότι η προσφορά ή το αίτημά μου ολοκληρώθηκε"
       email_about_new_payments: "... λαμβάνω μια πληρωμή"
-      email_about_payment_reminders: "... έχω ξεχάσει να πληρώσω"
       email_about_new_listings_by_followed_people: ~
       unsubscribe_succesful: "Διαγραφήκατε από τη λίστα ενημερώσεων"
       unsubscribe_info_text: "Δεν θα ξαναλάβετε τέτοιο email. Ελέξτε τις %{settings_link} σας για να επιλέξετε ποια email θέλετε να λαμβάνετε ή επιστρέψτε στην %{homepage_link}."
@@ -2085,7 +1985,9 @@ el:
   transactions:
     initiate:
       booked_days: ~
+      booked_nights: ~
       price_per_day: ~
+      price_per_night: ~
       quantity: ~
       subtotal: ~
       shipping-price: ~
@@ -2098,6 +2000,19 @@ el:
     day: ~
     days: ~
   web:
+    listings:
+      pricing_units:
+        piece: ~
+        hour: ~
+        day: ~
+        night: ~
+        week: ~
+        month: ~
+    no_listings:
+      sorry: ~
+      try_other_search_terms: ~
+    listing_card:
+      no_picture: ~
     topbar:
       menu: ~
       more: ~
@@ -2113,6 +2028,13 @@ el:
       signup: ~
       admin_dashboard: ~
       language: ~
+    utils:
+      km: ~
+      mi: ~
+    branding:
+      powered_by: ~
+      create_own: ~
+      learn_more: ~
   will_paginate:
     previous_label: ~
     next_label: ~

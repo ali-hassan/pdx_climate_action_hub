@@ -27,15 +27,11 @@ class TransactionsController < ApplicationController
         ensure_can_start_transactions(listing_model: listing_model, current_user: @current_user, current_community: @current_community)
       }
     ).on_success { |((listing_id, listing_model, author_model, process, gateway))|
-      booking = listing_model.unit_type == :day
-
       transaction_params = HashUtils.symbolize_keys({listing_id: listing_model.id}.merge(params.slice(:start_on, :end_on, :quantity, :delivery)))
 
-      case [process[:process], gateway, booking]
+      case [process[:process], gateway]
       when matches([:none])
         render_free(listing_model: listing_model, author_model: author_model, community: @current_community, params: transaction_params)
-      when matches([:preauthorize, __, true])
-        redirect_to book_path(transaction_params)
       when matches([:preauthorize, :paypal])
         redirect_to initiate_order_path(transaction_params)
       else
@@ -65,19 +61,32 @@ class TransactionsController < ApplicationController
       ->(form, (listing_id, listing_model, author_model, process, gateway), _, _) {
         booking_fields = Maybe(form).slice(:start_on, :end_on).select { |booking| booking.values.all? }.or_else({})
 
-        quantity = Maybe(booking_fields).map { |b| DateUtils.duration_days(b[:start_on], b[:end_on]) }.or_else(form[:quantity])
+        is_booking = date_selector?(listing_model)
+        quantity = calculate_quantity(tx_params: {
+                                        quantity: form[:quantity],
+                                        start_on: booking_fields.dig(:start_on),
+                                        end_on: booking_fields.dig(:end_on)
+                                      },
+                                      is_booking: is_booking,
+                                      unit: listing_model.unit_type&.to_sym)
 
-        TransactionService::Transaction.create(
+
+        transaction_service.create(
           {
             transaction: {
               community_id: @current_community.id,
+              community_uuid: @current_community.uuid_object,
               listing_id: listing_id,
+              listing_uuid: listing_model.uuid_object,
               listing_title: listing_model.title,
               starter_id: @current_user.id,
+              starter_uuid: @current_user.uuid_object,
               listing_author_id: author_model.id,
+              listing_author_uuid: author_model.uuid_object,
               unit_type: listing_model.unit_type,
               unit_price: listing_model.price,
               unit_tr_key: listing_model.unit_tr_key,
+              availability: listing_model.availability,
               listing_quantity: quantity,
               content: form[:message],
               booking_fields: booking_fields,
@@ -116,7 +125,7 @@ class TransactionsController < ApplicationController
 
     transaction_conversation, role = m_participant.or_else { m_admin.or_else([]) }
 
-    tx = TransactionService::Transaction.get(community_id: @current_community.id, transaction_id: params[:id])
+    tx = transaction_service.get(community_id: @current_community.id, transaction_id: params[:id])
          .maybe()
          .or_else(nil)
 
@@ -156,7 +165,78 @@ class TransactionsController < ApplicationController
     }
   end
 
-  def op_status
+  def created
+    proc_status = transaction_service.finalize_create(
+      community_id: @current_community.id,
+      transaction_id: params[:transaction_id],
+      force_sync: false)
+
+    unless proc_status[:success]
+      flash[:error] = t("error_messages.booking.booking_failed_payment_voided")
+      return redirect_to search_path
+    end
+
+    tx_fields = proc_status.dig(:data, :transaction_service_fields) || {}
+    process_token = tx_fields[:process_token]
+    process_completed = tx_fields[:completed]
+
+    if process_token.present?
+      redirect_url = transaction_finalize_processed_path(process_token)
+
+      if process_completed
+        redirect_to redirect_url
+      else
+        # Operation was performed asynchronously
+
+        # We're using here the same PayPal spinner, although we could
+        # create a new one for TransactionService.
+        render "paypal_service/success", layout: false, locals: {
+                 op_status_url: transaction_op_status_path(process_token),
+                 redirect_url: redirect_url
+               }
+      end
+    else
+      handle_finalize_proc_result(proc_status)
+    end
+  end
+
+  def finalize_processed
+    process_token = params[:process_token]
+
+    proc_status = transaction_process_tokens.get_status(UUIDTools::UUID.parse(process_token))
+    unless (proc_status[:success] && proc_status[:data][:completed])
+      return redirect_to error_not_found_path
+    end
+
+    handle_finalize_proc_result(proc_status[:data][:result])
+  end
+
+  def transaction_op_status
+    process_token = params[:process_token]
+
+    resp = Maybe(process_token)
+             .map { |ptok|
+               uuid = UUIDTools::UUID.parse(process_token)
+               transaction_process_tokens.get_status(uuid)
+             }
+             .select(&:success)
+             .data
+             .or_else(nil)
+
+    if resp
+      render json: process_resp_to_json(resp)
+    else
+      head :not_found
+    end
+  end
+
+  #
+  # TODO
+  #
+  # Move this to CheckoutOrdersController
+  # This shouldn't be in TransactionService, it should be in PaypalService
+  #
+  def paypal_op_status
     process_token = params[:process_token]
 
     resp = Maybe(process_token)
@@ -168,7 +248,7 @@ class TransactionsController < ApplicationController
     if resp
       render :json => resp
     else
-      redirect_to error_not_found_path
+      head :not_found
     end
   end
 
@@ -183,6 +263,29 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+  def handle_finalize_proc_result(response)
+    response_data = response[:data] || {}
+
+    if response[:success]
+      tx = response_data[:transaction]
+      redirect_to person_transaction_path(person_id: @current_user.id, id: tx[:id])
+    else
+      listing_id = response_data[:listing_id]
+
+      flash[:error] =
+        case response_data[:reason]
+        when :connection_issue
+          t("error_messages.booking.booking_failed_payment_voided")
+        when :double_booking
+          t("error_messages.booking.double_booking_payment_voided")
+        else
+          t("error_messages.booking.booking_failed_payment_voided")
+        end
+
+      redirect_to person_listing_path(person_id: @current_user.id, id: listing_id)
+    end
+  end
 
   def other_party(conversation)
     if @current_user.id == conversation[:other_person][:id]
@@ -287,7 +390,7 @@ class TransactionsController < ApplicationController
     if tx[:payment_process] == :none && tx[:listing_price].cents == 0
       nil
     else
-      unit_type = tx[:unit_type].present? ? ListingViewUtils.translate_unit(tx[:unit_type], tx[:unit_tr_key]) : nil
+      localized_unit_type = tx[:unit_type].present? ? ListingViewUtils.translate_unit(tx[:unit_type], tx[:unit_tr_key]) : nil
       localized_selector_label = tx[:unit_type].present? ? ListingViewUtils.translate_quantity(tx[:unit_type], tx[:unit_selector_tr_key]) : nil
       booking = !!tx[:booking]
       quantity = tx[:listing_quantity]
@@ -296,7 +399,7 @@ class TransactionsController < ApplicationController
 
       TransactionViewUtils.price_break_down_locals({
         listing_price: tx[:listing_price],
-        localized_unit_type: unit_type,
+        localized_unit_type: localized_unit_type,
         localized_selector_label: localized_selector_label,
         booking: booking,
         start_on: booking ? tx[:booking][:start_on] : nil,
@@ -306,7 +409,8 @@ class TransactionsController < ApplicationController
         subtotal: show_subtotal ? tx[:listing_price] * quantity : nil,
         total: Maybe(tx[:payment_total]).or_else(tx[:checkout_total]),
         shipping_price: tx[:shipping_price],
-        total_label: total_label
+        total_label: total_label,
+        unit_type: tx[:unit_type]
       })
     end
   end
@@ -327,9 +431,16 @@ class TransactionsController < ApplicationController
     localized_selector_label = listing_model.unit_type.present? ? ListingViewUtils.translate_quantity(listing_model.unit_type, listing_model.unit_selector_tr_key) : nil
     booking_start = Maybe(params)[:start_on].map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil)
     booking_end = Maybe(params)[:end_on].map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil)
-    booking = !!(booking_start && booking_end)
-    duration = booking ? DateUtils.duration_days(booking_start, booking_end) : nil
-    quantity = Maybe(booking ? DateUtils.duration_days(booking_start, booking_end) : TransactionViewUtils.parse_quantity(params[:quantity])).or_else(1)
+    booking = date_selector?(listing_model)
+
+    quantity = calculate_quantity(tx_params: {
+                                    start_on: booking_start,
+                                    end_on: booking_end,
+                                    quantity: TransactionViewUtils.parse_quantity(params[:quantity])
+                                  },
+                                  is_booking: booking,
+                                  unit: listing_model.unit_type)
+
     total_label = t("transactions.price")
 
     m_price_break_down = Maybe(listing_model).select { |l_model| l_model.price.present? }.map { |l_model|
@@ -341,12 +452,13 @@ class TransactionsController < ApplicationController
           booking: booking,
           start_on: booking_start,
           end_on: booking_end,
-          duration: duration,
+          duration: quantity,
           quantity: quantity,
           subtotal: quantity != 1 ? l_model.price * quantity : nil,
           total: l_model.price * quantity,
           shipping_price: nil,
-          total_label: total_label
+          total_label: total_label,
+          unit_type: l_model.unit_type
         })
     }
 
@@ -360,5 +472,43 @@ class TransactionsController < ApplicationController
              quantity: quantity,
              form_action: person_transactions_path(person_id: @current_user, listing_id: listing_model.id)
            }
+  end
+
+  def date_selector?(listing)
+    [:day, :night].include?(listing.quantity_selector&.to_sym)
+  end
+
+  def calculate_quantity(tx_params:, is_booking:, unit:)
+    if is_booking && unit == :day
+      DateUtils.duration_days(tx_params[:start_on], tx_params[:end_on])
+    elsif is_booking && unit == :night
+      DateUtils.duration_nights(tx_params[:start_on], tx_params[:end_on])
+    else
+      tx_params[:quantity] || 1
+    end
+  end
+
+  def process_resp_to_json(resp)
+    if resp[:completed]
+      {
+        completed: true,
+        result: {
+          success: resp[:result][:success],
+          data: {
+            redirect_url: resp.dig(:result, :data, :redirect_url)
+          }
+        }
+      }
+    else
+      { completed: false }
+    end
+  end
+
+  def transaction_service
+    TransactionService::Transaction
+  end
+
+  def transaction_process_tokens
+    TransactionService::API::Api.process_tokens
   end
 end
