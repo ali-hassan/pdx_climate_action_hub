@@ -3,7 +3,6 @@
 # Table name: communities
 #
 #  id                                         :integer          not null, primary key
-#  uuid                                       :binary(16)       not null
 #  ident                                      :string(255)
 #  domain                                     :string(255)
 #  use_domain                                 :boolean          default(FALSE), not null
@@ -86,6 +85,8 @@
 #  cover_photo_processing                     :boolean
 #  small_cover_photo_processing               :boolean
 #  favicon_processing                         :boolean
+#  dv_test_file_name                          :string(64)
+#  dv_test_file                               :string(64)
 #  deleted                                    :boolean
 #
 # Indexes
