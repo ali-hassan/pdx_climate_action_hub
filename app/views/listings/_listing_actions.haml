@@ -138,16 +138,33 @@
               window.ST.initializeShippingPriceTotal('#quantity', '.delivery-price-value', '#{Maybe(delivery_opts)[0][:price].currency.decimal_mark.or_else(".")}');
             }
 
-        .quantity-wrapper.input-group.clearfix
-          .quantity-label-wrapper
-            %label.quantity-label{for: 'quantity'}
-              = ListingViewUtils.translate_quantity(@listing.unit_type, @listing.unit_selector_tr_key)
-          .quantity-input.input-sm.required
-            %input#quantity{type: 'number', placeholder: t("listings.quantity_placeholder"), name: 'quantity', value: 1, min: 1, step: 1}
+        - if !@listing.external_payment_link
+          .quantity-wrapper.input-group.clearfix
+            .quantity-label-wrapper
+              %label.quantity-label{for: 'quantity'}
+                = ListingViewUtils.translate_quantity(@listing.unit_type, @listing.unit_selector_tr_key)
+            .quantity-input.input-sm.required
+              %input#quantity{type: 'number', placeholder: t("listings.quantity_placeholder"), name: 'quantity', value: 1, min: 1, step: 1}
 
       = render partial: "delivery_opts", locals: { delivery_opts: delivery_opts, is_author: is_author }
 
       = hidden_field_tag(:listing_id, @listing.id)
+
+      - if @listing.external_payment_link
+        - content_for :extra_javascript do
+          :javascript
+            $('#booking-dates .book-button').click( function() {
+              // http://stackoverflow.com/questions/19851782/how-to-open-a-url-in-a-new-tab-using-javascript-or-jquery
+              var win = window.open('#{@listing.external_payment_link}', '_blank');
+              if(win){
+                //Browser has allowed it to be opened
+                win.focus();
+              }else{
+                //Browser has blocked it
+                alert('Please allow popups for this site');
+              }
+              return false;
+              });
 
       - blocked_dates_result.on_success do
         %button.enabled-book-button
@@ -159,7 +176,11 @@
           .content
             = action_button_label(@listing)
 
-    - if payment_gateway == :paypal && process != :none
+    - if @listing.external_payment_link
+      .row
+        .col-12
+          Clicking the blue button above will take you to an external site to complete the transaction.
+    - if payment_gateway == :paypal && process != :none && @listing.external_payment_link == :none
       .row
         .col-12
           = render :partial => "listing_conversations/paypal_payment_methods", locals: { country_code: country_code }

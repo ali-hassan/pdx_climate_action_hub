@@ -1642,7 +1642,8 @@ en:
     you_are_ready_to_accept_payments: "You are ready to accept payments!"
     commission: "%{commission} %"
     new:
-      payout_info_you_need_to_connect: "In order to accept payments, you need to connect your PayPal account with %{service_name}."
+      payout_info_you_need_to_connect: "Unless you only list free things and/or link to an external booking/payment system, you need to connect your PayPal account with %{service_name}."
+      payout_info_you_need_to_connect_original: "In order to accept payments, you need to connect your PayPal account with %{service_name}."
       payout_info_text: "To connect your account, please complete the following steps."
       contact_admin_link_text: "contact the administrator"
       admin_account_not_connected: "Connecting your PayPal account is not possible since %{service_name} has not set up payments. Please %{contact_admin_link} for details."

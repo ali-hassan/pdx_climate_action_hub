@@ -186,6 +186,10 @@ class Listing < ActiveRecord::Base
     !open? || (valid_until && valid_until < DateTime.now)
   end
 
+  def has_external_payment_link?
+    external_payment_link?
+  end
+
   # Send notifications to the users following this listing
   # when the listing is updated (update=true) or a
   # new comment to the listing is created.
