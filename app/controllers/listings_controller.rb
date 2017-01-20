@@ -311,17 +311,30 @@ class ListingsController < ApplicationController
     listing_params = normalize_price_params(listing_params)
     m_unit = select_unit(listing_unit, shape)
 
+    # magic happens here for external booking.
+    transaction_process_id = shape[:transaction_process_id]
+    if params[:payment_option] == "external"
+      transaction_process = TransactionProcess.find(shape[:transaction_process_id])
+      new_transaction_process = TransactionProcess.where(author_is_seller: transaction_process[:author_is_seller], process: 'none').first
+      transaction_process_id = new_transaction_process[:id]
+    end
+
     listing_params = create_listing_params(listing_params).merge(
         uuid_object: listing_uuid,
         community_id: @current_community.id,
         listing_shape_id: shape[:id],
-        transaction_process_id: shape[:transaction_process_id],
+        transaction_process_id: transaction_process_id,
         shape_name_tr_key: shape[:name_tr_key],
         action_button_tr_key: shape[:action_button_tr_key],
         availability: shape[:availability]
     ).merge(unit_to_listing_opts(m_unit)).except(:unit)
 
     @listing = Listing.new(listing_params)
+    if params[:payment_option] == "external"
+      @listing.external_payment_link = params[:payment_option_external_link].strip
+    else
+      @listing.external_payment_link = nil
+    end
 
     ActiveRecord::Base.transaction do
       @listing.author = @current_user
@@ -453,7 +466,14 @@ class ListingsController < ApplicationController
 
     open_params = listing_reopened ? {open: true} : {}
 
+    if params[:payment_option] == "external"
+      external_payment_link = params[:payment_option_external_link].strip
+    else
+      external_payment_link = nil
+    end
+
     listing_params = create_listing_params(listing_params).merge(
+      external_payment_link: external_payment_link,
       transaction_process_id: shape[:transaction_process_id],
       shape_name_tr_key: shape[:name_tr_key],
       action_button_tr_key: shape[:action_button_tr_key],
@@ -880,6 +900,9 @@ class ListingsController < ApplicationController
   end
 
   def payment_setup_status(community:, user:, listing:, payment_type:, process:)
+    [true, ""]
+  end
+  def payment_setup_status_disabled(community:, user:, listing:, payment_type:, process:)
     case [payment_type, process]
     when matches([nil]),
          matches([__, :none])

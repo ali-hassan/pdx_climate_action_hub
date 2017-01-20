@@ -19,36 +19,83 @@
         - unit_options.each do |unit_option|
           %option{value: unit_option[:value], selected: unit_option[:selected], data: { kind: unit_option[:kind] }}
             = unit_option[:display]
+    .payment_option_choice
+      - content_for :payment_option_js do
+        :javascript
+          $(document).ready( function() {
+            var payment_option_handler = function() {
+                var value = $('input[name=payment_option]:radio:checked').val();
+                if ( value == "external" ) {
+                  $('.paypal_shtuff').hide();
+                  $('.external_shtuff').show();
+                }  else {
+                  $('.paypal_shtuff').show();
+                  $('.external_shtuff').hide();
+                }
+            };
+            if ( ! #{@listing.external_payment_link?} )
+              document.getElementById('payment_option_paypal').checked = true;
+            else
+              document.getElementById('payment_option_external').checked = true;
+            payment_option_handler();
+            $('#payment_option_paypal').click(payment_option_handler);
+            $('#payment_option_external').click(payment_option_handler);
+          });
+      - if run_js_immediately
+        :javascript
+          $(document).ready( function() { console.log('now'); });
+        = yield :payment_option_js
+      - else
+        :javascript
+          $(document).ready( function() { console.log('later'); });
+        - content_for :extra_javascript do
+          = yield :payment_option_js
+      :javascript
+        $(document).ready( function() { console.log('foo'); });
+      .choice
+        %input{:type => "radio", :name => "payment_option", :id => "payment_option_paypal", :value => "paypal"}
+        %label{:style => "display:inline-block; width:auto;"} Use PayPal to process payments / credit cards.
+    .paypal_shtuff
+      %small
+        - paypal_fee_info_link = capture do
+          %a.listing-paypal-fee-info-link#paypal_fee_info_link
+            = t(".paypal_fee_info_link_text")
 
-    %small
-      - paypal_fee_info_link = capture do
-        %a.listing-paypal-fee-info-link#paypal_fee_info_link
-          = t(".paypal_fee_info_link_text")
-
-      - if !seller_commission_in_use && payment_gateway == :paypal
-        = t(".no_service_fee_you_will_get_paypal_text", :paypal_fee_info_link => paypal_fee_info_link).html_safe
-      - elsif seller_commission_in_use
-        - content_for :seller_commission_js do
-          :javascript
-            $(function() {
-              updateSellerGetsValue(
-                "#listing_price",
-                "#fee_display",
-                "#listing_currency",
-                #{commission_from_seller},
-                #{minimum_commission.format(decimal_mark: ".", delimiter: "", symbol: false)},
-                #{payment_gateway == :paypal});
-            });
-        - if run_js_immediately
-          = yield :seller_commission_js
-        - else
-          - content_for :extra_javascript do
+        - if !seller_commission_in_use && payment_gateway == :paypal
+          = t(".no_service_fee_you_will_get_paypal_text", :paypal_fee_info_link => paypal_fee_info_link).html_safe
+        - elsif seller_commission_in_use
+          - content_for :seller_commission_js do
+            :javascript
+              $(function() {
+                updateSellerGetsValue(
+                  "#listing_price",
+                  "#fee_display",
+                  "#listing_currency",
+                  #{commission_from_seller},
+                  #{minimum_commission.format(decimal_mark: ".", delimiter: "", symbol: false)},
+                  #{payment_gateway == :paypal});
+              });
+          - if run_js_immediately
             = yield :seller_commission_js
+          - else
+            - content_for :extra_javascript do
+            = yield :seller_commission_js
+          - else
+            - content_for :extra_javascript do
+              = yield :seller_commission_js
 
-        - if payment_gateway == :paypal
-          = t(".after_service_fee_you_will_get_paypal_text", :sum_with_currency => '<span id="fee_display"></span>', :paypal_fee_info_link => paypal_fee_info_link).html_safe
-        - else
-          = t(".after_service_fee_you_will_get", :sum_with_currency => '<span id="fee_display"></span>').html_safe
+          - if payment_gateway == :paypal
+            = t(".after_service_fee_you_will_get_paypal_text", :sum_with_currency => '<span id="fee_display"></span>', :paypal_fee_info_link => paypal_fee_info_link).html_safe
+          - else
+            = t(".after_service_fee_you_will_get", :sum_with_currency => '<span id="fee_display"></span>').html_safe
+    .payment_option_choice
+      .choice
+        %input{:type => "radio", :name => "payment_option", :id => "payment_option_external", :value => "external"}
+        %label{:style => "display:inline-block; width:auto;"} Add link to item in another booking / payment system.
+    .external_shtuff
+      .choice
+        %label External Payment Link
+        %input{:id => "payment_option_external_link", :name => "payment_option_external_link", :value => "#{@listing.external_payment_link ? @listing.external_payment_link : 'http://'}", :style => "width: 100%;"}
 
 - if payment_gateway == :paypal
   = render layout: "layouts/lightbox", locals: { id: "paypal_fee_info_content"} do
