@@ -466,12 +466,14 @@ class ListingsController < ApplicationController
 
     open_params = listing_reopened ? {open: true} : {}
 
-    if params[:payment_option_external_link]
-      params[:payment_option_external_link] = params[:payment_option_external_link].strip
+    if params[:payment_option] == "external"
+      external_payment_link = params[:payment_option_external_link].strip
+    else
+      external_payment_link = nil
     end
 
     listing_params = create_listing_params(listing_params).merge(
-      external_payment_link: params[:payment_option_external_link],
+      external_payment_link: external_payment_link,
       transaction_process_id: shape[:transaction_process_id],
       shape_name_tr_key: shape[:name_tr_key],
       action_button_tr_key: shape[:action_button_tr_key],

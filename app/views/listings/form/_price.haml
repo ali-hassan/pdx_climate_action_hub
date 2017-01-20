@@ -38,12 +38,8 @@
             else
               document.getElementById('payment_option_external').checked = true;
             payment_option_handler();
-            if ( #{@listing.new_record?} ) {
-              $('#payment_option_paypal').click(payment_option_handler);
-              $('#payment_option_external').click(payment_option_handler);
-            } else {
-              $('.payment_option_choice').hide();
-            }
+            $('#payment_option_paypal').click(payment_option_handler);
+            $('#payment_option_external').click(payment_option_handler);
           });
       - if run_js_immediately
         :javascript
