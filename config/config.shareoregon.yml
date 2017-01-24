@@ -2,7 +2,6 @@
 
 default:
   google_maps_key: AIzaSyCVDKY-luQ8iemBagIFepYlez_mF7AxsRw
-  icon_pack: "ss-pika"
 
   paypal_username: rick-facilitator_api1.shareoregon.com
   paypal_password: X67F4WE7ZE2GFYW8
@@ -13,6 +12,7 @@ default:
   paypal_endpoint: sandbox
 
   paypal_button_source: # Unique value given to you by your PayPal contact
+
 
   # after authorization there is 3 day period before expiration
   paypal_expiration_period: 3
@@ -25,14 +25,21 @@ default:
 
 development:
   # Add local `development` environment configuration overrides here
+  icon_pack: "ss-pika"
+  map_listings_limit: 500
 
 test:
   # Add local `test` environment configuration overrides here
+  icon_pack: "ss-pika"
+  map_listings_limit: 500
 
 staging:
+  icon_pack: "ss-pika"
   secret_key_base: "fd1af50b59b5e27776941b3205f92aca0f704c2252225cf93e3d97ae53f4774d25736cbdb19c1580839a2f68e15009209227e966003f53932c1bcc5d65616948"
+  map_listings_limit: 500
 
 production:
+  icon_pack: "ss-pika"
   # Paypal credentials for the platform owner.
   #paypal_username: rick_api1.shareoregon.com
   #paypal_password: FFGSPRBP2TZ93NMV
@@ -41,3 +48,4 @@ production:
   #paypal_partner_id: Z96DECJ5VYNW4 # payerID for paypal platform owner account
   ## Paypal environment to use. Either :sandbox or :live
   #paypal_endpoint: live
+  map_listings_limit: 500
