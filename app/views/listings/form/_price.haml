@@ -79,9 +79,6 @@
             = yield :seller_commission_js
           - else
             - content_for :extra_javascript do
-            = yield :seller_commission_js
-          - else
-            - content_for :extra_javascript do
               = yield :seller_commission_js
 
           - if payment_gateway == :paypal
