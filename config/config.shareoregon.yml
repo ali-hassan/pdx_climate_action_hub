@@ -14,7 +14,6 @@ default:
 
   paypal_button_source: # Unique value given to you by your PayPal contact
 
-
   # after authorization there is 3 day period before expiration
   paypal_expiration_period: 3
   # The domain that we want Paypal to send IPN notifications to
