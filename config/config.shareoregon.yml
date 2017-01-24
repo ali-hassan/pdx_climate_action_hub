@@ -3,7 +3,6 @@
 default:
   google_maps_key: AIzaSyCVDKY-luQ8iemBagIFepYlez_mF7AxsRw
   icon_pack: "ss-pika"
-  secret_key_base: "fd1af50b59b5e27776941b3205f92aca0f704c2252225cf93e3d97ae53f4774d25736cbdb19c1580839a2f68e15009209227e966003f53932c1bcc5d65616948"
 
   paypal_username: rick-facilitator_api1.shareoregon.com
   paypal_password: X67F4WE7ZE2GFYW8
@@ -32,7 +31,7 @@ test:
   # Add local `test` environment configuration overrides here
 
 staging:
-  # Add local `staging` environment configuration overrides here
+  secret_key_base: "fd1af50b59b5e27776941b3205f92aca0f704c2252225cf93e3d97ae53f4774d25736cbdb19c1580839a2f68e15009209227e966003f53932c1bcc5d65616948"
 
 production:
   # Paypal credentials for the platform owner.
