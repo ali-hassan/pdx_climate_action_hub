@@ -26,17 +26,17 @@ default:
 development:
   # Add local `development` environment configuration overrides here
   icon_pack: "ss-pika"
-  map_listings_limit: 500
+  map_listings_limit: 2000
 
 test:
   # Add local `test` environment configuration overrides here
   icon_pack: "ss-pika"
-  map_listings_limit: 500
+  map_listings_limit: 2000
 
 staging:
   icon_pack: "ss-pika"
   secret_key_base: "fd1af50b59b5e27776941b3205f92aca0f704c2252225cf93e3d97ae53f4774d25736cbdb19c1580839a2f68e15009209227e966003f53932c1bcc5d65616948"
-  map_listings_limit: 500
+  map_listings_limit: 2000
 
 production:
   icon_pack: "ss-pika"
@@ -48,4 +48,4 @@ production:
   #paypal_partner_id: Z96DECJ5VYNW4 # payerID for paypal platform owner account
   ## Paypal environment to use. Either :sandbox or :live
   #paypal_endpoint: live
-  map_listings_limit: 500
+  map_listings_limit: 2000
