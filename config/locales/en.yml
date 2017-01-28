@@ -4,14 +4,14 @@ en:
       edit:
         edit_listing_category: "Edit category '%{category}'"
       index:
-        listing_categories: "Listing categories"
+        listing_categories: "Post categories"
         create_a_new_category: "+ Create a new category"
         remove_category_confirmation: "Are you sure you want to remove category '%{category_name}'?"
         saving_order: "Saving category order"
         save_order_successful: "Successfully saved category order"
         save_order_error: "An error occurred while saving category order. Please refresh the page and try again."
       new:
-        new_listing_category: "New listing category"
+        new_listing_category: "New post category"
       form:
         category_name:
           category_title: "Category title"
@@ -20,7 +20,7 @@ en:
           no_parent: "No parent"
         category_transaction_types:
           transaction_types: "Order types"
-          transaction_types_description: "Order types determine what kind of order process is allowed with listings in this category. For example, is it only selling, or are renting and giving away for free also allowed."
+          transaction_types_description: "Order types determine what kind of order process are allowed with posts in this category."
           select_all: "Select all"
           clear_all: "Clear all"
         buttons:
@@ -31,8 +31,8 @@ en:
         remove_category_name: "Remove category '%{category_name}'"
         warning_remove_effects: "Warning! Removing category '%{category_name}' will have the following effects:"
         warning_listing_will_be_moved:
-          one: "There is %{count} listing in the category. It will be moved to the selected category."
-          other: "There are %{count} listings in the category. They will be moved to the selected category."
+          one: "There is %{count} post in the category. It will be moved to the selected category."
+          other: "There are %{count} posts in the category. They will be moved to the selected category."
         warning_custom_field_will_be_moved:
           one: "There is %{count} custom field in the category. It will be moved to the selected category."
           other: "There are %{count} custom field in the category. They will be moved to the selected category."
@@ -40,8 +40,8 @@ en:
           one: "There is %{count} subcategory in the category. It will be removed."
           other: "There are %{count} subcategories in the category. They will be removed."
         warning_with_subcategories_listing_will_be_moved:
-          one: "There is %{count} listing in the category and subcategories. It will be moved to the selected category."
-          other: "There are %{count} listings in the category and subcategories. They will be moved to the selected category."
+          one: "There is %{count} post in the category and subcategories. It will be moved to the selected category."
+          other: "There are %{count} posts in the category and subcategories. They will be moved to the selected category."
         warning_with_subcategories_custom_field_will_be_moved:
           one: "There is %{count} custom field in the category and subcategories. It will be moved to the selected category."
           other: "There are %{count} custom field in the category and subcategories. They will be moved to the selected category."
@@ -57,26 +57,26 @@ en:
         enabled_languages: "Enabled languages"
         enabled_languages_description: "The set of languages available for users. The first one is used as default."
         default_language: "Default language"
-        language_selection_disabled: "Language selection is disabled for your marketplace because you are using following unofficial languages: %{languages}. Please contact Sharetribe support if you want to modify your language settings."
-        community_name: "Marketplace name"
-        edit_community_name_description: "The name of your marketplace. This is shown to users in emails and various other places."
-        community_slogan: "Marketplace slogan"
-        edit_community_slogan_description: "This is shown on the homepage of the marketplace for the users who are not logged in. %{see_how_it_looks_like}."
-        community_description: "Marketplace description"
-        edit_community_description_description: "This is shown on the homepage of the marketplace for the users who are not logged in. %{see_how_it_looks_like}."
+        language_selection_disabled: "Language selection is disabled for ShareOregon because you are using the following unofficial languages: %{languages}. Please contact us if you want to modify your language settings."
+        community_name: "ShareOregon"
+        edit_community_name_description: "ShareOregon's name is shown to users in emails and various other places."
+        community_slogan: "ShareOregon slogan"
+        edit_community_slogan_description: "This is shown on ShareOregon's homepage for users who are not logged in. %{see_how_it_looks_like}."
+        community_description: "ShareOregon description"
+        edit_community_description_description: "This is shown on ShareOregon's homepage for the users who are not logged in. %{see_how_it_looks_like}."
         community_search_placeholder: "Search help text"
-        edit_community_search_placeholder_description: "This is shown on the homepage of the marketplace as a placeholder text in the search bar. %{see_how_it_looks_like}."
-        private_community_homepage_content: "Private marketplace homepage content"
-        edit_private_community_homepage_content_description: "This content is shown on the homepage of private marketplaces to users who are not logged in. Here you can describe your marketplace and the process to join it. You can also add images, videos and HTML content here. %{see_how_it_looks_like}."
-        update_information: "Save settings"
+        edit_community_search_placeholder_description: "This is shown on ShareOregon's homepage as a placeholder text in the search bar. %{see_how_it_looks_like}."
+        private_community_homepage_content: "Private ShareOregon homepage content"
+        edit_private_community_homepage_content_description: "This content is shown on the ShareOregon homepage to users who are not logged in. You can also add images, videos and HTML content here. %{see_how_it_looks_like}."
+        update_information: "Save Settings"
         invite_people: "Invite new users to %{service_name}"
         edit_signup_info: "Signup info"
-        edit_signup_info_description: "This is an info text that can be shown to users in the signup page. There you can give the users instructions for signing up, information like where to get an invite, etc. By default there are no instructions."
+        edit_signup_info_description: "This is info text that can be shown to users on the signup page. There you can give the users instructions for signing up, like where to get an invite, etc. By default there are no instructions."
         edit_info: "Edit information"
         see_how_it_looks_like: "See how it looks"
         verification_to_post_listings_info_content: "Info text to non-verified users"
-        verification_to_post_listings_info_content_description: "You currently require your users to be verified manually by you before they can post listings. Here you can set the default text that is shown to non-verified users when they try to post a new listing."
-        verification_to_post_listings_info_content_default: "%{service_name} requires people to be verified manually by admin before they can post listings. You have not yet been verified. Please %{contact_admin_link} to be verified."
+        verification_to_post_listings_info_content_description: "You currently require your users to be verified manually by you before they can post. Here you can set the default text that is shown to non-verified users when they try to post."
+        verification_to_post_listings_info_content_default: "%{service_name} requires people to be verified manually by admin before they can post. You have not yet been verified. Please %{contact_admin_link} to be verified."
         contact_admin_link_text: "contact the admin"
         save: "Save settings"
         transaction_agreement: "Transaction agreement"
@@ -86,15 +86,15 @@ en:
         transaction_agreement_text_header: "Agreement text"
         transaction_agreement_description: "This is the content of the actual agreement that the user needs to accept. The agreement content is displayed when the user clicks the \"%{read_more}\" link next to the agreement label."
       edit_look_and_feel:
-        edit_community_look_and_feel: "Edit marketplace \"%{community_name}\" look and feel"
+        edit_community_look_and_feel: "Edit \"%{community_name}\" look and feel"
         community_logo: Logo
         community_logo_icon: "Logo for social networks and mobile devices"
         community_cover_photo: "Cover photo"
         small_community_cover_photo: "Small cover photo"
         favicon: Favicon
-        favicon_info_text: "Favicon will replace the default Sharetribe logo. The dimensions should be 32x32 pixels and the uploaded image will be resized to these dimensions."
+        favicon_info_text: "The dimensions of the favicon should be 32x32 pixels. The uploaded image will be resized to these dimensions."
         community_custom_color1: "Main color"
-        new_listing_button_custom_color: "Post a new listing button color"
+        new_listing_button_custom_color: "Add a Post button color"
         logo_instructions_text_with_dimensions: "The logo size should be %{width}x%{height}px. It will be shown to users with bigger screens."
         logo_instructions_text_with_dimensions_no_placing: "The logo size should be %{width}x%{height}px."
         logo_icon_instructions_text_with_dimensions: "This square logo will be shown when people share your site in Facebook, when they view your site on a mobile device or when they bookmark your site to the home screen of their mobile device. The dimensions should be (at least) %{width}x%{height}px."
@@ -105,9 +105,9 @@ en:
         small_cover_photo_instructions_text_with_dimensions: "The photo will be resized to %{width}x%{height} pixel size and taller images will be cut in the middle."
         main_content_width: "When choosing cover photos please note that the page main content is %{main_width} pixels wide at most. Remember to also check how your cover photo looks on the smaller screens (e.g. by using a more narrow browser window)."
         custom_color1_instructions_text: "You can change the main color of the user interface by entering a hex color value. <a href=\"http://www.colorpicker.com/?colorcode=D96E21\" target=\"_blank\" rel=\"noreferrer\">ColorPicker.com</a> can help you choose the color and copy the code here."
-        new_listing_button_instructions_text: "You can change the color of the Post a new listing button by entering a hex color value. %{link_to_colorpicker} can help you choose the color and copy the code here."
+        new_listing_button_instructions_text: "You can change the color of the Add a Post button by entering a hex color value. %{link_to_colorpicker} can help you choose the color and copy the code here."
         default_browse_view: "Default browse view"
-        default_browse_view_instructions_text: "Default browse view is used on the homepage to set how the listings are displayed by default."
+        default_browse_view_instructions_text: "Default browse view is used on the homepage to set how the posts are displayed by default."
         grid: Grid
         list: List
         map: Map
@@ -118,22 +118,22 @@ en:
         first_name_only: "First name only (First)"
         invalid_color_code: "Color code should contain 6 numbers or letters A-F, for example D96E21"
         custom_head_script: "Custom script"
-        custom_head_script_instructions_text: "This script is injected inside the <head> tag of every page and can be used to insert custom CSS, JavaScript or HTML. Please note that future changes to Sharetribe may render your script incompatible."
+        custom_head_script_instructions_text: "This script is injected inside the <head> tag of every page and can be used to insert custom CSS, JavaScript or HTML. Please note that future changes to may render your script incompatible."
       edit_text_instructions:
         edit_text_instructions: "Instruction texts"
       edit_welcome_email:
         welcome_email_content: "Welcome email content"
-        welcome_email_content_description: "The message below will be sent to every new user when they join. You can customize the message to fit your marketplace. By clicking '%{send_test_message_link}' you can send a preview message to your email address, so you can see how it looks in an email client."
+        welcome_email_content_description: "The message below will be sent to every new user when they join. By clicking '%{send_test_message_link}' you can send a preview message to your email address, so you can see how it looks in an email client."
         edit_message: "Edit message"
         send_test_message: "Send test message"
       outgoing_email:
         title: "Outgoing email address"
-        info: "This name and address is used for emails sent from your marketplace to members."
+        info: "This name and address is used for emails sent from ShareOregon to members."
         read_more: "Read more about outgoing email address"
         sender_address: "Sender address: %{sender_address}"
         sender_address_default: "Sender address: not set (using default address %{sender_address})"
         need_to_change: "If you need to change the email address, please %{contact_support_link}."
-        contact_support_link_text: "contact Sharetribe support"
+        contact_support_link_text: "contact ShareOregon support"
         set_sender_address: "Set sender address"
         sender_name_label: Name
         sender_name_placeholder: "Sender name"
@@ -153,7 +153,7 @@ en:
         invalid_email_domain: "The '%{email}' email address is using an unsupported email provider: '%{domain}'. %{invalid_email_domain_read_more_link}"
         invalid_email_domain_read_more_link: "Read the knowledge base article for more information."
         unknown_error: "Something went wrong"
-        white_label_offer: "Set your own email address as the sender and remove all Sharetribe branding from outgoing email messages by %{upgrade_pro_plan_link}."
+        white_label_offer: "Set your own email address as the sender for outgoing email messages by %{upgrade_pro_plan_link}."
         upgrade_plan_link: "upgrading to the Pro plan or higher"
         verification_sent_from: "The verification email was sent from %{verification_sender_name}."
         follow_the_instructions: "Please follow the instructions in the email to verify your address."
@@ -187,8 +187,8 @@ en:
         access: "Access preferences"
         join_with_invite_only: "Allow users to join only with an invite from another user"
         users_can_invite_new_users: "Allow all users to invite new users"
-        private: "Allow only registered users to see listings and user profiles (make marketplace private)"
-        require_verification_to_post_listings: "Allow only users verified by admin to post new listings"
+        private: "Allow only registered users to see posts and user profiles (make ShareOregon private)."
+        require_verification_to_post_listings: "Allow only users verified by admin to add new posts."
         search_preferences: "Search preferences"
         default_search_type: "Search type: %{select_search_type}"
         keyword_search: "Keyword search"
@@ -197,34 +197,34 @@ en:
         select_distance_unit: "Show distance in %{distance_units_selector}"
         km: km
         miles: miles
-        show_only_nearby: "Show only nearby listings with location search"
-        listing_preferences: "Listing preferences"
+        show_only_nearby: "Show only nearby posts with location search"
+        listing_preferences: "Post preferences"
         transaction_preferences: "Order preferences"
-        show_listing_publishing_date: "Display publishing date of the listing on the listing page"
-        show_category_in_listing_list: "Display listing type in list view"
-        hide_expiration_date: "Do not require listings to have an expiration date"
-        listing_comments_in_use: "Allow users to post comments to listings (viewable to all other users)"
+        show_listing_publishing_date: "Display publishing date of the post on the post page"
+        show_category_in_listing_list: "Display post type in list view"
+        hide_expiration_date: "Do not require posts to have an expiration date"
+        listing_comments_in_use: "Allow users to add comments to posts (viewable to all other users)"
         email_preferences: "Email preferences"
         automatic_newsletters: "Send automatic daily / weekly newsletters to all users (unless they opt out)"
         email_admins_about_new_members: "Send admins an email whenever a new user signs up"
         google_analytics_key: "Google Analytics tracking ID"
-        twitter_handle: "Twitter handle (used with tweet button in listing page)"
+        twitter_handle: "Twitter handle (used with tweet button in post page)"
         update_settings: "Save settings"
         automatically_confirmed_no_escrow: "Order will be automatically marked as completed %{days_dropdown} days after the payment has been made"
         automatic_newsletter_frequency: "Send automatic newsletter: %{frequency_dropdown}"
         newsletter_daily: Daily
         newsletter_weekly: Weekly
-        delete_marketplace_title: "Delete marketplace"
-        type_marketplace_domain: "Type your marketplace domain (%{domain}) to the text field below:"
-        type_marketplace_domain_placeholder: "Type your marketplace domain here"
-        once_you_delete: "Once you delete the marketplace, you will not be able to access it anymore. Be careful."
+        delete_marketplace_title: "Delete ShareOregon"
+        type_marketplace_domain: "Type the ShareOregon domain (%{domain}) to the text field below:"
+        type_marketplace_domain_placeholder: "Type the ShareOregon domain here."
+        once_you_delete: "Once you delete ShareOregon, you will not be able to access it anymore. Be careful."
         are_you_sure: "Are you sure?"
-        i_understand_button: "I understand that by clicking this button my marketplace will be deleted"
+        i_understand_button: "I understand that by clicking this button, ShareOregon will be deleted."
         last_community_updates: "Please note that after deletion, you and your marketplace users may still receive the last marketplace update emails."
         you_will_be_redirected_to: "After you have deleted your marketplace you will be redirected to %{destination}. You will not be able to access your marketplace anymore."
         delete_this_marketplace: "Delete this marketplace"
       manage_members:
-        manage_members: "Manage users"
+        manage_members: "Manage Users"
         email: Email
         name: Name
         join_date: Joined
@@ -235,20 +235,20 @@ en:
         save_user_status_successful: Saved
         export_all_as_csv: "Export all as CSV"
         save_user_status_error: "Saving failed. Please refresh the page and try again."
-        ban_user_confirmation: "This removes the user from the marketplace and prevents them from accessing the site again with this account. Are you sure you want to proceed?"
+        ban_user_confirmation: "This removes the user from ShareOregon and prevents them from accessing the site again with this account. Are you sure you want to proceed?"
         ban_me_error: "You cannot ban yourself."
       new_layout:
         new_layout: "New layout"
-        description_roadmap: "Sharetribe is currently in the process of rolling out a new and improved layout. During the transition period, you can select which parts of your marketplace should continue using the old layout using the menu below. New features will only be available on the new layout."
-        description_process: "Support for the old layout will be removed in the future. The Sharetribe team will notify you before this happens. Questions? Contact the team via %{support_link}."
+        description_roadmap: "We are in the process of rolling out a new and improved layout. During the transition period, you can select which parts should continue using the old layout using the menu below. New features will only be available on the new layout."
+        description_process: "Support for the old layout will be removed in the future. The ShareOregon team will notify you before this happens. Questions? Contact the team via %{support_link}."
         enabled_for_you: "Enabled for you"
         enabled_for_all: "Enabled for all"
         new_topbar: "New top bar (visible on every page)"
       social_media:
         social_media: "Social media"
         twitter_handle: "Twitter handle"
-        twitter_handle_info_text: "Username of the Twitter account of your marketplace (if you have one). It will be mentioned when people use the tweet button on the listing page."
-        twitter_handle_info_text_with_instructions: "Username of the Twitter account of your marketplace (if you have one). It will be mentioned when people use the tweet button on the listing page. %{instructions_link}."
+        twitter_handle_info_text: "Username of the Twitter account of your marketplace (if you have one). It will be mentioned when people use the tweet button on the post."
+        twitter_handle_info_text_with_instructions: "Username of the Twitter account of your marketplace (if you have one). It will be mentioned when people use the tweet button on the post. %{instructions_link}."
         twitter_instructions_link_text: "Read more"
         twitter_handle_placeholder: username
         invalid_twitter_handle: "Twitter handle should contain only at maximum 15 alphanumeric (letters A-Z and numbers 0-9) characters."
@@ -267,7 +267,7 @@ en:
         google_analytics_key_info_text: "Tracking ID of your Google Analytics account."
         google_analytics_key_info_text_with_instructions: "Tracking ID of your Google Analytics account. %{instructions_link}."
         google_analytics_instructions_link_text: "Read more about connecting Google Analytics"
-        save: "Save settings"
+        save: "Save Settings"
       menu_links:
         menu_links: "Menu links"
         save: "Save settings"
@@ -284,14 +284,14 @@ en:
         about_page: "about page"
       topbar:
         topbar: "Top bar"
-        new_listing_button_label: "Post a new listing button text"
-        invalid_post_listing_button_label: "Please provide a valid text for \"Post a new listing\" button"
+        new_listing_button_label: "Add a Post"
+        invalid_post_listing_button_label: "Please provide a valid text for \"Add a Post" button"
       transactions:
         export_all_as_csv: "Export all as CSV"
         transactions: "View transactions"
         headers:
           conversation: "Conversation thread"
-          listing: Listing
+          listing: Post
           status: Status
           sum: Sum
           started: Started
@@ -314,9 +314,9 @@ en:
         paypal_admin_account: "Payment system"
     custom_fields:
       edit:
-        edit_listing_field: "Edit listing field '%{field_name}'"
+        edit_listing_field: "Edit post field '%{field_name}'"
       edit_price:
-        description: "The minimum and maximum price only affect the filter. They do not set a limit for listing prices."
+        description: "The minimum and maximum price only affect the filter. They do not set a limit for post prices."
         edit_price_field: "Edit price field"
         show_price_filter_homepage: "Show price filter on homepage"
         price_min: "Filter minimum price"
@@ -326,22 +326,22 @@ en:
         this_field_is_required: "This field is required"
       form:
         field_required:
-          this_field_is_required: "Make it mandatory to fill in this field when creating a new listing"
-          this_field_is_required_checkbox: "Make it mandatory to fill in this field when creating a new listing (user has to select at least one option)"
+          this_field_is_required: "Make it mandatory to fill in this field when creating a post."
+          this_field_is_required_checkbox: "Make it mandatory to fill in this field when creating a post (user has to select at least one option)."
         search_filter:
           search_filter: "Display a filter based on this field on the homepage"
           date_cant_be_filtered: "There's no filter available for date field."
           text_cant_be_filtered: "There's no filter for text field. The main text search searches from text fields."
       index:
-        listing_fields: "Listing fields & filters"
-        listing_fields_help: "Here you can edit the fields that users have to fill in when they create a new listing. Please note that some fields are predefined and cannot be edited."
+        listing_fields: "Post fields & filters"
+        listing_fields_help: "Here you can edit the fields that users have to fill in when they create a post. Please note that some fields are predefined and cannot be edited."
         add_new_field: "Add new field:"
         remove_field_confirmation: "Are you sure you want to remove field '%{field_name}'?"
         cancel: Cancel
         save: Save
         field_title: "Field title"
         field_type: "Field type"
-        categories: "Listing categories where the field is used"
+        categories: "Post categories where the field is used"
         select_all: "Select all"
         clear_all: "Clear all"
         options: Options
@@ -355,7 +355,7 @@ en:
         maximum_value: Maximum
         allow_decimals: "Allow decimals"
       new:
-        new_listing_field: "New listing field"
+        new_listing_field: "New post field"
       field_types:
         text: Text
         number: Number
@@ -426,31 +426,31 @@ en:
         update_failure: "Could not save changes. Error: %{error_msg}"
         delete: "Delete order type"
         confirm_delete_order_type:
-          one: "There is %{count} listing with this order type. If you delete the order type, this listing will be closed. Are you sure you want to delete the order type?"
-          other: "There are %{count} listings with this order type. If you delete the order type, those listings will be closed. Are you sure you want to delete the order type?"
+          one: "There is %{count} post with this order type. If you delete the order type, this post will be closed. Are you sure you want to delete the order type?"
+          other: "There are %{count} posts with this order type. If you delete the order type, those posts will be closed. Are you sure you want to delete the order type?"
         can_not_delete_last: "You can't delete this order type because it's the only type in your marketplace."
         can_not_delete_only_one_in_categories: "You can't delete this order type because in following categories this order type is the only one in use: %{categories}"
       listing_shape_name: Name
-      listing_shape_name_placeholder: "E.g. Sell"
+      listing_shape_name_placeholder: "e.g. Sell"
       action_button_label: "Checkout button label"
-      action_button_placeholder: "E.g. Buy"
+      action_button_placeholder: "e.g. Buy"
       open_listings_warning:
-        one: "There is %{count} open listing with this order type. If you change any of the settings below, that listing will retain the old settings. The listing can be changed to the new settings by editing it manually. If you don't want to have the listing with the old settings visible on your site, you can close it by clicking the button below."
-        other: "There are %{count} open listings with this order type. If you change any of the settings below, those listings will retain the old settings. Those listings can be changed to the new settings by editing them manually. If you don't want to have any listings with the old settings visible on your site, you can close them by clicking the button below."
+        one: "There is %{count} open post with this order type. If you change any of the settings below, that post will retain the old settings. The post can be changed to the new settings by editing it manually. If you don't want to have the post with the old settings visible, you can close it by clicking the button below."
+        other: "There are %{count} open posts with this order type. If you change any of the settings below, those posts will retain the old settings. Those posts can be changed to the new settings by editing them manually. If you don't want to have any posts with the old settings visible on your site, you can close them by clicking the button below."
       close_listings_action:
-        one: "Close %{count} listing"
-        other: "Close %{count} listings"
+        one: "Close %{count} post"
+        other: "Close %{count} posts"
       confirm_close_listings_action:
-        one: "Are you sure you want to close %{count} listing?"
-        other: "Are you sure you want to close %{count} listings?"
-      successfully_closed: "Successfully closed listings"
+        one: "Are you sure you want to close %{count} post?"
+        other: "Are you sure you want to close %{count} posts?"
+      successfully_closed: "Successfully closed posts"
       successfully_deleted: "Successfully deleted order type '%{order_type}'"
       pricing_and_checkout_title: "Pricing & checkout"
       online_payments_label: "Allow sellers to accept payments online"
       shipping_label: "Allow sellers to define a shipping fee"
-      price_label: "Allow sellers to add a price to their listings"
+      price_label: "Allow sellers to add a price to their posts"
       units_title: "Pricing units"
-      units_desc: "If you have enabled pricing units, the listing price is displayed as \"price per pricing unit\". An example: \"$39 per hour\"."
+      units_desc: "If you have enabled pricing units, the post price is displayed as \"price per unit\". Example: \"$39 per hour\"."
       units:
         piece: "Per piece"
         hour: "Per hour"
@@ -475,12 +475,12 @@ en:
     paypal_accounts:
       marketplace_paypal_integration: "Payment system preferences"
       preferences_updated: "Payment system preferences updated"
-      marketplace_currency_used: "This marketplace uses %{currency} as its currency. To change the currency, %{contact_support_link}."
-      contact_support_link_text: "contact Sharetribe support"
-      integration_info_text: "The payment system of your marketplace is powered by PayPal. To allow your users to pay using your marketplace, you must connect your PayPal account. Once you have connected your PayPal account, you can choose a minimum transaction size and a possible commission fee."
+      marketplace_currency_used: "ShareOregon uses %{currency} as its currency."
+      contact_support_link_text: "contact us"
+      integration_info_text: "The payment system is powered by PayPal. To allow your users to pay you through ShareOregon, you must connect your PayPal account. Once you have connected your PayPal account, you can choose a minimum transaction size and a possible commission fee."
       link_paypal_personal_account_label: "Are you providing products or services yourself?"
       link_paypal_personal_account: "If so, you will also need to connect your PayPal account to %{personal_payment_preferences_link}."
-      personal_payment_preferences_link_text: "your personal marketplace account"
+      personal_payment_preferences_link_text: "your personal account"
       read_more_about_paypal: "Read more about the payment system"
       set_minimum_price_and_fee: "Set a minimum price & transaction fee"
       minimum_listing_price_label: "Minimum transaction size:"
@@ -507,10 +507,10 @@ en:
         inquiry: Contact
   common:
     edit_page: "Edit page"
-    default_community_slogan: "Community marketplace"
+    default_community_slogan: "Share the Best of Oregon"
     default_community_description: "This is a place to sell, rent, swap and share goods and services with the other members of the marketplace."
     cancel: Cancel
-    fields_that_are_mandatory: "Fields marked with star (*) are mandatory."
+    fields_that_are_mandatory: "Fields marked with * are mandatory."
     or: or
     password: Password
     service_name: "%{service_name}"
@@ -550,7 +550,7 @@ en:
       travel: Travel
       other: Other
     username: Username
-    username_or_email: "Email or username"
+    username_or_email: "Email or Username"
     what_is_this: "What's this?"
     removed_user: "Removed user"
     paypal_fee_info:
@@ -570,8 +570,8 @@ en:
       accept_request: "Accept the request"
       reject_offer: "Not this time"
       reject_request: "Not this time"
-      close_listing: "Close the listing %{listing_title_link}"
-      update_later: "Leave the listing open"
+      close_listing: "Close the post %{listing_title_link}"
+      update_later: "Leave the post open"
       optional_message: "Optional message"
       price_to_pay: "Total price to be paid"
       accept: Accept
@@ -614,7 +614,7 @@ en:
       canceled_request: "Order canceled."
       canceled_offer: "Offer canceled."
       message_from: "Message from %{person}"
-      about_listing: "About listing %{listing_title}"
+      about_listing: "About post %{listing_title}"
       free_message: "Free message"
       message_content_not_available: "Message content not available"
     message:
@@ -633,17 +633,17 @@ en:
       message: Message
       message_to: "Message to %{author_name}"
       optional_message_to: "Optional message to %{author_name}"
-      send_message: "Send message"
+      send_message: "Send Message"
       send: Send
       this_message_is_private: "This message is private between you and %{person}. %{person} will be notified of this message by email."
       you_will_get_notified_of_acceptance: "You will get an email notification when %{person} accepts or rejects your proposal."
       you_will_get_notified: "You will get an email notification when %{person} answers you."
       title: Title
       send_message_to_user: "Send message to %{person}"
-      about_listing: "About listing %{listing_title}"
+      about_listing: "About post %{listing_title}"
       author_has_to_accept_request: "%{author_name} needs to accept the request before you can pay"
     show:
-      in_response_to_listing: "about listing"
+      in_response_to_listing: "about post"
       message_sent_by: "Message sent by"
       message_sent_to: "Message sent to"
       send_reply: "Send reply"
@@ -657,7 +657,7 @@ en:
       total: "Total: %{total}"
     status:
       payment_errored: "Payment failed. Please try again."
-      payment_errored_starter: "Payment failed. Please try again. If the problem continues, please contact Sharetribe support."
+      payment_errored_starter: "Payment failed. Please try again. If the problem continues, please contact us."
       payment_errored_author: "Payment failed. Please contact %{starter_name} and ask him to try the payment again."
       cancel_payed_transaction: Cancel
       feedback_given: "Feedback given"
@@ -758,8 +758,8 @@ en:
       cancel_it_link_text: "cancel it"
       automatic_confirmation: "If you don't confirm or cancel the order within %{days_to_automatic_confirmation} days after the request was accepted, we will mark it automatically as completed."
     payment_settings_reminder:
-      remember_to_add_payment_details: "Remember to add your payment details to receive payments"
-      you_have_added_listing_with_payment: "You have added a listing %{listing_link} with payment. However, you haven't yet added your payment details. In order to receive the payment you have to add your payment information."
+      remember_to_add_payment_details: "Remember to add your payment details if you would like to receive payments through ShareOregon."
+      you_have_added_listing_with_payment: "Thank you for posting! Please note: If you would like to receive payments for %{listing_link} through ShareOregon, you will need to connect a PayPal account in your %{payment_settings_link}. You can disregard this message if you are linking to another payment system or what you posted is free."
       please_go_to_payment_settings: "Please go to your %{payment_settings_link} and fill in the required payment information."
       payment_settings_link: "payment settings"
     transaction_confirmed:
@@ -774,7 +774,7 @@ en:
       subject: "Order automatically completed - remember to give feedback"
       we_have_marked_request_as_confirmed: "We have marked the order about '%{request}' completed. The order was automatically completed because %{days_passed} days have passed since the request was accepted."
     booking_transaction_automatically_confirmed:
-      subject: "Order automatically completed - remember to give feedback"
+      subject: "Order automatically completed - please remember to give feedback."
       we_have_marked_request_as_confirmed: "We have marked the order about '%{request}' completed. The request was automatically completed because one day has passed since the booking period ended."
     automatically_confirmed_footer:
       giving_feedback_is_good_idea: "You can now give feedback to %{other_party_given_name}. Giving feedback is always a good idea. If everything went well, you should let others know that %{other_party_given_name} can be trusted. If there were any problems, it's good to mention those as well."
@@ -815,11 +815,11 @@ en:
       join_now: "Join now"
       invitation_code: "Invitation code: %{code}"
     new_comment:
-      has_commented_your_listing_in_kassi: "%{author} has commented on your listing '%{listing}'."
+      has_commented_your_listing_in_kassi: "%{author} has commented on your post '%{listing}'."
       view_comment: "View comment"
-      you_have_a_new_comment: "%{author} has commented on your listing in %{service_name}"
-      listing_you_follow_has_a_new_comment: "%{author} has commented on a listing you follow in %{service_name}"
-      has_commented_listing_you_follow_in_kassi: "%{author} has commented on the listing '%{listing}' you are following in %{service_name}."
+      you_have_a_new_comment: "%{author} has commented on your post in %{service_name}"
+      listing_you_follow_has_a_new_comment: "%{author} has commented on a post you follow in %{service_name}"
+      has_commented_listing_you_follow_in_kassi: "%{author} has commented on the post '%{listing}' you are following in %{service_name}."
     new_message:
       view_message: "View message"
       has_sent_you_a_message_in_kassi: "%{sender} has sent you a message in %{service_name}."
@@ -854,13 +854,13 @@ en:
       you_can_give_feedback_to: "You haven't yet given feedback to %{name}."
       view_feedback: "View feedback"
     new_update_to_listing:
-      listing_you_follow_has_been_updated: "Listing you follow has been updated"
-      has_updated_listing_you_follow_in_kassi: "%{author} has updated the listing '%{listing}' you are following in %{service_name}."
+      listing_you_follow_has_been_updated: "Post you follow has been updated"
+      has_updated_listing_you_follow_in_kassi: "%{author} has updated the post '%{listing}' you are following in %{service_name}."
       view_changes: "View changes"
     community_updates:
-      added_offer: "%{name_link} added a listing:"
-      added_request: "%{name_link} added a listing:"
-      added_listing: "%{name_link} added a listing:"
+      added_offer: "%{name_link} added a post:"
+      added_request: "%{name_link} added a post:"
+      added_listing: "%{name_link} added a post:"
       update_mail_title: "%{title_link} update"
       title_link_text: "%{community_name}"
       intro_paragraph: "Here are some of the things that happened on %{community_link} during the past %{time_since_last_update}."
@@ -877,16 +877,16 @@ en:
       change_my_password: "Change my password"
       reset_password_instructions: "<p>You have indicated that you have forgotten either your password or username in the %{service_name} service.</p><p>Your username is: %{username}</p><p>If you need to reset your password, click the following link: %{password_reset_link}</p><br/><p>If you didn't request this, please ignore this email. Your password won't change until you access the link above and create a new one.</p>"
     testimonial_reminder:
-      remember_to_give_feedback_to: "Reminder: remember to give feedback to %{name}"
-      you_have_not_given_feedback_yet: "You have not yet given feedback to %{name} about event '%{event}'. Remember to give feedback on how %{given_name} performed in the event."
+      remember_to_give_feedback_to: "Reminder: Please provide feedback about %{name}."
+      you_have_not_given_feedback_yet: "You have not yet given feedback to %{name} about '%{event}'. Remember to give feedback about how %{given_name} performed in the event."
     transaction_preauthorized:
       subject: "%{requester} has requested and authorized payment for %{listing_title}"
       transaction_requested_by_user: "%{requester} has requested and authorized payment for \"%{listing_title}\""
       you_have_time_to_accept: "You need to accept or reject the request within %{payment_expires_in}. If you accept within this timeframe, the payment will go through. If you don't accept, the request will be automatically rejected and you will not get paid."
       click_here_to_reply: "Click here to respond to the request"
     transaction_preauthorized_reminder:
-      subject: "Remember to accept the request from %{requester} about listing %{listing_title}"
-      remember_to_accept: "Remember to accept the request from %{requester} about listing \"%{listing_title}\". %{requester} has already paid for the listing. You have to accept the request in order to receive the payment."
+      subject: "Remember to accept the request from %{requester} about post %{listing_title}"
+      remember_to_accept: "Remember to accept the request from %{requester} about post \"%{listing_title}\". %{requester} has already authorized payment for it. You have to accept the request in order to receive the payment."
       one_day_left: "If you don't accept the request within one day the request will be automatically rejected and you will not get paid."
       click_here_to_reply: "Click here to respond to the request"
     welcome_email:
@@ -896,10 +896,10 @@ en:
       welcome_email_footer_text: "What kind of emails do you want to receive from %{service_name}? %{settings_link}"
       settings_link_text: "Check your settings"
     new_listing_by_followed_person:
-      subject: "%{author_name} has posted a new listing in %{service_name}"
-      has_posted_a_new_listing: "%{author_name} has posted a new listing:"
+      subject: "%{author_name} has added a new post in %{service_name}"
+      has_posted_a_new_listing: "%{author_name} has added a new post:"
       you_are_receiving_this_because: "You received this notification because you follow %{author_name}."
-      view_listing: "View listing"
+      view_listing: "View post"
     new_member_notification:
       new_member_has_joined: "A new member has joined %{community}. They may still have to confirm their email address."
       this_is_automatic_message: "This is an automatic message sent to administrators of %{community}."
@@ -925,11 +925,11 @@ en:
     paypal:
       buyer_cannot_pay_error: "The payment has been declined by PayPal. Please contact their Customer Service for more information: %{customer_service_link}"
       pending_review_error: "The payment was submitted but was flagged by PayPal as 'requiring a review'. When PayPal completes the review, the payment will be automatically authorized."
-      seller_express_checkout_disabled: "PayPal Express Checkout has been disabled for the listing author's PayPal account. Please contact the author and let them know that there's an issue with their PayPal account, and advise them to contact PayPal Customer Service."
+      seller_express_checkout_disabled: "PayPal Express Checkout has been disabled for the post author's PayPal account. Please contact the author and let them know that there's an issue with their PayPal account, and advise them to contact PayPal Customer Service."
       generic_error: "An error occurred during the payment process. Could not finalize your PayPal payment."
       cancel_error: "An error occurred during cancellation. Could not finalize cancel."
-      accept_authorization_error: "An error occurred while trying to accept preauthorized Paypal payment. Please, try again."
-      reject_authorization_error: "An error occurred while trying to reject preauthorized Paypal payment. Please, try again."
+      accept_authorization_error: "An error occurred while trying to accept preauthorized PayPal payment. Please, try again."
+      reject_authorization_error: "An error occurred while trying to reject preauthorized PayPal payment. Please, try again."
   error_pages:
     back_to_kassi_front_page: "Back to the front page"
     error_404:
@@ -940,20 +940,20 @@ en:
     error_410:
       page_removed: "Page removed"
       page_you_requested_has_been_removed: "The page you requested has been removed."
-      page_removed_reason: "There are a few possible reasons for this. For example, a user might have removed their account or a listing might have been removed."
+      page_removed_reason: "There are a few possible reasons for this. For example, a user might have removed their account or a post might have been removed."
     error_410_title: "page removed"
     error_500:
-      temporary_unavailable: "Marketplace temporarily unavailable"
-      unable_to_process: "The service is unable to process your request right now. Please try again in few moments."
+      temporary_unavailable: "We are sorry, but ShareOregon is temporarily unavailable."
+      unable_to_process: "ShareOregon is unable to process your request right now. Please try again in a few moments."
       we_hate_this: "We hate when this happens! We have been informed about the situation and we are fixing it."
-      refer_to_error_id: "If you wish to contact the support regarding this issue, please include an error ID \"%{error_id}\" in your message."
+      refer_to_error_id: "If you wish to contact support regarding this issue, please include an error ID \"%{error_id}\" in your message."
     error_500_title: "page loading failed"
     error_description: "Error description"
     no_javascript:
       javascript_is_disabled_in_your_browser: "Javascript is disabled in your browser"
       kassi_does_not_currently_work_without_javascript: "%{service_name} does not work properly without javascript. Try to enable javascript from your browser's preferences and then reload this page again."
-      contact_us: "contact us"
-      send_feedback: "Send message"
+      contact_us: "Contact Us"
+      send_feedback: "Send Message"
       your_feedback_to_admins: "Your message to %{service_name} team"
     send: Send
     your_email_address: "Your email address"
@@ -990,39 +990,39 @@ en:
     login:
       logged_in_to_kassi: "%{name} logged in to %{service_name} %{time_ago}."
     comment:
-      commented: "%{commenter_name} commented on listing %{listing_title} %{time_ago}."
+      commented: "%{commenter_name} commented on the post %{listing_title} %{time_ago}."
       offer_partitive: offer
       request_partitive: request
   header:
     about: About
     home: Home
     members: Community
-    new_listing: "New listing"
+    new_listing: "New Post"
     mobile_version: "Mobile version"
     offers: Offers
     requests: Requests
     search_kassi: "Search %{service_name}"
     create_new_marketplace: "Create a new marketplace"
-    contact_us: "Contact us"
+    contact_us: "Contact Us"
     profile: Profile
-    manage_listings: "Manage listings"
-    invite: "Invite new members"
-    login: "Log in"
-    signup: "Sign up"
+    manage_listings: "Manage Posts"
+    invite: "Invite New Members"
+    login: "Log In"
+    signup: "Sign Up"
     menu: Menu
   homepage:
     additional_private_listings_slate:
-      additionally_one_private_offer_exists: "Additionally  there is <b>one other offer</b>,"
-      additionally_one_private_request_exists: "Additionally  there is <b>one other request</b>,"
-      additionally_some_private_offers_exist: "Additionally there are <b>%{number_of_listings} other offers</b>,"
-      additionally_some_private_requests_exist: "Additionally there are <b>%{number_of_listings} other requests</b>,"
+      additionally_one_private_offer_exists: "Additionally, there is <b>one other offer</b>,"
+      additionally_one_private_request_exists: "Additionally, there is <b>one other request</b>,"
+      additionally_some_private_offers_exist: "Additionally, there are <b>%{number_of_listings} other offers</b>,"
+      additionally_some_private_requests_exist: "Additionally, there are <b>%{number_of_listings} other requests</b>,"
     blank_slate:
       add_first: "Add one!"
       but_that_is_visible_only_to_registered_members: "but that is visible only to registered members."
       but_those_are_visible_only_to_registered_members: "but those are visible only to registered members."
-      create_new_account_for_yourself: "Create yourself a new account"
-      examples_of_what_you_could_offer_to_others: "What could you offer to others"
-      examples_of_what_you_could_request_to_others: "What could you request from the others"
+      create_new_account_for_yourself: "Create a new account"
+      examples_of_what_you_could_offer_to_others: "What could you offer to others?"
+      examples_of_what_you_could_request_to_others: "What could you request from others?"
       favor_offer_list: "computer assistance, clothes repair, baking, bike fixing"
       favor_request_list: "babysitting, piano lessons, walking dogs, mowing lawn"
       favors_to_offer: "Help: "
@@ -1031,38 +1031,38 @@ en:
       item_request_list: "tools, sports equipment, costumes, camping equipment"
       items_to_offer: "Goods to lend: "
       items_to_request: "Goods to borrow: "
-      log_in: "log in!"
+      log_in: "Log In!"
       no_offers_visible_unless_logged_in: "No item, service or rideshare offers visible to users who are not logged in."
       no_open_offers_currently: "No open item, service or rideshare offers."
       no_open_requests_currently: "No open item, service or rideshare requests."
       no_requests_visible_unless_logged_in: "No item, service or rideshare requests visible to users who are not logged in."
       one_private_offer_exists: "There is already <b>one offer</b>,"
       one_private_request_exists: "There is already <b>one request</b>,"
-      ride_offer: "Take others' kids to their hobbies"
-      ride_request: "A ride to work"
+      ride_offer: "Offer a rideshare."
+      ride_request: "Request a ride to work."
       some_private_offers_exist: "There are already <b>%{number_of_listings} offers</b>,"
       some_private_requests_exist: "There are already <b>%{number_of_listings} requests</b>,"
     custom_filters:
-      update_view: "Update view"
+      update_view: "Update View"
       min: "Min:"
       max: "Max:"
     event_feed:
       latest_events: "What's going on"
     grid_item:
-      processing_uploaded_image: "(Processing uploaded image...)"
+      processing_uploaded_image: "Processing uploaded image..."
     index:
-      no_listings_with_your_search_criteria: "Sorry, no listings could be found for your search criteria. Maybe try other search terms?"
-      no_listings_notification: "No listings. %{add_listing_link}."
-      add_listing_link_text: "Add new listing"
-      open_listing: "open listing"
-      open_listings: "open listings"
+      no_listings_with_your_search_criteria: "Sorry, no posts could be found for your search criteria. Maybe try other search terms?"
+      no_listings_notification: "No posts. %{add_listing_link}."
+      add_listing_link_text: "Add new post"
+      open_listing: "open post"
+      open_listings: "open posts"
       private_listing_notification_log_in: "log in"
       is: is
       are: are
       what_do_you_need: "What are you looking for?"
-      post_new_listing: "Post a new listing"
+      post_new_listing: "+ Add a Post"
       are_offering: offer
-      add_news_item: "Add an article"
+      add_news_item: "+ Add an Article"
       lend_rent_help_carpool: "Sell, lend, help, share rides"
       loading_more_content: "Loading more content"
       more_events: "More events..."
@@ -1074,7 +1074,7 @@ en:
       recent_events: "Recent events"
       requesting: need
       tell_it_here: "Tell it here!"
-      welcome_to_new_kassi: "Welcome to new %{service_name}!"
+      welcome_to_new_kassi: "Welcome to %{service_name}!"
       no_reviews: "No reviews"
       no_image: "No image"
       filter: Filter
@@ -1087,7 +1087,7 @@ en:
       add_lots_of_email_addresses: "As you are an administrator, here is a tip: if you plan to send lots of invitations, you should use an emailing tool. Check out %{this_article_link} to find out resources about suitable email services."
       this_article_link: "this article"
       invitation_emails_field_placeholder: "friend1@example.com, friend2@example.com, ..."
-      invitation_message_field_placeholder: "I joined this amazing marketplace. You should too!"
+      invitation_message_field_placeholder: "I joined ShareOregon. You should too!"
       errors_in_emails: "Check that the email addresses you added are valid and don't contain any unusual characters. If you added multiple addresses, make sure they are separated with comma."
     list_item:
       review: review
@@ -1113,23 +1113,23 @@ en:
       map_button: Map
       grid_button: Grid
       list_button: List
-      all_listing_types: "All listing types"
+      all_listing_types: "All post types"
       all_categories: "All categories"
     errors:
       search_engine_not_responding: "Search is currently unavailable. Try searching again soon."
   infos:
     about:
-      default_about_text_title: "What is Sharetribe?"
-      default_about_text: "This marketplace is powered by Sharetribe platform. With Sharetribe you can easily create your own marketplace website. It's free and only takes a minute. %{click_here_link} to learn more!"
-      click_here_link_text: "Click here"
+      default_about_text_title: "What is ShareOregon?"
+      default_about_text: "ShareOregon lets you share the best of Oregon: things to do, places to explore, and more!"
+      click_here_link_text: "Click Here"
     how_to_use:
-      default_title: "How it works"
-      default_content: "Here you can find information about how %{marketplace_name} works."
+      default_title: "How It Works"
+      default_content: "Learn about how %{marketplace_name} works."
   landing_page:
     hero:
       search: Search
-      signup: "Sign up"
-      search_placeholder: "What are you looking for?"
+      signup: "Sign Up"
+      search_placeholder: "Find what you love . . ."
       search_location_placeholder: Location
     listings:
       no_listing_image: "No picture"
@@ -1137,32 +1137,32 @@ en:
     admin:
       admin: "%{service_name} admin panel"
     branding:
-      powered_by: "%{service_name} is powered by the %{sharetribe_link} marketplace platform."
-      create_own: "Want to create your own online marketplace website like %{service_name}? %{learn_more}."
+      powered_by: "%{service_name} lets you share the best of Oregon: things to do, places to explore, and more."
+      create_own: "Add a post today!"
       learn_more: "Learn more"
     no_tribe:
       inbox: Inbox
       settings: Settings
-      feedback: "Contact %{service_name} team"
+      feedback: "Contact the %{service_name} team."
     application:
-      join_this_community: "Join marketplace"
+      join_this_community: "Join ShareOregon"
       read_more: "Read more"
-      feedback: "Your message to %{service_name} team"
-      dont_use_to_contact_support: "We noticed you're an admin of %{service_name}. This form is what your users use to contact you. You cannot use this form to contact Sharetribe support. You can do that via the Support link in your admin panel instead."
-      feedback_forum: "feedback forum"
+      feedback: "Your message to the %{service_name} team"
+      dont_use_to_contact_support: "Thanks for being an administrator of %{service_name}!"
+      feedback_forum: "Feedback forum"
       feedback_handle: Feedback
-      give_feedback: "Contact us"
+      give_feedback: "Contact Us"
       or_check_our: "...or check our"
       send_feedback_to_admin: "Send message"
       to_see_what_others_have_suggested: "to see what other users have suggested, and vote for the ideas there."
-      your_email_address: "Your email address (to contact you)"
-      connect: "Sign up"
+      your_email_address: "Your Email Address (to contact you):"
+      connect: "Sign Up"
       invite_your_friends: "Invite friends!"
       invite_your_neighbors: "Invite neighbors!"
-      invite_your_friends_description: "The more people there are in %{service_name}, the more useful it is."
+      invite_your_friends_description: "The more folks use %{service_name}, the more useful it becomes as a community resource."
       invite_your_friends_invite_only_description: "People cannot join %{service_name} unless they are invited."
       join_without_facebook: "...or alternatively %{join_without_facebook_link}"
-      join_without_facebook_link: "sign up without using Facebook"
+      join_without_facebook_link: "Sign up without using Facebook"
     conversations:
       messages: Messages
       notifications: Notifications
@@ -1172,17 +1172,17 @@ en:
       select_language: "Select language"
     infos:
       about: About
-      how_to_use: "How it works"
+      how_to_use: "How It Works"
       info_about_kassi: "Information about %{service_name}"
       news: News
       register_details: Privacy
-      terms: "Terms of use"
+      terms: "Terms of Use"
     logged_in:
       admin: Admin
       go_to_your_profile_page: Profile
       hi: Hi
-      login: "Log in"
-      logout: "Log out"
+      login: "Log In"
+      logout: "Log Out"
       notifications: Notifications
       requests: "Friend requests"
       settings: Settings
@@ -1195,29 +1195,29 @@ en:
       admin: Admin
       go_to_your_profile_page: Profile
       hi: Hi
-      login: "Log in"
-      logout: "Log out"
+      login: "Log In"
+      logout: "Log Out"
       notifications: Notifications
       requests: "Friend requests"
       settings: Settings
       sign_up: "Sign up"
     notifications:
-      listing_could_not_be_saved: "Listing could not be saved. Please try again. If the problem persists, please %{contact_admin_link}."
-      contact_admin_link_text: "contact the admin"
+      listing_could_not_be_saved: "Post could not be saved. Please try again. If the problem persists, please %{contact_admin_link}."
+      contact_admin_link_text: "Please %{contact_admin_link}"
       test_welcome_email_delivered_to: "A test email was sent to %{email}."
-      something_went_wrong: "Something went wrong"
+      something_went_wrong: "Something went wrong. Feel free to %{contact_admin_link}."
       community_updated: "Details updated."
       community_update_failed: "Detail update failed."
-      account_creation_succesful_you_still_need_to_confirm_your_email: "Your account was created successfully. Now you need to confirm your email address."
-      community_joined_succesfully_you_still_need_to_confirm_your_email: "Thanks for joining %{service_name}. Now you need to confirm your email address."
+      account_creation_succesful_you_still_need_to_confirm_your_email: "Your account was created successfully. Please check your email inbox to confirm your address."
+      community_joined_succesfully_you_still_need_to_confirm_your_email: "Thanks for joining %{service_name}! Please check your email inbox to confirm your address."
       comment_cannot_be_empty: "Comment cannot be empty"
-      comment_sent: "Comment sent"
+      comment_sent: "Comment sent!"
       confirmation_link_is_wrong_or_used: "The confirmation link is already used or otherwise broken. Try logging in, or send feedback if the problem persists."
       additional_email_confirmed: "The email you entered is now confirmed."
       could_not_get_email_from_facebook: "Could not get email address from Facebook and can't create an account without email."
       facebook_email_unconfirmed: "The email address '%{email}' associated with your Facebook account is already used but it hasn't been confirmed yet. Please confirm the email address before logging in with Facebook."
-      create_new_listing: "Create another listing"
-      create_one_here: "create one here"
+      create_new_listing: "Add another post"
+      create_one_here: "Create one here"
       email_confirmation_sent_to_new_address: "Email confirmation is now sent to the new address."
       email_not_found: "The email you gave was not found from %{service_name} database."
       error_with_session: "Error with session."
@@ -1236,26 +1236,26 @@ en:
       account_deleted: "Your account is now deleted."
       login_successful: "Welcome, %{person_name}!"
       logout_successful: "You have now been logged out of %{service_name}. See you soon!"
-      news_item_created: "Article created"
-      news_item_creation_failed: "Article creation failed"
-      news_item_update_failed: "Article update failed"
-      news_item_updated: "Article updated"
-      news_item_deleted: "Article removed"
+      news_item_created: "Post created"
+      news_item_creation_failed: "Post creation failed"
+      news_item_update_failed: "Post update failed"
+      news_item_updated: "Post updated"
+      news_item_deleted: "Post removed"
       offer_accepted: "Offer accepted"
       offer_confirmed: "Offer confirmed"
       offer_closed: "Offer closed"
-      listing_created_successfully: "Listing created successfully. %{new_listing_link}."
+      listing_created_successfully: "Post created successfully. %{new_listing_link}."
       offer_rejected: "Offer rejected"
       offer_canceled: "Offer canceled"
-      listing_updated_successfully: "Listing updated successfully"
-      only_kassi_administrators_can_access_this_area: "Only %{service_name} administrators can access this area"
-      only_listing_author_can_close_a_listing: "Only listing author can close a listing"
-      only_listing_author_can_edit_a_listing: "Only listing author can edit a listing"
+      listing_updated_successfully: "Post updated successfully"
+      only_kassi_administrators_can_access_this_area: "Only %{service_name} administrators can access this area."
+      only_listing_author_can_close_a_listing: "Only the post author can close it."
+      only_listing_author_can_edit_a_listing: "Only the post author can close it."
       payment_successful: "Payment successful"
       payment_canceled: "Payment cancelled"
-      error_in_payment: "Error in payment. If you didn't complete the payment yet, try again. If you did, please send us feedback."
-      cannot_receive_payment: "The other party can't receive the payment due some error. Please contact the administrators to clarify the situation"
-      payment_waiting_for_later_accomplishment: "When you have paid, we'll notify the seller and you will get a receipt in email"
+      error_in_payment: "Error in payment. If you didn't complete the payment yet, please try again. If you did, please contact us and we would be happy to help."
+      cannot_receive_payment: "The other party can't receive the payment due to an error. Please click the Menu > Contact Us and we would be happy to help."
+      payment_waiting_for_later_accomplishment: "When you have paid, we'll notify the seller and you will get a receipt via email."
       password_recovery_sent: "Instructions to change your password were sent to your email."
       person_activated: "User activated"
       person_deactivated: "User deactivated"
@@ -1268,7 +1268,7 @@ en:
       poll_updated: "Poll updated"
       poll_deleted: "Poll removed"
       read_more: "Read more!"
-      registration_considered_spam: "Registration did not work, please contact us from header menu and mention \"email2 error\"."
+      registration_considered_spam: "Registration did not work. Please Contact Us via the Menu and we would be happy to help. Mention \"email2 error\"."
       reply_cannot_be_empty: "You can't send an empty message"
       reply_sent: "Reply sent successfully"
       request_accepted: "Request accepted"
@@ -1280,90 +1280,90 @@ en:
       this_content_is_not_available_in_this_community: "This content is not available."
       unknown_error: "Unknown error. Please use the Contact us link to send details about what happened."
       update_error: "An error occurred when trying to update your information, please try again"
-      you_are_not_allowed_to_give_feedback_on_this_transaction: "You are not authorized to give feedback on this event"
-      you_are_not_authorized_to_do_this: "You are not authorized to do this"
-      you_are_not_authorized_to_view_this_content: "You are not authorized to view this content"
-      listing_closed: "This listing has been closed"
+      you_are_not_allowed_to_give_feedback_on_this_transaction: "You are not authorized to give feedback on this event."
+      you_are_not_authorized_to_do_this: "You are not authorized to do this."
+      you_are_not_authorized_to_view_this_content: "You are not authorized to view this content."
+      listing_closed: "This post has been closed."
       send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
-      you_cannot_reply_to_a_closed_offer: "You cannot reply to a closed offer"
-      you_cannot_send_message_to_yourself: "You cannot send a message to yourself"
-      you_followed_listing: "You are now following this listing"
-      you_have_already_given_feedback_about_this_event: "You have already given feedback about this event"
+      you_cannot_reply_to_a_closed_offer: "You cannot reply to a closed offer."
+      you_cannot_send_message_to_yourself: "You cannot send a message to yourself."
+      you_followed_listing: "You are now following this post."
+      you_have_already_given_feedback_about_this_event: "You have already given feedback about this event."
       you_are_now_member: "Welcome to %{service_name}!"
       you_are_already_member: "You are already a member of %{service_name}. Welcome back!"
-      you_must_log_in_to_create_new_listing: "You must log in to %{service_name} to create a new listing. If you don't have an account you can %{sign_up_link}."
+      you_must_log_in_to_create_new_listing: "You must log in to %{service_name} to add a post. If you don't have an account you can %{sign_up_link}."
       additional_email_confirmed_dashboard: "Your email is now confirmed."
-      you_must_log_in_to_give_feedback: "You must log in to give feedback"
-      you_must_log_in_to_invite_new_users: "You must log in to invite new users to %{service_name}"
+      you_must_log_in_to_give_feedback: "You must log in to give feedback."
+      you_must_log_in_to_invite_new_users: "You must log in to invite new users to %{service_name}."
       you_must_log_in_to_send_a_comment: "You must log in to send a new comment"
       you_must_log_in_to_send_a_message: "You must log in to %{service_name} to send a message to another user."
       you_must_log_in_to_do_a_transaction: "You must log in to %{service_name} to do a transaction."
-      you_must_log_in_to_view_this_content: "You must log in to view this content"
-      you_must_log_in_to_view_this_page: "You must log in to view this page"
+      you_must_log_in_to_view_this_content: "You must log in to view this content."
+      you_must_log_in_to_view_this_page: "You must log in to view this page."
       you_must_log_in_to_view_your_inbox: "You must log in to %{service_name} to view your inbox."
       you_must_log_in_to_view_your_settings: "You must log in to %{service_name} to view your settings."
       you_must_log_in_to_add_news_item: "You must log in to %{service_name} to add a new article."
-      you_must_log_in_to_change_profile_settings: "You must log in to %{service_name} to change profile settings"
-      you_must_log_in_to_accept_or_reject: "You must log in to accept or reject the transaction"
-      you_must_log_in_to_confirm_or_cancel: "You must log in to cancel or confirm the transaction"
-      you_need_to_confirm_your_account_first: "You need to confirm your email."
-      you_must_fill_all_the_fields: "You must fill all the fields"
-      you_unfollowed_listing: "You are no longer following this listing"
-      joining_community_failed: "Joining failed"
-      can_not_delete_email: "You cannot remove the email address"
-      user_does_not_have_email_to_delete: "You don't have the email address you're trying to remove"
+      you_must_log_in_to_change_profile_settings: "You must log in to %{service_name} to change profile settings."
+      you_must_log_in_to_accept_or_reject: "You must log in to accept or reject the transaction."
+      you_must_log_in_to_confirm_or_cancel: "You must log in to cancel or confirm the transaction."
+      you_need_to_confirm_your_account_first: "You need to confirm your email. Please check your inbox."
+      you_must_fill_all_the_fields: "Please fill in all the fields."
+      you_unfollowed_listing: "You are no longer following this post."
+      joining_community_failed: "Failed to join ShareOregon."
+      can_not_delete_email: "You cannot remove the email address."
+      user_does_not_have_email_to_delete: "You don't have the email address you're trying to remove."
       email_deleted: "Email removed"
-      listing_author_payment_details_missing: "Please contact the author by pressing the 'Contact' button below. They need to update their payment details to receive payments."
-      images_are_processing: "We are processing your images. Give us a minute or two and they'll be visible."
+      listing_author_payment_details_missing: "Please contact the author by clicking the 'Contact' button. They need to update their payment details to receive payments."
+      images_are_processing: "We are processing your images. They'll be visible soon."
       maintenance_mode:
-        zero: "The website will now go offline for maintenance"
-        one: "The website will be offline for maintenance in %{count} minute"
-        other: "The website will be offline for maintenance in %{count} minutes"
+        zero: "ShareOregon will now go offline for maintenance."
+        one: "ShareOregon will be offline for maintenance in %{count} minute."
+        other: "ShareOregon will be offline for maintenance in %{count} minutes."
       automatically_logged_out_please_sign_in: "You have been automatically logged out. Please log in again."
     settings:
       account: Account
       notifications: Notifications
-      profile: "Profile info"
+      profile: "Profile"
       settings: Settings
       payments: Payments
   listings:
     bubble_listing_not_visible:
-      listing_not_visible: "You do not have permission to view this listing."
+      listing_not_visible: "You do not have permission to view this post."
     comment:
       wrote: wrote
       send_private_message: "Send private message to %{person}"
       delete: delete
       are_you_sure: "Are you sure you want to delete the comment?"
     comment_form:
-      ask_a_question: "Comment on the listing or ask for more details. All the other users will be able to see your comment."
-      log_in: "log in"
-      send_comment: "Send comment"
+      ask_a_question: "Comment on the post or ask for more details."
+      log_in: "Log In"
+      send_comment: "Send Comment"
       to_send_a_comment: "to send a new comment."
       write_comment: "Write a new comment:"
-      you_cannot_send_a_new_comment_because_listing_is_closed: "You cannot send new comments because this listing is closed."
+      you_cannot_send_a_new_comment_because_listing_is_closed: "You cannot send new comments because this post is closed."
       you_must: "You must"
-      subscribe_to_comments: "Notify me of new comments and updates"
+      subscribe_to_comments: "Notify me of new comments and updates."
     edit:
-      edit_listing: "Edit listing"
+      edit_listing: "Edit post"
     edit_links:
-      close_listing: "Close listing"
-      edit_listing: "Edit listing"
-      reopen_listing: "Reopen listing"
+      close_listing: "Close post"
+      edit_listing: "Edit post"
+      reopen_listing: "Reopen post"
       move_to_top: "Move to top of homepage"
       show_in_updates_email: "Show in the next newsletter"
       show_in_updates_email_loading: Loading...
-      show_in_updates_email_error: "Couldn't reach server. Try again after page refresh."
-      show_in_updates_email_success: "This listing will be shown in the next automatic update email sent to the users"
+      show_in_updates_email_error: "Could not reach server. Please try again after page refresh."
+      show_in_updates_email_success: "This post will be shown in the next automatic email update sent to users."
     map:
-      open_in_google_maps: "Open in Google Maps"
+      open_in_google_maps: "<b>Open in Google Maps</b>"
     error:
-      something_went_wrong: "Something went wrong, error code: %{error_code}"
+      something_went_wrong: "Something went wrong, error code: %{error_code}. Feel free to contact us via the Menu and we would be happy to help."
       something_went_wrong_plain: "Something went wrong"
-      create_failed_to_connect_to_booking_service: "Listing creation failed: Failed to connect to the booking service. Please try again."
-      update_failed_to_connect_to_booking_service: "Listing update failed: Failed to connect to the booking service. Please try again."
+      create_failed_to_connect_to_booking_service: "Post creation failed; Failed to connect to the booking service. Please try again."
+      update_failed_to_connect_to_booking_service: "Post update failed; Failed to connect to the booking service. Please try again."
     follow_links:
-      follow: "Get emails about new comments"
-      unfollow: "Don't get emails about new comments"
+      follow: "Get emails about new comments."
+      unfollow: "Don't get emails about new comments."
     form:
       custom_field_partials:
         dropdown:
@@ -1388,12 +1388,12 @@ en:
         i_want_to_offer: "I want to offer..."
         i_want_to_request: "I need..."
       googlemap:
-        googlemap_copy: "End Points From Map"
+        googlemap_copy: "End Points from Map"
         googlemap_description: Mapview
         googlemap_updatemap: "Update Map"
       images:
-        image: Image
-        best_result: "For best results, use JPG, GIF or PNG images that are %{width} by %{height} pixels"
+        image: "Image/(s): The first will be featured"
+        best_result: "For best results, use JPG, GIF or PNG images that are %{width} by %{height} pixels."
         no_file_selected: "No file selected"
         remove_image: "Remove image"
         select_file: "Select file"
@@ -1402,13 +1402,13 @@ en:
         processing: Processing...
         loading_image: Loading...
         image_uploading_in_progress: "Image upload in progress..."
-        processing_takes_a_while: "All images uploaded! Processing them will take a bit of time, but it's ok to save the listing and move on."
-        this_may_take_a_while: "this only takes a second"
+        processing_takes_a_while: "All images uploaded! Processing them may take a few moments, but it's ok to save the listing and move on."
+        this_may_take_a_while: "This only takes a moment."
         percentage_loaded: "%{percentage}%"
-        uploading_failed: "Image uploading failed"
-        image_processing_failed: "Image processing failed"
-        file_too_large: "The file is too large"
-        accepted_formats: "The image format must be either GIF, JPG or PNG."
+        uploading_failed: "Image uploading failed. Please try again later."
+        image_processing_failed: "Image processing failed. Please try again later."
+        file_too_large: "The file is too large. For best results, please use images that are 660 by 440 pixels."
+        accepted_formats: "The image format must be either JPG, GIF, or PNG."
         images_not_uploaded_confirm: "All images have not finished uploading. Do you really want to continue?"
       location:
         location: Location
@@ -1419,9 +1419,9 @@ en:
         mass: "piece, kg, l, m2, ..."
         time: "hour, day, month, ..."
         long_time: "week, month, ..."
-        after_service_fee_you_will_get: "After %{service_name} and payment processor fees you will get %{sum_with_currency}"
+        after_service_fee_you_will_get: "After the PayPal fee you will receive %{sum_with_currency}."
         no_service_fee_you_will_get_paypal_text: "%{paypal_fee_info_link} will be deducted from the price."
-        after_service_fee_you_will_get_paypal_text: "%{service_name} fee (%{sum_with_currency}) and %{paypal_fee_info_link} will be deducted from the price."
+        after_service_fee_you_will_get_paypal_text: "%{paypal_fee_info_link} will be deducted from the price."
         paypal_fee_info_link_text: "PayPal's payment processing fee"
         delivery: "Delivery method"
         shipping: Shipping
@@ -1432,7 +1432,7 @@ en:
         location: Location
         origin: Origin
       send_button:
-        save_listing: "Save listing"
+        save_listing: "Save Post"
       share_type:
         select: Select
         borrow: Borrowing
@@ -1452,7 +1452,7 @@ en:
         comma_separate: "(comma separate)"
         tags: Tags
       title:
-        listing_title: "Listing title"
+        listing_title: "Post title"
       valid_until:
         valid_until: "Expiration date"
       valid_until_radio_buttons:
@@ -1462,7 +1462,7 @@ en:
         private: "Private (only users who are logged in can see)"
         public: "Public (visible to users who are not logged in)"
     help_texts:
-      help_share_type_title: "Type of the offer or request"
+      help_share_type_title: "Type of offer or request"
       help_tags_title: Tags
       help_valid_until_title: "Expiration date"
     index:
@@ -1474,9 +1474,9 @@ en:
       favors: Services
       housing: Spaces
       items: Items
-      list_view: "List view"
-      listings: Listings
-      map_view: "Map view"
+      list_view: Events
+      listings: Posts
+      map_view: Places
       offer_something: "Let others know!"
       offer_type: "Offer type"
       offers: Offers
@@ -1510,18 +1510,18 @@ en:
       payment_help: "Payment help"
       unable_load_availability: "Could not load availability information. Please try again later."
     new:
-      listing: listing
+      listing: Post
       selected_category: "Category: %{category}"
       selected_subcategory: "Subcategory: %{subcategory}"
-      selected_transaction_type: "Listing type: %{transaction_type}"
+      selected_transaction_type: "Post type: %{transaction_type}"
       select_category: "Select category"
       select_subcategory: "Select subcategory"
-      select_transaction_type: "Select listing type"
-      you_need_to_fill_payout_details_before_accepting: "You need to fill in payout details before you can post a listing. Go to %{payment_settings_link} to fill in the details."
-      contact_admin_link_text: "contact the administrator"
-      community_not_configured_for_payments: "%{service_name} hasn't been configured for payments, so you cannot post new listings yet. Please %{contact_admin_link} for details."
+      select_transaction_type: "Select post type"
+      you_need_to_fill_payout_details_before_accepting: "Note: You need to connect a PayPal account before you can accept payments through ShareOregon. Go to %{payment_settings_link} to fill in the details."
+      contact_admin_link_text: "Please contact us via the Menu."
+      community_not_configured_for_payments: "%{service_name} hasn't been configured for payments, so you cannot add posts yet. Please %{contact_admin_link} for details."
       payment_settings_link: "payment settings"
-      community_not_configured_for_payments_admin: "%{service_name} hasn't been configured for payments, so you cannot post new listings yet. Go to %{payment_settings_link} to fill in the payment details."
+      community_not_configured_for_payments_admin: "%{service_name} hasn't been configured for payments, so you cannot add posts yet. Go to %{payment_settings_link} to fill in the payment details."
     quantity:
       hour: "Number of hours:"
       day: "Number of days:"
@@ -1627,7 +1627,7 @@ en:
   paypal_accounts:
     payout_info_title: "Receiving funds"
     paypal_account_email_connected: "<del>Connect PayPal account</del> Completed!"
-    payout_info_paypal: "%{service_name} uses PayPal as its payment provider. A %{create_paypal_account_link} is required in order to accept payments for your listings, and must be connected to %{service_name}."
+    payout_info_paypal: "%{service_name} uses PayPal as its payment provider. A %{create_paypal_account_link} is required in order to accept payments, and it must be connected to %{service_name}."
     paypal_billing_agreement_made: "<del>Grant %{service_name} permission to charge a transaction fee</del> Completed!"
     commission_permission_needed: "You will also need to grant %{service_name} permission to charge a transaction fee."
     create_paypal_account_link_text: "PayPal account"
@@ -1637,22 +1637,22 @@ en:
     paypal_receive_funds_info_australia_only: "If you see an error when trying to connect your account to %{service_name}, either %{upgrade_paypal_account_link} and upgrade to a Business account, or (if you are an individual), create a new Premier account. Both account types are completely free."
     paypal_receive_funds_info: "If you see an error when trying to connect your account to %{service_name}, upgrade your PayPal account by %{upgrade_paypal_account_link}. It's free and easy. If you're an individual, PayPal recommends using your name as the Business name."
     upgrade_paypal_account_link_text: "logging in and clicking the upgrade link"
-    admin_account_not_connected: "Using %{service_name}'s payment system in order to receive payments is not possible since payments have not been set up. Please %{contact_admin_link} for details."
-    contact_admin_link_text: "contact the marketplace administrator"
+    admin_account_not_connected: "Using %{service_name}'s payment system to receive payments is not possible since payments have not been set up. Please %{contact_admin_link} for details."
+    contact_admin_link_text: "Please %{contact_admin_link}"
     you_are_ready_to_accept_payments: "You are ready to accept payments!"
     commission: "%{commission} %"
     new:
       payout_info_you_need_to_connect: "Unless you only list free things and/or link to an external booking/payment system, you need to connect your PayPal account with %{service_name}."
       payout_info_you_need_to_connect_original: "In order to accept payments, you need to connect your PayPal account with %{service_name}."
       payout_info_text: "To connect your account, please complete the following steps."
-      contact_admin_link_text: "contact the administrator"
+      contact_admin_link_text: "Please %{contact_admin_link}."
       admin_account_not_connected: "Connecting your PayPal account is not possible since %{service_name} has not set up payments. Please %{contact_admin_link} for details."
       paypal_account_email: "Connect your PayPal account"
       paypal_account_email_placeholder: "Your PayPal email address"
       paypal_account_email_info_text: "If you don't have a PayPal account, you can create one by %{create_paypal_account}. If you get an error message when connecting your PayPal account, upgrade your PayPal account to a business account. Upgrading is free and easy. If you are an individual, you can use your first and last name as your \"business name\". To upgrade your account, %{upgrade_paypal_account} and find the upgrade link."
       create_paypal_account: "clicking here"
       upgrade_paypal_account: "log in to your PayPal account"
-      paypal_account_billing_agreement: "Grant %{service_name} permission to charge a transaction fee"
+      paypal_account_billing_agreement: "%{service_name} does not charge a transaction fee. We will notify you if we decide to charge a small percentage fee."
       follow_steps: "Follow the steps below to start receiving funds:"
       connect_paypal_account_title: "Connect your PayPal account"
       connect_paypal_account_title_with_step: "Step %{current_step}/%{total_steps}: Connect your PayPal account"
@@ -1678,21 +1678,21 @@ en:
     paypal_account_connected_title: "PayPal account connected"
     paypal_account_connected: "The PayPal account <%{email}> has been connected with %{service_name}."
     change_account: "Change PayPal account"
-    missing: "You have open listings but your Paypal account is not set up to receive payments. Connect your Paypal account and grant %{service_name} permission to charge a transaction fee from your %{settings_link}."
+    missing: "<p>Thank you for posting! Please note: If you would like to receive payments through %{service_name}, you will need to link a PayPal account in your %{payment_settings_link}. You can disregard this message if you are linking to another payment system or what you posted is free.</p><p>Just let us know if you have questions. We hope you love ShareOregon and please keep spreading the word so we continue to grow as a community resource!</p><p>Sincerely,</p><p>Rick Reynolds</p><p>Founder, ShareOregon</p>"
     from_your_payment_settings_link_text: "payment settings"
     redirect_message: "Redirecting you to PayPal. If nothing happens, click %{redirect_link}."
     redirect_link_text: here
     paypal_account_all_set_up: "Hooray, everything is set up!"
-    can_receive_payments: "You can now receive payments for your listings."
-    paypal_account_connected_summary: "PayPal account <%{email}> connected successfully"
-    paypal_permission_granted_summary: "Permission for transaction fees granted"
+    can_receive_payments: "You can now receive payments."
+    paypal_account_connected_summary: "PayPal account <%{email}> connected successfully."
+    paypal_permission_granted_summary: "Permission for transaction fees granted."
   paypal:
     pay_with_paypal: "Proceed to payment"
     checkout_with_paypal: "Checkout with PayPal"
     cancel_succesful: "PayPal payment succesfully canceled"
     transaction:
       commission_payment_name: "Commission payment for %{listing_title}"
-      commission_payment_description: "Marketplace %{service_name} took this commission from transaction regarding %{listing_title}"
+      commission_payment_description: "%{service_name} took this commission from transaction regarding %{listing_title}"
     wait_while_loading: "Please wait."
     chatting_with_paypal: "We are chatting with PayPal."
   people:
@@ -1703,38 +1703,38 @@ en:
       feedback_description_title: Feedback
       help_invitation_code_title: "You need an invite to join"
       terms_title: "%{service_name} terms of use"
-      invite_only_help_text: "Select this option if you want that new members can join only if they are invited by an existing user."
+      invite_only_help_text: "Select this option if you want new members to join only if they are invited by an existing user."
       invite_only_help_text_title: Invite-only
     inactive_notification:
-      this_person_is_not_active_in_kassi: "This user is no longer active in %{service_name}"
-      inactive_description: "This user has stopped using %{service_name}. You cannot contact this user, give feedback to them or comment their listings."
+      this_person_is_not_active_in_kassi: "This user is no longer active in %{service_name}."
+      inactive_description: "Sorry, this user has stopped using %{service_name}. You cannot contact this user, give feedback to them or comment on their posts."
     new:
       create_new_account: "Create account"
       email: "Email address"
-      email_is_in_use: "The email you gave is already in use."
+      email_is_in_use: "This email address is already in use."
       email_is_in_use_or_not_allowed: "This email is not allowed or it is already in use. If you can't get in, contact us."
-      email_not_allowed: "This email is not allowed in %{service_name}. Please use an email address that is allowed. If you still cannot get in, contact us."
+      email_not_allowed: "This email is not allowed in %{service_name}. Please use an email address that is allowed. If you still cannot get in, please contact us."
       email_restriction_instructions:
         one: "The access to %{service_name} is restricted. To join you need a '%{allowed_emails}' email address."
         other: "The access to %{service_name} is restricted. You need an email address that proves that you are entitled to join."
-      family_name: "Last name"
-      given_name: "First name"
+      family_name: "Last Name"
+      given_name: "First Name"
       i_accept_the: "I accept the"
       invalid_invitation_code: "The invitation code is not valid."
       invitation_code: "Invitation code"
       not_required: ", not required"
       notification_is_mandatory: "You must pick at least one email address for receiving notifications. If you don't want to receive any emails from %{service_name}, check your email notification settings."
-      password_again: "Confirm password"
+      password_again: "Confirm Password"
       show_my_name_to_others: "Show my real name to other %{service_name} users"
       sign_up: "Create a new %{service_name} account"
-      terms: "terms of use"
+      terms: "Terms of Use"
       username_is_in_use: "This username is already in use."
       username_is_invalid: "Username is invalid. Allowed characters are letters, numbers and underscore."
-      visible_only_to_you: "visible only to you and the marketplace admin"
+      visible_only_to_you: "visible only to you and the ShareOregon admin"
       visible_to_everybody: "visible to everybody"
-      create_account_with_facebook: "Sign up with Facebook"
+      create_account_with_facebook: "Sign Up with Facebook"
       OR: OR
-      signup_with_email: "Sign up with email"
+      signup_with_email: "Sign Up with Email"
     profile_feedback:
       grade: "grade:"
       and_gave_following_feedback: "and gave the following feedback"
@@ -1745,7 +1745,7 @@ en:
     show:
       contact: "Contact %{person}"
       about_me: "About me:"
-      add_description: "Share something about yourself"
+      add_description: "Please add to your profile to help build trust and the ShareOregon community."
       add_location: "Add location"
       add_phone_number: "Add phone number"
       address: "Location:"
@@ -1764,15 +1764,15 @@ en:
       what_are_these: "What are these?"
       review: "received review"
       reviews: "received reviews"
-      listing: listing
-      listings: listings
-      open_listing: "open listing"
-      open_listings: "open listings"
-      no_listings: "No listings"
-      no_open_listings: "No open listings"
+      listing: post
+      listings: posts
+      open_listing: "open post"
+      open_listings: "open posts"
+      no_listings: "No posts"
+      no_open_listings: "No open posts"
       no_reviews: "No reviews"
-      show_all_listings: "Show all listings"
-      show_all_open_listings: "Show all open listings"
+      show_all_listings: "Show all posts"
+      show_all_open_listings: "Show all open posts"
       show_all_reviews: "Show all reviews"
     followed_people:
       you_follow_plural: "You follow %{count} people"
@@ -1797,36 +1797,36 @@ en:
       search_verb: Search
   sessions:
     new:
-      create_new_account: "Create a new account"
-      i_forgot_my_password: "Forgot username or password"
-      login: "Log in"
-      login_to_kassi: "Log in to %{service_name}"
+      create_new_account: "<b>Create a New Account</b>"
+      i_forgot_my_password: "<b>Forgot Username or Password</b>"
+      login: "Log In"
+      login_to_kassi: "Log In to %{service_name}"
       connect_your_facebook_to_kassi: "Connect your Facebook account to %{service_name}"
       facebook_account: "Facebook account:"
       log_in_to_link_account: "If you already have a %{service_name} account, log in to link it with your Facebook account."
-      you_can_also_create_new_account: "If you don't have an account in %{service_name}, %{accont_creation_link} to create one with your Facebook login."
+      you_can_also_create_new_account: "If you don't have a %{service_name} account, %{accont_creation_link} to create one with your Facebook login."
       account_creation_link_text: "click here"
       cancle_facebook_connect: "If you don't want to link this account, you can %{cancel_link}."
       facebook_cancel_link_text: cancel
-      log_in_with_your_facebook_account: "Log in with Facebook"
-      or_sign_up_with_your_username: "...or with your username or email:"
+      log_in_with_your_facebook_account: "Log In with Facebook"
+      or_sign_up_with_your_username: "<b>. . . or with your email or username:</b>"
       we_will_not_post_without_asking_you: "We will never post to Facebook without asking you."
     password_forgotten:
       email: Email
       password_recovery_instructions: "Enter your email address to receive your username and reset your password."
-      request_new_password: "Request new password"
+      request_new_password: "Request New Password"
       change_your_password: "Change your password"
     confirmation_pending:
       welcome_to_kassi: "Welcome to %{service_name}!"
-      check_your_email: "Check your inbox"
+      check_your_email: "Please check your email inbox."
       resend_confirmation_instructions: "Resend confirmation instructions"
       your_current_email_is: "Your email is %{email}."
       change_email: Change
-      confirm_your_email: "Please confirm your email address"
-      account_confirmation_instructions: "You will soon receive an email with a link to confirm your email address. Don't forget to check your spam folder! After confirming your address, you can join %{service_name}."
-      account_confirmation_instructions_title_admin: "Welcome to your marketplace!"
-      your_marketplace_has_now_been_created: "Your marketplace has now been created. That was easy, wasn't it? There's just one more step before you can access your site: we need to confirm your email address."
-      account_confirmation_instructions_admin: "You will soon receive an email with a link to confirm your email address. Don't forget to check your spam folder! Once you open the link, you can start setting up your marketplace."
+      confirm_your_email: "Please check your email inbox to confirm your address."
+      account_confirmation_instructions: "You will soon receive an email with a link to confirm your email address. If you don't see it, please check your spam folder. After confirming your address, you can join %{service_name}."
+      account_confirmation_instructions_title_admin: "Welcome to ShareOregon!"
+      your_marketplace_has_now_been_created: "ShareOregon has now been created. Please confirm your email address."
+      account_confirmation_instructions_admin: "You will soon receive an email with a link to confirm your email address. Don't forget to check your spam folder!"
   settings:
     account:
       change: Change
@@ -1836,7 +1836,7 @@ en:
       delete_account_confirmation_popup: "Are you sure you really want to delete your user account and permanently lose all data related to it? Account deletion cannot be reversed."
       email_addresses: "Email addresses"
       new_email: "New email address"
-      delete_personal_information: "If you delete your account, your personal information (name, phone number, address, email, profile picture, etc.) will be deleted permanently and can't be recovered. All the listings you have created will be removed. You won't be able to reactivate your account."
+      delete_personal_information: "If you delete your account, all of your information will be deleted permanently and can't be recovered. All the posts you have added will be removed. You won't be able to reactivate your account."
       delete_information_others_involved: "Information where other members are involved (conversations with other people, transactions you've made, reviews you've given to others, etc) is not removed when you delete your account. However, your name will no longer be displayed next to this information."
       unfinished_transactions: "Your account can't be deleted because you have ongoing transactions. Please complete all transactions before deleting your account."
       new_password: "New password"
@@ -1858,50 +1858,50 @@ en:
         status_confirmed: Confirmed
         status_pending: Pending
     notifications:
-      email_from_admins: "I'm willing to receive occasional emails from the administrators"
+      email_from_admins: "I'm willing to receive occasional emails from ShareOregon."
       i_want_to_get_email_notification_when: "I want to get an email notification when..."
       newsletters: "Emails from administrators"
       community_updates: Newsletters
-      email_about_confirm_reminders: "...I have forgotten to confirm an order as completed"
-      email_about_new_comments_to_own_listing: "...someone comments on my offer or request"
-      email_about_new_messages: "...someone sends me a message"
-      email_about_new_received_testimonials: "...someone gives me feedback"
-      email_about_testimonial_reminders: "...I have forgotten to give feedback on an event"
-      email_daily_community_updates: "Send me a <b>daily</b> newsletter if there are new listings"
-      email_weekly_community_updates: "Send me a <b>weekly</b> newsletter if there are new listings"
-      do_not_email_community_updates: "Don't send me newsletters"
-      email_when_conversation_accepted: "...someone accepts my offer or request"
-      email_when_conversation_rejected: "...someone rejects my offer or request"
-      email_about_completed_transactions: "...someone marks my order as completed"
-      email_about_new_payments: "...I receive a new payment"
-      email_about_new_listings_by_followed_people: "...someone I follow posts a new listing"
+      email_about_confirm_reminders: "...I have forgotten to confirm an order as completed."
+      email_about_new_comments_to_own_listing: "...someone comments on my offer or request."
+      email_about_new_messages: "...someone sends me a message."
+      email_about_new_received_testimonials: "...someone gives me feedback."
+      email_about_testimonial_reminders: "...I have forgotten to give feedback on an event."
+      email_daily_community_updates: "Send me a <b>daily</b> newsletter if there are new posts."
+      email_weekly_community_updates: "Send me a <b>weekly</b> newsletter if there are new posts."
+      do_not_email_community_updates: "Don't send me newsletters."
+      email_when_conversation_accepted: "...someone accepts my offer or request."
+      email_when_conversation_rejected: "...someone rejects my offer or request."
+      email_about_completed_transactions: "...someone marks my order as completed."
+      email_about_new_payments: "...I receive a new payment."
+      email_about_new_listings_by_followed_people: "...someone I follow adds a post."
       unsubscribe_succesful: "Unsubscribe succesful"
       unsubscribe_info_text: "You will no longer receive these emails. Check your %{settings_link} to choose what kind of emails you want to receive from %{service_name}, or return to the %{homepage_link}."
       settings_link: settings
       homepage_link: homepage
-      unsubscribe_unsuccesful: "Error in unsubscribing"
+      unsubscribe_unsuccesful: "Error in unsubscribing. Please try again or feel free to contact us."
       unsuccessful_unsubscribe_info_text: "The unsubscribe link has expired. Log in to change your email subscription settings."
     profile:
-      about_you: "About you"
+      about_you: "About you: Qualifications, why you love what you do, etc."
       city: City
       family_name: "Last name"
       given_name: "First name"
       first_name_with_initial: "(only first letter shown to other users)"
       first_name_only: "(not shown to other users)"
-      location_description: "You can provide either your street address or only a city or zip/postal code. It’s good to also add your country when adding your location. Examples: \"10117 Berlin, Germany\" or \"2000 Sand Hill Road, CA, USA\"."
+      location_description: "You can provide either your street address or only a city or zip/postal code. Examples: \"200 Market St., Portland, OR\" or \"Bend, OR\" or \"97701\"."
       phone_number: "Phone number"
       profile_picture: "Profile picture"
-      postal_code: "Postal code"
+      postal_code: "Zip code"
       profile_page: "in your profile page"
       profilemap: Mapview
       street_address: Location
-      these_fields_are_shown_in_your: "This information is visible to all %{service_name} users"
+      these_fields_are_shown_in_your: "This information is visible to all %{service_name} users."
       visible_to_everybody: "visible to everybody"
-      visible_to_registered_users: "(visible to users that have logged in)"
-      default_in_listing: "(used only as a default when creating a new listing)"
+      visible_to_registered_users: "(visible to users who have logged in)"
+      default_in_listing: "(used only as a default when creating a new post)"
       invisible: "(not shown to other users)"
-      image_is_processing: "Hang on tight. We are processing your profile picture. It will be ready in a minute or two."
-    save_information: "Save information"
+      image_is_processing: "Hang on tight. We are processing your profile picture. It will be ready in a few moments."
+    save_information: "Save Information"
   shipping_address:
     shipping_address: "Shipping address"
   tag_cloud:
@@ -1911,14 +1911,14 @@ en:
   terms:
     show:
       accept_terms: "Accepting %{service_name} terms of use"
-      here: "by clicking here"
-      i_accept_new_terms: "I accept the new terms"
-      i_accept_terms: "I accept the terms"
+      here: "by clicking here."
+      i_accept_new_terms: "I accept the new terms."
+      i_accept_terms: "I accept the terms."
       terms: "%{service_name} terms of use"
       terms_have_changed: "Terms of use have changed"
-      you_can_view_the_new_terms: "You can view the new terms"
-      you_need_to_accept: "Welcome to %{service_name}! This seems to be the first time you are using the service. Before starting you must first accept the"
-      you_need_to_accept_new_terms: "%{service_name} terms of use have changed. You have to accept the new terms in order to continue using %{service_name}. The new terms are intended to enable the upkeep of the service after the research project has ended."
+      you_can_view_the_new_terms: "You can view the new terms."
+      you_need_to_accept: "Welcome to %{service_name}! Before starting you must first accept the"
+      you_need_to_accept_new_terms: "%{service_name} terms of use have changed. You have to accept the new terms in order to continue using %{service_name}."
   testimonials:
     index:
       all_testimonials: "All feedback"
@@ -1940,7 +1940,7 @@ en:
       negative: Negative
       default_textual_feedback: "Everything went smoothly, thanks a lot!"
     testimonial:
-      about_listing: "about listing"
+      about_listing: "about post"
   date:
     formats:
       long_with_abbr_day_name: "%a, %b %d, %Y"
@@ -2064,7 +2064,7 @@ en:
         week: week
         month: month
     no_listings:
-      sorry: "Sorry, no listings could be found for your search criteria."
+      sorry: "Sorry, no posts could be found for your search criteria."
       try_other_search_terms: "Maybe try other search terms?"
     listing_card:
       no_picture: "No picture"
@@ -2076,19 +2076,19 @@ en:
       user: User
       inbox: Inbox
       profile: Profile
-      manage_listings: "Manage listings"
+      manage_listings: "Manage Posts"
       settings: Settings
-      logout: "Log out"
-      login: "Log in"
-      signup: "Sign up"
+      logout: "Log Out"
+      login: "Log In"
+      signup: "Sign Up"
       admin_dashboard: "Admin dashboard"
       language: Language
     utils:
       km: km
       mi: mi
     branding:
-      powered_by: "%{service_name} is powered by the %{sharetribe_link} marketplace platform."
-      create_own: "Want to create your own online marketplace website like %{service_name}? %{learn_more}."
+      powered_by: "Copyright %{service_name}"
+      create_own: ""
       learn_more: "Learn more"
   will_paginate:
     models:
