@@ -46,7 +46,7 @@
                 .paypal-redirect-message
 
                   = t("paypal_accounts.redirect_message", redirect_link: paypal_redirect_link).html_safe
-    - elsif next_action == :ask_billing_agreement
+    - elsif next_action == :ask_billing_agreementPAYPALONESTEP
       - content_for :javascript do
         ST.initializeNewPaypalAccountHandler("ask_billing_agreement", "#{billing_agreement_action}", ".js-paypal-redirect-billing-agreement");
         ST.initializeNewPaypalAccountHandler("ask_paypal_permissions", "#{order_permission_action}", ".js-paypal-redirect-change-account");
@@ -120,10 +120,11 @@
               .col-12
                 =icon_tag("check", ["icon-fix", "paypal-success-mark"])
                 =t("paypal_accounts.paypal_account_connected_summary", :email => paypal_account_email)
-            .row.paypal-last-steps-list
-              .col-12
-                =icon_tag("check", ["icon-fix", "paypal-success-mark"])
-                =t("paypal_accounts.paypal_permission_granted_summary")
+            - if next_action == :PAYPALONESTEP_this_is_bogus_test_to_disable
+              .row.paypal-last-steps-list
+                .col-12
+                  =icon_tag("check", ["icon-fix", "paypal-success-mark"])
+                  =t("paypal_accounts.paypal_permission_granted_summary")
             .row.paypal-link-wrapper
               .col-12
                 %a.paypal-change-link#ask_paypal_permissions
