@@ -47,6 +47,7 @@ module PaypalHelper
     commission_type = settings[:commission_type].or_else(nil)
 
     acc_state == :verified || (acc_state == :connected && commission_type == :none)
+    acc_state == :verified || acc_state == :connected
   end
   private_class_method :account_prepared?
 
