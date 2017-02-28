@@ -14,6 +14,8 @@
 
     .fluid-thumbnail-grid-image-overlay{:class => "#{modifier_class}"}
     .fluid-thumbnail-grid-image-title{:class => "#{modifier_class}"}
+      - if has_event?(listing)
+        = icon_tag('calendar', ["icon-fix"])
       = listing.title
 
     .fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class}"}

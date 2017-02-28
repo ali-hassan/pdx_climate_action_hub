@@ -11,20 +11,20 @@
           .delivery-left-field.shipping-price-container.shipping-price-default
             .delivery-row
               .delivery-label-cont
-                = form.label :shipping_price, t("listings.form.price.shipping_price"), class: "shipping-options-label"
+                = f.label :shipping_price, t("listings.form.price.shipping_price"), class: "shipping-options-label"
               .delivery-input-cont
                 .delivery-currency
-                  = render partial: "listings/form/currency_selector", locals: {form: form}
-                = form.text_field :shipping_price, class: "price-field delivery-price-field", maxlength: 10, placeholder: 0, value: shipping_price
+                  = render partial: "listings/form/currency_selector", locals: {f: f}
+                = f.text_field :shipping_price, class: "price-field delivery-price-field", maxlength: 10, placeholder: 0, value: shipping_price
           .delivery-row-tall
             .delivery-left-field.shipping-price-container.js-shipping-price-additional{class: always_show_additional_shipping_price ? "" : "hidden"}
               .delivery-row
                 .delivery-label-cont
-                  = form.label :shipping_price_additional, t("listings.form.price.shipping_price_additional"), class: "shipping-options-label"
+                  = f.label :shipping_price_additional, t("listings.form.price.shipping_price_additional"), class: "shipping-options-label"
                 .delivery-input-cont
                   .delivery-currency
-                    = render partial: "listings/form/currency_selector", locals: {form: form}
-                  = form.text_field :shipping_price_additional, class: "price-field delivery-price-field", maxlength: 10, placeholder: 0, value: shipping_price_additional
+                    = render partial: "listings/form/currency_selector", locals: {f: f}
+                  = f.text_field :shipping_price_additional, class: "price-field delivery-price-field", maxlength: 10, placeholder: 0, value: shipping_price_additional
       .delivery-row-low
         .delivery-checkbox
           = check_box_tag "listing[delivery_methods][]", "pickup", pickup_enabled, id: "pickup-checkbox", class: "delivery-method-checkbox required"

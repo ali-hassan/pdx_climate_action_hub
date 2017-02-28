@@ -21,7 +21,8 @@ class Booking < ActiveRecord::Base
   attr_accessible :transaction_id, :end_on, :start_on
 
   validates :start_on, :end_on, presence: true
-  validates_with DateValidator,
+  validates_date :end_on, on_or_after: :start_on
+  #validates_with DateValidator,
                  attribute: :end_on,
                  compare_to: :start_on,
                  restriction: :on_or_after

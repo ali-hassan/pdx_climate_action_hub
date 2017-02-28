@@ -44,6 +44,12 @@ class HomepageController < ApplicationController
 
     filter_params[:listing_shape] = Maybe(selected_shape)[:id].or_else(nil)
 
+    if @view_type == "list"
+      filter_params[:upcoming_events] = true
+    else
+      filter_params[:upcoming_events] = false
+    end
+
     compact_filter_params = HashUtils.compact(filter_params)
 
     per_page = @view_type == "map" ? APP_CONFIG.map_listings_limit : APP_CONFIG.grid_listings_limit
@@ -53,7 +59,7 @@ class HomepageController < ApplicationController
       when "grid"
         [:author, :listing_images]
       when "list"
-        [:author, :listing_images, :num_of_reviews]
+        [:author, :listing_images, :num_of_reviews, :event]
       when "map"
         [:location]
       else
@@ -161,6 +167,7 @@ class HomepageController < ApplicationController
 
     search = {
       # Add listing_id
+      upcoming_events: filter_params[:upcoming_events],
       categories: filter_params[:categories],
       listing_shape_ids: Array(filter_params[:listing_shape]),
       price_cents: filter_params[:price_cents],

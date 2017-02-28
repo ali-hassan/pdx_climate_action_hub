@@ -12,6 +12,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
       {
         community_id: community_id,
         author_id: search[:author_id],
+        event_id: search[:event_id],
         deleted: 0,
         listing_shape_id: Maybe(search[:listing_shape_ids]).or_else(nil)
       })
@@ -19,9 +20,13 @@ module ListingIndexService::Search::DatabaseSearchHelper
     query = Listing
             .where(where_opts)
             .includes(included_models)
-            .order("listings.sort_date DESC")
+            .order( search[:upcoming_events] ? 'events.start_at' : 'listings.sort_date DESC' )
             .paginate(per_page: search[:per_page], page: search[:page])
 
+    if search[:upcoming_events]
+      query = query.with_events
+    end
+      query = query.with_events
     listings =
       if search[:include_closed]
         query

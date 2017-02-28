@@ -76,6 +76,10 @@ module ListingsHelper
     !listing.listing_images.empty?
   end
 
+  def has_event?(listing)
+    !listing.event.nil?
+  end
+
   def with_image_frame(listing, &block)
     if self.has_images?(listing) then
       images = listing.listing_images

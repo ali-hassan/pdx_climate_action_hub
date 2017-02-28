@@ -68,6 +68,7 @@ class Listing < ActiveRecord::Base
   include ApplicationHelper
   include ActionView::Helpers::TranslationHelper
   include Rails.application.routes.url_helpers
+  include ThinkingSphinx::Scopes
 
   belongs_to :author, :class_name => "Person", :foreign_key => "author_id"
 
@@ -78,6 +79,9 @@ class Listing < ActiveRecord::Base
   has_many :custom_field_values, :dependent => :destroy
   has_many :custom_dropdown_field_values, :class_name => "DropdownFieldValue"
   has_many :custom_checkbox_field_values, :class_name => "CheckboxFieldValue"
+
+  has_one :event, :dependent => :destroy #, :order => 'start_at DESC'
+  accepts_nested_attributes_for :event, :allow_destroy => true, :reject_if => :all_blank
 
   has_one :location, :dependent => :destroy
   has_one :origin_loc, -> { where('location_type = ?', 'origin_loc') }, :class_name => "Location", :dependent => :destroy
@@ -91,6 +95,22 @@ class Listing < ActiveRecord::Base
   monetize :price_cents, :allow_nil => true, with_model_currency: :currency
   monetize :shipping_price_cents, allow_nil: true, with_model_currency: :currency
   monetize :shipping_price_additional_cents, allow_nil: true, with_model_currency: :currency
+
+  # Create an "empty" relationship. This is needed in search when we want to stop the search chain (NumericFields)
+  # and just return empty result.
+  #
+  # When moving to Rails 4.0, remove this and use Model.none
+  # http://stackoverflow.com/questions/4877931/how-to-return-an-empty-activerecord-relation
+#  scope :none, Listing.none #where('1 = 0')
+
+#  default_scope :include => 'events', :order => 'events.start_at'
+
+  scope :with_events, -> {joins(:event).where(events: {end_at: (Time.now - 1.day)..(Time.now + 2.years)} ) } #.uniq
+#  scope :by_event_start, :order => 'event.start_at'
+
+  # sphinx_scope(:upcoming_events) {
+  #   { :with => { :event_id => (0..9999999) && ['end_at > ?', DateTime.now] } }
+  # }
 
   before_validation :set_valid_until_time
 
@@ -142,9 +162,9 @@ class Listing < ActiveRecord::Base
     when "all"
       where([])
     when "open"
-      where(["open = '1' AND (valid_until IS NULL OR valid_until > ?)", DateTime.now])
+      includes(:event).where(["open = '1' AND (((valid_until IS NULL OR valid_until > ?) AND events.end_at IS NULL) OR events.end_at > ?)", DateTime.now, DateTime.now])
     when "closed"
-      where(["open = '0' OR (valid_until IS NOT NULL AND valid_until < ?)", DateTime.now])
+      includes(:event).where(["open = '0' OR (valid_until IS NOT NULL AND valid_until < ?) OR (events.end_at IS NOT NULL AND events.end_at < ?)", DateTime.now, DateTime.now])
     end
   end
 
@@ -155,7 +175,11 @@ class Listing < ActiveRecord::Base
   # sets the time to midnight
   def set_valid_until_time
     if valid_until
-      self.valid_until = valid_until.utc + (23-valid_until.hour).hours + (59-valid_until.min).minutes + (59-valid_until.sec).seconds
+      # if self.events.end_at
+      #   self.valid_until = self.events.end_at
+      # else
+        self.valid_until = valid_until.utc + (23-valid_until.hour).hours + (59-valid_until.min).minutes + (59-valid_until.sec).seconds
+      # end
     end
   end
 

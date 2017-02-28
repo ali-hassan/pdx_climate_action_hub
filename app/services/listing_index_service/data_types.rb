@@ -29,6 +29,7 @@ module ListingIndexService::DataTypes
     [:fields, :array, default: []],
     [:author_id, :string],
     [:include_closed, :to_bool, default: false],
+    [:upcoming_events, :to_bool, default: false],
     [:locale, :symbol, :optional]
   )
 
@@ -40,6 +41,12 @@ module ListingIndexService::DataTypes
     [:thumb, :string],
     [:small_3x2, :string],
     [:medium, :string],
+  )
+
+  Event = EntityUtils.define_builder(
+    [:id, :fixnum, :mandatory],
+    [:start_at, :time, :mandatory],
+    [:end_at, :time, :mandatory],
   )
 
   Author = EntityUtils.define_builder(
@@ -63,6 +70,7 @@ module ListingIndexService::DataTypes
     [:category_id, :fixnum, :mandatory],
     [:author, entity: Author],
     [:listing_images, collection: ListingImage],
+    [:event, entity: Event],
     [:updated_at, :time, :mandatory, str_to_time: "%Y-%m-%dT%H:%M:%S.%L%z"], # 2014-12-08T20:51:29.000+0200
     [:created_at, :time, :mandatory, str_to_time: "%Y-%m-%dT%H:%M:%S.%L%z"],
     [:latitude],

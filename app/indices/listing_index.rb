@@ -15,6 +15,7 @@ if APP_CONFIG.use_thinking_sphinx_indexing.to_s.casecmp("true") == 0
     indexes description
     indexes custom_field_values(:text_value), :as => :custom_text_fields
     indexes origin_loc.google_address
+    indexes event.start_at, :sortable => true#, :as => events_start_at
 
     # attributes
     has id, :as => :listing_id # id didn't work without :as aliasing
@@ -24,6 +25,9 @@ if APP_CONFIG.use_thinking_sphinx_indexing.to_s.casecmp("true") == 0
     has category(:id), :as => :category_id
     has listing_shape_id
     has community_id
+    has event.id, :as => :event_id#, :multi => true
+    has event.start_at, :as => :event_starts_at#, :multi => false #:type => :timestamp,
+    has event.end_at, :as => :event_ends_at#, :multi => false #:type => :timestamp,
     has custom_dropdown_field_values.selected_options.id, :as => :custom_dropdown_field_options, :type => :integer, :multi => true
     has custom_checkbox_field_values.selected_options.id, :as => :custom_checkbox_field_options, :type => :integer, :multi => true
 

@@ -18,7 +18,8 @@ module ListingIndexViewUtils
     :quantity,
     :shape_name_tr_key,
     :listing_shape_id,
-    :icon_name)
+    :icon_name,
+    :event)
 
   Author = Struct.new(
     :id,
@@ -32,6 +33,10 @@ module ListingIndexViewUtils
   ListingImage = Struct.new(
     :thumb,
     :small_3x2)
+
+  Event = Struct.new(
+    :start_at,
+    :end_at)
 
   module_function
 
@@ -61,6 +66,16 @@ module ListingIndexViewUtils
           []
         end
 
+      event =
+		    if includes.include?(:event) && !l[:event].nil?
+	        Event.new(
+            l[:event][:start_at],
+            l[:event][:end_at]
+          )
+        else
+          nil
+        end
+
       ListingItem.new(
         l[:id],
         l[:url],
@@ -79,7 +94,8 @@ module ListingIndexViewUtils
         l[:quantity],
         l[:shape_name_tr_key],
         l[:listing_shape_id],
-        l[:icon_name]
+        l[:icon_name],
+        event
       )
     }
 

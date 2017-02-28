@@ -1,0 +1,5 @@
+.nested-fields.well.well-compact
+  .form-inline
+    = f.input :start_at, {:start_year => Time.now.year, :end_year => Time.now.year + 3, :order => [:month, :day, :year], :default => 1.hours.from_now.beginning_of_hour, :ampm => true, :minute_step => 15 }
+    = f.input :end_at, {:start_year => Time.now.year, :end_year => Time.now.year + 3, :order => [:month, :day, :year], :default => 3.hours.from_now.beginning_of_hour, :ampm => true, :minute_step => 15}
+    = link_to_remove_association 'Remove Date/Time', f, data: { enable_form_element: 'add_event' }

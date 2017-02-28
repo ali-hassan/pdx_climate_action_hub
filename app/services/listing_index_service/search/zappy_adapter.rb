@@ -6,7 +6,8 @@ module ListingIndexService::Search
       listing_images: :listing_images,
       author: :author,
       num_of_reviews: {author: :received_testimonials},
-      location: :location
+      location: :location,
+      event: :event
     }
 
     API_KEY = APP_CONFIG.external_search_apikey
