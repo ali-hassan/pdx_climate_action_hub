@@ -29,8 +29,10 @@ class Event < ActiveRecord::Base
   private
 
   def set_listing_delta_flag
-    listing.delta = true
-    listing.save
+    if listing.delta != true
+      listing.delta = true
+      listing.save
+    end
   end
 
   scope :current, lambda{ where(['end_at > ?', Time.now]) }
