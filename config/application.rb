@@ -75,6 +75,7 @@ module Kassi
       'app-bundle.css',
       'app-bundle.js',
       'vendor-bundle.js',
+      'cocoon.js',
     ]
 
     # Read the config from the config.yml
