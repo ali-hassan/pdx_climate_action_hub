@@ -5,10 +5,10 @@ ICON_MAP = {
       # Default UI icons
       "map" => "ss-maplocation",
       "thumbnails" => "ss-thumbnails",
-      "grid" => "ss-thumbnails",
+      "grid" => "ss-binoculars",
       "new_listing" => "ss-addfile",
       "search"  => "ss-search",
-      "list" => "ss-list",
+      "list" => "ss-calendar",
       "home" => "ss-home",
       "community" =>"ss-usergroup",
       "help" => "ss-help",
