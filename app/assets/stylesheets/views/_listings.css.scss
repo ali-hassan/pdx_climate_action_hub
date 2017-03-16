@@ -7,6 +7,13 @@
   word-wrap: break-word;
 }
 
+// wish I knew how to put this into ../events.css.scss
+form#new_listing.simple_form.new_listing {
+    div + strong {
+       display: none;
+    }
+}
+
 .listing-description-youtube-wrapper {
   width: 100%;
   padding-bottom: 56.25%; /* 16:9 */
