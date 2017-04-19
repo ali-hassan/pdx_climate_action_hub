@@ -26,7 +26,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
     if search[:upcoming_events]
       query = query.with_events
     end
-      query = query.with_events
+
     listings =
       if search[:include_closed]
         query

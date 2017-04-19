@@ -162,9 +162,9 @@ class Listing < ActiveRecord::Base
     when "all"
       where([])
     when "open"
-      includes(:event).where(["open = '1' AND (((valid_until IS NULL OR valid_until > ?) AND events.end_at IS NULL) OR events.end_at > ?)", DateTime.now, DateTime.now])
+      includes(:event).where(["open = '1' AND (((valid_until IS NULL OR valid_until > ?) AND events.end_at IS NULL) OR events.end_at > ?)", DateTime.now, DateTime.now]).references(:event)
     when "closed"
-      includes(:event).where(["open = '0' OR (valid_until IS NOT NULL AND valid_until < ?) OR (events.end_at IS NOT NULL AND events.end_at < ?)", DateTime.now, DateTime.now])
+      includes(:event).where(["open = '0' OR (valid_until IS NOT NULL AND valid_until < ?) OR (events.end_at IS NOT NULL AND events.end_at < ?)", DateTime.now, DateTime.now]).references(:event)
     end
   end
 
