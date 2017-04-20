@@ -27,19 +27,33 @@ development:
   # Add local `development` environment configuration overrides here
   icon_pack: "ss-pika"
   map_listings_limit: 2000
+  grid_listings_limit: 2000
 
 test:
   # Add local `test` environment configuration overrides here
   icon_pack: "ss-pika"
   map_listings_limit: 2000
+  grid_listings_limit: 2000
 
 staging:
   icon_pack: "ss-pika"
-  secret_key_base: "fd1af50b59b5e27776941b3205f92aca0f704c2252225cf93e3d97ae53f4774d25736cbdb19c1580839a2f68e15009209227e966003f53932c1bcc5d65616948"
+  secret_key_base: "23c7f316df221813a9ef14d4b939a49373f2f047816b8bbc61002bcf54b55462bea392fd99b4ca31e7b24211f7dbea1248b6c86b8f16ca774c46c53babb9e20b"
+  #secret_key_base: "fd1af50b59b5e27776941b3205f92aca0f704c2252225cf93e3d97ae53f4774d25736cbdb19c1580839a2f68e15009209227e966003f53932c1bcc5d65616948"
   map_listings_limit: 2000
+  grid_listings_limit: 2000
+
+  # Paypal credentials for the platform owner.
+  paypal_username: rick_api1.shareoregon.com
+  paypal_password: FFGSPRBP2TZ93NMV
+  paypal_signature: AmIF145e7vHbOWNGrVojetXUqpKmAcKjnf6Z0KrO9TNfHcjCiGV7UHnN
+  paypal_app_id: APP-7HC06763Y29525230
+  paypal_partner_id: Z96DECJ5VYNW4 # payerID for paypal platform owner account
+  # Paypal environment to use. Either :sandbox or :live
+  paypal_endpoint: live
 
 production:
   icon_pack: "ss-pika"
+  secret_key_base: "23c7f316df221813a9ef14d4b939a49373f2f047816b8bbc61002bcf54b55462bea392fd99b4ca31e7b24211f7dbea1248b6c86b8f16ca774c46c53babb9e20b"
   # Paypal credentials for the platform owner.
   #paypal_username: rick_api1.shareoregon.com
   #paypal_password: FFGSPRBP2TZ93NMV
@@ -49,3 +63,4 @@ production:
   ## Paypal environment to use. Either :sandbox or :live
   #paypal_endpoint: live
   map_listings_limit: 2000
+  grid_listings_limit: 2000
