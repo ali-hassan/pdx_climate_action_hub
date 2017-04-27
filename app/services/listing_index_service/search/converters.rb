@@ -20,6 +20,7 @@ module ListingIndexService::Search::Converters
       .merge(location_hash(l, includes))
       .merge(author_hash(l, includes))
       .merge(listing_images_hash(l, includes))
+      .merge(event_hash(l, includes))
   end
 
   def location_hash(l, includes)
@@ -57,6 +58,20 @@ module ListingIndexService::Search::Converters
   def num_of_reviews_hash(l, includes)
     if includes.include?(:num_of_reviews)
       {num_of_reviews: l.author.received_testimonials.size}
+    else
+      {}
+    end
+
+  end
+
+  def event_hash(l, includes)
+    if includes.include?(:event)
+      {event: {
+         id: l.event.id,
+         start_at: l.event.start_at,
+         end_at: l.event.end_at
+       }
+      }
     else
       {}
     end
