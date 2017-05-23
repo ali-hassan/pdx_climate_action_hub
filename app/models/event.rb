@@ -2,12 +2,14 @@
 #
 # Table name: events
 #
-#  id         :integer          not null, primary key
-#  start_at   :datetime
-#  end_at     :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  listing_id :integer
+#  id            :integer          not null, primary key
+#  start_at      :datetime
+#  end_at        :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  listing_id    :integer
+#  start_at_time :time
+#  end_at_time   :time
 #
 # Indexes
 #
@@ -15,7 +17,8 @@
 #
 
 class Event < ActiveRecord::Base
-  attr_accessible :start_at, :end_at
+  attr_accessible :start_at, :end_at, :start_at_time, :end_at_time
+  attr_accessor :repeats, :repeats_every, :repeat_day
   belongs_to :listing
 
   validates :start_at, presence: true

@@ -6,12 +6,12 @@
   = render partial: "listings/form/shipping", locals: { f: f, shape: shape, always_show_additional_shipping_price: always_show_additional_shipping_price, shipping_enabled: shipping_enabled, pickup_enabled: pickup_enabled, shipping_price: shipping_price, shipping_price_additional: shipping_price_additional }
   = render :partial => "listings/form/description", :locals => { :f => f }
   #event
-  = f.simple_fields_for :event do |event|
-    = render 'event_fields', :f => event
-  - if !has_event?(@listing)
-    .links
-      %strong
-        = link_to_add_association 'Event? Add Date/Time', f, :event, :force_non_association_create => true, :disable_with => "", :id => 'add_event'
+    = f.simple_fields_for :event do |event|
+      = render 'event_fields', :f => event
+    - if !has_event?(@listing)
+      .links
+        %strong
+          = link_to_add_association 'Event? Add Date/Time', f, :event, :force_non_association_create => true, :disable_with => "", :id => 'add_event'
   = render :partial => "listings/form/custom_fields", :locals => { :f => f, :listing => @listing, :custom_fields => @custom_field_questions }
   = render :partial => "listings/form/valid_until", :locals => { :f => f }
   = render :partial => "listings/form/origin", :locals => { :f => f, :origin_loc => @listing.origin_loc }
@@ -20,3 +20,13 @@
   = render :partial => "listings/form/send_button", :locals => { :f => f }
 
 = render :partial => "listings/help_texts", :collection => ["help_valid_until"], :as => :field
+
+
+:css
+  #repeat-event-lightbox{
+   padding: 50px;
+   background: #FFF;
+   display: none;
+   width: 500px;
+   height: 500px;
+  }

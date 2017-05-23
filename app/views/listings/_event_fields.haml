@@ -1,5 +1,48 @@
+// FAZER ELEMENTOS DO FORM
+// VERIFICAR COMO PEGAR NO SERVER SIDE
+// https://github.com/seejohnrun/ice_cube E VER COMO SALVAR NO SERVER
+// PROVAVELMENTE VAI GERAR UM YML E SALVAR EM UM CAMPO
+
 .nested-fields.well.well-compact
   .form-inline
-    = f.input :start_at, {:start_year => Time.now.year, :end_year => Time.now.year + 3, :order => [:month, :day, :year], :default => 1.hours.from_now.beginning_of_hour, :ampm => true, :minute_step => 15 }
-    = f.input :end_at, {:start_year => Time.now.year, :end_year => Time.now.year + 3, :order => [:month, :day, :year], :default => 3.hours.from_now.beginning_of_hour, :ampm => true, :minute_step => 15}
+    = f.text_field :start_at, class: "datepicker"
+    = f.text_field :start_at_time, class: "timepicker"
+
+  %br
+  %br
+  .form-inline
+    = f.text_field :end_at, class: "datepicker"
+    = f.text_field :end_at_time, class: "timepicker"
+
+    #repeat-event-lightbox
+      %h3
+        Repeat
+      %label
+        Repeats: 
+      = f.select :repeats, options_for_select(["Weekly"])
+      %label
+        Repeat every:
+      = f.select :repeats_every, options_for_select(1..30)
+      %br
+
+      - Date::DAYNAMES.each do |day|
+        .div{style: "float:left;width: 50px;"}
+          %label
+            = day[0]
+          = f.check_box :repeat_day, {}, day
+      %br{clear: "all"}
+
+      %label
+        Ends:
+      = button_tag
+
     = link_to_remove_association 'Remove Date/Time', f, data: { enable_form_element: 'add_event' }
+
+:css
+  #repeat-event-lightbox{
+   padding: 50px;
+   background: #FFF;
+   display: none;
+   width: 500px;
+   height: 500px;
+  }

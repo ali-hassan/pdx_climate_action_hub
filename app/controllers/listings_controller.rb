@@ -277,6 +277,13 @@ class ListingsController < ApplicationController
   end
 
   def create
+    p "****************************************************"
+    p "****************************************************"
+    p "************** CREATE LISTING *************"
+    p "****************************************************"
+    p "****************************************************"
+
+    p "****************** #{params} ***********************"
     params[:listing].delete("origin_loc_attributes") if params[:listing][:origin_loc_attributes][:address].blank?
 
     shape = get_shape(Maybe(params)[:listing][:listing_shape_id].to_i.or_else(nil))
