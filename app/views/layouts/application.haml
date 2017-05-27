@@ -1,3 +1,5 @@
+/ ADICIONAR UM ELEMENTO VISIBLE HIDDEN, COPIANDO O HTML DO 
+
 = render :partial => 'layouts/head'
 
 %body
@@ -107,7 +109,6 @@
         window.FastClick.attach(document.body, { excludeNode: '^pac-'} );
       }
 
-
     });
 
   -# Disable animations on tests
@@ -138,6 +139,15 @@
         $(".close_event").click(function(){
           $("#repeat-event-lightbox").trigger("close");
         });
+      });
+
+      $('body').on('submit',"#new_listing", function(){
+        var days_selected = $.map($('input[name="frm_repeats_day[]"]:checked'), function(c){return c.value; })
+
+        $("#repeats_every").val($("#repeat-event-lightbox #frm_repeats_every").val());
+        $("#repeats_type").val($("#repeat-event-lightbox #frm_repeats_type").val());
+        $("#repeats_day").val(days_selected);
+
       });
 
     });

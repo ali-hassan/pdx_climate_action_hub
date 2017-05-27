@@ -1,42 +1,48 @@
-// FAZER ELEMENTOS DO FORM
-// VERIFICAR COMO PEGAR NO SERVER SIDE
-// https://github.com/seejohnrun/ice_cube E VER COMO SALVAR NO SERVER
-// PROVAVELMENTE VAI GERAR UM YML E SALVAR EM UM CAMPO
+.nested-fields.well.well-compact.row
 
-.nested-fields.well.well-compact
-  .form-inline
-    = f.text_field :start_at, class: "datepicker"
-    = f.text_field :start_at_time, class: "timepicker"
+  .col-3.event_datetime
+    = f.text_field :start_at, class: "datepicker", placeholder: "starts at"
+  .col-2.event_datetime
+    = f.text_field :start_at_time, class: "timepicker", placeholder: "time"
+  .col-1
+    to
+  .col-2.event_datetime
+    = f.text_field :end_at_time, class: "timepicker", placeholder: "time"
+  .col-3.event_datetime  
+    = f.text_field :end_at, class: "datepicker", placeholder: "ends at"
+  %br{clear: "all"}
 
+  = check_box_tag "repeat"
+
+  %label.repeats
+    Repeats
+  
+#repeat-event-lightbox
+  %h3
+    Repeat
+  %label
+    Repeats: 
+  = select_tag :frm_repeats_type, options_for_select(["Weekly"])
+  %label
+    Repeat every:
+  = select_tag :frm_repeats_every, options_for_select(1..30)
   %br
-  %br
-  .form-inline
-    = f.text_field :end_at, class: "datepicker"
-    = f.text_field :end_at_time, class: "timepicker"
 
-    #repeat-event-lightbox
-      %h3
-        Repeat
+  - Date::DAYNAMES.each_with_index do |day, index|
+    .div{style: "float:left;width: 50px;"}
       %label
-        Repeats: 
-      = f.select :repeats, options_for_select(["Weekly"])
-      %label
-        Repeat every:
-      = f.select :repeats_every, options_for_select(1..30)
-      %br
+        = day[0]
+      = check_box_tag "frm_repeats_day[]", index + 1, :id => "frm_repeats_day_#{index + 1}"
+  %br{clear: "all"}
 
-      - Date::DAYNAMES.each do |day|
-        .div{style: "float:left;width: 50px;"}
-          %label
-            = day[0]
-          = f.check_box :repeat_day, {}, day
-      %br{clear: "all"}
+  %label
+    Ends:
+  = button_tag "Done", class: "close_event"
+  = link_to_remove_association 'Remove Date/Time', f, data: { enable_form_element: 'add_event' }
 
-      %label
-        Ends:
-      = button_tag
-
-    = link_to_remove_association 'Remove Date/Time', f, data: { enable_form_element: 'add_event' }
+= hidden_field_tag :repeats_type
+= hidden_field_tag :repeats_every
+= hidden_field_tag :repeats_day
 
 :css
   #repeat-event-lightbox{
@@ -45,4 +51,13 @@
    display: none;
    width: 500px;
    height: 500px;
+  }
+  .event_datetime{
+    font-size: 12px;
+  }
+  .event_datetime .timepicker{
+    padding-right: 0 !important;
+  }
+  label.repeats{
+    display:inline;
   }

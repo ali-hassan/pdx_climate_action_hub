@@ -2,14 +2,15 @@
 #
 # Table name: events
 #
-#  id            :integer          not null, primary key
-#  start_at      :datetime
-#  end_at        :datetime
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  listing_id    :integer
-#  start_at_time :time
-#  end_at_time   :time
+#  id              :integer          not null, primary key
+#  start_at        :datetime
+#  end_at          :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  listing_id      :integer
+#  start_at_time   :time
+#  end_at_time     :time
+#  event_rule_hash :text(65535)
 #
 # Indexes
 #
@@ -17,11 +18,12 @@
 #
 
 class Event < ActiveRecord::Base
-  attr_accessible :start_at, :end_at, :start_at_time, :end_at_time
-  attr_accessor :repeats, :repeats_every, :repeat_day
+  attr_accessible :start_at, :end_at, :start_at_time, :end_at_time, :event_rule_hash
   belongs_to :listing
 
   validates :start_at, presence: true
+  #validates :end_at, presence: true
+  
   #validates_date :end_at, on_or_after: :start_at
 
   default_scope {order('start_at DESC')}
@@ -40,5 +42,4 @@ class Event < ActiveRecord::Base
 
   scope :current, lambda{ where(['end_at > ?', Time.now]) }
 
-#  validates :end_at, presence: true, date: => { :after_or_equal_to => :start_at}
 end

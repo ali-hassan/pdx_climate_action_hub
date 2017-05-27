@@ -609,6 +609,7 @@ CREATE TABLE `events` (
   `listing_id` int(11) DEFAULT NULL,
   `start_at_time` time DEFAULT NULL,
   `end_at_time` time DEFAULT NULL,
+  `event_rule_hash` text,
   PRIMARY KEY (`id`),
   KEY `index_listing_id` (`listing_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1643,7 +1644,7 @@ CREATE TABLE `transactions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-23 16:38:01
+-- Dump completed on 2017-05-26 17:16:04
 INSERT INTO schema_migrations (version) VALUES ('20080806070738');
 
 INSERT INTO schema_migrations (version) VALUES ('20080807071903');
@@ -3249,4 +3250,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170518221458');
 INSERT INTO schema_migrations (version) VALUES ('20170523193003');
 
 INSERT INTO schema_migrations (version) VALUES ('20170523193216');
+
+INSERT INTO schema_migrations (version) VALUES ('20170526200811');
 

@@ -1,3 +1,7 @@
+# DAR UMA OLHADA NO RECURRING SELECT
+# https://github.com/GetJobber/recurring_select
+# SALVAR NO BANCO O YML
+
 # rubocop:disable ClassLength
 class ListingsController < ApplicationController
   class ListingDeleted < StandardError; end
@@ -277,13 +281,6 @@ class ListingsController < ApplicationController
   end
 
   def create
-    p "****************************************************"
-    p "****************************************************"
-    p "************** CREATE LISTING *************"
-    p "****************************************************"
-    p "****************************************************"
-
-    p "****************** #{params} ***********************"
     params[:listing].delete("origin_loc_attributes") if params[:listing][:origin_loc_attributes][:address].blank?
 
     shape = get_shape(Maybe(params)[:listing][:listing_shape_id].to_i.or_else(nil))
@@ -300,11 +297,12 @@ class ListingsController < ApplicationController
         return redirect_to new_listing_path
       end
     end
-
+    @params = params
     create_listing(shape, listing_uuid)
   end
 
   def create_listing(shape, listing_uuid)
+    p "********** CREATE LISTING METHOD ***********"
     listing_params = ListingFormViewUtils.filter(params[:listing], shape)
     listing_unit = Maybe(params)[:listing][:unit].map { |u| ListingViewUtils::Unit.deserialize(u) }.or_else(nil)
     listing_params = ListingFormViewUtils.filter_additional_shipping(listing_params, listing_unit)
@@ -347,6 +345,7 @@ class ListingsController < ApplicationController
       @listing.author = @current_user
 
       if @listing.save
+        create_repeat_rule
         upsert_field_values!(@listing, params[:custom_fields])
 
         listing_image_ids =
@@ -380,11 +379,17 @@ class ListingsController < ApplicationController
 
         redirect_to @listing, status: 303 and return
       else
+        p "**************************************************************"
+        p "**************************************************************"
+        p "****************** ERROR ON CREATION *************************"
+        p "******************* *******************************************"
+        p "**************************************************************"
+
         logger.error("Errors in creating listing: #{@listing.errors.full_messages.inspect}")
-        flash[:error] = t(
-          "layouts.notifications.listing_could_not_be_saved",
-          :contact_admin_link => view_context.link_to(t("layouts.notifications.contact_admin_link_text"), new_user_feedback_path, :class => "flash-error-link")
-        ).html_safe
+        # flash[:error] = t(
+        #   "layouts.notifications.listing_could_not_be_saved",
+        #   :contact_admin_link => view_context.link_to(t("layouts.notifications.contact_admin_link_text"), new_user_feedback_path, :class => "flash-error-link")
+        # ).html_safe
         redirect_to new_listing_path and return
       end
     end
@@ -567,6 +572,18 @@ class ListingsController < ApplicationController
   end
 
   private
+
+  def create_repeat_rule
+
+    schedule = IceCube::Schedule.new
+
+    if @params[:repeats_type] == "Weekly"
+      schedule.add_recurrence_rule IceCube::Rule.weekly(params[:repeats_every].to_i).day(params[:repeats_day].to_i)
+    end
+    hash = schedule.to_hash
+
+    @listing.event.update_attributes(event_rule_hash: hash)
+  end
 
   def create_bookable(community_uuid, listing_uuid, author_uuid, auth_context)
     res = HarmonyClient.post(
