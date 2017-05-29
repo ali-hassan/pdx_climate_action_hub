@@ -144,11 +144,38 @@
       $('body').on('submit',"#new_listing", function(){
         var days_selected = $.map($('input[name="frm_repeats_day[]"]:checked'), function(c){return c.value; })
 
+        var repeat_monthly_type = $('input[name=repeat_monthly_type]:checked').val();
+
         $("#repeats_every").val($("#repeat-event-lightbox #frm_repeats_every").val());
         $("#repeats_type").val($("#repeat-event-lightbox #frm_repeats_type").val());
         $("#repeats_day").val(days_selected);
+        $("#repeat_monthly_type").val(repeat_monthly_type);
 
       });
+
+      $('body').on('change',"#frm_repeats_type", function(){
+        var rType = $(this).val();
+
+        if(rType == "Monthly"){
+          $(".repeat_every_text").text("months");
+          $(".repeat_weekly").hide();
+          $(".repeat_monthly").show();
+        }
+
+        if(rType == "Weekly"){
+          $(".repeat_every_text").text("weeks");
+          $(".repeat_weekly").show();
+          $(".repeat_monthly").hide();
+        }
+
+        if(rType == "Annually"){
+          $(".repeat_every_text").text("years");
+          $(".repeat_weekly").hide();
+          $(".repeat_monthly").hide();
+        }
+
+      });
+
 
     });
 

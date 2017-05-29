@@ -1,3 +1,9 @@
+// - VERIFICAR A REGRA DO MONTHLY - SEMPRE NO 1 OU ULTIMO DIA DA SEMANA DO MES, DE ACORDO COM O DIA ATUAL
+// - VERIFICAR A DATA DE COMEÇO E VER QUAL DIA DA SEMANA É, E CRIAR A REGRA
+// - FAZER O ANUAL
+// - AJUSTAR O CLIENT
+// - VERIFICAR O OUTPUT
+
 .nested-fields.well.well-compact.row
 
   .col-3.event_datetime
@@ -15,25 +21,36 @@
   = check_box_tag "repeat"
 
   %label.repeats
-    Repeats
+    Repeat
   
 #repeat-event-lightbox
   %h3
-    Repeat
+    Repeatition
   %label
     Repeats: 
-  = select_tag :frm_repeats_type, options_for_select(["Weekly"])
+  = select_tag :frm_repeats_type, options_for_select(["Weekly", "Monthly", "Annually"])
   %label
     Repeat every:
-  = select_tag :frm_repeats_every, options_for_select(1..30)
+  = select_tag :frm_repeats_every, options_for_select(1..30) 
+  %span.repeat_every_text
+    weeks
   %br
 
-  - Date::DAYNAMES.each_with_index do |day, index|
-    .div{style: "float:left;width: 50px;"}
-      %label
-        = day[0]
-      = check_box_tag "frm_repeats_day[]", index + 1, :id => "frm_repeats_day_#{index + 1}"
-  %br{clear: "all"}
+  .repeat_weekly
+    - Date::DAYNAMES.each_with_index do |day, index|
+      .div{style: "float:left;width: 50px;"}
+        %label
+          = day[0]
+        = check_box_tag "frm_repeats_day[]", index, :id => "frm_repeats_day_#{index}"
+    %br{clear: "all"}
+
+  .repeat_monthly
+    %label
+      Repeat:
+    = radio_button_tag "repeat_monthly_type", "day_of_month"
+    day of the month
+    = radio_button_tag "repeat_monthly_type", "day_of_week"
+    day of the week
 
   %label
     Ends:
@@ -43,6 +60,7 @@
 = hidden_field_tag :repeats_type
 = hidden_field_tag :repeats_every
 = hidden_field_tag :repeats_day
+= hidden_field_tag :repeat_monthly_type
 
 :css
   #repeat-event-lightbox{
@@ -60,4 +78,8 @@
   }
   label.repeats{
     display:inline;
+  }
+
+  .repeat_monthly{
+    display:none;
   }

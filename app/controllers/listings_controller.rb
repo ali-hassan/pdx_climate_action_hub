@@ -1,6 +1,3 @@
-# DAR UMA OLHADA NO RECURRING SELECT
-# https://github.com/GetJobber/recurring_select
-# SALVAR NO BANCO O YML
 
 # rubocop:disable ClassLength
 class ListingsController < ApplicationController
@@ -575,11 +572,31 @@ class ListingsController < ApplicationController
 
   def create_repeat_rule
 
+    p "****** CREATE REPEAT RULE ****** PARAMS  #{@params} ********"
+
     schedule = IceCube::Schedule.new
+    repeats_every_counter = params[:repeats_every].to_i
 
     if @params[:repeats_type] == "Weekly"
-      schedule.add_recurrence_rule IceCube::Rule.weekly(params[:repeats_every].to_i).day(params[:repeats_day].to_i)
+      repeats_day = params[:repeats_day].split(",")
+      int_array = repeats_day.map(&:to_i)
+
+      schedule.add_recurrence_rule IceCube::Rule.weekly(repeats_every_counter).day(*int_array)
     end
+
+    if @params[:repeats_type] == "Monthly"
+
+      if @params[:repeat_monthly_type] == "day_of_month"
+        schedule.add_recurrence_rule IceCube::Rule.monthly(repeats_every_counter).day_of_month(15)
+      else
+        schedule.add_recurrence_rule IceCube::Rule.monthly(repeats_every_counter).day_of_week(1)
+      end
+    end
+    
+    if @params[:repeats_type] == "Annually"
+
+    end
+
     hash = schedule.to_hash
 
     @listing.event.update_attributes(event_rule_hash: hash)
