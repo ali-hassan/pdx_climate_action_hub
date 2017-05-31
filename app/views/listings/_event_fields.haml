@@ -1,9 +1,3 @@
-// - VERIFICAR A REGRA DO MONTHLY - SEMPRE NO 1 OU ULTIMO DIA DA SEMANA DO MES, DE ACORDO COM O DIA ATUAL
-// - VERIFICAR A DATA DE COMEÇO E VER QUAL DIA DA SEMANA É, E CRIAR A REGRA
-// - FAZER O ANUAL
-// - AJUSTAR O CLIENT
-// - VERIFICAR O OUTPUT
-
 .nested-fields.well.well-compact.row
 
   .col-3.event_datetime
@@ -19,10 +13,13 @@
   %br{clear: "all"}
 
   = check_box_tag "repeat"
+  
 
   %label.repeats
     Repeat
-  
+  %br{clear: "all"}
+
+  = link_to_remove_association 'Remove Date/Time', f, data: { enable_form_element: 'add_event' }
 #repeat-event-lightbox
   %h3
     Repeatition
@@ -41,7 +38,7 @@
       .div{style: "float:left;width: 50px;"}
         %label
           = day[0]
-        = check_box_tag "frm_repeats_day[]", index, :id => "frm_repeats_day_#{index}"
+        = check_box_tag "frm_repeats_day[]", index
     %br{clear: "all"}
 
   .repeat_monthly
@@ -53,14 +50,32 @@
     day of the week
 
   %label
+    Starts:
+  = text_field_tag "starts_at_repeat", "", disabled: true
+  %label
     Ends:
+
+  = radio_button_tag "frm_ends_at_repeat", "never"
+  Never
+  %br
+  = radio_button_tag "frm_ends_at_repeat", "after"
+  After 
+  = text_field_tag "frm_ends_at_ocurrences"
+  ocurrences
+  %br
+  = radio_button_tag "frm_ends_at_repeat", "end_date"
+  At
+  = text_field_tag "frm_ends_at_date"
+
   = button_tag "Done", class: "close_event"
-  = link_to_remove_association 'Remove Date/Time', f, data: { enable_form_element: 'add_event' }
 
 = hidden_field_tag :repeats_type
 = hidden_field_tag :repeats_every
 = hidden_field_tag :repeats_day
 = hidden_field_tag :repeat_monthly_type
+= hidden_field_tag :ends_at_repeat
+= hidden_field_tag :ends_at_ocurrences
+= hidden_field_tag :ends_at_date
 
 :css
   #repeat-event-lightbox{
@@ -68,8 +83,10 @@
    background: #FFF;
    display: none;
    width: 500px;
-   height: 500px;
+   height: 600px;
+   padding: 10px 20px;
   }
+
   .event_datetime{
     font-size: 12px;
   }
@@ -82,4 +99,13 @@
 
   .repeat_monthly{
     display:none;
+  }
+
+  #frm_ends_at_ocurrences, #frm_ends_at_date{
+    display:inline-block;
+    margin-top: 10px;
+    width: 50px;
+  }
+  #frm_ends_at_date, #starts_at_repeat{
+    width: 100px;
   }

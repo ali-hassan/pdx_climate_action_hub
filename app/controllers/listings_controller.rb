@@ -571,11 +571,13 @@ class ListingsController < ApplicationController
   private
 
   def create_repeat_rule
-
-    p "****** CREATE REPEAT RULE ****** PARAMS  #{@params} ********"
+    p "************ CREATE REPEAT RULE PARAMS ********** #{@params} ************"
+    
+    
+    repeats_every_counter = params[:repeats_every].to_i
+    start_at_date = @params[:listing][:event_attributes][:start_at].to_date
 
     schedule = IceCube::Schedule.new
-    repeats_every_counter = params[:repeats_every].to_i
 
     if @params[:repeats_type] == "Weekly"
       repeats_day = params[:repeats_day].split(",")
@@ -585,17 +587,29 @@ class ListingsController < ApplicationController
     end
 
     if @params[:repeats_type] == "Monthly"
-
       if @params[:repeat_monthly_type] == "day_of_month"
-        schedule.add_recurrence_rule IceCube::Rule.monthly(repeats_every_counter).day_of_month(15)
+        schedule.add_recurrence_rule IceCube::Rule.monthly(repeats_every_counter).day_of_month(start_at_date.day)
       else
-        schedule.add_recurrence_rule IceCube::Rule.monthly(repeats_every_counter).day_of_week(1)
+        week_day = start_at_date.cwday
+        week_number = start_at_date.week_of_month
+        schedule.add_recurrence_rule IceCube::Rule.monthly(repeats_every_counter).day_of_week(week_day => [week_number])
       end
     end
     
     if @params[:repeats_type] == "Annually"
-
+      schedule.add_recurrence_rule IceCube::Rule.yearly(repeats_every_counter)
     end
+
+    p "************* PARAMS START ******* #{@params[:listing][:event_attributes][:start_at]} ***********"
+    p "************* PARAMS START ******* #{@params[:listing][:event_attributes][:start_at].class} ***********"
+    p "************* PARAMS START ******* #{@params[:listing][:event_attributes][:start_at].to_date} ***********"
+    
+    p "************ PARAMS ENDS AT DATE ********** #{@params[:ends_at_date]} ******************"
+    p "************ PARAMS ENDS AT DATE ********** #{@params[:ends_at_date].class} ******************"
+    p "************ PARAMS ENDS AT DATE ********** #{@params[:ends_at_date].to_date} ******************"
+
+    schedule.duration = @params[:ends_at_ocurrences].to_i if @params[:ends_at_repeat] == "after"    
+    schedule.end_time = @params[:ends_at_date].to_date if @params[:ends_at_repeat] == "end_date"
 
     hash = schedule.to_hash
 

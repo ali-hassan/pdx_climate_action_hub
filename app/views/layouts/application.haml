@@ -1,5 +1,3 @@
-/ ADICIONAR UM ELEMENTO VISIBLE HIDDEN, COPIANDO O HTML DO 
-
 = render :partial => 'layouts/head'
 
 %body
@@ -136,6 +134,7 @@
 
       $('body').on('click',"#repeat", function(){
         $("#repeat-event-lightbox").lightbox_me({centered: true, zIndex: 1000000});
+        $("#starts_at_repeat").val($("#listing_event_attributes_start_at").val());
         $(".close_event").click(function(){
           $("#repeat-event-lightbox").trigger("close");
         });
@@ -143,13 +142,17 @@
 
       $('body').on('submit',"#new_listing", function(){
         var days_selected = $.map($('input[name="frm_repeats_day[]"]:checked'), function(c){return c.value; })
-
         var repeat_monthly_type = $('input[name=repeat_monthly_type]:checked').val();
+        var ends_at_repeat = $('input[name=frm_ends_at_repeat]:checked').val();
 
         $("#repeats_every").val($("#repeat-event-lightbox #frm_repeats_every").val());
         $("#repeats_type").val($("#repeat-event-lightbox #frm_repeats_type").val());
         $("#repeats_day").val(days_selected);
         $("#repeat_monthly_type").val(repeat_monthly_type);
+        
+        $("#ends_at_repeat").val(ends_at_repeat);
+        $("#ends_at_ocurrences").val($("#frm_ends_at_ocurrences").val());
+        $("#ends_at_date").val($("#frm_ends_at_date").val());
 
       });
 
@@ -173,9 +176,7 @@
           $(".repeat_weekly").hide();
           $(".repeat_monthly").hide();
         }
-
       });
-
 
     });
 
