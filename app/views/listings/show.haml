@@ -74,6 +74,13 @@
 
     .row
       .col-12
+        - if @listing.event
+          = icon_tag('calendar', ["icon-fix"])
+          - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
+            = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' - ' + @listing.event['end_at'].strftime('%I:%M%P')
+          - else
+            = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e @ %I:%M%P')      
+
         - if @listing.description && !@listing.description.blank?
           - text_with_line_breaks do
             = @listing.description
@@ -126,17 +133,8 @@
             = render :partial => "comment_form"
 
   %aside.col-4
-    .row-with-divider
-      .col-12
-        - if @listing.event
-          = icon_tag('calendar', ["icon-fix"])
-          - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
-            = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' - ' + @listing.event['end_at'].strftime('%I:%M%P')
-          - else
-            = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e @ %I:%M%P')
-
     - if @listing.price
-      .row
+      .row-with-divider
         .col-12
           .listing-price
             %span.listing-price-amount
