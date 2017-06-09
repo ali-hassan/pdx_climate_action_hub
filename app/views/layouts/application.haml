@@ -121,12 +121,18 @@
   :javascript
     $(document).ready(function() { initialize_defaults("#{I18n.locale}"); #{yield :javascript} });
     $(function(){
-      // USING BODY ON, BECAUSE ITS NOT LOADED ON THE DOM YET
+
       $('body').on('focus',".datepicker", function(){
+        
         if( $(this).hasClass('hasDatepicker') === false )  {
+          
           $(this).datepicker({
             format: 'yyyy-mm-dd'
+          }).on('changeDate', function(){
+            $("#listing_event_attributes_end_at").attr("placeholder", "");
+            $("#listing_event_attributes_end_at").val($(this).val());
           });
+
         }
       });
 
@@ -178,6 +184,10 @@
           $(".repeat_weekly").hide();
           $(".repeat_monthly").hide();
         }
+      });
+
+      $('body').on('click', '#add_event', function(){
+        $(this).hide();
       });
 
     });

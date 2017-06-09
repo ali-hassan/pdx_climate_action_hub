@@ -76,10 +76,21 @@
       .col-12
         - if @listing.event
           = icon_tag('calendar', ["icon-fix"])
-          - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
-            = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' - ' + @listing.event['end_at'].strftime('%I:%M%P')
+
+          - if @listing.event['start_at_time'].nil? or @listing.event['end_at_time'].nil?
+
+            - if @listing.event
+
+              - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
+                = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' - ' + @listing.event['end_at'].strftime('%I:%M%P')
+              - else
+                = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e @ %I:%M%P')
           - else
-            = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e @ %I:%M%P')      
+
+            - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
+              = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + "-" + @listing.event['end_at_time'].strftime('%I:%M%P')
+            - else
+              = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e') + ' - ' + @listing.event['end_at_time'].strftime('%I:%M%P')
 
         - if @listing.description && !@listing.description.blank?
           - text_with_line_breaks do
