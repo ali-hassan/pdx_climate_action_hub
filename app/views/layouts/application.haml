@@ -127,12 +127,10 @@
         if( $(this).hasClass('hasDatepicker') === false )  {
           
           $(this).datepicker({
-            format: 'yyyy-mm-dd'
           }).on('changeDate', function(){
             $("#listing_event_attributes_end_at").attr("placeholder", "");
             $("#listing_event_attributes_end_at").val($(this).val());
           });
-
         }
       });
 

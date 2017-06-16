@@ -299,7 +299,6 @@ class ListingsController < ApplicationController
   end
 
   def create_listing(shape, listing_uuid)
-    p "********** CREATE LISTING METHOD ***********"
     listing_params = ListingFormViewUtils.filter(params[:listing], shape)
     listing_unit = Maybe(params)[:listing][:unit].map { |u| ListingViewUtils::Unit.deserialize(u) }.or_else(nil)
     listing_params = ListingFormViewUtils.filter_additional_shipping(listing_params, listing_unit)
@@ -376,17 +375,13 @@ class ListingsController < ApplicationController
 
         redirect_to @listing, status: 303 and return
       else
-        p "**************************************************************"
-        p "**************************************************************"
-        p "****************** ERROR ON CREATION *************************"
-        p "******************* *******************************************"
-        p "**************************************************************"
 
         logger.error("Errors in creating listing: #{@listing.errors.full_messages.inspect}")
-        # flash[:error] = t(
-        #   "layouts.notifications.listing_could_not_be_saved",
-        #   :contact_admin_link => view_context.link_to(t("layouts.notifications.contact_admin_link_text"), new_user_feedback_path, :class => "flash-error-link")
-        # ).html_safe
+
+        flash[:error] = t(
+          "layouts.notifications.listing_could_not_be_saved",
+          :contact_admin_link => view_context.link_to(t("layouts.notifications.contact_admin_link_text"), new_user_feedback_path, :class => "flash-error-link")
+        ).html_safe
         redirect_to new_listing_path and return
       end
     end
@@ -573,9 +568,13 @@ class ListingsController < ApplicationController
   def create_repeat_rule
     p "************ CREATE REPEAT RULE PARAMS ********** #{@params} ************"
     
-    
     repeats_every_counter = params[:repeats_every].to_i
-    start_at_date = @params[:listing][:event_attributes][:start_at].to_date
+
+    start_at = @params[:listing][:event_attributes][:start_at]
+    ends_at = @params[:ends_at_date]
+
+    start_at_date = "#{start_at[3..4]}/#{start_at[0..1]}/#{start_at[6..9]}".to_date
+    ends_at_date = "#{ends_at[3..4]}/#{ends_at[0..1]}/#{ends_at[6..9]}"
 
     schedule = IceCube::Schedule.new
 
@@ -600,16 +599,9 @@ class ListingsController < ApplicationController
       schedule.add_recurrence_rule IceCube::Rule.yearly(repeats_every_counter)
     end
 
-    p "************* PARAMS START ******* #{@params[:listing][:event_attributes][:start_at]} ***********"
-    p "************* PARAMS START ******* #{@params[:listing][:event_attributes][:start_at].class} ***********"
-    p "************* PARAMS START ******* #{@params[:listing][:event_attributes][:start_at].to_date} ***********"
-    
-    p "************ PARAMS ENDS AT DATE ********** #{@params[:ends_at_date]} ******************"
-    p "************ PARAMS ENDS AT DATE ********** #{@params[:ends_at_date].class} ******************"
-    p "************ PARAMS ENDS AT DATE ********** #{@params[:ends_at_date].to_date} ******************"
 
     schedule.duration = @params[:ends_at_ocurrences].to_i if @params[:ends_at_repeat] == "after"    
-    schedule.end_time = @params[:ends_at_date].to_date if @params[:ends_at_repeat] == "end_date"
+    schedule.end_time = ends_at_date if @params[:ends_at_repeat] == "end_date"
 
     hash = schedule.to_hash
 

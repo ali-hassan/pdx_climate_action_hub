@@ -19,6 +19,7 @@
 
 class Event < ActiveRecord::Base
   attr_accessible :start_at, :end_at, :start_at_time, :end_at_time, :event_rule_hash
+
   belongs_to :listing
 
   validates :start_at, presence: true
@@ -31,6 +32,16 @@ class Event < ActiveRecord::Base
   after_save :set_listing_delta_flag
   after_destroy :set_listing_delta_flag
 
+  serialize :event_rule_hash, IceCube::Schedule
+
+  def start_at=(start_at)
+    write_attribute(:start_at, "#{start_at[3..4]}/#{start_at[0..1]}/#{start_at[6..9]}")
+  end
+
+  def end_at=(end_at)
+    write_attribute(:end_at, "#{end_at[3..4]}/#{end_at[0..1]}/#{end_at[6..9]}")
+  end
+
   private
 
   def set_listing_delta_flag
@@ -39,7 +50,7 @@ class Event < ActiveRecord::Base
       listing.save
     end
   end
-
+  
   scope :current, lambda{ where(['end_at > ?', Time.now]) }
 
 end

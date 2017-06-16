@@ -3,11 +3,11 @@
   .col-3.event_datetime
     = f.text_field :start_at, value: (f.object.start_at.nil? ? "" : f.object.start_at.strftime("%Y-%m-%d")), class: "datepicker", placeholder: "starts on"
   .col-2.event_datetime
-    = f.text_field :start_at_time, value: (f.object.start_at_time.nil? ? "" : f.object.start_at_time.strftime("%H:%M")), class: "timepicker", placeholder: "time"
+    = f.text_field :start_at_time, value: (f.object.start_at_time.nil? ? "" : f.object.start_at_time.strftime("%l:%M%P")), class: "timepicker", placeholder: "time"
   .col-1
     to
   .col-2.event_datetime
-    = f.text_field :end_at_time, value: (f.object.end_at_time.nil? ? "" : f.object.end_at_time.strftime("%H:%M")), class: "timepicker", placeholder: "time"
+    = f.text_field :end_at_time, value: (f.object.end_at_time.nil? ? "" : f.object.end_at_time.strftime("%l:%M%P")), class: "timepicker", placeholder: "time"
   .col-3.event_datetime  
     = f.text_field :end_at, value: (f.object.end_at.nil? ? "" : f.object.end_at.strftime("%Y-%m-%d")), class: "datepicker", placeholder: "ends on"
   %br{clear: "all"}
@@ -20,7 +20,7 @@
 
   = link_to_remove_association 'Remove Date/Time', f, data: { enable_form_element: 'add_event' }
 #repeat-event-lightbox
-  %h3
+  %h2
     Repeat
   %label
     Repeats: 
@@ -59,14 +59,15 @@
   = radio_button_tag "frm_ends_at_repeat", "never"
   Never
   %br
+  = radio_button_tag "frm_ends_at_repeat", "end_date"
+  On
+  = text_field_tag "frm_ends_at_date", "", class: "datepicker"
+  %br
   = radio_button_tag "frm_ends_at_repeat", "after"
   After 
   = text_field_tag "frm_ends_at_ocurrences"
   occurrences
-  %br
-  = radio_button_tag "frm_ends_at_repeat", "end_date"
-  On
-  = text_field_tag "frm_ends_at_date", "", class: "datepicker"
+
 
   = button_tag "Done", class: "close_event"
 
@@ -84,7 +85,7 @@
    background: #FFF;
    display: none;
    width: 500px;
-   height: 600px;
+   height: 442px;
    padding: 10px 20px;
   }
 
@@ -113,6 +114,28 @@
     margin-top: 10px;
     width: 50px;
   }
+
   #frm_ends_at_date, #starts_at_repeat{
     width: 100px;
+  }
+
+  .event_datetime input.datepicker{
+    width: 120px;
+  }
+
+  .event_datetime input.timepicker{
+    width: 65px;
+    font-size: 15px;
+  }
+
+  #event .col-3{
+    width: 28%;
+  }
+
+  #event .col-1{
+    padding: 15px 0 0 15px;
+  }
+
+  #event .datepicker{
+    font-size: 15px !important;
   }
