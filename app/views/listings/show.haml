@@ -71,7 +71,6 @@
                         = t("listings.show.processing_uploaded_image")
                       - else
                         = t(".no_description")
-
     .row
       .col-12
 
@@ -92,12 +91,6 @@
               = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + "-" + @listing.event['end_at_time'].strftime('%I:%M%P')
             - else
               = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e') + ' - ' + @listing.event['end_at_time'].strftime('%I:%M%P')
-
-          - if @listing.event.event_rule_hash.present?
-            %br
-            = @listing.event.event_rule_hash
-            //rule_hash = @listing.event.event_rule_hash.gsub(/[{}:]/,'').split(', ').map{|h| h1,h2 = h.split('=>'); {h1 => h2}}.reduce(:merge)
-            
 
 
         - if @listing.description && !@listing.description.blank?

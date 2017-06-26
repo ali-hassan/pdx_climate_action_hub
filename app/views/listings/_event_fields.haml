@@ -1,7 +1,7 @@
 .nested-fields.well.well-compact.row
   
   .col-3.event_datetime
-    = f.text_field :start_at, value: (f.object.start_at.nil? ? "" : f.object.start_at.strftime("%Y-%m-%d")), class: "datepicker", placeholder: "starts on"
+    = f.text_field :start_at, value: (f.object.start_at.nil? ? "" : f.object.start_at.strftime("%m/%d/%Y")), class: "datepicker", placeholder: "starts on"
   .col-2.event_datetime
     = f.text_field :start_at_time, value: (f.object.start_at_time.nil? ? "" : f.object.start_at_time.strftime("%l:%M%P")), class: "timepicker", placeholder: "time"
   .col-1
@@ -9,7 +9,7 @@
   .col-2.event_datetime
     = f.text_field :end_at_time, value: (f.object.end_at_time.nil? ? "" : f.object.end_at_time.strftime("%l:%M%P")), class: "timepicker", placeholder: "time"
   .col-3.event_datetime  
-    = f.text_field :end_at, value: (f.object.end_at.nil? ? "" : f.object.end_at.strftime("%Y-%m-%d")), class: "datepicker", placeholder: "ends on"
+    = f.text_field :end_at, value: (f.object.end_at.nil? ? "" : f.object.end_at.strftime("%m/%d/%Y")), class: "datepicker", placeholder: "ends on"
   %br{clear: "all"}
 
   = check_box_tag "repeat"
