@@ -55,19 +55,7 @@
   %br
   %label
     Ends:
-  %br
-  = radio_button_tag "frm_ends_at_repeat", "never"
-  Never
-  %br
-  = radio_button_tag "frm_ends_at_repeat", "end_date"
-  On
   = text_field_tag "frm_ends_at_date", "", class: "datepicker"
-  %br
-  = radio_button_tag "frm_ends_at_repeat", "after"
-  After 
-  = text_field_tag "frm_ends_at_ocurrences"
-  occurrences
-
 
   = button_tag "Done", class: "close_event"
 
@@ -85,7 +73,7 @@
    background: #FFF;
    display: none;
    width: 500px;
-   height: 442px;
+   height: 340px;
    padding: 10px 20px;
   }
 
