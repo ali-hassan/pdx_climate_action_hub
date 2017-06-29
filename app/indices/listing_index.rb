@@ -16,6 +16,7 @@ if APP_CONFIG.use_thinking_sphinx_indexing.to_s.casecmp("true") == 0
     indexes custom_field_values(:text_value), :as => :custom_text_fields
     indexes origin_loc.google_address
     indexes event.start_at, :sortable => true#, :as => events_start_at
+    indexes [author.username, author.given_name, author.family_name], :as => :author_search_name
 
     # attributes
     has id, :as => :listing_id # id didn't work without :as aliasing
