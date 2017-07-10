@@ -341,7 +341,9 @@ class ListingsController < ApplicationController
       @listing.author = @current_user
 
       if @listing.save
-        create_repeat_rule
+        
+        create_repeat_rule unless @params[:listing][:event_attributes].nil?
+
         upsert_field_values!(@listing, params[:custom_fields])
 
         listing_image_ids =

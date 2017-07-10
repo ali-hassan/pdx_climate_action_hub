@@ -882,7 +882,7 @@ CREATE TABLE `listings` (
   `pickup_enabled` tinyint(1) DEFAULT '0',
   `shipping_price_cents` int(11) DEFAULT NULL,
   `shipping_price_additional_cents` int(11) DEFAULT NULL,
-  `external_payment_link` varchar(256) DEFAULT NULL,
+  `external_payment_link` text,
   `availability` varchar(32) DEFAULT 'none',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
@@ -1644,7 +1644,7 @@ CREATE TABLE `transactions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-26 17:16:04
+-- Dump completed on 2017-07-06 16:46:40
 INSERT INTO schema_migrations (version) VALUES ('20080806070738');
 
 INSERT INTO schema_migrations (version) VALUES ('20080807071903');
@@ -3252,4 +3252,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170523193003');
 INSERT INTO schema_migrations (version) VALUES ('20170523193216');
 
 INSERT INTO schema_migrations (version) VALUES ('20170526200811');
+
+INSERT INTO schema_migrations (version) VALUES ('20170706193821');
 
