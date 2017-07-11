@@ -192,6 +192,7 @@ class ListingImage < ActiveRecord::Base
   end
 
   def set_position
+    p "SET POSITION *********** "
     self.position = ListingImage.where(listing_id: listing_id).maximum(:position).to_i + 1
   end
 end

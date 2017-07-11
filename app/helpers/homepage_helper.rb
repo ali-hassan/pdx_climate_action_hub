@@ -6,6 +6,15 @@ module HomepageHelper
   end
 
   def with_first_listing_image(listing, &block)
+    if listing.id == 125773
+       p "********* LISTNG IMAGE METHOD IMAGES ********** #{listing.listing_images}"
+
+      listing.listing_images.map do |image|
+        p "EACH IMAGE"
+        p image
+      end
+    end
+
     Maybe(listing)
       .listing_images
       .map { |images| images.first }[:small_3x2].each { |url|

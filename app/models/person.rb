@@ -425,7 +425,7 @@ class Person < ActiveRecord::Base
   end
 
   def is_marketplace_admin?
-    community_membership.admin?
+    #community_membership.admin?
   end
 
   def has_admin_rights?
