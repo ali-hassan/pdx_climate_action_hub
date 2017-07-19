@@ -33,7 +33,7 @@
 
   @include media(tablet) {
     &, &.filters-enabled {
-      float: right;
+      float: left;
       width: auto;
     }
   }
@@ -397,6 +397,11 @@ $home-list-avatar-padding: lines(0.25);
 
 .home-toolbar-toggle-container {
   margin-bottom: lines(0.5);
+}
+
+.home-toolbar-toggle-container.home_listing_shapes{
+  float:right;
+  display:block;
 }
 
 #pageless-loader {
