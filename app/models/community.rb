@@ -497,7 +497,7 @@ class Community < ActiveRecord::Base
 
     selected_listings = listings
       .currently_open
-      .where("updates_email_at > ? AND updates_email_at > created_at", latest)
+      .where("updates_email_at > ? AND updates_email_at > listings.created_at", latest)
       .order("updates_email_at DESC")
       .to_a
 
@@ -506,7 +506,7 @@ class Community < ActiveRecord::Base
       if additional_listings > 0
         listings
           .currently_open
-          .where("updates_email_at > ? AND updates_email_at = created_at", latest)
+          .where("updates_email_at > ? AND updates_email_at = listings.created_at", latest)
           .order("updates_email_at DESC")
           .limit(additional_listings)
           .to_a

@@ -106,6 +106,7 @@
       } else {
         window.FastClick.attach(document.body, { excludeNode: '^pac-'} );
       }
+
     });
 
   -# Disable animations on tests
@@ -119,8 +120,75 @@
 
   :javascript
     $(document).ready(function() { initialize_defaults("#{I18n.locale}"); #{yield :javascript} });
+    $(function(){
+
+      $('body').on('focus',".datepicker", function(){
+        
+        if( $(this).hasClass('hasDatepicker') === false )  {
+          
+          $(this).datepicker({
+          }).on('changeDate', function(){
+            $("#listing_event_attributes_end_at").attr("placeholder", "");
+            $("#listing_event_attributes_end_at").val($(this).val());
+          });
+        }
+      });
+
+      $('body').on('focus',".timepicker", function(){
+        $('.timepicker').timepicker({ 'scrollDefault': 'now' });
+      });
+
+      $('body').on('click',"#repeat", function(){
+        $("#repeat-event-lightbox").lightbox_me({centered: true, zIndex: 1000000});
+        $("#starts_at_repeat").val($("#listing_event_attributes_start_at").val());
+        $(".close_event").click(function(){
+          $("#repeat-event-lightbox").trigger("close");
+        });
+      });
+
+      $('body').on('submit',"#new_listing", function(){
+        var days_selected = $.map($('input[name="frm_repeats_day[]"]:checked'), function(c){return c.value; })
+        var repeat_monthly_type = $('input[name=repeat_monthly_type]:checked').val();
+        var ends_at_repeat = $('input[name=frm_ends_at_repeat]:checked').val();
+
+        $("#repeats_every").val($("#repeat-event-lightbox #frm_repeats_every").val());
+        $("#repeats_type").val($("#repeat-event-lightbox #frm_repeats_type").val());
+        $("#repeats_day").val(days_selected);
+        $("#repeat_monthly_type").val(repeat_monthly_type);
+        
+        $("#ends_at_repeat").val(ends_at_repeat);
+        $("#ends_at_ocurrences").val($("#frm_ends_at_ocurrences").val());
+        $("#ends_at_date").val($("#frm_ends_at_date").val());
+
+      });
+
+      $('body').on('change',"#frm_repeats_type", function(){
+        var rType = $(this).val();
+
+        if(rType == "Monthly"){
+          $(".repeat_every_text").text("months");
+          $(".repeat_weekly").hide();
+          $(".repeat_monthly").show();
+        }
+
+        if(rType == "Weekly"){
+          $(".repeat_every_text").text("weeks");
+          $(".repeat_weekly").show();
+          $(".repeat_monthly").hide();
+        }
+
+        if(rType == "Annually"){
+          $(".repeat_every_text").text("years");
+          $(".repeat_weekly").hide();
+          $(".repeat_monthly").hide();
+        }
+      });
+
+      $('body').on('click', '#add_event', function(){
+        $(this).hide();
+      });
+
+    });
 
   = javascript_include_tag :cocoon
   = render :partial => "layouts/noscript"
-
-

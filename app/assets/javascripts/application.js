@@ -10,8 +10,6 @@
 // NOTE: See config/initializers/assets.rb for some critical configuration regarding sprockets.
 // Basically, in HOT mode, we do not include this file for
 // Rails.application.config.assets.precompile
-//= require vendor-bundle
-//= require app-bundle
 
 // This is a manifest file that'll be compiled into including all the files listed below.
 // Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
@@ -35,6 +33,7 @@
 //= require jquery.fileupload-process
 //= require jquery.fileupload-validate
 //= require jquery.fileupload-image
+//= require jquery.timepicker.min
 
 //= require selectize-standalone.js
 //= require datepicker/bootstrap-datepicker.js

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.54, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.10, for osx10.11 (x86_64)
 --
--- Host: localhost    Database: sharetribe_development
+-- Host: localhost    Database: shareoregon
 -- ------------------------------------------------------
--- Server version	5.5.54-0+deb8u1
+-- Server version	5.7.10
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -607,6 +607,9 @@ CREATE TABLE `events` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `listing_id` int(11) DEFAULT NULL,
+  `start_at_time` time DEFAULT NULL,
+  `end_at_time` time DEFAULT NULL,
+  `event_rule_hash` text,
   PRIMARY KEY (`id`),
   KEY `index_listing_id` (`listing_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -710,12 +713,12 @@ CREATE TABLE `landing_page_versions` (
   `community_id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
   `released` datetime DEFAULT NULL,
-  `content` mediumtext NOT NULL,
+  `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_landing_page_versions_on_community_id_and_version` (`community_id`,`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -733,7 +736,7 @@ CREATE TABLE `landing_pages` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_landing_pages_on_community_id` (`community_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -879,7 +882,7 @@ CREATE TABLE `listings` (
   `pickup_enabled` tinyint(1) DEFAULT '0',
   `shipping_price_cents` int(11) DEFAULT NULL,
   `shipping_price_additional_cents` int(11) DEFAULT NULL,
-  `external_payment_link` varchar(256) DEFAULT NULL,
+  `external_payment_link` text,
   `availability` varchar(32) DEFAULT 'none',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
@@ -931,15 +934,15 @@ DROP TABLE IF EXISTS `marketplace_configurations`;
 CREATE TABLE `marketplace_configurations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `community_id` int(11) NOT NULL,
-  `main_search` varchar(255) NOT NULL DEFAULT 'keyword',
-  `distance_unit` varchar(255) NOT NULL DEFAULT 'metric',
+  `main_search` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'keyword',
+  `distance_unit` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'metric',
   `limit_priority_links` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `limit_search_distance` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `index_marketplace_configurations_on_community_id` (`community_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -952,8 +955,8 @@ DROP TABLE IF EXISTS `marketplace_plans`;
 CREATE TABLE `marketplace_plans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `community_id` int(11) NOT NULL,
-  `status` varchar(22) DEFAULT NULL,
-  `features` text,
+  `status` varchar(22) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `features` text COLLATE utf8_unicode_ci,
   `member_limit` int(11) DEFAULT NULL,
   `expires_at` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
@@ -961,7 +964,7 @@ CREATE TABLE `marketplace_plans` (
   PRIMARY KEY (`id`),
   KEY `index_marketplace_plans_on_community_id` (`community_id`),
   KEY `index_marketplace_plans_on_created_at` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1003,7 +1006,7 @@ CREATE TABLE `marketplace_setup_steps` (
   `invitation` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_marketplace_setup_steps_on_community_id` (`community_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1022,7 +1025,7 @@ CREATE TABLE `marketplace_trials` (
   PRIMARY KEY (`id`),
   KEY `index_marketplace_trials_on_community_id` (`community_id`),
   KEY `index_marketplace_trials_on_created_at` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1391,6 +1394,47 @@ CREATE TABLE `people` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `recurring_events`
+--
+
+DROP TABLE IF EXISTS `recurring_events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `recurring_events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `schedules`
+--
+
+DROP TABLE IF EXISTS `schedules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schedules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `schedulable_id` int(11) DEFAULT NULL,
+  `schedulable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` time DEFAULT NULL,
+  `rule` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `interval` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `day` text COLLATE utf8_unicode_ci,
+  `day_of_week` text COLLATE utf8_unicode_ci,
+  `until` datetime DEFAULT NULL,
+  `count` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `schema_migrations`
 --
 
@@ -1486,15 +1530,15 @@ CREATE TABLE `transaction_process_tokens` (
   `community_id` int(11) NOT NULL,
   `transaction_id` int(11) NOT NULL,
   `op_completed` tinyint(1) NOT NULL DEFAULT '0',
-  `op_name` varchar(64) NOT NULL,
-  `op_input` text,
-  `op_output` text,
+  `op_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `op_input` text COLLATE utf8_unicode_ci,
+  `op_output` text COLLATE utf8_unicode_ci,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_paypal_process_tokens_on_transaction` (`transaction_id`,`community_id`,`op_name`),
   UNIQUE KEY `index_transaction_process_tokens_on_process_token` (`process_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1600,7 +1644,7 @@ CREATE TABLE `transactions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-15 20:25:51
+-- Dump completed on 2017-07-06 16:46:40
 INSERT INTO schema_migrations (version) VALUES ('20080806070738');
 
 INSERT INTO schema_migrations (version) VALUES ('20080807071903');
@@ -3200,4 +3244,14 @@ INSERT INTO schema_migrations (version) VALUES ('20161018105521');
 INSERT INTO schema_migrations (version) VALUES ('20161019125057');
 
 INSERT INTO schema_migrations (version) VALUES ('20161023074355');
+
+INSERT INTO schema_migrations (version) VALUES ('20170518221458');
+
+INSERT INTO schema_migrations (version) VALUES ('20170523193003');
+
+INSERT INTO schema_migrations (version) VALUES ('20170523193216');
+
+INSERT INTO schema_migrations (version) VALUES ('20170526200811');
+
+INSERT INTO schema_migrations (version) VALUES ('20170706193821');
 

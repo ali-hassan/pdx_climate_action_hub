@@ -67,8 +67,8 @@ module ListingIndexViewUtils
         end
 
       event =
-		    if includes.include?(:event) && !l[:event].nil?
-	        Event.new(
+        if includes.include?(:event) && !l[:event].nil?
+          Event.new(
             l[:event][:start_at],
             l[:event][:end_at]
           )

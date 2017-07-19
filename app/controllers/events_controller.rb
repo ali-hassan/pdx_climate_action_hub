@@ -57,6 +57,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    p "************* CREATING EVENT ***********"
+    
     @event = Event.new(event_params)
 
     respond_to do |format|
@@ -104,6 +106,6 @@ class EventsController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def event_params
-      params.require(:event).permit(:end_at, :start_at)
+      params.require(:event).permit(:end_at, :start_at, :start_at_time, :end_at_time)
     end
 end

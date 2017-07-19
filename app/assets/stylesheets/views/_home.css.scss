@@ -21,6 +21,7 @@
 .home-toolbar-button-group {
   @include button-group;
   margin-bottom: lines(0.5);
+  margin-left: 1px;
 
   // Leave room for filters button on the left side
   width: 100%;
@@ -98,7 +99,7 @@
   height: lines(10.5); // Magical number, this just looks good on iPhone
 
   @include media(tablet) {
-    height: 30em;
+    height: 33em;
   }
 }
 

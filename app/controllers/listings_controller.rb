@@ -1,3 +1,4 @@
+
 # rubocop:disable ClassLength
 class ListingsController < ApplicationController
   class ListingDeleted < StandardError; end
@@ -293,7 +294,7 @@ class ListingsController < ApplicationController
         return redirect_to new_listing_path
       end
     end
-
+    @params = params
     create_listing(shape, listing_uuid)
   end
 
@@ -340,6 +341,9 @@ class ListingsController < ApplicationController
       @listing.author = @current_user
 
       if @listing.save
+        
+        create_repeat_rule unless @params[:listing][:event_attributes].nil?
+
         upsert_field_values!(@listing, params[:custom_fields])
 
         listing_image_ids =
@@ -373,7 +377,9 @@ class ListingsController < ApplicationController
 
         redirect_to @listing, status: 303 and return
       else
+
         logger.error("Errors in creating listing: #{@listing.errors.full_messages.inspect}")
+
         flash[:error] = t(
           "layouts.notifications.listing_could_not_be_saved",
           :contact_admin_link => view_context.link_to(t("layouts.notifications.contact_admin_link_text"), new_user_feedback_path, :class => "flash-error-link")
@@ -560,6 +566,49 @@ class ListingsController < ApplicationController
   end
 
   private
+
+  def create_repeat_rule
+    p "************ CREATE REPEAT RULE PARAMS ********** #{@params} ************"
+    
+    repeats_every_counter = params[:repeats_every].to_i
+
+    start_at = @params[:listing][:event_attributes][:start_at]
+    ends_at = @params[:ends_at_date]
+
+    start_at_date = "#{start_at[3..4]}/#{start_at[0..1]}/#{start_at[6..9]}".to_date
+    ends_at_date = "#{ends_at[3..4]}/#{ends_at[0..1]}/#{ends_at[6..9]}"
+
+    schedule = IceCube::Schedule.new
+
+    if @params[:repeats_type] == "Weekly"
+      repeats_day = params[:repeats_day].split(",")
+      int_array = repeats_day.map(&:to_i)
+
+      schedule.add_recurrence_rule IceCube::Rule.weekly(repeats_every_counter).day(*int_array)
+    end
+
+    if @params[:repeats_type] == "Monthly"
+      if @params[:repeat_monthly_type] == "day_of_month"
+        schedule.add_recurrence_rule IceCube::Rule.monthly(repeats_every_counter).day_of_month(start_at_date.day)
+      else
+        week_day = start_at_date.cwday
+        week_number = start_at_date.week_of_month
+        schedule.add_recurrence_rule IceCube::Rule.monthly(repeats_every_counter).day_of_week(week_day => [week_number])
+      end
+    end
+    
+    if @params[:repeats_type] == "Annually"
+      schedule.add_recurrence_rule IceCube::Rule.yearly(repeats_every_counter)
+    end
+
+
+    schedule.duration = @params[:ends_at_ocurrences].to_i if @params[:ends_at_repeat] == "after"    
+    schedule.end_time = ends_at_date if @params[:ends_at_repeat] == "end_date"
+
+    hash = schedule.to_hash
+
+    @listing.event.update_attributes(event_rule_hash: hash)
+  end
 
   def create_bookable(community_uuid, listing_uuid, author_uuid, auth_context)
     res = HarmonyClient.post(
