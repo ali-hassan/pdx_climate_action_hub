@@ -1,4 +1,15 @@
-<% section_style_class = s["background_image_variation"] == "light" ? "hero__section--light" : "hero__section--dark" %>
+<%
+hero_style_variations = {
+  "light" => "hero__section--light",
+  "dark" => "hero__section--dark",
+  "transparent" => "hero__section"
+}
+
+hero_style_variations.default = "hero__section--dark"
+
+section_style_class = hero_style_variations[s["background_image_variation"]]
+%>
+
 <% content_for :hero_css do %>
   .<%= section_style_class %> {
     background-image: url('<%= s["background_image"]["src"] %>');
@@ -43,9 +54,11 @@
                   </g>
                 </svg>
               </button>
-              <input type="search" name="q" class="hero__search-input<%= combined_mode %>" placeholder="<%= s["search_placeholder"]["value"] %>"/>
               <% if search_mode == "keyword_and_location_search" %>
-                <input type="search" name="lq" class="hero__search-input<%= combined_mode %>" placeholder="<%= s.dig("search_location_with_keyword_placeholder", "value") %>"/>
+                <input type="search" name="q" class="hero__keyword-search-input--combined" placeholder="<%= s["search_placeholder"]["value"] %>"/>
+                <input type="search" name="lq" class="hero__location-search-input--combined" placeholder="<%= s.dig("search_location_with_keyword_placeholder", "value") %>"/>
+              <% else %>
+                <input type="search" name="q" class="hero__search-input" placeholder="<%= s["search_placeholder"]["value"] %>"/>
               <% end %>
             </div>
             <button type="submit" class="hero__search-button hero__search-button<%= combined_mode %>"><%= s["search_button"]["value"] %></button>

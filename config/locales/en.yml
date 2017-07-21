@@ -1,4 +1,10 @@
 en:
+  number:
+    currency:
+      format:
+        separator: "."
+        delimiter: ","
+        format: "%u%n"
   admin:
     categories:
       edit:
@@ -94,7 +100,13 @@ en:
         favicon: Favicon
         favicon_info_text: "The dimensions of the favicon should be 32x32 pixels. The uploaded image will be resized to these dimensions."
         community_custom_color1: "Main color"
+
         new_listing_button_custom_color: "Add a Post button color"
+        community_slogan_color: "Marketplace slogan color"
+        community_slogan_color_instructions_text: "You can change the color of the slogan on the homepage by entering a hex color value. The slogan is shown to users that are not logged in. %{colorpicker} can help you choose the color and give you the hex color code. You can then copy the code here. %{see_how_it_looks_like}."
+        community_description_color: "Marketplace description color"
+        community_description_color_instructions_text: "You can change the color of the description on the homepage by entering a hex color value. The description is shown to users that are not logged in. %{colorpicker} can help you choose the color and give you the hex color code. You can then copy the code here. %{see_how_it_looks_like}."
+        new_listing_button_custom_color: "Post a new listing button color"
         logo_instructions_text_with_dimensions: "The logo size should be %{width}x%{height}px. It will be shown to users with bigger screens."
         logo_instructions_text_with_dimensions_no_placing: "The logo size should be %{width}x%{height}px."
         logo_icon_instructions_text_with_dimensions: "This square logo will be shown when people share your site in Facebook, when they view your site on a mobile device or when they bookmark your site to the home screen of their mobile device. The dimensions should be (at least) %{width}x%{height}px."
@@ -104,6 +116,7 @@ en:
         small_cover_photo_visibility: "Small cover photo is shown in all pages except in the homepage for users who are not logged in."
         small_cover_photo_instructions_text_with_dimensions: "The photo will be resized to %{width}x%{height} pixel size and taller images will be cut in the middle."
         main_content_width: "When choosing cover photos please note that the page main content is %{main_width} pixels wide at most. Remember to also check how your cover photo looks on the smaller screens (e.g. by using a more narrow browser window)."
+
         custom_color1_instructions_text: "You can change the main color of the user interface by entering a hex color value. <a href=\"http://www.colorpicker.com/?colorcode=D96E21\" target=\"_blank\" rel=\"noreferrer\">ColorPicker.com</a> can help you choose the color and copy the code here."
         new_listing_button_instructions_text: "You can change the color of the Add a Post button by entering a hex color value. %{link_to_colorpicker} can help you choose the color and copy the code here."
         default_browse_view: "Default browse view"
@@ -139,6 +152,7 @@ en:
         sender_name_placeholder: "Sender name"
         sender_email_label: "Email address"
         sender_email_placeholder: sender-email@example.com
+        amazon_ses_notification: "You will receive an email from %{email_sender} to confirm your e-mail address. The email subject is '%{email_subject}'. Follow the instructions to verify your email."
         this_is_how_it_will_look: "This is how it will look:"
         send_verification_button: "Send verification email"
         successfully_saved: "Sender address saved successfully. The verification email will be sent soon."
@@ -151,7 +165,7 @@ en:
         resend_link: Resend
         invalid_email_error: "Invalid email format for '%{email}'"
         invalid_email_domain: "The '%{email}' email address is using an unsupported email provider: '%{domain}'. %{invalid_email_domain_read_more_link}"
-        invalid_email_domain_read_more_link: "Read the knowledge base article for more information."
+        invalid_email_domain_read_more_link: "Read the Help Center article for more information."
         unknown_error: "Something went wrong"
         white_label_offer: "Set your own email address as the sender for outgoing email messages by %{upgrade_pro_plan_link}."
         upgrade_plan_link: "upgrading to the Pro plan or higher"
@@ -227,6 +241,7 @@ en:
         manage_members: "Manage Users"
         email: Email
         name: Name
+        display_name: "Display name"
         join_date: Joined
         admin: Admin
         posting_allowed: "Posting allowed"
@@ -241,9 +256,11 @@ en:
         new_layout: "New layout"
         description_roadmap: "We are in the process of rolling out a new and improved layout. During the transition period, you can select which parts should continue using the old layout using the menu below. New features will only be available on the new layout."
         description_process: "Support for the old layout will be removed in the future. The ShareOregon team will notify you before this happens. Questions? Contact the team via %{support_link}."
+        description_roadmap_new: "When new layout components are made available for your marketplace, you can choose whether you want to start using the new component or continue using the old one. You can toggle the selection at any point from this page. It's recommended to always be using the new version, as the old components might be phased out at some point. In case a component you're currently using is going to be phased out, you will be contacted in advance."
         enabled_for_you: "Enabled for you"
         enabled_for_all: "Enabled for all"
         new_topbar: "New top bar (visible on every page)"
+        searchpage: "New search page (requires the new top bar)"
       social_media:
         social_media: "Social media"
         twitter_handle: "Twitter handle"
@@ -318,12 +335,16 @@ en:
       edit_price:
         description: "The minimum and maximum price only affect the filter. They do not set a limit for post prices."
         edit_price_field: "Edit price field"
+
         show_price_filter_homepage: "Show price filter on homepage"
         price_min: "Filter minimum price"
         price_max: "Filter maximum price"
       edit_location:
-        edit_location_field: "Edit location field"
+        edit_location_field: "Edit listing field 'Location'"
         this_field_is_required: "This field is required"
+      edit_expiration:
+        edit_expiration_field: "Edit listing field 'Expiration date'"
+        enable: "Enable expiration date"
       form:
         field_required:
           this_field_is_required: "Make it mandatory to fill in this field when creating a post."
@@ -379,18 +400,19 @@ en:
       users_and_transactions: "Users & transactions"
       configure: Configuration
       emails_title: Emails
-      support: Support
       subscription: Subscription
       preview: "Preview site"
     listing_shapes:
       availability_title: Availability
-      allow_availability_management: "Enable automatic availability management (prevent double bookings)"
+      read_more: "Read more about automatic availability management."
+      read_more_availability_management: "Read more about availability management."
+      allow_providers_to_manage_availability: "Allow providers to manage their availability from a calendar"
       per_day_availability: "\"Per day\" availability"
       per_night_availability: "\"Per night\" availability"
       pricing_units_disabled_info: "Pricing units cannot be used when availability calendar is enabled."
       index:
         listing_shapes: "Order types"
-        description: "Order types determine how the order process works in your site. You can decide whether your users are renting or selling, or perhaps just posting announcements and communicating via free messages."
+        description: "Order types determine how the order process works in your site. You can decide whether your users are renting or selling, or perhaps just posting announcements and communicating via direct messages."
         read_more_about_order_types: "Read more about order types"
         add_new_shape: "Add new order type: "
         select_template: "Select template..."
@@ -478,11 +500,15 @@ en:
       marketplace_currency_used: "ShareOregon uses %{currency} as its currency."
       contact_support_link_text: "contact us"
       integration_info_text: "The payment system is powered by PayPal. To allow your users to pay you through ShareOregon, you must connect your PayPal account. Once you have connected your PayPal account, you can choose a minimum transaction size and a possible commission fee."
+
       link_paypal_personal_account_label: "Are you providing products or services yourself?"
       link_paypal_personal_account: "If so, you will also need to connect your PayPal account to %{personal_payment_preferences_link}."
       personal_payment_preferences_link_text: "your personal account"
       read_more_about_paypal: "Read more about the payment system"
-      set_minimum_price_and_fee: "Set a minimum price & transaction fee"
+      edit_payment_settings: "Edit payment settings"
+      supported_currencies_information_text: "Sharetribe's online payment system supports 24 currencies. If your currency is not on the list, please %{contact_support_link}. If you change the marketplace currency, existing listings will retain their old currency. You need to edit those listings individually to convert them to the new currency."
+      currency_change_warning_text: "Heads up: if you move forward with this currency change, don't forget to ask your sellers to manually edit their existing listings to get the currency update."
+      marketplace_currency_label: "Marketplace currency:"
       minimum_listing_price_label: "Minimum transaction size:"
       transaction_fee_label: "Transaction fee:"
       minimum_transaction_fee_label: "Minimum transaction fee:"
@@ -842,9 +868,9 @@ en:
       you_have_made_new_payment: "You have paid <b>%{payment_sum}</b> for <b>%{listing_title}</b> to %{recipient_full_name}. Here is a receipt of the payment."
       product: Product
       price_per_unit_type: "Price per %{unit_type}"
-      duration: "Duration:"
-      quantity: "Quantity:"
-      subtotal: "Subtotal:"
+      duration: Duration
+      quantity: Quantity
+      subtotal: Subtotal
       total: Total
       price: Price
       service_fee: "Service fee"
@@ -880,9 +906,11 @@ en:
       remember_to_give_feedback_to: "Reminder: Please provide feedback about %{name}."
       you_have_not_given_feedback_yet: "You have not yet given feedback to %{name} about '%{event}'. Remember to give feedback about how %{given_name} performed in the event."
     transaction_preauthorized:
-      subject: "%{requester} has requested and authorized payment for %{listing_title}"
-      transaction_requested_by_user: "%{requester} has requested and authorized payment for \"%{listing_title}\""
+      subject: "%{requester} is interested and has authorized payment for %{listing_title} published in %{service_name}"
+      transaction_requested_by_user: "Great news! %{requester} is interested in \"%{listing_title}\" and has authorized payment for this listing."
       you_have_time_to_accept: "You need to accept or reject the request within %{payment_expires_in}. If you accept within this timeframe, the payment will go through. If you don't accept, the request will be automatically rejected and you will not get paid."
+      if_you_do_accept: "If you accept the request within this timeframe, you will receive the money immediately to your account."
+      if_you_do_not_accept: "If you reject the request or don't accept it within this timeframe, the transaction will be automatically cancelled, %{requester} will not be charged and you will not get paid."
       click_here_to_reply: "Click here to respond to the request"
     transaction_preauthorized_reminder:
       subject: "Remember to accept the request from %{requester} about post %{listing_title}"
@@ -923,6 +951,7 @@ en:
     transaction_agreement:
       required_error: "You need to accept the agreement"
     paypal:
+      transaction_cannot_complete: "Transaction cannot complete. This is most likely caused by the credit card failing bank authorization. Please, try purchasing again with an alternative payment method."
       buyer_cannot_pay_error: "The payment has been declined by PayPal. Please contact their Customer Service for more information: %{customer_service_link}"
       pending_review_error: "The payment was submitted but was flagged by PayPal as 'requiring a review'. When PayPal completes the review, the payment will be automatically authorized."
       seller_express_checkout_disabled: "PayPal Express Checkout has been disabled for the post author's PayPal account. Please contact the author and let them know that there's an issue with their PayPal account, and advise them to contact PayPal Customer Service."
@@ -1484,7 +1513,6 @@ en:
       request_type: "Request type"
       requests: Requests
       rideshare: Rideshare
-      search_verb: Search
       you_have_something_others_do_not: "Have something to offer?"
       feed_title: "%{listing_type} in %{service_name} %{optional_category}"
     left_panel_link:
@@ -1616,7 +1644,6 @@ en:
       request_type: "Request type"
       requests: Requests
       rideshare: Rideshare
-      search_verb: Search
       you_have_something_others_do_not: "Have something to offer?"
     please_comment: Comment
   mercury:
@@ -1634,6 +1661,7 @@ en:
     connected_account: "PayPal account '%{email}' connected successfully."
     paypal_receive_funds_info_label_australia_only: "Your PayPal account needs to be able to accept payments. This might require a Premier or Business account."
     paypal_receive_funds_info_label: "Your PayPal account needs to be able to accept payments. This might require a Business account."
+
     paypal_receive_funds_info_australia_only: "If you see an error when trying to connect your account to %{service_name}, either %{upgrade_paypal_account_link} and upgrade to a Business account, or (if you are an individual), create a new Premier account. Both account types are completely free."
     paypal_receive_funds_info: "If you see an error when trying to connect your account to %{service_name}, upgrade your PayPal account by %{upgrade_paypal_account_link}. It's free and easy. If you're an individual, PayPal recommends using your name as the Business name."
     upgrade_paypal_account_link_text: "logging in and clicking the upgrade link"
@@ -1786,16 +1814,6 @@ en:
       following: Following
       follow: Follow
       unfollow: Unfollow
-  search:
-    show:
-      all_results: "All results"
-      loading_more_search_results: "Loading more search results"
-      offers: Offers
-      requests: Requests
-      search: Search
-      search_results: "Search results"
-      search_returned_no_results: "Your search returned no results."
-      search_verb: Search
   sessions:
     new:
       create_new_account: "Create a New Account"
@@ -1828,6 +1846,11 @@ en:
       account_confirmation_instructions_title_admin: "Welcome to ShareOregon!"
       your_marketplace_has_now_been_created: "ShareOregon has now been created. Please confirm your email address."
       account_confirmation_instructions_admin: "You will soon receive an email with a link to confirm your email address. Don't forget to check your spam folder!"
+      before_full_access_you_need_to_confirm_email: "Before we can give you full access to your marketplace, there's just one more thing we need to do: confirm your email address."
+      before_confirmation_only_access_admin_dashboard: "Before confirmation you can only access the %{admin_dashboard_link}."
+      admin_dashboard_link_text: "admin dashboard"
+      account_confirmation_instructions_admin: "You should have received an email at %{email_address} with a confirmation link. If you don't see it, check your spam folder or click the button below to resend the email. Once it arrives, open the included link to confirm your address, after which you'll get full access to your marketplace. If you need any help, don't hesitate to %{support_link}."
+      contact_support_link_text: "contact Sharetribe support"
   settings:
     account:
       change: Change
@@ -1890,6 +1913,9 @@ en:
       first_name_with_initial: "(only first letter shown to other users)"
       first_name_only: "(not shown to other users)"
       location_description: "You can provide your street address or just a city or zip code. Examples: \"200 Market St., Portland, OR\" or \"Bend, OR\" or \"97701\"."
+      display_name: "Display name"
+      display_name_description: "If you represent an organisation, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
+
       phone_number: "Phone number"
       profile_picture: "Profile picture"
       postal_code: "Zip code"
@@ -2057,6 +2083,10 @@ en:
     days: days
   web:
     listings:
+      errors:
+        availability:
+          something_went_wrong: "We're not able to display availability information. Try to reload the page."
+          saving_failed: "We're not able to save availability changes. Try to reload the page."
       pricing_units:
         piece: piece
         hour: hour
@@ -2064,11 +2094,20 @@ en:
         night: night
         week: week
         month: month
+      edit_availability_header: Availability
+      save_and_close_availability_editing: "Save and close"
+      confirm_discarding_unsaved_availability_changes_explanation: "You have unsaved changes to your availability information. If you proceed, these changes will be lost."
+      confirm_discarding_unsaved_availability_changes_question: "Are you sure you want to discard your changes?"
+      edit_listing_availability: "Edit listing availability"
     no_listings:
       sorry: "Sorry, no posts could be found for your search criteria."
       try_other_search_terms: "Maybe try other search terms?"
     listing_card:
+      add_picture: "Add picture"
       no_picture: "No picture"
+    search:
+      page: Page
+      page_of_pages: "of %{total_number_of_pages}"
     topbar:
       menu: Menu
       more: More

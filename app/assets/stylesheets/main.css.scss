@@ -154,7 +154,7 @@ ul {
   margin-top: lines(0.25);
 
   textarea {
-    height: lines(5);
+    min-height: lines(5);
   }
 }
 
@@ -608,6 +608,9 @@ label.error {
 
   p {
     margin-bottom: lines(0.5);
+  }
+
+  p, li {
     @include small-type;
   }
 
@@ -619,7 +622,7 @@ label.error {
     h2 {
       @include big-type;
     }
-    p {
+    p, li {
       @include normal-type;
     }
   }
@@ -1095,7 +1098,7 @@ $noscript-height: lines(4);
 
       textarea {
         width: 95%;
-        height: lines(4);
+        min-height: lines(4);
       }
 
     }
@@ -1122,7 +1125,7 @@ $noscript-height: lines(4);
       .comment-form {
         textarea {
           width: 100%;
-          height: lines(6);
+          min-height: lines(6);
         }
       }
     }
@@ -1382,7 +1385,7 @@ $noscript-height: lines(4);
   max-width: lines(5);
 }
 
-.currency-selector {
+.price-currency {
   margin-left: lines(0.25);
   display: inline;
   @include big-type;
@@ -1482,15 +1485,10 @@ input[type=text].delivery-price-field {
     display: inline-block;
   }
 
-  .status-link {
-    @include button($link);
-    margin-right: lines(0.5);
-  }
-
   .accept, .confirm, .accept_preauthorized {
+    @include button(lighten($green, 40%));
+    margin-right: lines(0.5);
     color: $green;
-    background: lighten($green, 40%);
-    border-color: $green;
     &:hover {
       color: lighten($green, 10%);
       background: lighten($green, 50%);
@@ -1499,9 +1497,9 @@ input[type=text].delivery-price-field {
   }
 
   .reject, .cancel, .reject_preauthorized {
+    @include button(lighten($red, 40%));
+    margin-right: lines(0.5);
     color: $red;
-    background: lighten($red, 40%);
-    border-color: $red;
     &:hover {
       color: lighten($red, 10%);
       background: lighten($red, 50%);
@@ -1909,7 +1907,6 @@ $network-green: #00a26c;
 
 .coverimage {
   position: relative;
-  max-width: em(1920);
   margin-left: auto;
   margin-right: auto;
 }
@@ -1966,7 +1963,6 @@ figure.fluidratio {
   .coverimage-fade {
     position: absolute;
     top: lines(0);
-    max-width: em(1920);
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -1985,8 +1981,7 @@ figure.fluidratio {
   }
 
   .marketplace-lander-content {
-    padding-top: 5em;
-    padding-bottom: 5em;
+    padding: 5em 1em;
     text-align: center;
   }
 
@@ -1995,7 +1990,7 @@ figure.fluidratio {
     margin-top: 0;
     position: relative;
     padding: 0;
-    color: $background;
+    color: $slogancolor;
     @include larger-type;
     line-height: em(18);
     @include media(tablet) {
@@ -2003,6 +1998,10 @@ figure.fluidratio {
       @include huge-type;
       line-height: em(15);
     }
+  }
+
+  .marketplace-lander-content-description {
+      color: $descriptioncolor;
   }
 
   .title-container {

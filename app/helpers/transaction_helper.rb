@@ -389,7 +389,8 @@ module TransactionHelper
     status_links([
       {
         link_href: new_person_message_feedback_path(@current_user, :message_id => conversation.id),
-        link_icon_with_tag: icon_tag("testimonial", ["icon-with-text"]),
+        link_classes: "accept",
+        link_icon_tag: icon_tag("testimonial", ["icon-with-text"]),
         link_text_with_icon: t("conversations.status.give_feedback")
       },
       {
@@ -420,7 +421,7 @@ module TransactionHelper
   def waiting_for_buyer_to_confirm(conversation)
     link = t("conversations.status.waiting_confirmation_from_requester",
       :requester_name => link_to(
-        conversation.other_party(@current_user).given_name_or_username,
+        PersonViewUtils.person_display_name_for_type(conversation.other_party(@current_user), "first_name_only"),
         conversation.other_party(@current_user)
       )
     ).html_safe
@@ -431,7 +432,7 @@ module TransactionHelper
   def waiting_for_author_to_accept_preauthorized(transaction)
     text = t("conversations.status.waiting_for_listing_author_to_accept_request",
       :listing_author_name => link_to(
-        transaction.author.given_name_or_username,
+        PersonViewUtils.person_display_name_for_type(transaction.author, "first_name_only"),
         transaction.author
       )
     ).html_safe
