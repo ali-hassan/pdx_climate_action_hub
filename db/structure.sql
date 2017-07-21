@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for osx10.12 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.10, for osx10.11 (x86_64)
 --
 -- Host: localhost    Database: shareoregon
 -- ------------------------------------------------------
--- Server version	5.7.17
+-- Server version	5.7.10
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1670,7 +1670,7 @@ CREATE TABLE `transactions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-26 15:41:32
+-- Dump completed on 2017-07-21 19:29:46
 INSERT INTO schema_migrations (version) VALUES ('20080806070738');
 
 INSERT INTO schema_migrations (version) VALUES ('20080807071903');
@@ -3271,16 +3271,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161019125057');
 
 INSERT INTO schema_migrations (version) VALUES ('20161023074355');
 
-INSERT INTO schema_migrations (version) VALUES ('20170518221458');
-
-INSERT INTO schema_migrations (version) VALUES ('20170523193003');
-
-INSERT INTO schema_migrations (version) VALUES ('20170523193216');
-
-INSERT INTO schema_migrations (version) VALUES ('20170526200811');
-
-INSERT INTO schema_migrations (version) VALUES ('20170706193821');
-
 INSERT INTO schema_migrations (version) VALUES ('20161101104218');
 
 INSERT INTO schema_migrations (version) VALUES ('20161101124317');
@@ -3319,7 +3309,17 @@ INSERT INTO schema_migrations (version) VALUES ('20170313201104');
 
 INSERT INTO schema_migrations (version) VALUES ('20170314075755');
 
+INSERT INTO schema_migrations (version) VALUES ('20170518221458');
+
+INSERT INTO schema_migrations (version) VALUES ('20170523193003');
+
+INSERT INTO schema_migrations (version) VALUES ('20170523193216');
+
+INSERT INTO schema_migrations (version) VALUES ('20170526200811');
+
 INSERT INTO schema_migrations (version) VALUES ('20170613153959');
 
 INSERT INTO schema_migrations (version) VALUES ('20170613153960');
+
+INSERT INTO schema_migrations (version) VALUES ('20170706193821');
 
