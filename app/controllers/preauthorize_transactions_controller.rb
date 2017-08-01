@@ -96,18 +96,16 @@ class PreauthorizeTransactionsController < ApplicationController
                                  quantity_selector:,
                                  shipping_enabled:,
                                  pickup_enabled:,
-                                 availability_enabled:,
-                                 auth_context:)
+                                 availability_enabled:)
 
       validate_delivery_method(tx_params: tx_params, shipping_enabled: shipping_enabled, pickup_enabled: pickup_enabled)
         .and_then { validate_booking(tx_params: tx_params, quantity_selector: quantity_selector) }
         .and_then { |result|
-          if FeatureFlagHelper.feature_enabled?(:availability) && availability_enabled
+          if availability_enabled
             validate_booking_timeslots(tx_params: tx_params,
                                        marketplace_uuid: marketplace_uuid,
                                        listing_uuid: listing_uuid,
-                                       quantity_selector: quantity_selector,
-                                       auth_context: auth_context)
+                                       quantity_selector: quantity_selector)
           else
             Result::Success.new(result)
           end
@@ -151,8 +149,8 @@ class PreauthorizeTransactionsController < ApplicationController
           Result::Error.new(nil, code: :dates_missing, tx_params: tx_params)
         elsif start_on > end_on
           Result::Error.new(nil, code: :end_cant_be_before_start, tx_params: tx_params)
-        elsif quantity_selector == :night && start_on == end_on
-          Result::Error.new(nil, code: :at_least_one_night_required, tx_params: tx_params)
+        elsif start_on == end_on
+          Result::Error.new(nil, code: :at_least_one_day_or_night_required, tx_params: tx_params)
         else
           Result::Success.new(tx_params)
         end
@@ -174,15 +172,8 @@ class PreauthorizeTransactionsController < ApplicationController
       }
     end
 
-    def validate_booking_timeslots(tx_params:, marketplace_uuid:, listing_uuid:, quantity_selector:, auth_context:)
+    def validate_booking_timeslots(tx_params:, marketplace_uuid:, listing_uuid:, quantity_selector:)
       start_on, end_on = tx_params.values_at(:start_on, :end_on)
-
-      # The calendar UI doesn't give the exclusive end date for the
-      # day selector, which is why we have to adjust by increasing
-      # it with one day. The timestamp will be 00:00:00, ensuring
-      # the the full day before the exclusive end date is taken into
-      # account.
-      end_adjusted = quantity_selector == :day ? end_on + 1.days : end_on
 
       HarmonyClient.get(
         :query_timeslots,
@@ -190,17 +181,14 @@ class PreauthorizeTransactionsController < ApplicationController
           marketplaceId: marketplace_uuid,
           refId: listing_uuid,
           start: start_on,
-          end: end_adjusted
-        },
-        opts: {
-          auth_context: auth_context
+          end: end_on
         }
       ).rescue {
         Result::Error.new(nil, code: :harmony_api_error)
       }.and_then { |res|
         timeslots = res[:body][:data].map { |v| v[:attributes] }
 
-        if all_days_available(timeslots, start_on, end_adjusted)
+        if all_days_available(timeslots, start_on, end_on)
           Result::Success.new(tx_params)
         else
           Result::Error.new(nil, code: :dates_not_available)
@@ -230,19 +218,13 @@ class PreauthorizeTransactionsController < ApplicationController
         shipping_enabled: listing.require_shipping_address,
         pickup_enabled: listing.pickup_enabled)
 
-      auth_context = {
-        marketplace_id: @current_community.uuid_object,
-        actor_id: @current_user.uuid_object
-      }
-
       Validator.validate_initiate_params(marketplace_uuid: @current_community.uuid_object,
                                          listing_uuid: listing.uuid_object,
                                          tx_params: tx_params,
                                          quantity_selector: listing.quantity_selector&.to_sym,
                                          shipping_enabled: listing.require_shipping_address,
                                          pickup_enabled: listing.pickup_enabled,
-                                         availability_enabled: listing.availability.to_sym == :booking,
-                                         auth_context: auth_context)
+                                         availability_enabled: listing.availability.to_sym == :booking)
     }
 
     validation_result.on_success { |tx_params|
@@ -256,19 +238,17 @@ class PreauthorizeTransactionsController < ApplicationController
         unit_price: listing_entity[:price],
         quantity: quantity)
 
-      shipping_total =
-        if tx_params[:delivery] == :shipping
-          ShippingTotal.new(
-            initial: listing_entity[:shipping_price],
-            additional: listing_entity[:shipping_price_additional],
-            quantity: quantity)
-        else
-          NoShippingFee.new
-        end
+      shipping_total = calculate_shipping_from_entity(tx_params: tx_params, listing_entity: listing_entity, quantity: quantity)
 
       order_total = OrderTotal.new(
         item_total: item_total,
         shipping_total: shipping_total)
+
+      Analytics.record_event(
+        flash.now,
+        "InitiatePreauthorizedTransaction",
+        { listing_id: listing.id,
+          listing_uuid: listing.uuid_object.to_s })
 
       render "listing_conversations/initiate",
              locals: {
@@ -282,6 +262,13 @@ class PreauthorizeTransactionsController < ApplicationController
                expiration_period: MarketplaceService::Transaction::Entity.authorization_expiration_period(:paypal),
                form_action: initiated_order_path(person_id: @current_user.id, listing_id: listing_entity[:id]),
                country_code: LocalizationUtils.valid_country_code(@current_community.country),
+               paypal_analytics_event: [
+                 "RedirectingBuyerToPayPal",
+                 { listing_id: listing.id,
+                   listing_uuid: listing.uuid_object.to_s,
+                   community_id: @current_community.id,
+                   marketplace_uuid: @current_community.uuid_object.to_s,
+                   user_logged_in: @current_user.present? }],
                price_break_down_locals: TransactionViewUtils.price_break_down_locals(
                  booking:  is_booking,
                  quantity: quantity,
@@ -304,7 +291,11 @@ class PreauthorizeTransactionsController < ApplicationController
         if data.is_a?(Array)
           # Entity validation failed
           t("listing_conversations.preauthorize.invalid_parameters")
-        elsif [:dates_missing, :end_cant_be_before_start, :delivery_method_missing, :at_least_one_night_required].include?(data[:code])
+        elsif [:dates_missing,
+               :end_cant_be_before_start,
+               :delivery_method_missing,
+               :at_least_one_day_or_night_required,
+              ].include?(data[:code])
           t("listing_conversations.preauthorize.invalid_parameters")
         elsif data[:code] == :dates_not_available
           t("listing_conversations.preauthorize.dates_not_available")
@@ -340,16 +331,7 @@ class PreauthorizeTransactionsController < ApplicationController
       is_booking = date_selector?(listing)
 
       quantity = calculate_quantity(tx_params: tx_params, is_booking: is_booking, unit: listing.unit_type)
-
-      shipping_total =
-        if tx_params[:delivery] == :shipping
-          ShippingTotal.new(
-            initial: listing.shipping_price,
-            additional: listing.shipping_price_additional,
-            quantity: quantity)
-        else
-          NoShippingFee.new
-        end
+      shipping_total = calculate_shipping_from_model(tx_params: tx_params, listing_model: listing, quantity: quantity)
 
       tx_response = create_preauth_transaction(
         payment_type: :paypal,
@@ -376,7 +358,7 @@ class PreauthorizeTransactionsController < ApplicationController
           logger.error(msg, :transaction_initiated_error, data)
           [t("listing_conversations.preauthorize.invalid_parameters"), listing_path(listing.id)]
 
-        elsif [:dates_missing, :end_cant_be_before_start, :delivery_method_missing, :at_least_one_night_required].include?(data[:code])
+        elsif [:dates_missing, :end_cant_be_before_start, :delivery_method_missing, :at_least_one_day_or_night_required].include?(data[:code])
           logger.error(msg, :transaction_initiated_error, data)
           [t("listing_conversations.preauthorize.invalid_parameters"), listing_path(listing.id)]
         elsif data[:code] == :agreement_missing
@@ -391,6 +373,33 @@ class PreauthorizeTransactionsController < ApplicationController
   end
 
   private
+
+  def calculate_shipping_from_entity(tx_params:, listing_entity:, quantity:)
+    calculate_shipping(
+      tx_params: tx_params,
+      initial: listing_entity[:shipping_price],
+      additional: listing_entity[:shipping_price_additional],
+      quantity: quantity)
+  end
+
+  def calculate_shipping_from_model(tx_params:, listing_model:, quantity:)
+    calculate_shipping(
+      tx_params: tx_params,
+      initial: listing_model.shipping_price,
+      additional: listing_model.shipping_price_additional,
+      quantity: quantity)
+  end
+
+  def calculate_shipping(tx_params:, initial:, additional:, quantity:)
+    if tx_params[:delivery] == :shipping
+      ShippingTotal.new(
+        initial: initial,
+        additional: additional,
+        quantity: quantity)
+    else
+      NoShippingFee.new
+    end
+  end
 
   def add_defaults(params:, shipping_enabled:, pickup_enabled:)
     default_shipping =
@@ -428,10 +437,8 @@ class PreauthorizeTransactionsController < ApplicationController
   end
 
   def calculate_quantity(tx_params:, is_booking:, unit:)
-    if is_booking && unit == :day
-      DateUtils.duration_days(tx_params[:start_on], tx_params[:end_on])
-    elsif is_booking && unit == :night
-      DateUtils.duration_nights(tx_params[:start_on], tx_params[:end_on])
+    if is_booking
+      DateUtils.duration(tx_params[:start_on], tx_params[:end_on])
     else
       tx_params[:quantity] || 1
     end
@@ -528,6 +535,13 @@ class PreauthorizeTransactionsController < ApplicationController
 
     unless ready[:data][:result]
       flash[:error] = t("layouts.notifications.listing_author_payment_details_missing")
+
+      Analytics.record_event(
+        flash,
+        "ProviderPaymentDetailsMissing",
+        { listing_id: listing.id,
+          listing_uuid: listing.uuid_object.to_s })
+
       redirect_to listing_path(listing)
     end
   end

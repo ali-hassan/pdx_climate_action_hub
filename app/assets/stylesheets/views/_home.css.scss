@@ -28,7 +28,6 @@
 
   &.filters-enabled {
     width: 50%;
-    padding-left: lines(0.5 / 2);
   }
 
   @include media(tablet) {
@@ -316,15 +315,17 @@ $home-list-avatar-padding: lines(0.25);
 }
 
 .home-list-price-value-mobile,
-.browsing-list-item-price-value-mobile {
-  font-size: 24px;
+.browsing-list-item-price-value-mobile,
+.home-list-shape-value-mobile,
+.browsing-list-item-shape-value-mobile {
+  font-size: em(24);
   & > .smaller {
-    font-size: 18px;
+    font-size: em(18);
   }
   @include media(large-mobile) {
-    font-size: 36px;
+    font-size: em(24);
     & > .smaller {
-      font-size: 24px;
+      font-size: em(24);
     }
   }
 }
@@ -348,14 +349,14 @@ $home-list-avatar-padding: lines(0.25);
 
 .home-list-item-price-value,
 .browsing-list-item-price-value {
-  font-size: em(44);
+  font-size: em(32);
   line-height: 1;
   font-weight: 400;
 }
 
 .home-list-listing-shape-value,
 .browsing-list-item-listing-shape-value {
-  font-size: em(32);
+  font-size: em(24);
   line-height: 1;
   font-weight: 400;
 }

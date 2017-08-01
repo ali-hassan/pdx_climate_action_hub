@@ -16,6 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `active_sessions`
+--
+
+DROP TABLE IF EXISTS `active_sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `active_sessions` (
+  `id` binary(16) NOT NULL,
+  `person_id` varchar(22) COLLATE utf8_unicode_ci NOT NULL,
+  `community_id` int(11) NOT NULL,
+  `refreshed_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_active_sessions_on_person_id` (`person_id`),
+  KEY `index_active_sessions_on_community_id` (`community_id`),
+  KEY `index_active_sessions_on_refreshed_at` (`refreshed_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `auth_tokens`
 --
 
@@ -244,13 +265,15 @@ CREATE TABLE `communities` (
   `small_cover_photo_updated_at` datetime DEFAULT NULL,
   `custom_color1` varchar(255) DEFAULT NULL,
   `custom_color2` varchar(255) DEFAULT NULL,
+  `slogan_color` varchar(6) DEFAULT NULL,
+  `description_color` varchar(6) DEFAULT NULL,
   `stylesheet_url` varchar(255) DEFAULT NULL,
   `stylesheet_needs_recompile` tinyint(1) DEFAULT '0',
   `service_logo_style` varchar(255) DEFAULT 'full-logo',
-  `available_currencies` text,
+  `currency` varchar(3) NOT NULL,
   `facebook_connect_enabled` tinyint(1) DEFAULT '1',
   `minimum_price_cents` int(11) DEFAULT NULL,
-  `hide_expiration_date` tinyint(1) DEFAULT '0',
+  `hide_expiration_date` tinyint(1) DEFAULT '1',
   `facebook_connect_id` varchar(255) DEFAULT NULL,
   `facebook_connect_secret` varchar(255) DEFAULT NULL,
   `google_analytics_key` varchar(255) DEFAULT NULL,
@@ -315,7 +338,6 @@ CREATE TABLE `community_customizations` (
   `about_page_content` mediumtext,
   `terms_page_content` mediumtext,
   `privacy_page_content` mediumtext,
-  `storefront_label` varchar(255) DEFAULT NULL,
   `signup_info_content` text,
   `private_community_homepage_content` mediumtext,
   `verification_to_post_listings_info_content` mediumtext,
@@ -776,6 +798,7 @@ CREATE TABLE `listing_images` (
   `width` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
   `author_id` varchar(255) DEFAULT NULL,
+  `position` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_listing_images_on_listing_id` (`listing_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1166,7 +1189,9 @@ CREATE TABLE `payment_settings` (
   `payment_process` varchar(64) DEFAULT NULL,
   `commission_from_seller` int(11) DEFAULT NULL,
   `minimum_price_cents` int(11) DEFAULT NULL,
+  `minimum_price_currency` varchar(3) DEFAULT NULL,
   `minimum_transaction_fee_cents` int(11) DEFAULT NULL,
+  `minimum_transaction_fee_currency` varchar(3) DEFAULT NULL,
   `confirmation_after_days` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -1367,6 +1392,7 @@ CREATE TABLE `people` (
   `password_salt` varchar(255) DEFAULT NULL,
   `given_name` varchar(255) DEFAULT NULL,
   `family_name` varchar(255) DEFAULT NULL,
+  `display_name` varchar(255) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `description` text,
   `image_file_name` varchar(255) DEFAULT NULL,
@@ -1644,7 +1670,7 @@ CREATE TABLE `transactions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-06 16:46:40
+-- Dump completed on 2017-07-21 19:29:46
 INSERT INTO schema_migrations (version) VALUES ('20080806070738');
 
 INSERT INTO schema_migrations (version) VALUES ('20080807071903');
@@ -3245,6 +3271,44 @@ INSERT INTO schema_migrations (version) VALUES ('20161019125057');
 
 INSERT INTO schema_migrations (version) VALUES ('20161023074355');
 
+INSERT INTO schema_migrations (version) VALUES ('20161101104218');
+
+INSERT INTO schema_migrations (version) VALUES ('20161101124317');
+
+INSERT INTO schema_migrations (version) VALUES ('20161101124829');
+
+INSERT INTO schema_migrations (version) VALUES ('20161102101418');
+
+INSERT INTO schema_migrations (version) VALUES ('20161102101419');
+
+INSERT INTO schema_migrations (version) VALUES ('20161102193340');
+
+INSERT INTO schema_migrations (version) VALUES ('20161103063652');
+
+INSERT INTO schema_migrations (version) VALUES ('20161107092030');
+
+INSERT INTO schema_migrations (version) VALUES ('20161107105050');
+
+INSERT INTO schema_migrations (version) VALUES ('20161107112025');
+
+INSERT INTO schema_migrations (version) VALUES ('20161107131859');
+
+INSERT INTO schema_migrations (version) VALUES ('20161107132513');
+
+INSERT INTO schema_migrations (version) VALUES ('20161107141257');
+
+INSERT INTO schema_migrations (version) VALUES ('20161109094513');
+
+INSERT INTO schema_migrations (version) VALUES ('20170216134444');
+
+INSERT INTO schema_migrations (version) VALUES ('20170220123526');
+
+INSERT INTO schema_migrations (version) VALUES ('20170309104456');
+
+INSERT INTO schema_migrations (version) VALUES ('20170313201104');
+
+INSERT INTO schema_migrations (version) VALUES ('20170314075755');
+
 INSERT INTO schema_migrations (version) VALUES ('20170518221458');
 
 INSERT INTO schema_migrations (version) VALUES ('20170523193003');
@@ -3253,5 +3317,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170523193216');
 
 INSERT INTO schema_migrations (version) VALUES ('20170526200811');
 
-INSERT INTO schema_migrations (version) VALUES ('20170706193821');
+INSERT INTO schema_migrations (version) VALUES ('20170613153959');
 
+INSERT INTO schema_migrations (version) VALUES ('20170613153960');
+
+INSERT INTO schema_migrations (version) VALUES ('20170706193821');
