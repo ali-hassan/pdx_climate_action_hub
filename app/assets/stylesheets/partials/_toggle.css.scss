@@ -60,7 +60,7 @@
       @include small-type;
       display: block;
       width: 100%;
-      height: lines(3, 13);
+      min-height: lines(3, 13);
       padding: lines(0.25, 13);
     }
   }
@@ -149,4 +149,13 @@
 
 .toggle-menu-subitem, a.toggle-menu-subitem {
   padding-left: lines(1);
+}
+
+#home_toolbar-select-share-type{
+  float:right;
+  position:relative;
+}
+
+#home-toolbar-filters{
+  position:relative;
 }

@@ -48,17 +48,15 @@ Kassi::Application.routes.draw do
   get "/listings/new/:type" => "listings#new", :as => :new_request_without_locale # needed for some emails, where locale part is already set
   get "/change_locale" => "i18n#change_locale", :as => :change_locale
 
-
-  # Prettier link for admin panel
-  namespace :admin do
-    get '' => "getting_started_guide#index"
-  end
-
   # Internal API
   namespace :int_api do
     post "/create_trial_marketplace" => "marketplaces#create"
     post "/prospect_emails" => "marketplaces#create_prospect_email"
   end
+
+  # Harmony Proxy
+  # This endpoint proxies the requests to Harmony and does authorization
+  match '/harmony_proxy/*harmony_path' => 'harmony_proxy#proxy', via: :all
 
   # UI API, i.e. internal endpoints for dynamic UI that doesn't belong to under any specific controller
   get "/ui_api/topbar_props" => "topbar_api#props"
@@ -164,6 +162,7 @@ Kassi::Application.routes.draw do
     end
 
     namespace :admin do
+      get '' => "getting_started_guide#index"
 
       # Payments
       get  "/paypal_preferences"                      => "paypal_preferences#index"
@@ -281,6 +280,8 @@ Kassi::Application.routes.draw do
           post :order
           put :update_price
           put :update_location
+          get :edit_expiration
+          put :update_expiration
         end
       end
       resources :categories do
@@ -330,6 +331,7 @@ Kassi::Application.routes.draw do
         collection do
           post :add_from_file
           put :add_from_url
+          put :reorder
         end
       end
     end
@@ -439,7 +441,6 @@ Kassi::Application.routes.draw do
           member do
             get :account
             get :notifications
-            get :payments
             get :unsubscribe
           end
         end

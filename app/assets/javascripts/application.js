@@ -19,11 +19,11 @@
 //
 //= require jquery
 //= require jquery-ui-1.9.2.custom
+//= require jquery-ui-1.9.2.sortable
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.validate
 //= require jquery.pageless
-//= require jquery.autosize-min
 //= require jquery.lightbox_me
 //= require jquery.transit.min
 //= require jquery.ui.widget
@@ -34,6 +34,7 @@
 //= require jquery.fileupload-validate
 //= require jquery.fileupload-image
 //= require jquery.timepicker.min
+//= require autosize
 
 //= require selectize-standalone.js
 //= require datepicker/bootstrap-datepicker.js
@@ -86,4 +87,5 @@
 //= require transaction
 //= require listing_form
 //= require radio_buttons
+//= require new_layout
 //= require_self

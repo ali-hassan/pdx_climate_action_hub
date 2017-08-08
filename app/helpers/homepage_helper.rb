@@ -6,11 +6,10 @@ module HomepageHelper
   end
 
   def with_first_listing_image(listing, &block)
-    Maybe(listing)
-      .listing_images
-      .map { |images| images.first }[:small_3x2].each { |url|
-      block.call(url)
-    }
+    listing_model = Listing.find(listing.id)
+    if listing_model.listing_images.size > 0
+      block.call(listing_model.listing_images.order("position").first.image.url(:small_3x2))
+    end
   end
 
   def without_listing_image(listing, &block)

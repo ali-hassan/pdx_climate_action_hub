@@ -1,5 +1,6 @@
 class PeopleController < Devise::RegistrationsController
   class PersonDeleted < StandardError; end
+  class PersonBanned < StandardError; end
 
   skip_before_filter :verify_authenticity_token, :only => [:creates]
   skip_before_filter :require_no_authentication, :only => [:new]
@@ -23,6 +24,7 @@ class PeopleController < Devise::RegistrationsController
   def show
     @person = Person.find_by!(username: params[:username], community_id: @current_community.id)
     raise PersonDeleted if @person.deleted?
+    raise PersonBanned if @person.banned?
 
     redirect_to landing_page_path and return if @current_community.private? && !@current_user
     @selected_tribe_navi_tab = "members"
@@ -143,6 +145,8 @@ class PeopleController < Devise::RegistrationsController
 
     Delayed::Job.enqueue(CommunityJoinedJob.new(@person.id, @current_community.id)) if @current_community
 
+    Analytics.record_event(flash, "SignUp", method: :email)
+
     # send email confirmation
     # (unless disabled for testing environment)
     if APP_CONFIG.skip_email_confirmation
@@ -182,20 +186,33 @@ class PeopleController < Devise::RegistrationsController
       :password => Devise.friendly_token[0,20],
       community_id: @current_community.id
     }
-    @person = Person.create!(person_hash)
-    # We trust that Facebook has already confirmed these and save the user few clicks
-    Email.create!(:address => session["devise.facebook_data"]["email"], :send_notifications => true, :person => @person, :confirmed_at => Time.now, community_id: @current_community.id)
 
-    @person.set_default_preferences
+    ActiveRecord::Base.transaction do
+      @person = Person.create!(person_hash)
+      # We trust that Facebook has already confirmed these and save the user few clicks
+      Email.create!(:address => session["devise.facebook_data"]["email"], :send_notifications => true, :person => @person, :confirmed_at => Time.now, community_id: @current_community.id)
 
-    @person.store_picture_from_facebook
+      @person.set_default_preferences
+      CommunityMembership.create(person: @person, community: @current_community, status: "pending_consent")
+    end
+
+    begin
+      @person.store_picture_from_facebook!
+    rescue StandardError => e
+      # We can just catch and log the error, because if the profile picture upload fails
+      # we still want to make the user creation pass, just without the profile picture,
+      # which user can upload later
+      logger.error(e.message, :facebook_new_user_profile_picture_upload_failed, { person_id: @person.id })
+    end
 
     sign_in(resource_name, @person)
-    flash[:notice] = t("layouts.notifications.login_successful", :person_name => view_context.link_to(@person.given_name_or_username, person_path(@person))).html_safe
+    flash[:notice] = t("layouts.notifications.login_successful", :person_name => view_context.link_to(PersonViewUtils.person_display_name_for_type(@person, "first_name_only"), person_path(@person))).html_safe
 
-    CommunityMembership.create(person: @person, community: @current_community, status: "pending_consent")
 
     session[:fb_join] = "pending_analytics"
+
+    Analytics.record_event(flash, "SignUp", method: :facebook)
+
     redirect_to pending_consent_path
   end
 
@@ -221,6 +238,7 @@ class PeopleController < Devise::RegistrationsController
       person_params = params.require(:person).permit(
         :given_name,
         :family_name,
+        :display_name,
         :street_address,
         :phone_number,
         :image,
@@ -365,8 +383,5 @@ class PeopleController < Devise::RegistrationsController
     person.set_default_preferences
 
     [person, email]
-  end
-
-  def email_availability(email, community_id)
   end
 end

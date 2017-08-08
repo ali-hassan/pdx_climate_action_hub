@@ -192,8 +192,7 @@ module TransactionService::Store::Transaction
   def add_opt_booking(hash, m)
     if m.booking
       booking_data = EntityUtils.model_to_hash(m.booking)
-      hash.merge(booking: Booking.call(
-                  booking_data.merge(duration: m.listing_quantity)))
+      hash.merge(booking: Booking.call(booking_data.merge(duration: m.listing_quantity)))
     else
       hash
     end
@@ -226,9 +225,11 @@ module TransactionService::Store::Transaction
 
   def build_booking(tx_model, tx_data)
     if is_booking?(tx_data)
-      start_on = tx_data[:booking_fields][:start_on]
-      end_on = tx_data[:booking_fields][:end_on]
-      tx_model.build_booking({start_on: start_on, end_on: end_on})
+      start_on, end_on = tx_data[:booking_fields].values_at(:start_on, :end_on)
+
+      tx_model.build_booking(
+        start_on: start_on,
+        end_on: end_on)
     end
   end
 
