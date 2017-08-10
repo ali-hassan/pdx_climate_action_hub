@@ -46,11 +46,7 @@ class HomepageController < ApplicationController
 
     filter_params[:listing_shape] = Maybe(selected_shape)[:id].or_else(nil)
 
-    if @view_type == "list"
-      filter_params[:upcoming_events] = true
-    else
-      filter_params[:upcoming_events] = true
-    end
+    filter_params[:upcoming_events] = true
 
     compact_filter_params = HashUtils.compact(filter_params)
 
