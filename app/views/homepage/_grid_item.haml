@@ -1,5 +1,4 @@
-- if listing.event.end_at >= DateTime.now.to_date
-
+- if show_post?(Listing.find(listing.id))
   - frontpage_fragment_cache("grid_item", listing) do
     .home-fluid-thumbnail-grid-item
       %div

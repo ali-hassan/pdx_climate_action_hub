@@ -134,4 +134,15 @@ module ListingsHelper
     t(listing.action_button_tr_key)
   end
 
+  def show_post?(listing)
+    show = true
+
+    if listing.event_has_end_at
+
+      show = false if (listing.event.end_at < DateTime.now.to_date) and listing.event.event_rule_hash.blank?
+    end
+
+    return show
+  end
+
 end

@@ -266,4 +266,8 @@ class Listing < ActiveRecord::Base
     Maybe(read_attribute(:unit_type)).to_sym.or_else(nil)
   end
 
+  def event_has_end_at
+    self.event.present? and self.event.end_at.present?
+  end
+
 end

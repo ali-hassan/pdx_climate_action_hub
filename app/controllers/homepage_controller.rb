@@ -46,7 +46,11 @@ class HomepageController < ApplicationController
 
     filter_params[:listing_shape] = Maybe(selected_shape)[:id].or_else(nil)
 
-    filter_params[:upcoming_events] = true
+    if @view_type == "list"
+      filter_params[:upcoming_events] = true
+    else
+      filter_params[:upcoming_events] = false
+    end
 
     compact_filter_params = HashUtils.compact(filter_params)
 
@@ -55,7 +59,7 @@ class HomepageController < ApplicationController
     includes =
       case @view_type
       when "grid"
-        [:author, :listing_images, :event]
+        [:author, :listing_images]
       when "list"
         [:author, :listing_images, :num_of_reviews, :event]
       when "map"
