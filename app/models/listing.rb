@@ -162,9 +162,9 @@ class Listing < ActiveRecord::Base
     when "all"
       where([])
     when "open"
-      includes(:event).where(["open = '1' AND (((valid_until IS NULL OR valid_until > ?) AND events.end_at IS NULL) OR events.end_at > ?)", DateTime.now, DateTime.now]).references(:event)
+      includes(:event).where(["open = '1' AND (((valid_until IS NULL OR valid_until > ?) AND events.end_at IS NULL) OR events.end_at >= ?)", DateTime.now, DateTime.now.to_date]).references(:event)
     when "closed"
-      includes(:event).where(["open = '0' OR (valid_until IS NOT NULL AND valid_until < ?) OR (events.end_at IS NOT NULL AND events.end_at < ?)", DateTime.now, DateTime.now]).references(:event)
+      includes(:event).where(["open = '0' OR (valid_until IS NOT NULL AND valid_until < ?) OR (events.end_at IS NOT NULL AND events.end_at <= ?)", DateTime.now, DateTime.now.to_date]).references(:event)
     end
   end
 
@@ -264,6 +264,10 @@ class Listing < ActiveRecord::Base
 
   def unit_type
     Maybe(read_attribute(:unit_type)).to_sym.or_else(nil)
+  end
+
+  def event_has_end_at
+    self.event.present? and self.event.end_at.present?
   end
 
 end
