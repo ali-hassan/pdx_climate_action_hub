@@ -9,7 +9,9 @@
     - if !has_event?(@listing)
       .links
         %strong
+          = icon_tag('calendar', ["icon-fix"])
           = link_to_add_association 'Click to add date(s) if this is an event, etc.', f, :event, :force_non_association_create => true, :disable_with => "", :id => 'add_event'  
+  = render :partial => "listings/form/images", :locals => { :f => f, :run_js_immediately => run_js_immediately }
   = render :partial => "listings/form/price", :locals => { :f => f, :seller_commission_in_use => seller_commission_in_use, :payment_gateway => payment_gateway, :run_js_immediately => run_js_immediately, :minimum_commission => minimum_commission, commission_from_seller: commission_from_seller, shape: shape, unit_options: unit_options, shipping_price_additional: shipping_price_additional, paypal_fees_url: paypal_fees_url }
   = render partial: "listings/form/shipping", locals: { f: f, shape: shape, always_show_additional_shipping_price: always_show_additional_shipping_price, shipping_enabled: shipping_enabled, pickup_enabled: pickup_enabled, shipping_price: shipping_price, shipping_price_additional: shipping_price_additional }
   = render :partial => "listings/form/description", :locals => { :f => f }
@@ -17,7 +19,7 @@
   = render :partial => "listings/form/valid_until", :locals => { :f => f }
   = render :partial => "listings/form/origin", :locals => { :f => f, :origin_loc => @listing.origin_loc }
   = render :partial => "listings/form/googlemap", :locals => { :f => f, :run_js_immediately => run_js_immediately}
-  = render :partial => "listings/form/images", :locals => { :f => f, :run_js_immediately => run_js_immediately }
+  
   = render :partial => "listings/form/send_button", :locals => { :f => f }
 
 = render :partial => "listings/help_texts", :collection => ["help_valid_until"], :as => :field
