@@ -195,3 +195,4 @@ gem 'ice_cube'
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 
 gem 'intercom', '~> 3.5.10'
+gem 'rails_autolink'
