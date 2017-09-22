@@ -1,5 +1,5 @@
 # coding: utf-8
-Kassi::Application.routes.draw do
+Rails.application.routes.draw do
 
   namespace :mercury do
     resources :images
@@ -100,6 +100,8 @@ Kassi::Application.routes.draw do
   get '/406' => 'errors#not_acceptable', :as => :error_not_acceptable
   get '/410' => 'errors#gone', as: :error_gone
   get '/community_not_found' => 'errors#community_not_found', as: :community_not_found
+
+  get '/_custom_head_scripts' => 'landing_page#custom_head_scripts'
 
   resources :communities, only: [:new, :create]
 
