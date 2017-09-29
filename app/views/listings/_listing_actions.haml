@@ -4,7 +4,6 @@
 - show_manage_availability = is_authorized && availability_enabled
 
 - str_dates = @listing.unavailable_dates.map { |d| "new Date('#{d.date}')" }.join(",").html_safe
-= str_dates
 
 - if @listing.closed?
   .listing-view-admin-links
