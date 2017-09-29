@@ -47,7 +47,8 @@ Rails.application.routes.draw do
   get "/people/:person_id/inbox/:id", :to => redirect("/fi/people/%{person_id}/messages/%{id}")
   get "/listings/new/:type" => "listings#new", :as => :new_request_without_locale # needed for some emails, where locale part is already set
   get "/change_locale" => "i18n#change_locale", :as => :change_locale
-
+  post "/toggle_availability" => "listings#toggle_availability"
+  
   # Internal API
   namespace :int_api do
     post "/create_trial_marketplace" => "marketplaces#create"

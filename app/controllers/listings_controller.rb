@@ -598,6 +598,28 @@ class ListingsController < ApplicationController
 
   end
 
+  def toggle_availability
+    params_date = params[:date].to_date.strftime("%Y-%m-%d")
+
+    date = UnavailableDate.where("listing_id like ? and date like ?", params[:listing_id], params_date).first
+
+    if date.nil?
+      UnavailableDate.create(date: params_date, listing_id: params[:listing_id])
+    else
+      date.destroy
+    end
+
+    render nothing: true
+  end
+
+  def is_unavailable
+    params_date = params[:date]
+
+    date = UnavailableDate.where("listing_id like ? and date like ?", params[:listing_id], params_date).first
+
+    render json: date.nil?
+  end
+  
   private
 
   def create_repeat_rule

@@ -79,6 +79,7 @@ class Listing < ApplicationRecord
   has_many :custom_field_values, :dependent => :destroy
   has_many :custom_dropdown_field_values, :class_name => "DropdownFieldValue"
   has_many :custom_checkbox_field_values, :class_name => "CheckboxFieldValue"
+  has_many :unavailable_dates
 
   has_one :event, :dependent => :destroy #, :order => 'start_at DESC'
   accepts_nested_attributes_for :event, :allow_destroy => true, :reject_if => :all_blank

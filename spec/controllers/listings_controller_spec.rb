@@ -46,6 +46,7 @@
 #  pickup_enabled                  :boolean          default(FALSE)
 #  shipping_price_cents            :integer
 #  shipping_price_additional_cents :integer
+#  external_payment_link           :text(65535)
 #  availability                    :string(32)       default("none")
 #
 # Indexes
@@ -61,7 +62,6 @@
 #  person_listings                     (community_id,author_id)
 #  updates_email_listings              (community_id,open,updates_email_at)
 #
-
 
 #Tests LisingControllers atom feed feature
 

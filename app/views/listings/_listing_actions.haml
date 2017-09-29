@@ -3,6 +3,9 @@
 - is_authorized = is_author || is_marketplace_admin
 - show_manage_availability = is_authorized && availability_enabled
 
+- str_dates = @listing.unavailable_dates.map { |d| "new Date('#{d.date}')" }.join(",").html_safe
+= str_dates
+
 - if @listing.closed?
   .listing-view-admin-links
     .listing-view-admin-link
@@ -37,7 +40,7 @@
             :javascript
 
               var disabledDates = [
-                #{blocked_dates.map { |d| "new Date(#{d.to_i * 1000})" }.join(",")}
+                #{str_dates}
               ];
 
               $.fn.datepicker.dates['#{I18n.locale}'] = {
@@ -196,6 +199,11 @@
         %a.icon-with-text-container{href: edit_listing_path(@listing)}
           = icon_tag("edit", ["icon-part"])
           .text-part= t("listings.edit_links.edit_listing")
+      .listing-view-admin-link
+        %a.icon-with-text-container.edit-calendar-availability{href: "#"}
+          = icon_tag("edit", ["icon-part"])
+          .text-part= t("listings.edit_links.edit_availability")
+        #calendar-availability
       - if show_manage_availability
         - availability_link_id = "edit-listing-availability-#{SecureRandom.urlsafe_base64(5)}"
         .listing-view-admin-link
@@ -220,3 +228,70 @@
             .icon-with-text-container
               = icon_tag("mail", ["icon-part"])
               .text-part#add-to-updates-email-text{data: {:"action-loading" => t("listings.edit_links.show_in_updates_email_loading"), :"action-error" => t("listings.edit_links.show_in_updates_email_error"), :"action-success"=> t("listings.edit_links.show_in_updates_email_success")}}= t("listings.edit_links.show_in_updates_email")
+
+
+- content_for :extra_javascript do
+  :javascript
+    $(function(){
+
+      $(".enabled-book-button").click(function(){
+        start_on = new Date($("input[name=start_on]").val());
+        end_on = new Date($("input[name=end_on]").val());
+        var diff = Math.abs(end_on - start_on);
+        number_of_selected_days = Math.floor(diff / (24*60*60*1000));
+
+      })
+
+      $(".edit-calendar-availability").click(function(){
+        var disabledDates = [#{str_dates}];
+        function getCorrectMonth(month){
+          if (month.toString().length == 1){
+            return "0" + month;
+          }else{
+            return month
+          }
+        }
+
+        $("#calendar-availability").datepicker({multidate: true, beforeShowDay: function(date){
+          dmy = date.getFullYear() + "-" + ( getCorrectMonth(date.getMonth()+1)) + "-" + ('0' + date.getDate()).slice(-2);
+          if ($.inArray(dmy, disabledDates) !== -1) {
+            return {classes: "calendar-disabled-day"}
+          } else {
+            return {enabled: true}
+          }
+        }}).on('changeDate', function(ev) {
+          $.post("/toggle_availability", {date: ev.date, listing_id: #{@listing.id}});
+          $('.active').toggleClass('calendar-disabled-day');
+        });
+        
+
+      });
+    })
+
+
+:css
+  #calendar-availability .datepicker-days .disabled-date:hover{
+    cursor:pointer;
+    background-color: #3483de;
+    color: #fff;
+  }
+
+  .datepicker table tr td.calendar-disabled-day, td.active.day.calendar-disabled-day{
+    background-color: #e8e8e8 !important;
+  }
+
+  .datepicker table tr td.active{
+    background-color: #FFF !important;
+    color: #000 !important;
+  }
+  .calendar-description{
+    text-align:left;
+    font-weight:bold;
+    font-size: 1.2em;
+    margin: 10px 0 0 25px;
+  }
+
+  .datepicker table tr td.active:hover, .datepicker table tr td.active{
+    background: #000 !important;
+    color: #FFF !important;
+  }

@@ -18,7 +18,6 @@
 #
 
 class Event < ActiveRecord::Base
-  attr_accessible :start_at, :end_at, :start_at_time, :end_at_time, :event_rule_hash
 
   belongs_to :listing
 
