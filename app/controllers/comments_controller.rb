@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   before_action :ensure_authorized_to_comment, only: [:create]
 
   def create
+
     if @comment.save
       @comment.reload # reload is needed, as create.js.erb refers the model directly
       Delayed::Job.enqueue(CommentCreatedJob.new(@comment.id, @current_community.id))
