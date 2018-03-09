@@ -136,13 +136,10 @@ module ListingsHelper
 
   def show_post?(listing)
     show = true
-
     if listing.event_has_end_at
-
-      show = false if (listing.event.end_at < DateTime.now.to_date) and listing.event.event_rule_hash.blank?
+      show = false if (listing.event.end_at < DateTime.now.to_date)
     end
-
-    return show
+    show
   end
 
 end
