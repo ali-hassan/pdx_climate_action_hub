@@ -22,6 +22,7 @@ window.ST = window.ST || {};
       return clonedDate;
     });
     var now = new Date();
+    console.log(1)
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
     var dateRage = $('#'+ rangeContainerId);
     var dateLocale = dateRage.data('locale');

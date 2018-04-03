@@ -3,7 +3,7 @@
 - is_authorized = is_author || is_marketplace_admin
 - show_manage_availability = is_authorized && availability_enabled
 
-- str_dates = @listing.unavailable_dates.map { |d| "new Date('#{d.date}')" }.join(",").html_safe
+- str_dates = @listing.unavailable_dates.map { |d| "'#{d.date.year}-#{d.date.month}-#{d.date.day}'" }.join(",").html_safe
 
 - if @listing.closed?
   .listing-view-admin-links
@@ -200,7 +200,7 @@
           .text-part= t("listings.edit_links.edit_listing")
       .listing-view-admin-link
         %a.icon-with-text-container.edit-calendar-availability{href: "#"}
-          = icon_tag("edit", ["icon-part"])
+          = icon_tag("calendar", ["icon-part"])
           .text-part= t("listings.edit_links.edit_availability")
         #calendar-availability
       - if show_manage_availability
@@ -252,7 +252,7 @@
         }
 
         $("#calendar-availability").datepicker({multidate: true, beforeShowDay: function(date){
-          dmy = date.getFullYear() + "-" + ( getCorrectMonth(date.getMonth()+1)) + "-" + ('0' + date.getDate()).slice(-2);
+          dmy = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
           if ($.inArray(dmy, disabledDates) !== -1) {
             return {classes: "calendar-disabled-day"}
           } else {

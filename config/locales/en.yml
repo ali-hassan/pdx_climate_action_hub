@@ -331,7 +331,7 @@ en:
         paypal_admin_account: "Payment system"
     custom_fields:
       edit:
-        edit_listing_field: "Edit post field '%{field_name}'"
+        edit_listing_field: "Edit Post field '%{field_name}'"
       edit_price:
         description: "The minimum and maximum price only affect the filter. They do not set a limit for post prices."
         edit_price_field: "Edit price field"
@@ -1376,16 +1376,17 @@ en:
       you_must: "You must"
       subscribe_to_comments: "Notify me of new comments and updates."
     edit:
-      edit_listing: "Edit post"
+      edit_listing: "Edit Post"
     edit_links:
-      close_listing: "Close post"
-      edit_listing: "Edit post"
-      reopen_listing: "Reopen post"
+      close_listing: "Close Post"
+      edit_listing: "Edit Post"
+      reopen_listing: "Reopen Post"
       move_to_top: "Move to top of homepage"
       show_in_updates_email: "Show in the next newsletter"
       show_in_updates_email_loading: Loading...
       show_in_updates_email_error: "Could not reach server. Please try again after page refresh."
       show_in_updates_email_success: "This post will be shown in the next automatic email update sent to users."
+      edit_availability: "Edit Availability"
     map:
       open_in_google_maps: "Open in Google Maps"
     error:

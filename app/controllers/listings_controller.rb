@@ -609,7 +609,7 @@ class ListingsController < ApplicationController
       date.destroy
     end
 
-    render nothing: true
+    render json: "ok"
   end
 
   def is_unavailable
@@ -623,8 +623,6 @@ class ListingsController < ApplicationController
   private
 
   def create_repeat_rule
-    p "************ CREATE REPEAT RULE PARAMS ********** #{@params} ************"
-    
     repeats_every_counter = params[:repeats_every].to_i
 
     start_at = @params[:listing][:event_attributes][:start_at]
