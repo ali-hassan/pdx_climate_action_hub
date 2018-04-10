@@ -250,7 +250,6 @@
             return month
           }
         }
-
         $("#calendar-availability").datepicker({multidate: true, beforeShowDay: function(date){
           dmy = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
           if ($.inArray(dmy, disabledDates) !== -1) {
