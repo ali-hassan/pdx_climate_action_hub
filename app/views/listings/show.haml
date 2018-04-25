@@ -95,7 +95,7 @@
 
         - if @listing.description && !@listing.description.blank?
           - text_with_line_breaks do
-            = @listing.description
+            = auto_link(@listing.description, html: {target: "_blank"} ).html_safe
           - if(youtube_link_ids.present?)
             - youtube_link_ids.each do |youtube_id|
               .listing-description-youtube-wrapper
