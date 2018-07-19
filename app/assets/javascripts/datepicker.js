@@ -22,6 +22,7 @@ window.ST = window.ST || {};
       return clonedDate;
     });
     var now = new Date();
+    console.log(1)
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
     var dateRage = $('#'+ rangeContainerId);
     var dateLocale = dateRage.data('locale');
@@ -30,7 +31,8 @@ window.ST = window.ST || {};
       startDate: today,
       inputs: [$("#start-on"), $("#end-on")],
       endDate: endDate,
-      datesDisabled: disabledStartDates
+      datesDisabled: disabledStartDates,
+      plusOne: nightPicker
     };
 
     if(dateLocale !== 'en') {
@@ -41,11 +43,15 @@ window.ST = window.ST || {};
 
     if (nightPicker) {
       $("#start-on").focus(function() {
-        $("#start-on").datepicker("setDatesDisabled", disabledStartDates);
+        if(!$(this).is(":focus")) {
+          $("#start-on").datepicker("setDatesDisabled", disabledStartDates);
+        }
       });
 
       $("#end-on").focus(function() {
-        $("#end-on").datepicker("setDatesDisabled", disabledEndDates);
+        if(!$(this).is(":focus")) {
+          $("#end-on").datepicker("setDatesDisabled", disabledEndDates);
+        }
       });
     }
 
@@ -64,8 +70,8 @@ window.ST = window.ST || {};
         // End date should be excluded
         newDate.setDate(newDate.getDate() + 1);
       }
-
       outputElement.val(module.utils.toISODate(newDate));
+      setTimeout(function() { $("#end-on").valid(); }, 360)
     });
   };
 })(window.ST);

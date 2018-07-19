@@ -140,6 +140,24 @@ class LandingPageController < ActionController::Metal
     end
   end
 
+  include ActionView::Helpers::JavaScriptHelper
+
+  def custom_head_scripts
+    @current_community = request.env[:current_marketplace]
+    FeatureFlagHelper.init(community_id: @current_community.id,
+                           user_id: @current_user&.id,
+                           request: request,
+                           is_admin: Maybe(@current_user).is_admin?.or_else(false),
+                           is_marketplace_admin: Maybe(@current_user).is_marketplace_admin?(@current_community).or_else(false))
+
+    if FeatureFlagHelper.feature_enabled?(:landing_scripts)
+      js = @current_community.custom_head_script.to_s
+      render body: "document.write(\"#{escape_javascript js}\")", content_type: 'text/javascript'
+    else
+      render body: "", content_type: 'text/javascript'
+    end
+  end
+
 
   private
 
@@ -380,15 +398,23 @@ class LandingPageController < ActionController::Metal
   end
 
   def landing_page_styles
-    Rails.application.assets.find_asset("landing_page/styles.scss").to_s.html_safe
+    find_asset_path("landing_page/styles.scss")
   end
 
   def location_search_js
-    Rails.application.assets.find_asset("location_search.js").to_s.html_safe
+    find_asset_path("location_search.js")
   end
 
   def js_translations(topbar_locale)
-    Rails.application.assets.find_asset("i18n/#{topbar_locale}.js").to_s.html_safe
+    find_asset_path("i18n/#{topbar_locale}.js")
+  end
+
+  def find_asset_path(asset_name)
+    if Rails.configuration.assets.compile
+      Rails.application.assets.find_asset(asset_name)
+    else
+      CompassRails.sprockets.find_asset(asset_name)
+    end.to_s.html_safe
   end
 
   def locale
