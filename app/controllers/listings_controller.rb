@@ -704,14 +704,14 @@ class ListingsController < ApplicationController
       }
     ).rescue {
       Result::Error.new(nil, code: :harmony_api_error)
-    }.and_then { |res|
+    }.and_then do |res|
       available_slots = dates_to_ts_set(
         res[:body][:data].map { |timeslot| timeslot[:attributes][:start].to_date }
       )
       Result::Success.new(
         dates_to_ts_set(start_on..end_on).subtract(available_slots)
       )
-    }
+    end
   end
 
   def dates_to_ts_set(dates)
