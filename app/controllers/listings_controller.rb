@@ -695,21 +695,21 @@ class ListingsController < ApplicationController
 
   def get_blocked_dates(start_on:, end_on:, community:, user:, listing:)
     HarmonyClient.get(
-        :query_timeslots,
-        params: {
-            marketplaceId: community.uuid_object,
-            refId: listing.uuid_object,
-            start: start_on,
-            end: end_on
-        }
+      :query_timeslots,
+      params: {
+        marketplaceId: community.uuid_object,
+        refId: listing.uuid_object,
+        start: start_on,
+        end: end_on
+      }
     ).rescue {
       Result::Error.new(nil, code: :harmony_api_error)
     }.and_then do |res|
       available_slots = dates_to_ts_set(
-          res[:body][:data].map { |timeslot| timeslot[:attributes][:start].to_date }
+        res[:body][:data].map { |timeslot| timeslot[:attributes][:start].to_date }
       )
       Result::Success.new(
-          dates_to_ts_set(start_on..end_on).subtract(available_slots)
+        dates_to_ts_set(start_on..end_on).subtract(available_slots)
       )
     end
   end
