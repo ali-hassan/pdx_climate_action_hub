@@ -1849,11 +1849,12 @@ en:
       account_confirmation_instructions: "You will soon receive an email with a link to confirm your email address. If you don't see it, please check your spam folder. After confirming your address, you can join %{service_name}."
       account_confirmation_instructions_title_admin: "Welcome to ShareOregon!"
       your_marketplace_has_now_been_created: "ShareOregon has now been created. Please confirm your email address."
-      account_confirmation_instructions_admin: "You will soon receive an email with a link to confirm your email address. Don't forget to check your spam folder!"
+#      account_confirmation_instructions_admin: "You will soon receive an email with a link to confirm your email address. Don't forget to check your spam folder!"
       before_full_access_you_need_to_confirm_email: "Please check your email and confirm your address."
       before_confirmation_only_access_admin_dashboard: "Before confirmation you can only access the %{admin_dashboard_link}."
       admin_dashboard_link_text: "admin dashboard"
-      account_confirmation_instructions_admin: "You should have received an email at %{email_address} with a confirmation link. If you don't see it, check your spam folder or click the button below to resend the email. Once it arrives, open the included link to confirm your address, after which you'll get full access to your ShareOregon. If you need any help, don't hesitate to %{support_link}."
+      account_confirmation_instructions_admin: "You should have received an email at %{email_address} with a confirmation button. If you don't see it, check your spam folder or click the button below to resend the email. Once it arrives, please click the button to confirm your address and get full access to your ShareOregon account. If have any questions, please don't hesitate to %{user_feedback_link}."
+      user_feedback_link_text: "contact us"
       contact_support_link_text: "contact ShareOregon support"
   settings:
     account:
