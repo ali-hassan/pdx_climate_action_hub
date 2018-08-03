@@ -65,7 +65,7 @@
         - unless @skip_terms_checkbox
           %input{:type => "checkbox", :id => "person_terms", :name => "person[terms]"}
           = form.label :terms, t('.i_accept_the'), :class => "checkbox"
-          = "#{link_to( t(".terms"), terms_infos_path, :target => "_blank")}."
+          = link_to( t(".terms"), terms_infos_path, :target => "_blank") + "."
 
     = form.hidden_field :consent, :value => @current_community.consent
 
