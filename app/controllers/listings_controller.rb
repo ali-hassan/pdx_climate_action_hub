@@ -182,6 +182,7 @@ class ListingsController < ApplicationController
       [nil, nil]
     end
 
+    @near_by_listings = @listing.near_by_listings
     payment_gateway = MarketplaceService::Community::Query.payment_type(@current_community.id)
     process = get_transaction_process(community_id: @current_community.id, transaction_process_id: @listing.transaction_process_id)
     form_path = new_transaction_path(listing_id: @listing.id)

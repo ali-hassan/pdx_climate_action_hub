@@ -140,6 +140,10 @@ class Listing < ApplicationRecord
     self.uuid = UUIDUtils.raw(uuid)
   end
 
+  def near_by_listings
+    Location.near(self.origin, 50).collect {|loc| loc.listing}
+  end
+
   before_create :add_uuid
   def add_uuid
     self.uuid ||= UUIDUtils.create_raw

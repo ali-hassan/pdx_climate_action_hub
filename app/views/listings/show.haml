@@ -116,6 +116,10 @@
               %b
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
+    .row
+      .col-12
+        - @near_by_listings.each do |n_listing|
+          = render :partial => "listing", locals: { :listings => n_listing.listing_images }
 
     - if !@current_community.private?
       .row
