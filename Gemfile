@@ -170,3 +170,4 @@ gem 'redcarpet', '~> 3.4.0'
 
 gem 'rails_autolink'
 gem 'intercom'
+gem 'geocoder'
