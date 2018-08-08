@@ -118,8 +118,7 @@
                 = l @listing.created_at, :format => :short_date
     .row
       .col-12
-        - @near_by_listings.each do |n_listing|
-          = render :partial => "listing", locals: { :listings => n_listing.listing_images }
+        = render :partial => "listings/profile_listings", :locals => {person: @person, limit: @per_page, listings: @near_by_listings}
 
     - if !@current_community.private?
       .row

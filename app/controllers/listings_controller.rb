@@ -180,9 +180,39 @@ class ListingsController < ApplicationController
       @listing.prev_and_next_image_ids_by_id(@current_image.id)
     else
       [nil, nil]
-    end
+                                     end
+    @person  = @listing.author
+    @per_page = params[:per_page] || 1000 # the point is to show all here by default
+    includes = [:author, :listing_images]
+    include_closed = @person == @current_user && params[:show_closed]
+    search = {
+        author_id: @person.id,
+        include_closed: include_closed,
+        page: 1,
+        address: @listing.origin,
+        per_page: @per_page
+    }
 
-    @near_by_listings = @listing.near_by_listings
+    raise_errors = Rails.env.development?
+
+    @near_by_listings =
+        ListingIndexService::API::Api
+            .listings
+            .search(
+                community_id: @current_community.id,
+                search: search,
+                engine: FeatureFlagHelper.search_engine,
+                raise_errors: raise_errors,
+                includes: includes
+            ).and_then { |res|
+          Result::Success.new(
+              ListingIndexViewUtils.to_struct(
+                  result: res,
+                  includes: includes,
+                  page: search[:page],
+                  per_page: search[:per_page]
+              ))
+        }.data
     payment_gateway = MarketplaceService::Community::Query.payment_type(@current_community.id)
     process = get_transaction_process(community_id: @current_community.id, transaction_process_id: @listing.transaction_process_id)
     form_path = new_transaction_path(listing_id: @listing.id)

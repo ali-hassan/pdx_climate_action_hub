@@ -1,6 +1,6 @@
 %div{class: @category_menu_enabled ? "home-fluid-thumbnail-grid-narrow" : "home-fluid-thumbnail-grid-wide"}
   .home-fluid-thumbnail-grid
-    - listings.each do |listing|
+    - listing.each do |listing|
     - if show_post?(Listing.find(listing.id))
       - frontpage_fragment_cache("grid_item", listing) do
         .home-fluid-thumbnail-grid-item
