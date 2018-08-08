@@ -117,6 +117,8 @@
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
     .row
+      %h5 More Results Close By:
+    .row
       .col-12
         = render :partial => "listings/profile_listings", :locals => {person: @person, limit: @per_page, listings: @near_by_listings}
 
