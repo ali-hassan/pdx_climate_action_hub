@@ -190,6 +190,9 @@ class ListingsController < ApplicationController
         include_closed: include_closed,
         page: 1,
         address: @listing.origin,
+        location_latitude: @listing.origin_loc.try(:latitude),
+        location_longitude: @listing.origin_loc.try(:longitude),
+        location_radius: "50",
         per_page: @per_page
     }
 
@@ -213,6 +216,7 @@ class ListingsController < ApplicationController
                   per_page: search[:per_page]
               ))
         }.data
+
     payment_gateway = MarketplaceService::Community::Query.payment_type(@current_community.id)
     process = get_transaction_process(community_id: @current_community.id, transaction_process_id: @listing.transaction_process_id)
     form_path = new_transaction_path(listing_id: @listing.id)
