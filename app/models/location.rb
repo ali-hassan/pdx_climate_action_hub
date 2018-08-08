@@ -22,6 +22,7 @@
 #
 
 class Location < ApplicationRecord
+
   belongs_to :person
   belongs_to :listing
   belongs_to :community
