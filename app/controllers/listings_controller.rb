@@ -189,7 +189,7 @@ class ListingsController < ApplicationController
         author_id: @person.id,
         include_closed: include_closed,
         page: 1,
-        address: @listing.origin,
+        # address: @listing.origin,
         location_latitude: @listing.origin_loc.try(:latitude),
         location_longitude: @listing.origin_loc.try(:longitude),
         location_radius: "50",
