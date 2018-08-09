@@ -192,7 +192,7 @@ class ListingsController < ApplicationController
         # address: @listing.origin,
         location_latitude: @listing.origin_loc.try(:latitude),
         location_longitude: @listing.origin_loc.try(:longitude),
-        location_radius: "50",
+        location_radius: "20",
         per_page: @per_page
     }
 

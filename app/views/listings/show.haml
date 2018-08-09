@@ -120,7 +120,7 @@
       %h5 Things to Do Nearby:
     .row
       .col-12
-        = render :partial => "listings/profile_listings", :locals => {person: @person, limit: @per_page, listings: @near_by_listings}
+        = render :partial => "listings/profile_listings", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id } }
 
     - if !@current_community.private?
       .row
