@@ -116,11 +116,6 @@
               %b
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
-    .row
-      %h5 Things to Do Nearby:
-    .row
-      .col-12
-        = render :partial => "listings/profile_listings", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id } }
 
     - if !@current_community.private?
       .row
@@ -149,6 +144,14 @@
             = render :partial => "comment", :collection => @listing.comments
           #comment-form
             = render :partial => "comment_form"
+
+
+    .row
+      %h5 Things to Do Nearby:
+    .row
+      .col-12
+        = render :partial => "listings/profile_listings", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id } }
+
 
   %aside.col-4
     - if @listing.price
