@@ -134,7 +134,7 @@
       .view-item
         #comments.discussion.overflow-allowed
           %h2
-            %div{ :style => "color: #009aee !important;" }= icon_tag("chat_bubble", ["icon-with_text"])
+            = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
             .text-with-icon
               = t(".comments")
               %span#comment_count= "(#{@listing.comments_count})"
