@@ -117,10 +117,12 @@
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
 
+
     - if !@current_community.private?
       .row
         .col-12
           .listing-social
+            .fb-save{"data-size" => "small", "data-uri" => "https://www.shareoregon.com/things-to-do"}
             .listing-fb-like-button
               = facebook_like(current_user?(@listing.author))
             .listing-tweet-button
@@ -134,7 +136,7 @@
       .view-item
         #comments.discussion.overflow-allowed
           %h2
-            = icon_tag("chat_bubble", ["icon-with_text"])
+            = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
             .text-with-icon
               = t(".comments")
               %span#comment_count= "(#{@listing.comments_count})"
@@ -144,6 +146,14 @@
             = render :partial => "comment", :collection => @listing.comments
           #comment-form
             = render :partial => "comment_form"
+
+
+    .row
+      %h5 Things to Do Nearby:
+    .row
+      .col-12
+        = render :partial => "listings/profile_listings", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id } }
+
 
   %aside.col-4
     - if @listing.price
