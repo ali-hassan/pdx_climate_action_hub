@@ -117,10 +117,12 @@
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
 
+
     - if !@current_community.private?
       .row
         .col-12
           .listing-social
+            .fb-save{"data-size" => "small", "data-uri" => "https://www.shareoregon.com/things-to-do"}
             .listing-fb-like-button
               = facebook_like(current_user?(@listing.author))
             .listing-tweet-button
