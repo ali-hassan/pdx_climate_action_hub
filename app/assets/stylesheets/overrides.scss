@@ -1,6 +1,13 @@
-text-part {
+.icon-with-text-container .text-part {
   font-weight: bold !important;
 }
-.listing-fb-like-button, .listing-tweet-button {
-  margin-right: 1.5em !important;
+.listing-fb-like-button {
+  width: 95px;
+}
+.listing-tweet-button  {
+  width: 40px;
+}
+.fb_iframe_widget {
+  float: left;
+  width: 126px;
 }
