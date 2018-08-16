@@ -152,10 +152,60 @@ class SessionsController < ApplicationController
     end
   end
 
+  def google
+    data = request.env["omniauth.auth"].extra.raw_info
+    origin_locale = get_origin_locale(request, available_locales())
+    I18n.locale = origin_locale if origin_locale
+
+    persons = Person
+              .includes(:emails, :community_memberships)
+              .references(:emails)
+              .where(["people.google_id = ? OR emails.address = ?", data.id, data.email]).uniq
+
+    people_in_this_community = persons.select { |p| p.is_admin? || p.community_memberships.map(&:community_id).include?(@current_community.id) }
+    person_by_google_id = people_in_this_community.find { |p| p.google_id == data.id }
+    person_by_email = people_in_this_community.find { |p| p.emails.any? { |e| e.address == data.email && e.confirmed_at.present? } }
+    email_unconfirmed = people_in_this_community.flat_map(&:emails).find { |e| e.address == data.email && e.confirmed_at.blank? }.present?
+
+    person = person_by_google_id || person_by_email
+
+    if person
+      person.update_google_data(data.id)
+      flash[:notice] = t("devise.omniauth_callbacks.success", :kind => "Google")
+      sign_in_and_redirect person, :event => :authentication
+    elsif data.email.blank?
+      flash[:error] = t("layouts.notifications.could_not_get_email_from_google")
+      redirect_to sign_up_path and return
+    elsif email_unconfirmed
+      flash[:error] = t("layouts.notifications.google_email_unconfirmed", email: data.email)
+      redirect_to login_path and return
+    else
+      google_data = {"email" => data.email,
+                       "given_name" => data.first_name,
+                       "family_name" => data.last_name,
+                       "username" => data.username,
+                       "id"  => data.id}
+
+      session["devise.google_data"] = google_data
+      redirect_to :action => :create_google_based, :controller => :people
+    end
+  end
+
   # Facebook setup phase hook, that is used to dynamically set up a omniauth strategy for facebook on customer basis
   def facebook_setup
     request.env["omniauth.strategy"].options[:client_id] = @current_community.facebook_connect_id || APP_CONFIG.fb_connect_id
     request.env["omniauth.strategy"].options[:client_secret] = @current_community.facebook_connect_secret || APP_CONFIG.fb_connect_secret
+    request.env["omniauth.strategy"].options[:iframe] = true
+    request.env["omniauth.strategy"].options[:scope] = "public_profile,email"
+    request.env["omniauth.strategy"].options[:info_fields] = "name,email,last_name,first_name"
+
+    render :plain => "Setup complete.", :status => 404 #This notifies the ominauth to continue
+  end
+
+  # Google setup phase hook, that is used to dynamically set up a omniauth strategy for google on customer basis
+  def google_setup
+    request.env["omniauth.strategy"].options[:client_id] = @current_community.google_connect_id || APP_CONFIG.google_connect_id
+    request.env["omniauth.strategy"].options[:client_secret] = @current_community.google_connect_secret || APP_CONFIG.google_connect_secret
     request.env["omniauth.strategy"].options[:iframe] = true
     request.env["omniauth.strategy"].options[:scope] = "public_profile,email"
     request.env["omniauth.strategy"].options[:info_fields] = "name,email,last_name,first_name"
