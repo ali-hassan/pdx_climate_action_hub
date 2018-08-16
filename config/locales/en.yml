@@ -1832,6 +1832,7 @@ en:
       cancle_facebook_connect: "If you don't want to link this account, you can %{cancel_link}."
       facebook_cancel_link_text: cancel
       log_in_with_your_facebook_account: "Log In with Facebook"
+      log_in_with_your_google_account: "Log In with Google"
       or_sign_up_with_your_username: ". . . or with your email or username:"
       we_will_not_post_without_asking_you: "We will never post to Facebook without asking you."
     password_forgotten:

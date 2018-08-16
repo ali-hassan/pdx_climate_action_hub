@@ -19,9 +19,14 @@ class SessionsController < ApplicationController
 
     @selected_tribe_navi_tab = "members"
     @facebook_merge = session["devise.facebook_data"].present?
+    @google_merge = session["devise.google_data"].present?
     if @facebook_merge
       @facebook_email = session["devise.facebook_data"]["email"]
       @facebook_name = "#{session["devise.facebook_data"]["given_name"]} #{session["devise.facebook_data"]["family_name"]}"
+    end
+    if @google_merge
+      @google_email = session["devise.google_data"]["email"]
+      @google_name = "#{session["devise.google_data"]["given_name"]} #{session["devise.google_data"]["family_name"]}"
     end
   end
 

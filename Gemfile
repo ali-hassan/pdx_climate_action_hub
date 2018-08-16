@@ -50,7 +50,7 @@ gem 'rails-i18n', '~> 5.0.4'
 gem 'devise', '~> 4.3.0'
 gem 'devise-encryptable', '~> 0.2.0'
 gem "omniauth-facebook", '~> 4.0.0'
-
+gem 'omniauth-google-oauth2'
 # Dynamic form adds helpers that are needed, e.g. error_messages
 gem 'dynamic_form', '~> 1.1.4'
 gem "truncate_html", '~> 0.9.3'
