@@ -146,6 +146,52 @@ ul {
     .fb-text {
       padding: em(1) em(10) em(7) em(35);
     }
+    .google-icon {
+      @include large-type;
+      top: em(5);
+      left: em(5);
+    }
+    .google-text {
+      padding: em(1) em(10) em(7) em(35);
+    }
+  }
+
+}
+@mixin google-connect-button {
+  position: relative;
+  cursor: pointer;
+  color: white;
+  display: block;
+  text-align: left;
+  @include single-text-shadow;
+  background: #e00;
+  min-height: 42px;
+  &:hover {
+    background: #6f99bc;
+  }
+  @include border-radius(em(5));
+
+
+  .google-icon {
+    position: absolute;
+    @include big-type;
+    top: em(10);
+    left: em(7);
+  }
+
+  .google-text {
+    padding: em(0) em(10) em(7) em(30);
+  }
+
+  @include media(tablet) {
+    .google-icon {
+      @include large-type;
+      top: em(5);
+      left: em(5);
+    }
+    .google-text {
+      padding: em(1) em(10) em(7) em(35);
+    }
   }
 
 }
@@ -182,6 +228,14 @@ ul {
 
   a.fb-connect {
     @include facebook-connect-button;
+    padding: em(10) 2% em(6) 2%;
+    width: 100%;
+    margin-bottom: lines(0.5);
+    margin-top: lines(1.5);
+  }
+
+  a.google-connect {
+    @include google-connect-button;
     padding: em(10) 2% em(6) 2%;
     width: 100%;
     margin-bottom: lines(0.5);

@@ -1768,6 +1768,7 @@ en:
       visible_only_to_you: "visible only to you and the ShareOregon admin"
       visible_to_everybody: "visible to everybody"
       create_account_with_facebook: "Sign Up with Facebook"
+      create_account_with_google: "Sign Up with Facebook"
       OR: OR
       signup_with_email: "Sign Up with Email"
     profile_feedback:
@@ -1827,7 +1828,9 @@ en:
       login: "Log In"
       login_to_kassi: "Log In to %{service_name}"
       connect_your_facebook_to_kassi: "Connect your Facebook account to %{service_name}"
+      connect_your_google_to_kassi: "Connect your Google account to %{service_name}"
       facebook_account: "Facebook account:"
+      google_account: "Google account:"
       log_in_to_link_account: "If you already have a %{service_name} account, log in to link it with your Facebook account."
       you_can_also_create_new_account: "If you don't have a %{service_name} account, %{accont_creation_link} to create one with your Facebook login."
       account_creation_link_text: "click here"

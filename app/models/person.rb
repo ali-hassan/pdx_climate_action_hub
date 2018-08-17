@@ -74,7 +74,7 @@ class Person < ApplicationRecord
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
-         :omniauthable
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   attr_accessor :guid, :password2, :form_login,
                 :form_given_name, :form_family_name, :form_password,
