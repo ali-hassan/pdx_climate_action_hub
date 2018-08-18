@@ -521,6 +521,10 @@ class Person < ApplicationRecord
     end
   end
 
+  def update_google_data(google_id)
+    self.update_attribute(:google_id, google_id)
+  end
+
   def self.find_by_email_address_and_community_id(email_address, community_id)
     Maybe(
       Email.find_by_address_and_community_id(email_address, community_id)
