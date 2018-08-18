@@ -152,7 +152,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def google
+  def google_oauth2
     data = request.env["omniauth.auth"].extra.raw_info
     origin_locale = get_origin_locale(request, available_locales())
     I18n.locale = origin_locale if origin_locale
