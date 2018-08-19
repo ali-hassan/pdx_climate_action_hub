@@ -1,5 +1,21 @@
-.g-signin2{"data-height" => "200", "data-longtitle" => "true", "data-width" => "300"}
-
-%a#fb-login.google-connect{:href => person_google_oauth2_omniauth_authorize_path }
-  = icon_tag("google", ["google-icon"])
-  .google-text= button_text
+%a#my-signin2{:href => person_google_oauth2_omniauth_authorize_path }
+:javascript
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 337,
+        'border-radius': '0.3125em',
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+%script{:async => "", :defer => "defer", :src => "https://apis.google.com/js/platform.js?onload=renderButton"}
