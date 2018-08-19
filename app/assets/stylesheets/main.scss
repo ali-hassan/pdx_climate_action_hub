@@ -146,14 +146,6 @@ ul {
     .fb-text {
       padding: em(1) em(10) em(7) em(35);
     }
-    .google-icon {
-      @include large-type;
-      top: em(5);
-      left: em(5);
-    }
-    .google-text {
-      padding: em(1) em(10) em(7) em(35);
-    }
   }
 
 }
