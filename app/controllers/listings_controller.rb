@@ -189,10 +189,11 @@ class ListingsController < ApplicationController
         author_id: @person.id,
         include_closed: include_closed,
         page: 1,
-        # address: @listing.origin,
-        location_latitude: @listing.origin_loc.try(:latitude),
-        location_longitude: @listing.origin_loc.try(:longitude),
-        location_radius: "20",
+        address: @listing.origin,
+        latitude: @listing.origin_loc.try(:latitude),
+        longitude: @listing.origin_loc.try(:longitude),
+        distance_max: 50.0,
+        # distance_unit: "kilometer",
         per_page: @per_page
     }
 
