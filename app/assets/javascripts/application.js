@@ -36,6 +36,7 @@
 //= require jquery.fileupload-image
 //= require jquery.timepicker.min
 //= require autosize
+//= require custom
 
 //= require selectize-standalone.js
 //= require datepicker/bootstrap-datepicker.js
