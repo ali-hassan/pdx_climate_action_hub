@@ -124,7 +124,7 @@ module UserService::API
         )
         .to_url
         .delete('-')
-        .or_else("fb_name_missing")[0...18]
+        .or_else("google_name_missing")[0...18]
 
       generate_username_from_base(base, community_id)
     end
