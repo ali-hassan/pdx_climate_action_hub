@@ -1767,8 +1767,8 @@ en:
       username_is_invalid: "Username is invalid. Allowed characters are letters, numbers and underscore."
       visible_only_to_you: "visible only to you and the ShareOregon admin"
       visible_to_everybody: "visible to everybody"
-      create_account_with_facebook: "Sign Up with Facebook"
-      create_account_with_google: "Sign Up with Facebook"
+      create_account_with_facebook: "Continue with Facebook"
+      create_account_with_google: "Continue with Google"
       OR: OR
       signup_with_email: "Sign Up with Email"
     profile_feedback:
