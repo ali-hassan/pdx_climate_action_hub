@@ -180,11 +180,12 @@ class SessionsController < ApplicationController
       flash[:error] = t("layouts.notifications.google_email_unconfirmed", email: data.email)
       redirect_to login_path and return
     else
-      google_data = {"email" => data.email,
-                       "given_name" => data.first_name,
-                       "family_name" => data.last_name,
-                       "username" => data.username,
-                       "id"  => data.id}
+      google_data = { "email"       => data.email,
+                      "given_name"  => data.given_name,
+                      "family_name" => data.family_name,
+                      "username"    => data.name,
+                      "id"          => data.id
+      }
 
       session["devise.google_data"] = google_data
       redirect_to :action => :create_google_based, :controller => :people
