@@ -1,5 +1,6 @@
 $ ->
-  $("#my-signin2").on "click", ->
+  $(".trans-button").on "click", (event) ->
+    event.preventDefault();
     window.location.href = "/people/auth/google_oauth2?locale=en";
 
   $(window).load ->

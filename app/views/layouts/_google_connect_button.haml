@@ -1,4 +1,5 @@
-%a#my-signin2{:href => person_google_oauth2_omniauth_authorize_path }
+%a.trans-button
+%a#my-signin2{style: "pointer-events: none;"}
 :javascript
     function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -18,4 +19,4 @@
         'onfailure': onFailure
       });
     }
-%script{:async => "", :defer => "defer", :src => "https://apis.google.com/js/platform.js?onload=renderButton"}
+%script{:src => "https://apis.google.com/js/platform.js?onload=renderButton"}
