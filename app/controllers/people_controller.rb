@@ -217,7 +217,7 @@ class PeopleController < Devise::RegistrationsController
   end
 
   def create_google_based
-    username = UserService::API::Users.username_from_fb_data(
+    username = UserService::API::Users.username_from_google_data(
         username: session["devise.google_data"]["username"],
         given_name: session["devise.google_data"]["given_name"],
         family_name: session["devise.google_data"]["family_name"],

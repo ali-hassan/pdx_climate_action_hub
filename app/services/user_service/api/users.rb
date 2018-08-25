@@ -118,14 +118,13 @@ module UserService::API
     end
 
     def username_from_google_data(username:, given_name:, family_name:, community_id:)
-      debugger
       base = Maybe(
           Maybe(username)
           .or_else(Maybe(given_name).strip.or_else("") + Maybe(family_name).strip()[0].or_else(""))
         )
         .to_url
         .delete('-')
-        .or_else(username)[0...18]
+        .or_else("google_name_missing")[0...18]
 
       generate_username_from_base(base, community_id)
     end
