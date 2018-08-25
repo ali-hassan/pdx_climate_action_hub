@@ -186,7 +186,6 @@ class ListingsController < ApplicationController
     includes = [:author, :listing_images]
     include_closed = @person == @current_user && params[:show_closed]
     search = {
-        author_id: @person.id,
         include_closed: include_closed,
         page: 1,
         address: @listing.origin,
