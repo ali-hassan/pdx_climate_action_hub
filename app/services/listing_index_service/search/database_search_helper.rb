@@ -17,8 +17,8 @@ module ListingIndexService::Search::DatabaseSearchHelper
         listing_shape_id: Maybe(search[:listing_shape_ids]).or_else(nil)
       })
 
-    if search[:distance_max].present? && search[:latitude].present?
-      query = Listing.near([search[:latitude], search[:longitude]], search[:distance_max])
+    if search[:distance_max].present? && search[:address].present?
+      query = Listing.near(search[:address], search[:distance_max], :order => ' ')
                   .includes(included_models)
                   .paginate(per_page: search[:per_page], page: search[:page])
 
