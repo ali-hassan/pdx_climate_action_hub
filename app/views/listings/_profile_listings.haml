@@ -5,10 +5,11 @@
 .people-load-more-listings-container
   #load-more-listings
     - if is_near_by
-      - if current_user?(@person) && params[:show_closed]
-        = link_to t("people.show.show_all_near_by"), "#", :data => { :url => person_listings_url(@person, :show_closed => true) }, style: "font-weight:bold;"
-      - else
-        = link_to t("people.show.show_all_near_by"), "#", :data => { :url => person_listings_url(@person) }, style: "font-weight:bold;"
+      - if count > 15
+        - if current_user?(@person) && params[:show_closed]
+          = link_to t("people.show.show_all_near_by"), "#", :data => { :url => person_listings_url(@person, :show_closed => true) }, style: "font-weight:bold;"
+        - else
+          = link_to t("people.show.show_all_near_by"), "#", :data => { :url => person_listings_url(@person) }, style: "font-weight:bold;"
     -else
       - if current_user?(@person) && params[:show_closed]
         = link_to t("people.show.show_all_listings"), "#", :data => { :url => person_listings_url(@person, :show_closed => true) }
