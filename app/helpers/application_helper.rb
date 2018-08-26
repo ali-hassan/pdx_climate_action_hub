@@ -338,7 +338,7 @@ module ApplicationHelper
     end
 
     links << {
-      :topic => :general,
+      :topic => :preview,
       :text => t("admin.left_hand_navigation.preview"),
       :icon_class => icon_class("eye"),
       :path => homepage_without_locale_path(big_cover_photo: true, locale: nil),
