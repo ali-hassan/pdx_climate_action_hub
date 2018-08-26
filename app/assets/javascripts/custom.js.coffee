@@ -8,3 +8,9 @@ $ ->
       $(".abcRioButtonContents").text("Log In with Google");
     else
       $(".abcRioButtonContents").text("Continue with Google");
+
+  $(document).ready ->
+    setTimeout (->
+      $("#u_0_3").innerHTML = "";
+      return
+    ),8000
