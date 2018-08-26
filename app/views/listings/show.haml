@@ -145,7 +145,7 @@
         %h5 Things to Do Nearby:
       .row
         .col-12
-          = render :partial => "listings/profile_listings", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id }, is_near_by: true }
+          = render :partial => "listings/near_by_listings_grid", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id } }
 
 
   %aside.col-4
