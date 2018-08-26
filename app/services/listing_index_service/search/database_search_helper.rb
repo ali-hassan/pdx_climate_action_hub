@@ -18,7 +18,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
       })
 
     if search[:distance_max].present? && search[:latitude].present?
-      query = Listing.near([search[:latitude], search[:longitude]], search[:distance_max], :order => :origin)
+      query = Listing.near([search[:latitude], search[:longitude]], search[:distance_max])
                   .includes(included_models)
                   .paginate(per_page: search[:per_page], page: search[:page])
 
