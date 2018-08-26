@@ -791,6 +791,8 @@ CREATE TABLE `listings` (
   `external_payment_link` text,
   `availability` varchar(32) DEFAULT 'none',
   `per_hour_ready` tinyint(1) DEFAULT '0',
+  `latitude` float DEFAULT NULL,
+  `longitude` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
   KEY `index_listings_on_open` (`open`),
@@ -1197,8 +1199,7 @@ CREATE TABLE `people` (
   `min_days_between_community_updates` int(11) DEFAULT '1',
   `deleted` tinyint(1) DEFAULT '0',
   `cloned_from` varchar(22) DEFAULT NULL,
-  `payment_setup_notification_count` int(11) DEFAULT '0',
-  `is_payment_setup_notification_dismissed` tinyint(1) DEFAULT NULL,
+  `is_payment_setup_notification_dismissed` tinyint(1) DEFAULT '0',
   `google_id` varchar(255) DEFAULT NULL,
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`),
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
@@ -2310,8 +2311,8 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20180108061342'),
 ('20180108093607'),
 ('20180514083133'),
-('20180810121040'),
-('20180810121543'),
-('20180816175248');
+('20180810123440'),
+('20180816175248'),
+('20180826074607');
 
 

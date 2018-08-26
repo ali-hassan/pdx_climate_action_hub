@@ -182,7 +182,7 @@ class ListingsController < ApplicationController
       [nil, nil]
                                      end
     @person  = @listing.author
-    @per_page = params[:per_page] || 1000 # the point is to show all here by default
+    @per_page = params[:per_page] || 15 # the point is to show all here by default
     includes = [:author, :listing_images]
     include_closed = @person == @current_user && params[:show_closed]
     search = {

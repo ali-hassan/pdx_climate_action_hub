@@ -17,11 +17,18 @@ module ListingIndexService::Search::DatabaseSearchHelper
         listing_shape_id: Maybe(search[:listing_shape_ids]).or_else(nil)
       })
 
-    query = Listing
-            .where(where_opts)
-            .includes(included_models)
-            .order( search[:upcoming_events] ? 'events.start_at' : 'listings.sort_date DESC' )
-            .paginate(per_page: search[:per_page], page: search[:page])
+    if search[:distance_max].present? && search[:latitude].present?
+      query = Listing.near([search[:latitude], search[:longitude]], search[:distance_max], :order => :origin)
+                  .includes(included_models)
+                  .paginate(per_page: search[:per_page], page: search[:page])
+
+    else
+      query = Listing
+              .where(where_opts)
+              .includes(included_models)
+              .order( search[:upcoming_events] ? 'events.start_at' : 'listings.sort_date DESC' )
+              .paginate(per_page: search[:per_page], page: search[:page])
+    end
 
     if search[:upcoming_events]
       query = query.with_events

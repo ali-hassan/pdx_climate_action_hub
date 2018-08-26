@@ -19,7 +19,7 @@ module ListingIndexService::Search
       # rename listing_shape_ids to singular so that Sphinx understands it
       search = HashUtils.rename_keys({:listing_shape_ids => :listing_shape_id}, search)
 
-      if DatabaseSearchHelper.needs_db_query?(search) && DatabaseSearchHelper.needs_search?(search)
+      if search[:latitude].present? && search[:latitude].present? && search[:distance_max].present?
         return DatabaseSearchHelper.fetch_from_db(community_id: community_id,
                                                   search: search,
                                                   included_models: included_models,
