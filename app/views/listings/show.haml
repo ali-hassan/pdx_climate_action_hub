@@ -93,6 +93,9 @@
               = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e') + ' - ' + @listing.event['end_at_time'].strftime('%I:%M%P')
 
 
+        - if !@current_community.private?
+          = render "scocial_buttons"
+
         - if @listing.description && !@listing.description.blank?
           - text_with_line_breaks do
             = auto_link(@listing.description, html: {target: "_blank"} ).html_safe
@@ -101,8 +104,6 @@
               .listing-description-youtube-wrapper
                 %iframe.listing-description-youtube-iframe{ title: t("listings.show.youtube_video_player"), width: 640, height:390, src: "//www.youtube.com/embed/#{ youtube_id }", frameborder: 0, allowfullscreen: true}
 
-    - if !@current_community.private?
-      = render "scocial_buttons"
 
     - @listing.custom_field_values.each do |custom_field_value|
       .row
