@@ -227,7 +227,7 @@ class PeopleController < Devise::RegistrationsController
       :username => username,
       :given_name => session["devise.google_data"]["given_name"],
       :family_name => session["devise.google_data"]["family_name"],
-      :facebook_id => session["devise.google_data"]["id"],
+      :google_id => session["devise.google_data"]["id"],
       :locale => I18n.locale,
       :test_group_number => 1 + rand(4),
       :password => Devise.friendly_token[0,20],
@@ -244,7 +244,7 @@ class PeopleController < Devise::RegistrationsController
     end
 
     begin
-      @person.store_picture_from_google!
+      @person.store_picture_from_google!(session["devise.google_data"]["profile_pic"])
     rescue StandardError => e
       # We can just catch and log the error, because if the profile picture upload fails
       # we still want to make the user creation pass, just without the profile picture,

@@ -170,7 +170,7 @@ class SessionsController < ApplicationController
     person = person_by_google_id || person_by_email
 
     if person
-      person.update_google_data(data.id)
+      person.update_google_data(data.sub, data.picture)
       flash[:notice] = t("devise.omniauth_callbacks.success", :kind => "Google")
       sign_in_and_redirect person, :event => :authentication
     elsif data.email.blank?
@@ -184,7 +184,8 @@ class SessionsController < ApplicationController
                       "given_name"  => data.given_name,
                       "family_name" => data.family_name,
                       "username"    => data.name,
-                      "id"          => data.id
+                      "id"          => data.sub,
+                      "profile_pic"   => data.picture
       }
 
       session["devise.google_data"] = google_data
