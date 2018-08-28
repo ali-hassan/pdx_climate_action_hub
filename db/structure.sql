@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS `active_sessions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `active_sessions` (
   `id` binary(16) NOT NULL,
-  `person_id` varchar(22) COLLATE utf8_unicode_ci NOT NULL,
+  `person_id` varchar(22) NOT NULL,
   `community_id` int(11) NOT NULL,
   `refreshed_at` datetime NOT NULL,
   `created_at` datetime NOT NULL,
@@ -23,18 +23,18 @@ CREATE TABLE `active_sessions` (
   KEY `index_active_sessions_on_person_id` (`person_id`),
   KEY `index_active_sessions_on_community_id` (`community_id`),
   KEY `index_active_sessions_on_refreshed_at` (`refreshed_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `ar_internal_metadata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ar_internal_metadata` (
-  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `key` varchar(255) NOT NULL,
+  `value` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `auth_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -78,8 +78,14 @@ CREATE TABLE `bookings` (
   `end_on` date DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `per_hour` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `index_bookings_on_transaction_id` (`transaction_id`)
+  KEY `index_bookings_on_transaction_id` (`transaction_id`),
+  KEY `index_bookings_on_per_hour` (`per_hour`),
+  KEY `index_bookings_on_start_time` (`start_time`),
+  KEY `index_bookings_on_end_time` (`end_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `categories`;
@@ -260,6 +266,10 @@ CREATE TABLE `communities` (
   `small_cover_photo_processing` tinyint(1) DEFAULT NULL,
   `favicon_processing` tinyint(1) DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT NULL,
+  `end_user_analytics` tinyint(1) DEFAULT '1',
+  `google_connect_secret` varchar(255) DEFAULT NULL,
+  `google_connect_id` varchar(255) DEFAULT NULL,
+  `google_connect_enabled` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_communities_on_uuid` (`uuid`),
   KEY `index_communities_on_domain` (`domain`),
@@ -354,10 +364,12 @@ CREATE TABLE `conversations` (
   `updated_at` datetime DEFAULT NULL,
   `last_message_at` datetime DEFAULT NULL,
   `community_id` int(11) DEFAULT NULL,
+  `starting_page` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_conversations_on_listing_id` (`listing_id`),
   KEY `index_conversations_on_community_id` (`community_id`),
-  KEY `index_conversations_on_last_message_at` (`last_message_at`)
+  KEY `index_conversations_on_last_message_at` (`last_message_at`),
+  KEY `index_conversations_on_starting_page` (`starting_page`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `custom_field_names`;
@@ -517,6 +529,22 @@ CREATE TABLE `events` (
   KEY `index_listing_id` (`listing_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `export_task_results`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `export_task_results` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `file_file_name` varchar(255) DEFAULT NULL,
+  `file_content_type` varchar(255) DEFAULT NULL,
+  `file_file_size` int(11) DEFAULT NULL,
+  `file_updated_at` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `feature_flags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -539,7 +567,7 @@ CREATE TABLE `feedbacks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` text,
   `author_id` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `url` varchar(2048) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `is_handled` int(11) DEFAULT '0',
@@ -562,6 +590,20 @@ CREATE TABLE `follower_relationships` (
   KEY `index_follower_relationships_on_person_id` (`person_id`),
   KEY `index_follower_relationships_on_follower_id` (`follower_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `invitation_unsubscribes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `invitation_unsubscribes` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `community_id` int(11) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_invitation_unsubscribes_on_community_id` (`community_id`),
+  KEY `index_invitation_unsubscribes_on_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `invitations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -591,12 +633,12 @@ CREATE TABLE `landing_page_versions` (
   `community_id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
   `released` datetime DEFAULT NULL,
-  `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `content` mediumtext NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_landing_page_versions_on_community_id_and_version` (`community_id`,`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `landing_pages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -609,7 +651,7 @@ CREATE TABLE `landing_pages` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_landing_pages_on_community_id` (`community_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `listing_followers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -684,6 +726,21 @@ CREATE TABLE `listing_units` (
   KEY `index_listing_units_on_listing_shape_id` (`listing_shape_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `listing_working_time_slots`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `listing_working_time_slots` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `listing_id` int(11) DEFAULT NULL,
+  `week_day` int(11) DEFAULT NULL,
+  `from` varchar(255) DEFAULT NULL,
+  `till` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_listing_working_time_slots_on_listing_id` (`listing_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `listings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -733,6 +790,9 @@ CREATE TABLE `listings` (
   `shipping_price_additional_cents` int(11) DEFAULT NULL,
   `external_payment_link` text,
   `availability` varchar(32) DEFAULT 'none',
+  `per_hour_ready` tinyint(1) DEFAULT '0',
+  `latitude` float DEFAULT NULL,
+  `longitude` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
   KEY `index_listings_on_open` (`open`),
@@ -773,15 +833,15 @@ DROP TABLE IF EXISTS `marketplace_configurations`;
 CREATE TABLE `marketplace_configurations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `community_id` int(11) NOT NULL,
-  `main_search` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'keyword',
-  `distance_unit` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'metric',
+  `main_search` varchar(255) NOT NULL DEFAULT 'keyword',
+  `distance_unit` varchar(255) NOT NULL DEFAULT 'metric',
   `limit_priority_links` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `limit_search_distance` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `index_marketplace_configurations_on_community_id` (`community_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `marketplace_plans`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -789,8 +849,8 @@ DROP TABLE IF EXISTS `marketplace_plans`;
 CREATE TABLE `marketplace_plans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `community_id` int(11) NOT NULL,
-  `status` varchar(22) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `features` text COLLATE utf8_unicode_ci,
+  `status` varchar(22) DEFAULT NULL,
+  `features` text,
   `member_limit` int(11) DEFAULT NULL,
   `expires_at` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
@@ -798,7 +858,7 @@ CREATE TABLE `marketplace_plans` (
   PRIMARY KEY (`id`),
   KEY `index_marketplace_plans_on_community_id` (`community_id`),
   KEY `index_marketplace_plans_on_created_at` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `marketplace_sender_emails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -828,9 +888,10 @@ CREATE TABLE `marketplace_setup_steps` (
   `paypal` tinyint(1) NOT NULL DEFAULT '0',
   `listing` tinyint(1) NOT NULL DEFAULT '0',
   `invitation` tinyint(1) NOT NULL DEFAULT '0',
+  `payment` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_marketplace_setup_steps_on_community_id` (`community_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `marketplace_trials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -844,7 +905,7 @@ CREATE TABLE `marketplace_trials` (
   PRIMARY KEY (`id`),
   KEY `index_marketplace_trials_on_community_id` (`community_id`),
   KEY `index_marketplace_trials_on_created_at` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `menu_link_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -956,6 +1017,12 @@ CREATE TABLE `payment_settings` (
   `confirmation_after_days` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `api_client_id` varchar(255) DEFAULT NULL,
+  `api_private_key` varchar(255) DEFAULT NULL,
+  `api_publishable_key` varchar(255) DEFAULT NULL,
+  `api_verified` tinyint(1) DEFAULT NULL,
+  `api_visible_private_key` varchar(255) DEFAULT NULL,
+  `api_country` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_payment_settings_on_community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1132,6 +1199,8 @@ CREATE TABLE `people` (
   `min_days_between_community_updates` int(11) DEFAULT '1',
   `deleted` tinyint(1) DEFAULT '0',
   `cloned_from` varchar(22) DEFAULT NULL,
+  `is_payment_setup_notification_dismissed` tinyint(1) DEFAULT '0',
+  `google_id` varchar(255) DEFAULT NULL,
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`),
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
   UNIQUE KEY `index_people_on_email` (`email`),
@@ -1219,6 +1288,46 @@ CREATE TABLE `shipping_addresses` (
   KEY `index_shipping_addresses_on_transaction_id` (`transaction_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `stripe_accounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stripe_accounts` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person_id` varchar(255) DEFAULT NULL,
+  `community_id` int(11) DEFAULT NULL,
+  `stripe_seller_id` varchar(255) DEFAULT NULL,
+  `stripe_bank_id` varchar(255) DEFAULT NULL,
+  `stripe_customer_id` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `stripe_payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stripe_payments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `community_id` int(11) DEFAULT NULL,
+  `transaction_id` int(11) DEFAULT NULL,
+  `payer_id` varchar(255) DEFAULT NULL,
+  `receiver_id` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `sum_cents` int(11) DEFAULT NULL,
+  `commission_cents` int(11) DEFAULT NULL,
+  `currency` varchar(255) DEFAULT NULL,
+  `stripe_charge_id` varchar(255) DEFAULT NULL,
+  `stripe_transfer_id` varchar(255) DEFAULT NULL,
+  `fee_cents` int(11) DEFAULT NULL,
+  `real_fee_cents` int(11) DEFAULT NULL,
+  `subtotal_cents` int(11) DEFAULT NULL,
+  `transfered_at` datetime DEFAULT NULL,
+  `available_on` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `testimonials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1247,15 +1356,15 @@ CREATE TABLE `transaction_process_tokens` (
   `community_id` int(11) NOT NULL,
   `transaction_id` int(11) NOT NULL,
   `op_completed` tinyint(1) NOT NULL DEFAULT '0',
-  `op_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `op_input` text COLLATE utf8_unicode_ci,
-  `op_output` text COLLATE utf8_unicode_ci,
+  `op_name` varchar(64) NOT NULL,
+  `op_input` text,
+  `op_output` text,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_paypal_process_tokens_on_transaction` (`transaction_id`,`community_id`,`op_name`),
   UNIQUE KEY `index_transaction_process_tokens_on_process_token` (`process_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `transaction_processes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -1347,7 +1456,7 @@ CREATE TABLE `unavailable_dates` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -2180,15 +2289,30 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20170313201104'),
 ('20170314075755'),
 ('20170518221458'),
-('20170523193003'),
-('20170523193216'),
 ('20170526200811'),
 ('20170613153959'),
 ('20170613153960'),
 ('20170613153961'),
 ('20170613153965'),
+('20170616114938'),
 ('20170626065542'),
 ('20170706193821'),
-('20170929211550');
+('20170801125553'),
+('20170814125622'),
+('20170817035830'),
+('20170929211550'),
+('20171023070523'),
+('20171107063241'),
+('20171117062422'),
+('20171128122539'),
+('20171129152027'),
+('20171207073027'),
+('20171207075640'),
+('20180108061342'),
+('20180108093607'),
+('20180514083133'),
+('20180810123440'),
+('20180816175248'),
+('20180826074607');
 
 

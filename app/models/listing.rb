@@ -48,6 +48,9 @@
 #  shipping_price_additional_cents :integer
 #  external_payment_link           :text(65535)
 #  availability                    :string(32)       default("none")
+#  per_hour_ready                  :boolean          default(FALSE)
+#  latitude                        :float(24)
+#  longitude                       :float(24)
 #
 # Indexes
 #
@@ -64,6 +67,8 @@
 #
 
 class Listing < ApplicationRecord
+  geocoded_by :origin
+  after_validation :geocode, :if => :origin_changed?
 
   include ApplicationHelper
   include ActionView::Helpers::TranslationHelper
@@ -167,6 +172,29 @@ class Listing < ApplicationRecord
     when "closed"
       includes(:event).where(["open = '0' OR (valid_until IS NOT NULL AND valid_until < ?) OR (events.end_at IS NOT NULL AND events.end_at <= ?)", DateTime.now, DateTime.now.to_date]).references(:event)
     end
+  end
+
+  after_create :search_and_fill_latlng
+  def search_and_fill_latlng(address=nil, locale=APP_CONFIG.default_locale)
+    okresponse = false
+    geocoder = "http://maps.googleapis.com/maps/api/geocode/json?address="
+
+    if address == nil
+      address = self.origin
+    end
+
+    if address != nil && address != ""
+      url = URI.escape(geocoder+address)
+      resp = RestClient.get(url)
+      result = JSON.parse(resp.body)
+
+      if result["status"] == "OK"
+        self.latitude = result["results"][0]["geometry"]["location"]["lat"]
+        self.longitude = result["results"][0]["geometry"]["location"]["lng"]
+        okresponse = true
+      end
+    end
+    okresponse
   end
 
   def visible_to?(current_user, current_community)

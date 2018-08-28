@@ -117,6 +117,18 @@ module UserService::API
       generate_username_from_base(base, community_id)
     end
 
+    def username_from_google_data(username:, given_name:, family_name:, community_id:)
+      base = Maybe(
+          Maybe(username)
+          .or_else(Maybe(given_name).strip.or_else("") + Maybe(family_name).strip()[0].or_else(""))
+        )
+        .to_url
+        .delete('-')
+        .or_else("google_name_missing")[0...18]
+
+      generate_username_from_base(base, community_id)
+    end
+
     def replace_with_default_locale(community_id:, locales:, default_locale:)
       Person.where(community_id: community_id, locale: locales).update_all(locale: default_locale)
     end

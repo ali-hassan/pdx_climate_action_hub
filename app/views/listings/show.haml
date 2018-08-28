@@ -78,20 +78,24 @@
 
           = icon_tag('calendar', ["icon-fix"])
 
-          - if @listing.event['start_at_time'].nil? or @listing.event['end_at_time'].nil?
+          %span{ style: "font-weight:bold;" }
+            - if @listing.event['start_at_time'].nil? or @listing.event['end_at_time'].nil?
 
-            - if @listing.event
-              - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
-                = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' - ' + @listing.event['end_at'].strftime('%I:%M%P')
-              - else
-                = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e @ %I:%M%P')
-          - else
-
-            - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
-              = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + "-" + @listing.event['end_at_time'].strftime('%I:%M%P')
+              - if @listing.event
+                - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
+                  = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' - ' + @listing.event['end_at'].strftime('%I:%M%P')
+                - else
+                  = @listing.event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e @ %I:%M%P')
             - else
-              = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e') + ' - ' + @listing.event['end_at_time'].strftime('%I:%M%P')
 
+              - if @listing.event['start_at'].to_date == @listing.event['end_at'].to_date
+                = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + "-" + @listing.event['end_at_time'].strftime('%I:%M%P')
+              - else
+                = @listing.event['start_at'].strftime('%a %b %e') + ' - ' + @listing.event['start_at_time'].strftime('%I:%M%P') + ' to ' + @listing.event['end_at'].strftime('%a %b %e') + ' - ' + @listing.event['end_at_time'].strftime('%I:%M%P')
+
+
+        - if !@current_community.private?
+          = render "scocial_buttons"
 
         - if @listing.description && !@listing.description.blank?
           - text_with_line_breaks do
@@ -100,6 +104,7 @@
             - youtube_link_ids.each do |youtube_id|
               .listing-description-youtube-wrapper
                 %iframe.listing-description-youtube-iframe{ title: t("listings.show.youtube_video_player"), width: 640, height:390, src: "//www.youtube.com/embed/#{ youtube_id }", frameborder: 0, allowfullscreen: true}
+
 
     - @listing.custom_field_values.each do |custom_field_value|
       .row
@@ -117,24 +122,15 @@
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
 
+
     - if !@current_community.private?
-      .row
-        .col-12
-          .listing-social
-            .listing-fb-like-button
-              = facebook_like(current_user?(@listing.author))
-            .listing-tweet-button
-              - twitter_params =  {count: "horizontal", via: (@current_community.twitter_handle), text: @listing.title }.compact
-              = link_to("", "https://twitter.com/share", :class => "twitter-share-button", "data" => twitter_params)
-              - content_for :extra_javascript do
-                :javascript
-                  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      = render "scocial_buttons"
 
     - unless (@listing.closed? && !current_user?(@listing.author)) || !@current_community.listing_comments_in_use
       .view-item
         #comments.discussion.overflow-allowed
           %h2
-            = icon_tag("chat_bubble", ["icon-with_text"])
+            = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
             .text-with-icon
               = t(".comments")
               %span#comment_count= "(#{@listing.comments_count})"
@@ -144,6 +140,15 @@
             = render :partial => "comment", :collection => @listing.comments
           #comment-form
             = render :partial => "comment_form"
+
+
+    - unless @near_by_listings.empty?
+      .row
+        %h5 Things to Do Nearby:
+      .row
+        .col-12
+          = render :partial => "listings/near_by_listings_grid", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id } }
+
 
   %aside.col-4
     - if @listing.price

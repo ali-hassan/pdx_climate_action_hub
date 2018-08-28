@@ -86,21 +86,21 @@
     :javascript
       window.ST.initializeDeleteMarketplace('#{delete_confirmation}');
 
-  - if can_delete_marketplace
-    .row.without-margin
-      .col-12
-        .alert-box-danger
+  -#- if can_delete_marketplace
+  -#  .row.without-margin
+      -#.col-12
+      -#  .alert-box-danger
+      -#
+      -#    %p
+      -#      %span.alert-box-icon<>
+      -#        = icon_tag("alert", ["icon-fix"])
+      -#      %span<
+      -#        %strong
+      -#          = t("admin.communities.settings.delete_marketplace_title")
+      -#    %p
+      -#      = t("admin.communities.settings.once_you_delete")
 
-          %p
-            %span.alert-box-icon<>
-              = icon_tag("alert", ["icon-fix"])
-            %span<
-              %strong
-                = t("admin.communities.settings.delete_marketplace_title")
-          %p
-            = t("admin.communities.settings.once_you_delete")
-
-          = button_tag t("admin.communities.settings.delete_this_marketplace"), class: "delete-button js-delete-marketplace-button"
+          -#= button_tag t("admin.communities.settings.delete_this_marketplace"), class: "delete-button js-delete-marketplace-button"
 
           = form_tag delete_marketplace_admin_community_path(@current_community), method: :delete, class: "hidden js-delete-marketplace-confirmation-form" do
 

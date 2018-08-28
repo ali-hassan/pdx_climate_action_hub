@@ -74,7 +74,7 @@ class Person < ApplicationRecord
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
-         :omniauthable
+         :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
   attr_accessor :guid, :password2, :form_login,
                 :form_given_name, :form_family_name, :form_password,
@@ -338,6 +338,12 @@ class Person < ApplicationRecord
     end
   end
 
+  def store_picture_from_google!(url)
+    if self.google_id
+      self.picture_from_url(url)
+    end
+  end
+
   def offers
     listings.offers
   end
@@ -517,6 +523,20 @@ class Person < ApplicationRecord
         # we still want to make the user creation pass, just without the profile picture,
         # which user can upload later
         logger.error(e.message, :facebook_existing_user_profile_picture_upload_failed, { person_id: self.id })
+      end
+    end
+  end
+
+  def update_google_data(google_id, image_url=nil)
+    self.update_attribute(:google_id, google_id)
+    if self.image_file_size.nil?
+      begin
+        self.store_picture_from_google!(image_url)
+      rescue StandardError => e
+        # We can just catch and log the error, because if the profile picture upload fails
+        # we still want to make the user creation pass, just without the profile picture,
+        # which user can upload later
+        logger.error(e.message, :google_existing_user_profile_picture_upload_failed, { person_id: self.id })
       end
     end
   end
