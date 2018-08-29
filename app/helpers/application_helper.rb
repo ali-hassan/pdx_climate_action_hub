@@ -492,6 +492,16 @@ module ApplicationHelper
 
     links
   end
+
+  def ckeditor_toolbar
+    [
+        { name: "links", items: [ "Link", "Unlink", "Anchor" ] },
+        { name: "insert", items: [ "Image", "SpecialChar" ] },
+        { name: "basicstyles", items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "CopyFormatting", "RemoveFormat" ] },
+        { name: "paragraph", items: [ "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "CreateDiv", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "-" ] },
+        { name: "colors", items: [ "TextColor", "BGColor", "FontSize", "Source" ] },
+    ]
+  end
   # rubocop:enable Metrics/MethodLength
 
   # Settings view left hand navigation content

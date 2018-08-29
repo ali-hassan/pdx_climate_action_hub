@@ -1,3 +1,4 @@
+= javascript_include_tag Ckeditor.cdn_url
 = f.label :description, t('listings.form.description.detailed_description'), :class => "input"
 = render partial: "layouts/info_text", locals: { text: t("listings.form.description.youtube_info") }
-= f.text_area(:description, :maxlength => "5000", :class => "listing_description_textarea", ckeditor: { language: 'uk'})
+= f.text_area(:description, :maxlength => "5000", :class => "listing_description_textarea", as: :ckeditor, input_html: { ckeditor: { toolbar: ckeditor_toolbar } }, data: { mercury: "full" })
