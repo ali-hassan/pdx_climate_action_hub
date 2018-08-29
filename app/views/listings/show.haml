@@ -95,7 +95,7 @@
 
 
         - if !@current_community.private?
-          = render "scocial_buttons", :locals => { :listing => @listing }
+          = render "scocial_buttons"
 
         - if @listing.description && !@listing.description.blank?
           - text_with_line_breaks do
@@ -124,7 +124,7 @@
 
 
     - if !@current_community.private?
-      = render "scocial_buttons", :locals => { :listing => @listing }
+      = render "scocial_buttons"
 
     - unless (@listing.closed? && !current_user?(@listing.author)) || !@current_community.listing_comments_in_use
       .view-item
