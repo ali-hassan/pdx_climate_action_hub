@@ -1,9 +1,9 @@
 .row
   .col-12
     .listing-social
-      .fb-save{"data-size" => "small", "data-uri" => "https://www.shareoregon.com/things-to-do/en/listings/#{@listing.id}-#{@listing.title}"}
+      .fb-save.set-padding{"data-size" => "small", "data-uri" => "https://www.shareoregon.com/things-to-do/en/listings/#{@listing.id}-#{@listing.title}"}
       .listing-fb-like-button
-        #like_button= facebook_like
+        #like_button.set-padding= facebook_like
       .listing-tweet-button
         - twitter_params =  {count: "horizontal", via: (@current_community.twitter_handle), text: @listing.title }.compact
         = link_to("", "https://twitter.com/share", :class => "twitter-share-button", "data" => twitter_params)
