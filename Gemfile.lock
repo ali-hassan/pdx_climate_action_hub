@@ -573,7 +573,7 @@ DEPENDENCIES
   better_errors (~> 2.1.1)
   binding_of_caller
   capybara (~> 2.6.2)
-  ckeditor
+  ckeditor (~> 4.2, >= 4.2.4)
   cocoon
   coffee-rails (~> 4.2.2)
   color (~> 1.8)
