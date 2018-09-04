@@ -63,19 +63,17 @@
   @include clickable-area-ie
 }
 
-.listing-image-navi-right {
-  @extend .listing-image-navi-clickarea;
+.listing-image-navi-right{
   right: 0;
   text-align: right;
-  width: 75%;
+  width: 25px;
   background: transparent;
 }
 
 .listing-image-navi-left {
-  @extend .listing-image-navi-clickarea;
   left: 0;
   text-align: left;
-  width: 25%;
+  width: 25px;
   background: transparent;
 }
 
