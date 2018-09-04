@@ -19,6 +19,7 @@
 .listing-shape-delete-button {
   @include button($link);
   margin: 0;
+  background: #4a90e2;
 }
 
 .listing-shape-delete-link {
