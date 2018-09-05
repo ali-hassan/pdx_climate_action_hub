@@ -103,7 +103,7 @@
           - if(youtube_link_ids.present?)
             - youtube_link_ids.each do |youtube_id|
               .listing-description-youtube-wrapper
-                %iframe.listing-description-youtube-iframe{ title: t("listings.show.youtube_video_player"), width: 640, height:390, src: "//www.youtube.com/embed/#{ youtube_id }", frameborder: 0, allowfullscreen: true}
+                %iframe.listing-description-youtube-iframe{ title: t("listings.show.youtube_video_player"), width: 640, height:390, src: sanitize("https://www.youtube.com/embed/#{youtube_id}", tags:[]), frameborder: 0, allowfullscreen: true}
 
 
     - @listing.custom_field_values.each do |custom_field_value|
