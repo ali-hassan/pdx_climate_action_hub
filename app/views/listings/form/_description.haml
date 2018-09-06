@@ -2,7 +2,4 @@
 = f.label :description, t('listings.form.description.detailed_description'), :class => "input"
 = render partial: "layouts/info_text", locals: { text: t("listings.form.description.youtube_info") }
 = render partial: "layouts/info_text", locals: { text: t("listings.form.description.resize_editor") }
-= f.text_area(:description, :maxlength => "8000", :class => "listing_description_textarea",class: "ckeditor", id: "ckeditor_text", as: :ckeditor)
-:javascript
-  CKEDITOR.replace('ckeditor_text');
-
+= f.cktext_area(:description, :maxlength => "8000", :class => "listing_description_textarea")

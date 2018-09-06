@@ -91,4 +91,5 @@
 //= require radio_buttons
 //= require new_layout
 //= require ckeditor/init
+//= require ckeditor/config
 // = require_self
