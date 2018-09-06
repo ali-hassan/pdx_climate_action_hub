@@ -1,12 +1,13 @@
 CKEDITOR.editorConfig = (config) ->
   config.language = 'en'
   config.toolbar_Pure = [
-    { name: 'document',    items: [ 'Save','Preview' ] },
-    { name: 'clipboard',   items: [ 'Cut','Copy','Paste','Undo','Redo' ] },
+#    { name: 'document',    items: [ 'Save','Preview' ] },
+    { name: 'basicstyles', items: [ 'Bold','Italic' ] },
 #    { name: 'editing',     items: [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
 #    { name: 'tools',       items: [ 'Maximize', 'ShowBlocks','-','About' ] }
-    { name: 'basicstyles', items: [ 'Bold','Italic','Underline' ] },
-#    { name: 'paragraph',   items: [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+    { name: 'paragraph',   items: [ 'NumberedList','BulletedList','Outdent','Indent','Link','Unlink' ] },
+
+    { name: 'clipboard',   items: [ 'Undo','Redo' ] },
 #    { name: 'links',       items: [ 'Link','Unlink','Anchor' ] },
 #    '/',
 #    { name: 'styles',      items: [ 'Styles','Format','Font','FontSize' ] },
