@@ -5,6 +5,7 @@
 .listing-details-container {
   overflow-wrap: break-word;
   word-wrap: break-word;
+  font-size: 14pt;
 }
 
 // wish I knew how to put this into ../events.css.scss
@@ -38,7 +39,7 @@ form#new_listing.simple_form.new_listing {
 .listing-fb-like-button,
 .listing-tweet-button {
   float: left;
-  margin-right: lines(1);
+  //margin-right: lines(1);
 }
 
 .listing-tweet-button {

@@ -90,4 +90,6 @@
 //= require listing_form
 //= require radio_buttons
 //= require new_layout
-//= require_self
+//= require ckeditor/init
+//= require ckeditor/config
+// = require_self

@@ -73,6 +73,7 @@ module Kassi
 
     # Add webfonts folder which can contain icons used like fonts
     config.assets.paths << Rails.root.join("app", "assets", "webfonts")
+    config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
     config.assets.paths << VENDOR_CSS_PATH
 
     # Define here additional Asset Pipeline Manifests to include to precompilation
