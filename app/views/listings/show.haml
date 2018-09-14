@@ -98,8 +98,9 @@
           = render "social_buttons"
 
         - if @listing.description && !@listing.description.blank?
-          - text_with_line_breaks do
-            = auto_link(@listing.description, html: {target: "_blank"} ).html_safe
+          = @listing.description.html_safe
+          -#- text_with_line_breaks do
+          -#  = auto_link(@listing.description, :all, target: '_blank'  ).html_safe
           - if(youtube_link_ids.present?)
             - youtube_link_ids.each do |youtube_id|
               .listing-description-youtube-wrapper
