@@ -10,6 +10,7 @@
 #  paypal                 :boolean          default(FALSE), not null
 #  listing                :boolean          default(FALSE), not null
 #  invitation             :boolean          default(FALSE), not null
+#  payment                :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -18,4 +19,8 @@
 
 class MarketplaceSetupSteps < ApplicationRecord
   validates_presence_of(:community_id)
+
+  def skip_payment
+    update_attributes(payment: true)
+  end
 end

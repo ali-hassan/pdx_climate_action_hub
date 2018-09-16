@@ -47,6 +47,9 @@
 #  shipping_price_additional_cents :integer
 #  external_payment_link           :text(65535)
 #  availability                    :string(32)       default("none")
+#  per_hour_ready                  :boolean          default(FALSE)
+#  latitude                        :float(24)
+#  longitude                       :float(24)
 #
 # Indexes
 #
@@ -161,5 +164,41 @@ describe Listing, type: :model do
       expect(@listing).to be_valid
     end
 
+  end
+
+  context 'manage availability per hour' do
+    let(:community) { FactoryGirl.create(:community) }
+    let(:listing) { FactoryGirl.create(:listing, community_id: community.id, listing_shape_id: 123) }
+
+    it '#working_hours_periods_grouped_by_day' do
+      listing.working_hours_new_set
+      listing.save
+      periods = listing.working_hours_periods_grouped_by_day(Time.zone.parse('2017-11-13'), Time.zone.parse('2017-11-19'))
+      expect(periods.keys).to eq ["2017-11-13", "2017-11-14", "2017-11-15", "2017-11-16", "2017-11-17"]
+      ["2017-11-13", "2017-11-14", "2017-11-15", "2017-11-16", "2017-11-17"].each do |date|
+        expect(periods[date].first.start_time.to_s).to eq "#{date} 09:00:00 UTC"
+        expect(periods[date].first.end_time.to_s).to eq "#{date} 17:00:00 UTC"
+      end
+    end
+  end
+
+  describe "delete_listings" do
+    let(:location) { FactoryGirl.create(:location) }
+    let(:hammer) { FactoryGirl.create(:listing, title: "Hammer", listing_shape_id: 123, location: location)}
+    let(:author) { hammer.author }
+
+    it "delete_listings by author" do
+      # Guard
+      expect(hammer.deleted?).to eq(false)
+
+      Listing.delete_by_author(author.id)
+      hammer.reload
+
+      expect(hammer.description).to be_nil
+      expect(hammer.origin).to be_nil
+      expect(hammer.open).to be false
+      expect(hammer.location).to be_nil
+      expect(hammer.deleted?).to be true
+    end
   end
 end

@@ -23,7 +23,7 @@ gem 'sass', '~> 3.4.24'
 gem 'rack-attack', '~> 5.0.1'
 gem 'rest-client', '~> 2.0.2'
 
-gem 'paperclip', '~> 5.1.0'
+gem 'paperclip', '~> 5.2.1'
 gem 'delayed_paperclip', '~> 3.0.1'
 
 gem 'aws-sdk', '~> 2.9.25'
@@ -70,6 +70,7 @@ gem 'stringex', '~> 2.7.1'
 gem 'paypal-sdk-permissions', '~> 1.96.4'
 gem 'paypal-sdk-merchant', '~> 1.116.0'
 gem 'airbrake', '~> 6.1.2'
+gem 'stripe', '~> 3.0.0'
 
 gem 'simple_form'
 gem 'cocoon'
@@ -147,6 +148,8 @@ group :test do
 
   # required for CircleCI automatic test balancing
   gem 'rspec_junit_formatter'
+
+  gem 'fake_stripe', git: 'https://github.com/ithouse/fake_stripe.git', ref: '6848daab104333b2c0c493ab069731d4a0b87f6f'
 end
 
 group :development, :test do
@@ -172,3 +175,7 @@ gem 'rails_autolink'
 gem 'intercom'
 gem 'geocoder'
 gem 'ckeditor', '~> 4.2', '>= 4.2.4'
+
+gem 'twitter_cldr'
+gem 'memoist'
+gem 'biz'

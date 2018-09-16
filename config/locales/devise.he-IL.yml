@@ -1,7 +1,7 @@
 he-IL:
   errors:
     messages:
-      expired: "פג תוקף הבקשה, אנא שלח בקשה נוספת"
+      expired: "פג תוקף הבקשה, אנא שלח/י בקשה נוספת"
       not_found: "לא נמצא"
       already_confirmed: "כבר אושר, בבקשה נסה להתחבר שנית"
       not_locked: "לא ננעל"
@@ -47,11 +47,11 @@ he-IL:
       send_instructions: "בעוד מספר דקות תתקבל בתיבת הדוא״ל שלך הודעה עם הנחיות כיצד לשחרר את חשבונך."
       unlocked: "חשבונך שוחרר בהצלחה. אנא התחבר/י בכדי להמשיך."
     omniauth_callbacks:
-      success: "אושר בהצלחה מחשבונו של ‎%{kind}‎"
-      failure: "לא הצלחנו לאשר אותך מה‎%{kind}‎ בגלל‎%{reason}‎."
+      success: "‎%{kind}‎ אושר בהצלחה מחשבונו של ‎"
+      failure: "‎%{kind}‎ זו הסיבה שלא הצלחנו לאשר אותך מ ‎%{reason}‎."
     mailer:
       confirmation_instructions:
-        subject: "הנחיות לאימות"
+        subject: "‎%{service_name}‎ הנחיות לאימות הצטרפות ל"
       reset_password_instructions:
         subject: "הנחיות לאיפוס הסיסמה"
       unlock_instructions:

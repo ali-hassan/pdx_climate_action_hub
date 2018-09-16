@@ -42,6 +42,7 @@ class FreeTransactionsController < ApplicationController
             availability: :none, # Always none for free transactions and contacts
             listing_quantity: 1,
             content: contact_form.content,
+            starting_page: ::Conversation::LISTING,
             payment_gateway: :none,
             payment_process: :none}
         })
@@ -52,9 +53,8 @@ class FreeTransactionsController < ApplicationController
       end
 
       transaction_id = transaction_response[:data][:transaction][:id]
-      MarketplaceService::Transaction::Command.transition_to(transaction_id, "free")
+      TransactionService::StateMachine.transition_to(transaction_id, "free")
 
-      # TODO: remove references to transaction model
       transaction = Transaction.find(transaction_id)
 
       flash[:notice] = t("layouts.notifications.message_sent")

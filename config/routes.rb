@@ -54,6 +54,11 @@ Rails.application.routes.draw do
   namespace :int_api do
     post "/create_trial_marketplace" => "marketplaces#create"
     post "/prospect_emails" => "marketplaces#create_prospect_email"
+    resources :listings, only: [], defaults: { format: :json } do
+      member do
+        post :update_working_time_slots
+      end
+    end
   end
 
   # Harmony Proxy
@@ -103,8 +108,6 @@ Rails.application.routes.draw do
   get '/410' => 'errors#gone', as: :error_gone
   get '/community_not_found' => 'errors#community_not_found', as: :community_not_found
 
-  get '/_custom_head_scripts' => 'landing_page#custom_head_scripts'
-
   resources :communities, only: [:new, :create]
 
 
@@ -115,7 +118,7 @@ Rails.application.routes.draw do
 
     put '/mercury_update' => "mercury_update#update", :as => :mercury_update
 
-    get "/transactions/op_status/:process_token" => "transactions#paypal_op_status", as: :paypal_op_status
+    get "/transactions/op_status/:process_token" => "paypal_service/checkout_orders#paypal_op_status", as: :paypal_op_status
     get "/transactions/transaction_op_status/:process_token" => "transactions#transaction_op_status", :as => :transaction_op_status
     get "/transactions/created/:transaction_id" => "transactions#created", as: :transaction_created
     get "/transactions/finalize_processed/:process_token" => "transactions#finalize_processed", as: :transaction_finalize_processed
@@ -144,6 +147,9 @@ Rails.application.routes.draw do
     get "/login" => "sessions#new", :as => :login
     get "/listing_bubble/:id" => "listings#listing_bubble", :as => :listing_bubble
     get "/listing_bubble_multiple/:ids" => "listings#listing_bubble_multiple", :as => :listing_bubble_multiple
+    get '/:person_id/settings/payments' => 'payment_settings#index', :as => :person_payment_settings
+    post '/:person_id/settings/payments' => 'payment_settings#create', :as => :create_person_payment_settings
+    put '/:person_id/settings/payments' => 'payment_settings#update', :as => :update_person_payment_settings
     get '/:person_id/settings/payments/paypal_account' => 'paypal_accounts#index', :as => :paypal_account_settings_payment
 
     # community membership related actions
@@ -154,6 +160,7 @@ Rails.application.routes.draw do
 
     get  '/community_memberships/check_email_availability_and_validity' => 'community_memberships#check_email_availability_and_validity'
     get  '/community_memberships/check_invitation_code'                 => 'community_memberships#check_invitation_code'
+
 
     namespace :paypal_service do
       resources :checkout_orders do
@@ -169,8 +176,18 @@ Rails.application.routes.draw do
       get '' => "getting_started_guide#index"
 
       # Payments
-      get  "/paypal_preferences"                      => "paypal_preferences#index"
-      post "/paypal_preferences/preferences_update"   => "paypal_preferences#preferences_update"
+      resources :payment_preferences, only: [:index], param: :payment_gateway do
+        collection do
+          put :common_update
+          put :update_stripe_keys
+        end
+        member do
+          get :disable
+          get :enable
+        end
+      end
+      # PayPal Connect
+      get  "/paypal_preferences" => redirect("/%{locale}/admin/payment_preferences")
       get  "/paypal_preferences/account_create"       => "paypal_preferences#account_create"
       get  "/paypal_preferences/permissions_verified" => "paypal_preferences#permissions_verified"
 
@@ -183,9 +200,10 @@ Rails.application.routes.draw do
       get "getting_started_guide/slogan_and_description" => "getting_started_guide#slogan_and_description", as: :getting_started_guide_slogan_and_description
       get "getting_started_guide/cover_photo"            => "getting_started_guide#cover_photo",            as: :getting_started_guide_cover_photo
       get "getting_started_guide/filter"                 => "getting_started_guide#filter",                 as: :getting_started_guide_filter
-      get "getting_started_guide/paypal"                 => "getting_started_guide#paypal",                 as: :getting_started_guide_paypal
+      get "getting_started_guide/payment"                => "getting_started_guide#payment",                as: :getting_started_guide_payment
       get "getting_started_guide/listing"                => "getting_started_guide#listing",                as: :getting_started_guide_listing
       get "getting_started_guide/invitation"             => "getting_started_guide#invitation",             as: :getting_started_guide_invitation
+      get "getting_started_guide/skip_payment"           => "getting_started_guide#skip_payment",           as: :getting_started_guide_skip_payment
 
       # Details and look 'n feel
       get   "/look_and_feel/edit" => "communities#edit_look_and_feel",          as: :look_and_feel_edit
@@ -252,11 +270,19 @@ Rails.application.routes.draw do
           get "getting_started_guide/invitation",             to: redirect("/admin/getting_started_guide/invitation")
 
         end
-        resources :transactions, controller: :community_transactions, only: :index
+        resources :transactions, controller: :community_transactions, only: :index do
+          collection do
+            get 'export'
+            get 'export_status'
+          end
+        end
+        resources :conversations, controller: :community_conversations, only: [:index, :show]
+        resources :testimonials, controller: :community_testimonials, only: [:index, :show]
         resources :emails
         resources :community_memberships do
           member do
             put :ban
+            put :unban
           end
           collection do
             post :promote_admin
@@ -308,7 +334,11 @@ Rails.application.routes.draw do
       resource :plan, only: [:show]
     end
 
-    resources :invitations
+    resources :invitations, only: [:new, :create ] do
+      collection do
+        get :unsubscribe
+      end
+    end
     resources :user_feedbacks, :controller => :feedbacks
     resources :homepage do
       collection do
@@ -442,6 +472,12 @@ Rails.application.routes.draw do
             get :billing_agreement_cancel
           end
         end
+        resource :stripe_account, only: [:show, :update, :create] do
+          member do
+            put :send_verification
+          end
+        end
+
         resources :transactions, only: [:show, :new, :create]
         resource :settings do
           member do

@@ -1,3 +1,5 @@
+require "spec_helper"
+
 # See https://github.com/thoughtbot/factory_girl/wiki/Testing-all-Factories-(with-RSpec)
 
 describe "Factory Girl", type: :model do
@@ -24,8 +26,9 @@ describe "Factory Girl", type: :model do
   end
 
   def error_message(factory)
-    factory.errors.messages.map do |(field_name, errors)|
+    result = factory.errors.messages.map do |(field_name, errors)|
       ":#{field_name} => #{errors.join(', ')}"
-    end.join("\n")
+    end
+    ([factory.class.name.to_s] + result).join("\n")
   end
 end

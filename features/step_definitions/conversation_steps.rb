@@ -38,7 +38,7 @@ end
 Given /^there is a message "([^"]*)" from "([^"]*)" about that listing$/ do |message, sender|
   @transaction = create_transaction(@current_community, @listing, @people[sender], message)
   @conversation = @transaction.conversation
-  MarketplaceService::Transaction::Command.transition_to(@transaction.id, "free")
+  TransactionService::StateMachine.transition_to(@transaction.id, "free")
   @transaction.reload
 end
 
@@ -67,4 +67,14 @@ end
 
 Then /^I should see "(.*?)" in the message list$/ do |msg|
   expect(page.find("#messages")).to have_content(msg)
+end
+
+Then(/^I should see price box on top of the message list$/) do
+  visit_transaction_of_listing(@listing)
+  expect(page).to have_css('.initiate-transaction-totals')
+end
+
+Then(/^I should not see price box on top of the message list$/) do
+  visit_transaction_of_listing(@listing)
+  expect(page).to have_no_css('.initiate-transaction-totals')
 end

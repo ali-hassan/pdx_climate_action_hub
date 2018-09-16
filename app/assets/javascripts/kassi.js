@@ -187,25 +187,6 @@ function initialize_defaults(locale) {
   });
 }
 
-function report_analytics_event(category, action, opt_label) {
-  if (window.ST != null && typeof window.ST.gtmPush === 'function') {
-    window.ST.gtmPush({
-      'event' : 'GAEvent',
-      'eventCategory' : category,
-      'eventAction' : action,
-      'eventLabel' : opt_label,
-      'eventValue' : undefined
-    });
-  }
-  var params_array = [category, action, opt_label];
-  if (typeof _gaq !== 'undefined' && Array.isArray(_gaq)) {
-    _gaq.push(['_trackEvent'].concat(params_array));
-  }
-  if (typeof ST.customerReportEvent === 'function') {
-    ST.customerReportEvent(category, action, opt_label);
-  }
-}
-
 function initialize_network_defaults(required_message, email_message) {
   enableSamePageScroll();
 }
@@ -274,7 +255,7 @@ function initialize_send_message_form(locale) {
     },
     submitHandler: function(form) {
       disable_and_submit(form_id, form, "false", locale);
-      report_analytics_event("message", "sent");
+      window.ST.analytics.logEvent("message", "sent");
     }
   });
 }
@@ -289,7 +270,7 @@ function initialize_send_person_message_form(locale) {
     },
     submitHandler: function(form) {
       disable_and_submit(form_id, form, "false", locale);
-      report_analytics_event("message", "sent");
+      window.ST.analytics.logEvent("message", "sent");
     }
   });
 }
@@ -314,43 +295,8 @@ function initialize_listing_view(locale) {
   );
 
   $('#send_comment_button').click(function() {
-    report_analytics_event("listing", "commented");
+    window.ST.analytics.logEvent("listing", "commented");
   });
-}
-
-function updateSellerGetsValue(currencyOpts, priceInputSelector, displayTargetSelector, communityCommissionPercentage, minCommission, showReversed) {
-  // true == Show the fee instead of what's left after the fee
-  showReversed = showReversed || false;
-
-  $display = $(displayTargetSelector);
-  $input = $(priceInputSelector);
-
-  function updateYouWillGet() {
-    var sum = ST.paymentMath.parseFloatFromFieldValue($input.val());
-
-    var displaySum;
-    if (showReversed) {
-      displaySum = ST.paymentMath.totalCommission(sum, communityCommissionPercentage, minCommission);
-    } else {
-      displaySum = sum - ST.paymentMath.totalCommission(sum, communityCommissionPercentage, minCommission);
-    }
-
-    displaySumInCents = displaySum * Math.pow(10, currencyOpts.digits);
-
-    $display.text(
-      ST.paymentMath.displayMoney(Math.max(0, displaySumInCents),
-                                  currencyOpts.symbol,
-                                  currencyOpts.digits,
-                                  currencyOpts.format,
-                                  currencyOpts.separator,
-                                  currencyOpts.delimiter)
-    );
-  }
-
-  $input.keyup(updateYouWillGet);
-
-  // Run once immediately
-  updateYouWillGet();
 }
 
 function initialize_give_feedback_form(locale, grade_error_message, text_error_message) {
@@ -387,6 +333,10 @@ function initialize_signup_form(locale, username_in_use_message, invalid_usernam
     link.preventDefault();
     $('#terms').lightbox_me({ centered: true, zIndex: 1000000 });
   });
+  $('#privacy_link').click(function(link) {
+    link.preventDefault();
+    $('#privacy').lightbox_me({ centered: true, zIndex: 1000000 });
+  });
   var form_id = "#new_person";
   //name_required = (name_required == 1) ? true : false
   $(form_id).validate({
@@ -415,7 +365,7 @@ function initialize_signup_form(locale, username_in_use_message, invalid_usernam
     onkeyup: false, //Only do validations when form focus changes to avoid exessive ASI calls
     submitHandler: function(form) {
       disable_and_submit(form_id, form, "false", locale);
-      report_analytics_event('user', "signed up", "normal form");
+      window.ST.analytics.logEvent('user', "signed up", "normal form");
     }
   });
 }
@@ -654,7 +604,8 @@ function initialize_admin_edit_tribe_look_and_feel_form(locale, community_id, in
      rules: {
        "community[custom_color1]": {required: false, minlength: 6, maxlength: 6, regex: "^([a-fA-F0-9]+)?$"},
        "community[description_color]": {required: false, minlength: 6, maxlength: 6, regex: "^([a-fA-F0-9]+)?$"},
-       "community[slogan_color]": {required: false, minlength: 6, maxlength: 6, regex: "^([a-fA-F0-9]+)?$"}
+       "community[slogan_color]": {required: false, minlength: 6, maxlength: 6, regex: "^([a-fA-F0-9]+)?$"},
+       "community[custom_head_script]": {required: false, maxlength: 65535}
      },
      messages: {
        "community[custom_color1]": { regex: invalid_color_code_message },
@@ -670,6 +621,9 @@ function initialize_admin_edit_tribe_look_and_feel_form(locale, community_id, in
 function initialize_admin_social_media_form(locale, community_id, invalid_twitter_handle_message, invalid_facebook_connect_id_message, invalid_facebook_connect_secret_message) {
   translate_validation_messages(locale);
   var form_id = "#edit_community_" + community_id;
+  $("#community_facebook_connect_enabled").click(function(){
+    $("#community_facebook_connect_id, #community_facebook_connect_secret").prop('disabled', !this.checked);
+  });
   $(form_id).validate({
      rules: {
        "community[twitter_handle]": {required: false, minlength: 1, maxlength: 15, regex: "^([A-Za-z0-9_]+)?$"},
@@ -800,6 +754,10 @@ function initialize_pending_consent_form(email_invalid_message, invitation_requi
     link.preventDefault();
     $('#terms').lightbox_me({ centered: true, zIndex: 1000000 });
   });
+  $('#privacy_link').click(function(link) {
+    link.preventDefault();
+    $('#privacy').lightbox_me({ centered: true, zIndex: 1000000 });
+  });
   $('#pending_consent_form').validate({
     errorPlacement: function(error, element) {
       if (element.attr("name") == "form[consent]") {
@@ -903,4 +861,18 @@ function enableSamePageScroll() {
     }
     return [];
   }
+}
+
+function autoSetMinimalPriceFromCountry() {
+    var _minimal_commissions = {USD: 50, AUD: 50, BRL: 50, GBP: 50, CAD: 50, CZK: 1500, DKK: 500, EUR: 50, HKD: 500, HUF: 10000, ILS: 200, JPY: 50, MXN: 500, MYR: 200, TWD: 1500, NZD: 50, NOK: 500, PHP: 2000, PLN: 200, RUB: 1500, SGD: 100, SEK: 500, CHF: 100, THB: 1500, TRY: 150};
+    var _min_price = $("#payment_preferences_form_minimum_listing_price");
+    $("#payment_preferences_form_marketplace_currency").change(function(){
+      var currency = $(this).val();
+      var min_tx = _minimal_commissions[currency] / 100;
+      var cur_tx = parseFloat(_min_price.val());
+      if(isNaN(cur_tx) || min_tx > cur_tx) {
+        _min_price.val(min_tx.toFixed(2))
+      }
+      _min_price.next(".paypal-preferences-currency-label").text(currency);
+    }).trigger('change');
 }

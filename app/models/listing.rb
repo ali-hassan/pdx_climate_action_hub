@@ -73,7 +73,7 @@ class Listing < ApplicationRecord
   include ApplicationHelper
   include ActionView::Helpers::TranslationHelper
   include Rails.application.routes.url_helpers
-  include ThinkingSphinx::Scopes
+  include ManageAvailabilityPerHour
 
   belongs_to :author, :class_name => "Person", :foreign_key => "author_id"
 
@@ -97,6 +97,14 @@ class Listing < ApplicationRecord
   has_and_belongs_to_many :followers, :class_name => "Person", :join_table => "listing_followers"
 
   belongs_to :category
+  has_many :working_time_slots, ->{ ordered },  dependent: :destroy
+  accepts_nested_attributes_for :working_time_slots, reject_if: :all_blank, allow_destroy: true
+
+  belongs_to :listing_shape
+
+  has_many :tx, class_name: 'Transaction'
+  has_many :bookings, through: :tx
+  has_many :bookings_per_hour, ->{ per_hour_blocked }, through: :tx, source: :booking
 
   monetize :price_cents, :allow_nil => true, with_model_currency: :currency
   monetize :shipping_price_cents, allow_nil: true, with_model_currency: :currency
@@ -159,7 +167,7 @@ class Listing < ApplicationRecord
   end
   validates_length_of :description, :maximum => 5000, :allow_nil => true
   validates_presence_of :category
-  validates_inclusion_of :valid_until, :allow_nil => :true, :in => DateTime.now..DateTime.now + 7.months
+  validates_inclusion_of :valid_until, :allow_nil => :true, :in => proc{ DateTime.now..DateTime.now + 7.months }
   validates_numericality_of :price_cents, :only_integer => true, :greater_than_or_equal_to => 0, :message => "price must be numeric", :allow_nil => true
 
   def self.currently_open(status="open")
@@ -299,4 +307,130 @@ class Listing < ApplicationRecord
     self.event.present? and self.event.end_at.present?
   end
 
+  def init_origin_location(location)
+    if location.present?
+      build_origin_loc(location.attributes)
+    else
+      build_origin_loc()
+    end
+  end
+
+  def ensure_origin_loc
+    build_origin_loc unless origin_loc
+  end
+
+  def custom_field_value_factory(custom_field_id, answer_value)
+    question = CustomField.find(custom_field_id)
+
+    answer = question.with_type do |question_type|
+      case question_type
+      when :dropdown
+        option_id = answer_value.to_i
+        answer = DropdownFieldValue.new
+        answer.custom_field_option_selections = [CustomFieldOptionSelection.new(:custom_field_value => answer,
+                                                                                :custom_field_option_id => option_id,
+                                                                                :listing_id => self.id)]
+        answer
+      when :text
+        answer = TextFieldValue.new
+        answer.text_value = answer_value
+        answer
+      when :numeric
+        answer = NumericFieldValue.new
+        answer.numeric_value = ParamsService.parse_float(answer_value)
+        answer
+      when :checkbox
+        answer = CheckboxFieldValue.new
+        answer.custom_field_option_selections = answer_value.map { |value|
+          CustomFieldOptionSelection.new(:custom_field_value => answer, :custom_field_option_id => value, :listing_id => self.id)
+        }
+        answer
+      when :date_field
+        answer = DateFieldValue.new
+        answer.date_value = Time.utc(answer_value["(1i)"].to_i,
+                                     answer_value["(2i)"].to_i,
+                                     answer_value["(3i)"].to_i)
+        answer
+      else
+        raise ArgumentError.new("Unimplemented custom field answer for question #{question_type}")
+      end
+    end
+
+    answer.question = question
+    answer.listing_id = self.id
+    return answer
+  end
+
+  # Note! Requires that parent self is already saved to DB. We
+  # don't use association to link to self but directly connect to
+  # self_id.
+  def upsert_field_values!(custom_field_params)
+    custom_field_params ||= {}
+
+    # Delete all existing
+    custom_field_value_ids = self.custom_field_values.map(&:id)
+    CustomFieldOptionSelection.where(custom_field_value_id: custom_field_value_ids).delete_all
+    CustomFieldValue.where(id: custom_field_value_ids).delete_all
+
+    field_values = custom_field_params.map do |custom_field_id, answer_value|
+      custom_field_value_factory(custom_field_id, answer_value) unless is_answer_value_blank(answer_value)
+    end.compact
+
+    # Insert new custom fields in a single transaction
+    CustomFieldValue.transaction do
+      field_values.each(&:save!)
+    end
+  end
+
+  def is_answer_value_blank(value)
+    if value.is_a?(Hash)
+      value["(3i)"].blank? || value["(2i)"].blank? || value["(1i)"].blank?  # DateFieldValue check
+    else
+      value.blank?
+    end
+  end
+
+  def reorder_listing_images(params, user_id)
+    listing_image_ids =
+      if params[:listing_images]
+        params[:listing_images].collect { |h| h[:id] }.select { |id| id.present? }
+      else
+        logger.error("Listing images array is missing", nil, {params: params})
+        []
+      end
+
+    ListingImage.where(id: listing_image_ids, author_id: user_id).update_all(listing_id: self.id)
+
+    if params[:listing_ordered_images].present?
+      params[:listing_ordered_images].split(",").each_with_index do |image_id, position|
+        ListingImage.where(id: image_id, author_id: user_id).update_all(position: position+1)
+      end
+    end
+  end
+
+  def logger
+    @logger ||= SharetribeLogger.new(:listing, logger_metadata.keys).tap { |logger|
+      logger.add_metadata(logger_metadata)
+    }
+  end
+
+  def logger_metadata
+    { listing_id: id }
+  end
+
+  def self.delete_by_author(author_id)
+    listings = Listing.where(author_id: author_id)
+    listings.update_all(
+      # Delete listing info
+      description: nil,
+      origin: nil,
+      open: false,
+      deleted: true
+    )
+    listings.each do |listing|
+      listing.location&.destroy
+    end
+    ids = listings.pluck(:id)
+    ListingImage.where(listing_id: ids).destroy_all
+  end
 end

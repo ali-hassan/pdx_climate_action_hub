@@ -4,9 +4,9 @@ module FeatureTests
 
     def create_marketplace(payment_gateway:)
 
-      marketplace = MarketplaceService::API::Marketplaces.create(
+      marketplace = MarketplaceService.create(
         marketplace_name: "Test marketplace",
-        marketplace_type: "service",
+        marketplace_type: "product",
         marketplace_country: "us",
         marketplace_language: "en",
         payment_process: :preauthorize
@@ -18,6 +18,9 @@ module FeatureTests
           payment_gateway: payment_gateway,
           payment_process: :preauthorize,
           active: true)
+      end
+      if payment_gateway == :stripe
+        FeatureFlagService::API::Api.features.enable(community_id: marketplace[:id], features: [:stripe])
       end
 
       {

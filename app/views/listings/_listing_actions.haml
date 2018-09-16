@@ -1,7 +1,6 @@
 - is_author = current_user?(@listing.author)
 - is_marketplace_admin = Maybe(@current_user).has_admin_rights?(@current_community).or_else(false)
 - is_authorized = is_author || is_marketplace_admin
-- show_manage_availability = is_authorized && availability_enabled
 
 - str_dates = @listing.unavailable_dates.map { |d| "'#{d.date.year}-#{d.date.month}-#{d.date.day}'" }.join(",").html_safe
 
@@ -11,7 +10,7 @@
       .icon-with-text-container
         = icon_tag("lock", ["icon-part"])
         .text-part= t("listings.reply_link.listing_closed")
-    - if is_authorized
+    - if @listing_presenter.is_authorized
       .listing-view-admin-link
         %a.action-link{href: edit_listing_path(@listing)}
           .icon-with-text-container
@@ -19,25 +18,16 @@
             .text-part= t("listings.edit_links.reopen_listing")
 - else
 
-  - if is_author
-    = render partial: "delivery_opts", locals: { delivery_opts: delivery_opts, is_author: is_author }
+  - if @listing_presenter.is_author
+    = render partial: "delivery_opts", locals: { delivery_opts: @listing_presenter.delivery_opts, is_author: @listing_presenter.is_author }
   - else
 
-    = form_tag form_path, :method => :get, :id => "booking-dates" do
+    = form_tag @listing_presenter.form_path, :method => :get, :id => "booking-dates" do
 
-      - if [:day, :night].include?(@listing.quantity_selector&.to_sym)
-        - blocked_dates_result.on_success do |blocked_dates|
-          - days = [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
-          - months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
-          - translated_days = days.map { |day_symbol| t("datepicker.days.#{day_symbol}") }.to_json
-          - translated_days_short = days.map { |day_symbol| t("datepicker.days_short.#{day_symbol}") }.to_json
-          - translated_days_min = days.map { |day_symbol| t("datepicker.days_min.#{day_symbol}") }.to_json
-          - translated_months = months.map { |day_symbol| t("datepicker.months.#{day_symbol}") }.to_json
-          - translated_months_short = months.map { |day_symbol| t("datepicker.months_short.#{day_symbol}") }.to_json
-
+      - if @listing_presenter.quantity_per_day_or_night?
+        - @listing_presenter.blocked_dates_result.on_success do |blocked_dates|
           - content_for :extra_javascript do
             :javascript
-
               var disabledDates = [
                 #{str_dates}
               ];
@@ -108,23 +98,43 @@
               var nightPicker = #{@listing.quantity_selector.to_sym == :night};
 
               window.ST.initializeFromToDatePicker('datepicker', {disabledDates: disabledDates, endDate: endDate, nightPicker: nightPicker });
+              window.ST.FromToDatePicker.setupPerDayOrNight(#{raw @listing_presenter.datepicker_per_day_or_night_setup(blocked_dates).to_json});
           .input-daterange.input-group.clearfix#datepicker{:data => {:locale => I18n.locale, :dateformat => t("datepicker.format")}}
             .datepicker-start-wrapper
               = label_tag t(".booking_from")
-              %input.input-sm.form-control.required#start-on{:type => 'text', :name => "start_on", :placeholder => t("datepicker.format"), :data => { :output => "booking-start-output" } }
+              %input.input-sm.form-control.required#start-on{:type => 'text', :name => "start_on", :placeholder => t("datepicker.format"), :data => { :output => "booking-start-output" }, :autocomplete => 'off' }
               %input#booking-start-output{:type => 'hidden', :name => 'start_on'}
 
             .datepicker-end-wrapper
               = label_tag t(".booking_to")
-              %input.input-sm.form-control.required#end-on{:type => 'text', :name => "end_on", :placeholder => t("datepicker.format"), :data => { :output => "booking-end-output" }}
+              %input.input-sm.form-control.required#end-on{:type => 'text', :name => "end_on", :placeholder => t("datepicker.format"), :data => { :output => "booking-end-output" }, :autocomplete => 'off'}
               %input#booking-end-output{:type => 'hidden', :name => 'end_on'}
 
-        - blocked_dates_result.on_error do
+        - @listing_presenter.blocked_dates_result.on_error do
           = t("listings.listing_actions.unable_load_availability")
 
-      - elsif listing_unit_type.present?
-        - delivery_type = delivery_opts.length > 0 ? delivery_opts.first[:name].to_s : ""
-        - shipping_price_additional = delivery_opts.length > 0 ? delivery_opts.first[:shipping_price_additional] : nil
+      - elsif @listing_presenter.booking_per_hour?
+        .input-daterange.input-group.clearfix
+          .datepicker-per-hour
+            .field
+              = label_tag t(".booking_date")
+              %input.input-sm.form-control.required#start-on{ :type => 'text',
+                :name => "start_on_show", :placeholder => t("datepicker.format"), :autocomplete => 'off',
+                :data => { :locale => I18n.locale, :dateformat => t("datepicker.format") },
+                :required => true }
+            .field
+              = label_tag t(".start_time")
+              = select_tag 'start_time', options_for_select([]), id: 'start_time', :required => true
+            .field
+              = label_tag t(".end_time")
+              = select_tag 'end_time', options_for_select([]), id: 'end_time', :required => true
+          = hidden_field_tag 'per_hour', '1'
+        - content_for :extra_javascript do
+          = js_t ["listings.listing_actions.select_one"], true
+          :javascript
+            window.ST.FromToDatePicker.setupPerHour(#{raw @listing_presenter.datepicker_per_hour_setup.to_json});
+
+      - elsif @listing_presenter.listing_unit_type.present?
         - content_for :extra_javascript do
           :javascript
             $("#booking-dates").validate({
@@ -137,8 +147,8 @@
               }
             });
             window.ST.initializeQuantityValidation({validate: "positiveIntegers", input: "quantity", errorMessage: "#{t("errors.messages.positive_number")}" });
-            if ("#{delivery_type}" == "shipping" && #{shipping_price_additional != nil}) {
-              window.ST.initializeShippingPriceTotal(#{raw currency_opts.to_json}, '#quantity', '.delivery-price-value');
+            if ("#{@listing_presenter.delivery_type}" == "shipping" && #{@listing_presenter.shipping_price_additional != nil}) {
+              window.ST.initializeShippingPriceTotal(#{raw @listing_presenter.currency_opts.to_json}, '#quantity', '.delivery-price-value');
             }
 
         - if !@listing.external_payment_link
@@ -149,50 +159,31 @@
             .quantity-input.input-sm.required
               %input#quantity{type: 'number', placeholder: t("listings.quantity_placeholder"), name: 'quantity', value: 1, min: 1, step: 1}
 
-      = render partial: "delivery_opts", locals: { delivery_opts: delivery_opts, is_author: is_author }
+      = render partial: "delivery_opts", locals: { delivery_opts: @listing_presenter.delivery_opts, is_author: @listing_presenter.is_author }
 
       = hidden_field_tag(:listing_id, @listing.id)
 
-      - if @listing.external_payment_link
-        - content_for :extra_javascript do
-          :javascript
-            $('#booking-dates .external-booking').click( function() {
-              // http://stackoverflow.com/questions/19851782/how-to-open-a-url-in-a-new-tab-using-javascript-or-jquery
-              var win = window.open('#{@listing.external_payment_link}', '_blank');
-              if(win){
-                //Browser has allowed it to be opened
-                win.focus();
-              }else{
-                //Browser has blocked it
-                alert('Please allow popups for this site');
-              }
-              return false;
-              });
-        - blocked_dates_result.on_success do
-          %button.enabled-book-button.external-booking
-            .content
-              = action_button_label(@listing)
-      - else
-        - blocked_dates_result.on_success do
+      - if @listing_presenter.quantity_per_day_or_night?
+        - @listing_presenter.blocked_dates_result.on_success do
           %button.enabled-book-button
             .content
               = action_button_label(@listing)
 
-        - blocked_dates_result.on_error do
+        - @listing_presenter.blocked_dates_result.on_error do
           %button.disabled-book-button{disabled: true}
             .content
               = action_button_label(@listing)
+      - else
+        %button.enabled-book-button
+          .content
+            = action_button_label(@listing)
 
-    - if @listing.external_payment_link
+    - if @listing_presenter.payments_enabled?
       .row
         .col-12
-          Clicking the blue button above will take you to an external site to complete the transaction.
-    - if payment_gateway == :paypal && process != :none && @listing.external_payment_link == :none
-      .row
-        .col-12
-          = render :partial => "listing_conversations/paypal_payment_methods", locals: { country_code: country_code }
+          = render :partial => "listing_conversations/payment_methods", locals: { stripe_in_use: @listing_presenter.stripe_in_use, paypal_in_use: @listing_presenter.paypal_in_use }
 
-  - if is_authorized
+  - if @listing_presenter.is_authorized
     .listing-view-admin-links
       .listing-view-admin-link
         %a.icon-with-text-container{href: edit_listing_path(@listing)}
@@ -210,12 +201,25 @@
       /       = icon_tag("calendar", ["icon-part"])
       /       .text-part= t("web.listings.edit_listing_availability")
       /     = react_component("ManageAvailabilityApp", props: manage_availability_props.merge({ availability_link_id: availability_link_id }), prerender: false)
+      - if @listing_presenter.show_manage_availability
+        - availability_link_id = "edit-listing-availability-#{SecureRandom.urlsafe_base64(5)}"
+        .listing-view-admin-link
+          - if @listing_presenter.booking_per_hour?
+            %a.icon-with-text-container{id: availability_link_id, href: "#manage-working-hours"}
+              = icon_tag("calendar", ["icon-part"])
+              .text-part= t("web.listings.edit_listing_availability")
+            = react_component("ListingWorkingHoursApp", props: @listing_presenter.working_hours_props.merge({ availability_link_id: availability_link_id }), prerender: false)
+          - elsif APP_CONFIG.harmony_api_in_use
+            %a.icon-with-text-container{id: availability_link_id, href: "#manage-availability"}
+              = icon_tag("calendar", ["icon-part"])
+              .text-part= t("web.listings.edit_listing_availability")
+            = react_component("ManageAvailabilityApp", props: @listing_presenter.manage_availability_props.merge({ availability_link_id: availability_link_id }), prerender: false)
       .listing-view-admin-link
         %a.icon-with-text-container{href: close_person_listing_path(@current_user, @listing), data: { method: "put", remote: "true"}}
           = icon_tag("lock", ["icon-part"])
           .text-part= t("listings.edit_links.close_listing")
 
-      - if is_marketplace_admin
+      - if @listing_presenter.is_marketplace_admin
         .listing-view-admin-link
           = link_to move_to_top_person_listing_path(@current_user, @listing), data: { method: "put" } do
             .icon-with-text-container
