@@ -181,30 +181,6 @@ class ListingsController < ApplicationController
 
     result = ListingFormViewUtils.build_listing_params(shape, listing_uuid, params, @current_community)
 
-    # magic happens here for external booking.
-    transaction_process_id = shape[:transaction_process_id]
-    if params[:payment_option] == "external"
-      transaction_process = TransactionProcess.find(shape[:transaction_process_id])
-      new_transaction_process = TransactionProcess.where(author_is_seller: transaction_process[:author_is_seller], process: 'none').first
-      transaction_process_id = new_transaction_process[:id]
-    end
-
-    listing_params = create_listing_params(listing_params).merge(
-        uuid_object: listing_uuid,
-        community_id: @current_community.id,
-        listing_shape_id: shape[:id],
-        transaction_process_id: transaction_process_id,
-        shape_name_tr_key: shape[:name_tr_key],
-        action_button_tr_key: shape[:action_button_tr_key],
-        availability: shape[:availability]
-    ).merge(unit_to_listing_opts(m_unit)).except(:unit)
-
-    @listing = Listing.new(listing_params)
-    if params[:payment_option] == "external"
-      @listing.external_payment_link = params[:payment_option_external_link].strip
-    else
-      @listing.external_payment_link = nil
-    end
     unless result.success
       flash[:error] = t("listings.error.something_went_wrong", error_code: result.data.join(', '))
       redirect_to new_listing_path
@@ -217,47 +193,6 @@ class ListingsController < ApplicationController
       @listing.author = @current_user
 
       if @listing.save
-        create_repeat_rule unless @params[:listing][:event_attributes].nil?
-
-        upsert_field_values!(@listing, params.to_unsafe_hash[:custom_fields])
-
-        listing_image_ids =
-          if params[:listing_images]
-            params[:listing_images].collect { |h| h[:id] }.select { |id| id.present? }
-          else
-            logger.error("Listing images array is missing", nil, {params: params})
-            []
-          end
-
-        ListingImage.where(id: listing_image_ids, author_id: @current_user.id).update_all(listing_id: @listing.id)
-
-        if params[:listing_ordered_images].present?
-          params[:listing_ordered_images].split(",").each_with_index do |image_id, position|
-            ListingImage.where(id: image_id, author_id: @current_user.id).update_all(position: position+1)
-          end
-        end
-
-        Delayed::Job.enqueue(ListingCreatedJob.new(@listing.id, @current_community.id))
-        if @current_community.follow_in_use?
-          Delayed::Job.enqueue(NotifyFollowersJob.new(@listing.id, @current_community.id), :run_at => NotifyFollowersJob::DELAY.from_now)
-        end
-
-        flash[:notice] = t(
-          "layouts.notifications.listing_created_successfully",
-          :new_listing_link => view_context.link_to(t("layouts.notifications.create_new_listing"),new_listing_path)
-        ).html_safe
-
-        # Onboarding wizard step recording
-        state_changed = Admin::OnboardingWizard.new(@current_community.id)
-          .update_from_event(:listing_created, @listing)
-        if state_changed
-          report_to_gtm({event: "km_record", km_event: "Onboarding listing created"})
-
-          flash[:show_onboarding_popup] = true
-        end
-
-        if shape[:availability] == :booking
-          redirect_to listing_path(@listing, anchor: 'manage-availability'), status: 303 and return
         @listing.upsert_field_values!(params.to_unsafe_hash[:custom_fields])
         @listing.reorder_listing_images(params, @current_user.id)
         notify_about_new_listing
@@ -270,16 +205,13 @@ class ListingsController < ApplicationController
           redirect_to @listing, status: 303
         end
       else
-
         logger.error("Errors in creating listing: #{@listing.errors.full_messages.inspect}")
-
         flash[:error] = t(
-          "layouts.notifications.listing_could_not_be_saved",
-          :contact_admin_link => view_context.link_to(t("layouts.notifications.contact_admin_link_text"), new_user_feedback_path, :class => "flash-error-link")
+            "layouts.notifications.listing_could_not_be_saved",
+            :contact_admin_link => view_context.link_to(t("layouts.notifications.contact_admin_link_text"), new_user_feedback_path, :class => "flash-error-link")
         ).html_safe
         redirect_to new_listing_path
       end
-    end
     end
   end
 
