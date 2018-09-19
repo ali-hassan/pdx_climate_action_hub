@@ -175,7 +175,7 @@ module TransactionService::Store::PaymentSettings
     cipher.padding = 0
     plain = Base64.decode64(value)
     cipher.iv = plain.slice!(0,16)
-    cipher.update(plain) + cipher.final
+    cipher.update(plain) + cipher.final rescue false
   end
 
   def clean_or_encrypt_api_keys(model, new_settings)
