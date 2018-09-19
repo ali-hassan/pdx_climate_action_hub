@@ -153,7 +153,7 @@ module TransactionService::Store::PaymentSettings
     end
     # store visible hint
     settings[:api_visible_private_key] = settings[:api_private_key].sub(/\A(.{7}).+(.{4})$/, '\1*********************\2')
-    settings[:api_private_key] = encrypt_value(settings[:api_private_key])
+    settings[:api_private_key] = settings[:api_private_key]
   end
 
   def encrypt_value(value)
@@ -175,7 +175,7 @@ module TransactionService::Store::PaymentSettings
     cipher.padding = 0
     plain = Base64.decode64(value)
     cipher.iv = plain.slice!(0,16)
-    cipher.update(plain) + cipher.final rescue false
+    cipher.update(plain) + cipher.final
   end
 
   def clean_or_encrypt_api_keys(model, new_settings)
