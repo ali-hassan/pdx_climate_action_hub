@@ -120,6 +120,7 @@ class StripeService::API::StripeApiWrapper
           account_token: account_info[:token],
         }
         data.deep_merge!(payout_mode).deep_merge!(metadata: metadata)
+        Stripe.api_key = APP_CONFIG.feature_stripe_private_key
         Stripe::Account.create(data)
       end
     end
@@ -218,6 +219,7 @@ class StripeService::API::StripeApiWrapper
 
     def get_seller_account(community:, account_id:)
       with_stripe_payment_config(community) do |payment_settings|
+        Stripe.api_key = APP_CONFIG.feature_stripe_private_key
         Stripe::Account.retrieve(account_id)
       end
     end
