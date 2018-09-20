@@ -3,9 +3,9 @@
 - required_class = (required ? "required" : "")
 - origin_loc = @listing.origin_loc
 
-= f.label :origin, title, :class => "input"
-= f.text_field :origin, :class => "text_field #{required_class}", :onkeyup => "timed_input(this)", :value => (origin_loc ? origin_loc.address : nil)
-= f.fields_for :origin_loc, include_id: false do |loc|
+= form.label :origin, title, :class => "input"
+= form.text_field :origin, :class => "text_field #{required_class}", :onkeyup => "timed_input(this)", :value => (origin_loc ? origin_loc.address : nil)
+= form.fields_for :origin_loc, include_id: false do |loc|
   = loc.hidden_field :address, :value => origin_loc.address
   = loc.hidden_field :google_address, :value => origin_loc.google_address
   = loc.hidden_field :latitude, :value => origin_loc.latitude
