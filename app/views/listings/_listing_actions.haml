@@ -24,6 +24,16 @@
 
     = form_tag @listing_presenter.form_path, :method => :get, :id => "booking-dates" do
 
+      - if [:day, :night].include?(@listing.quantity_selector&.to_sym)
+        - blocked_dates_result.on_success do |blocked_dates|
+          - days = [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
+          - months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
+          - translated_days = days.map { |day_symbol| t("datepicker.days.#{day_symbol}") }.to_json
+          - translated_days_short = days.map { |day_symbol| t("datepicker.days_short.#{day_symbol}") }.to_json
+          - translated_days_min = days.map { |day_symbol| t("datepicker.days_min.#{day_symbol}") }.to_json
+          - translated_months = months.map { |day_symbol| t("datepicker.months.#{day_symbol}") }.to_json
+          - translated_months_short = months.map { |day_symbol| t("datepicker.months_short.#{day_symbol}") }.to_json
+
       - if @listing_presenter.quantity_per_day_or_night?
         - @listing_presenter.blocked_dates_result.on_success do |blocked_dates|
           - content_for :extra_javascript do
