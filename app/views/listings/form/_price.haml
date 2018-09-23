@@ -56,7 +56,7 @@
         $(document).ready( function() { console.log('foo'); });
       .choice
         %input{:type => "radio", :name => "payment_option", :id => "payment_option_paypal", :value => "paypal"}
-        %label{:style => "display:inline-block; width:auto;"} Use PayPal to process payments / credit cards.
+        %label{:style => "display:inline-block; width:auto;"} Use Stripe or PayPal to process payments / credit cards.
     .paypal_shtuff
       %small
         - paypal_fee_info_link = capture do
