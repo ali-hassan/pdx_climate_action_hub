@@ -92,7 +92,7 @@
               .row
                 .col-12
                   = form.label :birth_date, t("stripe_accounts.form_new.birth_date")+"*"
-                  = form.date_select :birth_date, {:start_year => Date.current.year-18, :end_year => 1920, order: [:day, :month, :year], :use_month_names => I18n.t("datepicker.months").values}, class: 'required'
+                  = form.date_select :birth_date, {:start_year => Date.current.year-18, :end_year => 1920, order: [:month, :day, :year], :use_month_names => I18n.t("datepicker.months").values}, class: 'required'
               .row
                 .col-2
                   = form.label :address_country, t("stripe_accounts.form_new.address_country")+"*"
