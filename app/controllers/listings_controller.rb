@@ -444,7 +444,7 @@ class ListingsController < ApplicationController
     if shapes.size == 1
       shapes.first
     else
-      shapes.find { |shape| shape[:id] == listing.listing_shape_id }
+      shapes.find { |shape| shape[:id] == @listing.listing_shape_id }
     end
   end
 
