@@ -2,4 +2,8 @@
   .info-text-icon
     = icon_tag("information")
   .info-text-content
-    %p= text
+    %p
+      - if text.include?("Stripe or PayPal")
+        = link_to(text, "things-to-do/en/#{@current_user.username}/settings/payments", target: "_blank")
+      - else
+        = text
