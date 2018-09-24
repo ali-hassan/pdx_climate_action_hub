@@ -369,7 +369,10 @@ class ApplicationController < ActionController::Base
         payment_settings_link = view_context.link_to(t("paypal_accounts.from_your_payment_settings_link_text"),
           person_payment_settings_path(@current_user), target: "_blank")
 
-        flash.now[:warning] = t("stripe_accounts.missing_payment", settings_link: payment_settings_link).html_safe
+        unless @current_user.is_payment_setup_notification_dismissed
+          flash.now[:warning] = t("stripe_accounts.missing_payment", settings_link: payment_settings_link).html_safe
+          @current_user.update is_payment_setup_notification_dismissed: true
+        end
       end
     end
   end
