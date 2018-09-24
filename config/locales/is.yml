@@ -137,7 +137,12 @@ is:
         amazon_ses_notification: ~
         this_is_how_it_will_look: ~
         send_verification_button: ~
+        change_sender_email: ~
         successfully_saved: ~
+        successfully_saved_name: ~
+        set_sender_name: ~
+        change_sender_name: ~
+        change_sender_prompt: ~
         status: ~
         status_verified: ~
         status_error: ~
@@ -206,6 +211,7 @@ is:
         twitter_handle: ~
         update_settings: ~
         automatically_confirmed_no_escrow: ~
+        automatically_confirmed_no_escrow_stripe_info: ~
         automatic_newsletter_frequency: ~
         newsletter_daily: ~
         newsletter_weekly: ~
@@ -218,6 +224,7 @@ is:
         last_community_updates: ~
         you_will_be_redirected_to: ~
         delete_this_marketplace: ~
+        payment_preferences: ~
       manage_members:
         manage_members: ~
         email: ~
@@ -232,7 +239,13 @@ is:
         export_all_as_csv: ~
         save_user_status_error: ~
         ban_user_confirmation: ~
+        unban_user_confirmation: ~
         ban_me_error: ~
+        search: ~
+        search_by_name_email: ~
+        reset_search: ~
+        for_search_terms: ~
+        this_makes_the_user_an_admin: ~
       new_layout:
         new_layout: ~
         description_roadmap_new: ~
@@ -256,6 +269,7 @@ is:
         invalid_facebook_connect_id: ~
         facebook_connect_secret: ~
         invalid_facebook_connect_secret: ~
+        enable_facebook_login: ~
         save: ~
       analytics:
         analytics: ~
@@ -263,6 +277,10 @@ is:
         google_analytics_key_info_text: ~
         google_analytics_key_info_text_with_instructions: ~
         google_analytics_instructions_link_text: ~
+        sharetribe_analytics: ~
+        sharetribe_analytics_info_text_with_instructions: ~
+        sharetribe_analytics_instructions_link_text: ~
+        end_user_analytics: ~
         save: ~
       menu_links:
         menu_links: ~
@@ -284,6 +302,7 @@ is:
         invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: ~
+        processing_export: ~
         transactions: ~
         headers:
           conversation: ~
@@ -295,6 +314,7 @@ is:
           initiated_by: ~
           other_party: ~
         status:
+          conversation: ~
           free: ~
           pending: ~
           preauthorized: ~
@@ -305,9 +325,57 @@ is:
           canceled: ~
           initiated: ~
           pending_ext: ~
+          none:
+            free: ~
+          paypal:
+            free: ~
+            pending: ~
+            preauthorized: ~
+            accepted: ~
+            rejected: ~
+            paid: ~
+            confirmed: ~
+            canceled: ~
+            initiated: ~
+            pending_ext: ~
+          stripe:
+            free: ~
+            pending: ~
+            preauthorized: ~
+            accepted: ~
+            rejected: ~
+            paid: ~
+            confirmed: ~
+            canceled: ~
+            initiated: ~
+            pending_ext: ~
         not_available: ~
-      paypal_account:
-        paypal_admin_account: ~
+      conversations:
+        conversations: ~
+        headers:
+          started_from: ~
+          status: ~
+          started: ~
+          last_activity: ~
+          initiated_by: ~
+          other_party: ~
+        participants: ~
+        profile: ~
+      testimonials:
+        testimonials: ~
+        no_testimonials_found: ~
+        displaying_xx_reviews: ~
+        headers:
+          transaction: ~
+          author: ~
+          receiver: ~
+          status: ~
+          grade: ~
+          note: ~
+        status:
+          waiting: ~
+          skipped: ~
+          published: ~
     custom_fields:
       edit:
         edit_listing_field: ~
@@ -365,14 +433,32 @@ is:
       new:
         send_email_to_members: ~
         send_email_to_members_title: ~
+        send_email: ~
+        send_email_or: ~
+        send_test_email: ~
+        test_sent: ~
+        send_email_article_title: ~
+        send_email_article_text: ~
+        recipients:
+          title: ~
+          options:
+            all_users: ~
+            with_listing: ~
+            with_listing_no_payment: ~
+            with_payment_no_listing: ~
+            no_listing_no_payment: ~
         email_subject: ~
         email_content: ~
         email_content_placeholder: ~
         email_language: ~
         any_language: ~
-        send_email: ~
         message_will_be_sent_only_to_people_with_this_language: ~
         email_sent: ~
+        to_improve_email_deliverability: ~
+        email_subject_text: ~
+        firstname_cannot_be_removed: ~
+        hello_firstname: ~
+        hello_firstname_text: ~
     left_hand_navigation:
       general: ~
       users_and_transactions: ~
@@ -385,9 +471,11 @@ is:
       read_more: ~
       read_more_availability_management: ~
       allow_providers_to_manage_availability: ~
+      per_hour_availability: ~
       per_day_availability: ~
       per_night_availability: ~
       pricing_units_disabled_info: ~
+      can_not_find_name: ~
       index:
         listing_shapes: ~
         description: ~
@@ -467,6 +555,8 @@ is:
       integration_info_text: ~
       link_paypal_personal_account_label: ~
       link_paypal_personal_account: ~
+      link_stripe_personal_account: ~
+      link_paypal_and_stripe_personal_account: ~
       personal_payment_preferences_link_text: ~
       read_more_about_paypal: ~
       edit_payment_settings: ~
@@ -479,13 +569,81 @@ is:
       save_settings: ~
       minimum_listing_price_below_tx_fee: ~
       minimum_listing_price_below_min: ~
+    payment_preferences:
+      title: ~
+      general_settings: ~
+      connect_a_payment_provider: ~
+      contact_support: ~
+      no_payments_link_text: ~
+      your_country: ~
+      you_cannot_use_online_payments: ~
+      which_to_choose: ~
+      you_can_use_stripe_or_paypal: ~
+      you_can_use_stripe_only: ~
+      read_more_stripe: ~
+      you_can_use_paypal_only: ~
+      read_more_paypal: ~
+      read_more_about_paypal_and_stripe: ~
+      general_settings_updated: ~
+      transaction_fee_settings_updated: ~
+      choose_popup_text: ~
+      invalid_api_keys: ~
+      missing_api_keys: ~
+      stripe_verified: ~
+      change_settings: ~
+      configure_stripe: ~
+      configure_paypal: ~
+      transaction_fee_settings: ~
+      transaction_fee_save: ~
+      stripe_fee: ~
+      stripe_fee_notice: ~
+      fee_should_be_less_than_minimum_price: ~
+      confirm_disable: ~
+      stripe_connected:
+        title: ~
+        disable: ~
+        disabled: ~
+        enable: ~
+      paypal_connected:
+        title: ~
+        disable: ~
+        disabled: ~
+        enable: ~
+      cannot_enable_gateway: ~
+      cannot_disable_gateway: ~
+      stripe_form:
+        add_your_api_keys: ~
+        how_to_get_these: ~
+        publishable_key_example: ~
+        secret_key_example: ~
+        save_api_keys: ~
+        invalid_secret: ~
+        invalid_publishable: ~
+      index:
+        header: ~
+        info: ~
+        active: ~
+        gateway: ~
+        process: ~
+        commission: ~
+        minimum_price: ~
+        minimum_fee: ~
+        api_verified: ~
+        actions: ~
+        payments_not_enabled: ~
     transaction_types:
       sell: ~
+      sell_w_online_payment: ~
+      sell_wo_online_payment: ~
       rent: ~
+      rent_w_online_payment: ~
+      rent_wo_online_payment: ~
       give: ~
       lend: ~
       swap: ~
       service: ~
+      service_w_online_payment: ~
+      service_wo_online_payment: ~
       request: ~
       inquiry: ~
       share_for_free: ~
@@ -543,11 +701,20 @@ is:
     username_or_email: ~
     what_is_this: "Hvað er þetta?"
     removed_user: ~
+    payment_fee_info:
+      title: ~
+      stripe: ~
+      paypal: ~
+      info: ~
     paypal_fee_info:
       title: ~
       body_text: ~
-      body_with_shipping_text: ~
+      body_text_accept: ~
       link_to_paypal_text: ~
+    stripe_fee_info:
+      title: ~
+      body_text: ~
+      link_to_stripe_text: ~
   conversations:
     accept:
       details: ~
@@ -568,8 +735,12 @@ is:
       you_will_get_label: ~
       total_label: ~
       total_value: ~
+      total_value_paypal: ~
+      total_value_stripe: ~
       paypal_fee_info: ~
+      payment_fee_info: ~
       shipping_price_label: ~
+      stripe-fee_label: ~
     confirm:
       confirm_description: ~
       cancel_description: ~
@@ -615,6 +786,9 @@ is:
       canceled_offer: ~
       paid: ~
       payment_preauthorized: ~
+      stripe:
+        held_payment: ~
+        confirmed_request: ~
     new:
       message: Skilaboð
       message_to: ~
@@ -687,6 +861,8 @@ is:
           intl: ~
           unknown_reason: ~
           verify: ~
+      stripe:
+        waiting_confirmation_from_requester: ~
     status_link:
       accept_offer: "Tilboð samþykkt"
       accept_request: "Beiðni þín var samþykkt"
@@ -756,6 +932,8 @@ is:
       has_marked_request_as_canceled: ~
       giving_feedback_is_good_idea: ~
       give_feedback_to: ~
+      stripe:
+        has_marked_request_as_confirmed: ~
     transaction_automatically_confirmed:
       subject: ~
       we_have_marked_request_as_confirmed: ~
@@ -780,7 +958,10 @@ is:
       message_not_displaying_correctly: ~
       view_it_in_your_browser: ~
       or: ~
+      unsubscribe_from_these_emails_info: ~
       unsubscribe_from_these_emails: ~
+      unsubscribe_from_invitation_emails_info: ~
+      unsubscribe_from_invitation_emails: ~
     conversation_status_changed:
       has_accepted_your_offer: "%{accepter} hefur samþykkt tilboð þitt: %{listing}."
       has_accepted_your_request: "%{accepter} hefur samþykkt beiðnina þína: %{listing}."
@@ -815,6 +996,34 @@ is:
       price_per_unit_type: ~
       quantity: ~
       you_have_received_new_payment: ~
+      listing_per_unit_title: ~
+    payment_receipt_to_seller:
+      payment_gateway_fee: ~
+      shipping_total: ~
+      product: ~
+      price_payer_paid: ~
+      service_fee: ~
+      you_will_get: ~
+      new_payment: ~
+      price_per_unit_type: ~
+      quantity: ~
+      you_have_received_new_payment: ~
+      stripe:
+        you_have_received_new_payment: ~
+    payment_receipt_to_payer:
+      receipt_of_payment: ~
+      you_have_made_new_payment: ~
+      product: ~
+      price_per_unit_type: ~
+      duration: ~
+      quantity: ~
+      subtotal: ~
+      total: ~
+      price: ~
+      service_fee: ~
+      stripe_gateway_fee: ~
+      paypal_gateway_fee: ~
+      money_will_be_transferred: ~
     paypal_new_payment:
       paypal_gateway_fee: ~
       shipping_total: ~
@@ -834,7 +1043,12 @@ is:
       total: ~
       price: ~
       service_fee: ~
+      stripe_gateway_fee: ~
+      paypal_gateway_fee: ~
       money_will_be_transferred: ~
+      listing_per_unit_title: ~
+      stripe:
+        you_have_made_new_payment: ~
     new_testimonial:
       has_given_you_feedback_in_kassi: "%{name} hefur gefið þér umsögn á %{service_name}"
       you_can_give_feedback_to: "Þú hefur enn ekki gefið %{name} umsögn."
@@ -870,6 +1084,7 @@ is:
       transaction_requested_by_user: ~
       you_have_time_to_accept: ~
       if_you_do_accept: ~
+      if_you_do_accept_stripe: ~
       if_you_do_not_accept: ~
       click_here_to_reply: ~
     transaction_preauthorized_reminder:
@@ -917,6 +1132,10 @@ is:
       seller_express_checkout_disabled: ~
       generic_error: ~
       cancel_error: ~
+      accept_authorization_error: ~
+      reject_authorization_error: ~
+    stripe:
+      generic_error: ~
       accept_authorization_error: ~
       reject_authorization_error: ~
   error_pages:
@@ -1216,8 +1435,10 @@ is:
       feedback_sent_to: "Amusing send til %{target_person}."
       feedback_skipped: "Umsögn sleppt"
       invitation_cannot_be_sent: ~
+      invitation_cannot_unsubscribe: ~
       invitation_limit_reached: ~
       invitation_sent: ~
+      invitation_successfully_unsubscribed: ~
       inviting_new_users_is_not_allowed_in_this_community: ~
       login_again: "Vinsamlegast, skráðu þig inn aftur."
       login_failed: "Innskráning mistókst. Vinsamlegast skráðu inn réttar upplýsingar."
@@ -1307,11 +1528,14 @@ is:
       listing_author_payment_details_missing: ~
       images_are_processing: ~
       automatically_logged_out_please_sign_in: ~
+      stripe_you_account_balance_is_not_0: ~
     settings:
       account: Aðgangur
       notifications: Tilkynningar
       profile: "Síðan mín"
       settings: Stillingar
+      paypal_payments: ~
+      stripe_payments: ~
       payments: ~
   listings:
     bubble_listing_not_visible:
@@ -1408,8 +1632,9 @@ is:
         long_time: ~
         after_service_fee_you_will_get: ~
         no_service_fee_you_will_get_paypal_text: ~
-        after_service_fee_you_will_get_paypal_text: ~
-        paypal_fee_info_link_text: ~
+        no_service_fee_you_will_get_payment_text: ~
+        after_service_fee_you_will_get_payment_text: ~
+        payment_fee_info_link_text: ~
         delivery: ~
         shipping: ~
         shipping_price: ~
@@ -1495,6 +1720,10 @@ is:
       how_paypal_works: ~
       payment_help: ~
       unable_load_availability: ~
+      booking_date: ~
+      select_one: ~
+      start_time: ~
+      end_time: ~
     new:
       listing: ~
       selected_category: ~
@@ -1583,6 +1812,17 @@ is:
       invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: ~
+    stripe_payment:
+      payment: ~
+      pay_with_card: ~
+      address: ~
+      address_country: ~
+      address_name: ~
+      address_city: ~
+      address_state: ~
+      address_street1: ~
+      address_street2: ~
+      address_postal_code: ~
   mapview:
     index:
       all_categories: "Allir flokkar"
@@ -1626,6 +1866,7 @@ is:
     contact_admin_link_text: ~
     you_are_ready_to_accept_payments: ~
     commission: ~
+    not_now: ~
     new:
       payout_info_you_need_to_connect: ~
       payout_info_text: ~
@@ -1672,6 +1913,8 @@ is:
     paypal_permission_granted_summary: ~
   paypal:
     pay_with_paypal: ~
+    checkout_with: ~
+    or_pay_with_paypal: ~
     checkout_with_paypal: ~
     cancel_succesful: ~
     transaction:
@@ -1698,9 +1941,11 @@ is:
       email_is_in_use: "Netfangið er nú þegar í notkun"
       email_is_in_use_or_not_allowed: ~
       email_not_allowed: ~
+      invalid_username_or_email: ~
       family_name: Eftirnafn
       given_name: Fornafn
-      i_accept_the: "Ég samþykki"
+      i_accept_the_terms_and_privacy: ~
+      admin_emails_consent: ~
       invalid_invitation_code: ~
       invitation_code: ~
       not_required: ", ekki nauðsynlegt"
@@ -1709,6 +1954,7 @@ is:
       show_my_name_to_others: ~
       sign_up: "Nýskráning %{service_name}"
       terms: notendaskilmálar
+      privacy: ~
       username_is_in_use: "Notendanafn er nú þegar í notkun."
       username_is_invalid: "Notendanafn er ógilt. Aðeins eru leyfðir stafir, tölur og undirskor."
       visible_only_to_you: "sjáanlegt aðeins hjá þér og stjórnanda síðunnar"
@@ -1813,6 +2059,7 @@ is:
       delete_personal_information: ~
       delete_information_others_involved: ~
       unfinished_transactions: ~
+      only_admin: ~
       new_password: ~
       save: ~
       these_fields_are_shown_only_to_you: ~
@@ -1920,6 +2167,7 @@ is:
   date:
     formats:
       long_with_abbr_day_name: ~
+    first_day_of_week: ~
   datepicker:
     days:
       sunday: ~
@@ -1979,6 +2227,7 @@ is:
       short: ~
       shorter: ~
       short_date: ~
+      hours_only: "%H:%M"
   timestamps:
     day_ago: ~
     days_ago: ~
@@ -1997,14 +2246,19 @@ is:
       booked_nights: ~
       price_per_day: ~
       price_per_night: ~
+      price_per_hour: ~
+      price_per_unit: ~
       quantity: ~
       subtotal: ~
       shipping-price: ~
+      stripe-fee: ~
+      start_end_time: ~
     price_per_quantity: ~
     price: ~
     quantity: ~
     unit_price: ~
     total: ~
+    total_to_pay: ~
   unit:
     day: ~
     days: ~
@@ -2014,6 +2268,10 @@ is:
         availability:
           something_went_wrong: ~
           saving_failed: ~
+        working_hours:
+          required: ~
+          overlaps: ~
+          covers: ~
       pricing_units:
         piece: ~
         hour: ~
@@ -2026,6 +2284,13 @@ is:
       confirm_discarding_unsaved_availability_changes_explanation: ~
       confirm_discarding_unsaved_availability_changes_question: ~
       edit_listing_availability: ~
+      working_hours:
+        default_schedule: ~
+        i_am_available_on: ~
+        start_time: ~
+        end_time: ~
+        add_another_time_slot: ~
+        save: ~
     no_listings:
       sorry: ~
       try_other_search_terms: ~
@@ -2064,3 +2329,92 @@ is:
     page_entries_info:
       multi_page: ~
       multi_page_html: ~
+    person:
+      community_members_entries_info:
+        multi_page: ~
+        multi_page_html: ~
+  stripe_accounts:
+    admin_account_not_connected: ~
+    contact_admin_link_text: ~
+    you_are_ready_to_accept_payments: ~
+    commission: ~
+    pay_with_stripe: ~
+    add_and_pay: ~
+    card_not_stored: ~
+    missing_payment: ~
+    stripe_bank_connected: ~
+    stripe_can_accept: ~
+    stripe_credit_card: ~
+    paypal: ~
+    paypal_connected: ~
+    paypal_can_accept: ~
+    paypal_connected_give_permission: ~
+    form_new:
+      need_info: ~
+      select_country: ~
+      legal_name: ~
+      first_name: ~
+      last_name: ~
+      country: ~
+      birth_date: ~
+      ssn_last_4: ~
+      personal_id_number: ~
+      address_country: ~
+      address_state: ~
+      address_province: ~
+      address_city: ~
+      address_postal_code: ~
+      address_line1: ~
+      tos_link: ~
+      tos_link_title: ~
+      save_details: ~
+      edit: ~
+      cancel: ~
+    form_bank:
+      bank_account_number: ~
+      bank_routing_number: ~
+      bank_routing_1: ~
+      bank_routing_2: ~
+      bank_currency: ~
+      update_also_bank_account: ~
+      messages:
+        account_number: ~
+        routing_number: ~
+        bank_code: ~
+        branch_code: ~
+        transit_number: ~
+        institution_number: ~
+        format_varies_by_bank: ~
+        bsb: ~
+        error_message: ~
+        clearing_code: ~
+        sort_code: ~
+        must_match: ~
+        a_dash: ~
+        digits: ~
+        digits_or_chars: ~
+    form_verification:
+      personal_id_number: ~
+      document: ~
+      send_verification: ~
+      need_verification: ~
+    form_pin:
+      social_insurance_number: ~
+      social_security_number: ~
+      ssn_last_4: ~
+      hong_kong_identity_card: ~
+      singapore_identity_card: ~
+      messages:
+        social_insurance_number: ~
+  payment_settings:
+    title: ~
+    bank_account: ~
+    paypal: ~
+    bank_account_details: ~
+    add_bank_details: ~
+    can_accept_stripe_and_paypal: ~
+    to_accept_paypal: ~
+    connect_paypal: ~
+    wrong_setup: ~
+    invalid_bank_account_number: ~
+    invalid_postal_code: ~

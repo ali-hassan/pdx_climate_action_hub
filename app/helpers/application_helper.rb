@@ -1,4 +1,6 @@
 # encoding: utf-8
+
+# rubocop:disable Metrics/ModuleLength
 module ApplicationHelper
 
   # Removes whitespaces from HAML expressions
@@ -60,6 +62,11 @@ module ApplicationHelper
   # Changes line breaks to <br>-tags and transforms URLs to links
   def text_with_line_breaks_for_email(&block)
     haml_concat add_links_and_br_tags_for_email(capture_haml(&block)).html_safe
+  end
+
+  #  Transforms URLs to links
+  def text_with_url_links(&block)
+    haml_concat add_links(capture_haml(&block)).html_safe
   end
 
   def small_avatar_thumb(person, avatar_html_options={})
@@ -243,8 +250,11 @@ module ApplicationHelper
   end
 
   def add_links(text)
-    #pattern = /[\.)]*$/
-    #text.gsub(/https?:\/\/\S+/) { |link_url| link_to(link_url.gsub(pattern,""), link_url.gsub(pattern,""), class: "truncated-link", :target => "_blank") + link_url.match(pattern)[0]}
+    # pattern = /[\.)]*$/
+    # text.gsub(/\b(https?:\/\/|www\.)\S+/i) do |link_url|
+    #   site_url = (link_url.starts_with?("www.") ? "http://" + link_url : link_url)
+    #   link_to(link_url.gsub(pattern,""), site_url.gsub(pattern,""), class: "truncated-link") + link_url.match(pattern)[0]
+    # end
   end
 
   # general method for making urls as links and line breaks as <br /> tags
@@ -363,7 +373,7 @@ module ApplicationHelper
       {
         :topic => :manage,
         :text => t("admin.communities.edit_details.invite_people"),
-        :icon_class => "ss-adduser",
+        :icon_class => icon_class("invite"),
         :path => new_invitation_path,
         :name => "invite_people"
       },
@@ -375,16 +385,30 @@ module ApplicationHelper
         :name => "transactions"
       },
       {
+        :topic => :manage,
+        :text => t("admin.communities.conversations.conversations"),
+        :icon_class => icon_class("chat_bubble"),
+        :path => admin_community_conversations_path(@current_community, sort: "last_activity", direction: "desc"),
+        :name => "conversations"
+      },
+      {
+        :topic => :manage,
+        :text => t("admin.communities.testimonials.testimonials"),
+        :icon_class => icon_class("like"),
+        :path => admin_community_testimonials_path(@current_community),
+        :name => "testimonials"
+      },
+      {
         :topic => :configure,
         :text => t("admin.communities.edit_details.community_details"),
-        :icon_class => "ss-page",
+        :icon_class => icon_class("details"),
         :path => admin_details_edit_path,
         :name => "tribe_details"
       },
       {
         :topic => :configure,
         :text => t("admin.communities.edit_details.community_look_and_feel"),
-        :icon_class => "ss-paintroller",
+        :icon_class => icon_class("looknfeel"),
         :path => admin_look_and_feel_edit_path,
         :name => "tribe_look_and_feel"
       },
@@ -442,13 +466,13 @@ module ApplicationHelper
       :name => "listing_shapes"
     }
 
-    if PaypalHelper.paypal_active?(@current_community.id)
+    if PaypalHelper.paypal_active?(@current_community.id) || StripeHelper.stripe_provisioned?(@current_community.id)
       links << {
         :topic => :configure,
-        :text => t("admin.communities.paypal_account.paypal_admin_account"),
+        :text => t("admin.communities.settings.payment_preferences"),
         :icon_class => icon_class("payments"),
-        :path => admin_paypal_preferences_path(),
-        :name => "paypal_account"
+        :path => admin_payment_preferences_path(),
+        :name => "payment_preferences"
       }
     end
 
@@ -520,18 +544,17 @@ module ApplicationHelper
       }
     ]
 
-    payment_type = MarketplaceService::Community::Query.payment_type(@current_community.id)
+    paypal_ready = PaypalHelper.community_ready_for_payments?(@current_community.id)
+    stripe_ready = StripeHelper.community_ready_for_payments?(@current_community.id)
 
-    if payment_type.present?
-
+    if paypal_ready || stripe_ready
       links << {
         :id => "settings-tab-payments",
         :text => t("layouts.settings.payments"),
         :icon_class => icon_class("payments"),
-        :path => paypal_account_settings_payment_path(@current_user),
+        :path => person_payment_settings_path(@current_user),
         :name => "payments"
       }
-
     end
 
     return links
@@ -639,7 +662,7 @@ module ApplicationHelper
   end
 
   def search_mode
-    FeatureFlagHelper.location_search_available ? MarketplaceService::API::Api.configurations.get(community_id: @current_community.id).data[:main_search] : :keyword
+    FeatureFlagHelper.location_search_available ? @current_community.configuration&.main_search&.to_sym : :keyword
   end
 
   def landing_page_path
@@ -660,4 +683,71 @@ module ApplicationHelper
       content_for :extra_javascript do js end
     end
   end
+
+  def format_local_date(value)
+    format = t("datepicker.format").gsub(/([md])[md]+/, '%\1').gsub(/yyyy/, '%Y')
+    value.present? ? value.strftime(format) : nil
+  end
+
+  def us_states
+    [
+      ['Alabama', 'AL'],
+      ['Alaska', 'AK'],
+      ['Arizona', 'AZ'],
+      ['Arkansas', 'AR'],
+      ['California', 'CA'],
+      ['Colorado', 'CO'],
+      ['Connecticut', 'CT'],
+      ['Delaware', 'DE'],
+      ['District of Columbia', 'DC'],
+      ['Florida', 'FL'],
+      ['Georgia', 'GA'],
+      ['Hawaii', 'HI'],
+      ['Idaho', 'ID'],
+      ['Illinois', 'IL'],
+      ['Indiana', 'IN'],
+      ['Iowa', 'IA'],
+      ['Kansas', 'KS'],
+      ['Kentucky', 'KY'],
+      ['Louisiana', 'LA'],
+      ['Maine', 'ME'],
+      ['Maryland', 'MD'],
+      ['Massachusetts', 'MA'],
+      ['Michigan', 'MI'],
+      ['Minnesota', 'MN'],
+      ['Mississippi', 'MS'],
+      ['Missouri', 'MO'],
+      ['Montana', 'MT'],
+      ['Nebraska', 'NE'],
+      ['Nevada', 'NV'],
+      ['New Hampshire', 'NH'],
+      ['New Jersey', 'NJ'],
+      ['New Mexico', 'NM'],
+      ['New York', 'NY'],
+      ['North Carolina', 'NC'],
+      ['North Dakota', 'ND'],
+      ['Ohio', 'OH'],
+      ['Oklahoma', 'OK'],
+      ['Oregon', 'OR'],
+      ['Pennsylvania', 'PA'],
+      ['Puerto Rico', 'PR'],
+      ['Rhode Island', 'RI'],
+      ['South Carolina', 'SC'],
+      ['South Dakota', 'SD'],
+      ['Tennessee', 'TN'],
+      ['Texas', 'TX'],
+      ['Utah', 'UT'],
+      ['Vermont', 'VT'],
+      ['Virginia', 'VA'],
+      ['Washington', 'WA'],
+      ['West Virginia', 'WV'],
+      ['Wisconsin', 'WI'],
+      ['Wyoming', 'WY']
+    ]
+  end
+
+  def regex_definition_to_js(string)
+    string.gsub('\A', '^').gsub('\z', '$').gsub('\\', '\\\\')
+  end
 end
+# rubocop:enable Metrics/ModuleLength

@@ -5,8 +5,6 @@ require 'spec_helper'
 # Override the API with test API
 require_relative '../../services/plan_service/api/api'
 
-class TransactionMailer; end
-
 describe IntApi::MarketplacesController, type: :controller do
 
   before(:each) do
@@ -18,8 +16,6 @@ describe IntApi::MarketplacesController, type: :controller do
     PlanService::API::Api.reset!
     PlanService::API::Api.set_environment({active: false})
   end
-
-  let(:listings_api) { ListingService::API::Api }
 
   def expect_trial_plan(cid)
     # Create trial plan
@@ -49,11 +45,11 @@ describe IntApi::MarketplacesController, type: :controller do
       expect(c.locales.first).to eql "fi"
       expect(c.name("fi")).to eql "ImaginationTraders"
       expect(c.ident).to eql "imaginationtraders"
-      s = listings_api.shapes.get(community_id: c.id).data.first
-      expect(s[:price_enabled]).to eql true
-      expect(s[:units].empty?).to eql true
+      s = c.shapes.first
+      expect(s.price_enabled).to eql true
+      expect(s.units.empty?).to eql true
 
-      payment_settings = TransactionService::API::Api.settings.get_active(community_id: c.id)
+      payment_settings = TransactionService::API::Api.settings.get_active_by_gateway(community_id: c.id, payment_gateway: :paypal)
       expect(payment_settings[:data][:payment_gateway]).to eql :paypal
       expect(payment_settings[:data][:payment_process]).to eql :preauthorize
 
@@ -89,9 +85,9 @@ describe IntApi::MarketplacesController, type: :controller do
       expect(c.locales.first).to eql "fi"
       expect(c.name("fi")).to eql "ImaginationTraders"
       expect(c.ident).to eql "imaginationtraders"
-      s = listings_api.shapes.get(community_id: c.id).data.first
-      expect(s[:price_enabled]).to eql true
-      expect(s[:units].empty?).to eql true
+      s = c.shapes.first
+      expect(s.price_enabled).to eql true
+      expect(s.units.empty?).to eql true
 
       p = c.admins.first
       expect(p).to_not be_nil
@@ -125,9 +121,9 @@ describe IntApi::MarketplacesController, type: :controller do
       expect(c.locales.first).to eql "fi"
       expect(c.name("fi")).to eql "ImaginationTraders"
       expect(c.ident).to eql "imaginationtraders"
-      s = listings_api.shapes.get(community_id: c.id).data.first
-      expect(s[:price_enabled]).to eql true
-      expect(s[:units].empty?).to eql true
+      s = c.shapes.first
+      expect(s.price_enabled).to eql true
+      expect(s.units.empty?).to eql true
 
       p = c.admins.first
       expect(p).to_not be_nil
@@ -161,9 +157,9 @@ describe IntApi::MarketplacesController, type: :controller do
       expect(c.locales.first).to eql "fi"
       expect(c.name("fi")).to eql "ImaginationTraders"
       expect(c.ident).to eql "imaginationtraders"
-      s = listings_api.shapes.get(community_id: c.id).data.first
-      expect(s[:price_enabled]).to eql true
-      expect(s[:units].empty?).to eql true
+      s = c.shapes.first
+      expect(s.price_enabled).to eql true
+      expect(s.units.empty?).to eql true
 
       p = c.admins.first
       expect(p).to_not be_nil

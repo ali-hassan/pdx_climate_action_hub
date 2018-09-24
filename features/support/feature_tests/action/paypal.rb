@@ -20,11 +20,15 @@ module FeatureTests
 
         expect(page).to have_content("PayPal account connected")
 
-        # Save payment preferences
-        paypal_preferences.set_payment_preferences(min_price: min_price, commission: commission, min_commission: min_commission)
-        paypal_preferences.save_settings
+        paypal_preferences.edit_payment_general_preferences(min_price: min_price)
+        paypal_preferences.click_button("Save settings")
+
+        #paypal_preferences.change_paypal_settings
+        paypal_preferences.edit_payment_transaction_fee_preferences(commission: commission, min_commission: min_commission)
+        paypal_preferences.click_button("Save")
         onboarding_wizard.dismiss_dialog
-        expect(page).to have_content("Payment system preferences updated")
+
+        expect(page).to have_content("Transaction fee settings updated")
       end
 
       def connect_seller_paypal
@@ -58,20 +62,24 @@ module FeatureTests
         listing.fill_in_booking_dates
         listing.click_request
 
-        expect(page).to have_content("Request #{title}")
+        expect(page).to have_content("Buy #{title}")
         listing_book.fill_in_message("Snowman ☃ sells: #{title}")
 
         if expected_price.present?
           # listing.fill_in_booking_dates always selects a two day period
-          expect(page).to have_content("(2 days)")
+          # expect(page).to have_content("(2 days)")
           expect(listing_book.total_value).to have_content("$#{expected_price}")
         end
 
         listing_book.proceed_to_payment
 
         worker.work_until do
-          page.has_content?("Payment authorized") &&
-            page.has_content?("Snowman ☃ sells: #{title}")
+          begin
+            page.has_content?("Payment authorized") &&
+              page.has_content?("Snowman ☃ sells: #{title}")
+          rescue Selenium::WebDriver::Error::StaleElementReferenceError
+            false
+          end
         end
       end
 

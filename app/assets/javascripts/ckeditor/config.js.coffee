@@ -16,3 +16,15 @@ CKEDITOR.editorConfig = (config) ->
   ]
   config.toolbar = 'Pure'
   true
+
+CKEDITOR.on 'dialogDefinition', (ev) ->
+  dialogName = ev.data.name
+  dialogDefinition = ev.data.definition
+  if dialogName == 'link'
+    targetTab = dialogDefinition.getContents('target')
+    # Set the default value for the URL field.
+    targetField = targetTab.get('linkTargetType')
+    targetName = targetTab.get('linkTargetName')
+    targetField['default'] = '_blank'
+    targetName['default'] = '_blank'
+  return

@@ -37,6 +37,7 @@
 //= require jquery.timepicker.min
 //= require autosize
 //= require custom
+//= require regenerator-runtime/runtime
 
 //= require selectize-standalone.js
 //= require datepicker/bootstrap-datepicker.js
@@ -72,6 +73,8 @@
 //= require admin/listing_shapes
 //= require admin/settings.js
 //= require admin/emails.js
+//= require admin/payment_preferences.js
+//= require admin/transactions.js
 //= require payment_math
 //= require dropdown
 //= require jquery.nouislider
@@ -92,4 +95,7 @@
 //= require new_layout
 //= require ckeditor/init
 //= require ckeditor/config
-// = require_self
+//= require stripe_form
+//= require analytics
+//= require social-insurance-number
+//= require_self

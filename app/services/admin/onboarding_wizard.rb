@@ -4,14 +4,14 @@ module Admin
     MarketplaceSetupSteps = ::MarketplaceSetupSteps
 
     KNOWN_STATUSES = [
-      :slogan_and_description, :cover_photo, :filter, :paypal, :listing, :invitation
+      :slogan_and_description, :cover_photo, :filter, :payment, :listing, :invitation
     ].to_set
 
     EVENT_TYPES = [
       :community_customizations_updated,
       :community_updated,
       :custom_field_created,
-      :paypal_preferences_updated,
+      :payment_preferences_updated,
       :listing_created,
       :invitation_created,
       :listing_shape_updated
@@ -22,7 +22,7 @@ module Admin
       [:slogan_and_description, :bool, :mandatory],
       [:cover_photo, :bool, :mandatory],
       [:filter, :bool, :mandatory],
-      [:paypal, :bool, :mandatory],
+      [:payment, :bool, :mandatory],
       [:listing, :bool, :mandatory],
       [:invitation, :bool, :mandatory])
 
@@ -87,19 +87,24 @@ module Admin
       end
     end
 
-    def paypal_preferences_updated(setup_status, community)
+    def payment_preferences_updated(setup_status, community)
       # This event handler is an unfortunate exception as it's not a
       # pure function of input values. The reason is that PaypalHelper
       # already encapsulates the logic to check if a community is
       # ready for payments so repeating it here would be both waste
       # and also dangerous as PaypalHelper logic is used in all other
       # places.
-      if !setup_status[:paypal] &&
-         community &&
-         PaypalHelper.community_ready_for_payments?(community.id)
-        :paypal
+      shapes = community.shapes
+      unless setup_status[:payment]
+        if (PaypalHelper.community_ready_for_payments?(community.id) ||
+           StripeHelper.community_ready_for_payments?(community.id))
+          :payment
+        elsif shapes.any? && shapes.count == shapes.by_process_none.count
+          :payment
+        end
       end
     end
+    alias listing_shape_updated payment_preferences_updated
 
     def listing_created(setup_status, listing)
       if !setup_status[:listing] &&
@@ -112,17 +117,6 @@ module Admin
       if !setup_status[:invitation] &&
          invitation
         :invitation
-      end
-    end
-
-    def listing_shape_updated(setup_status, listing_shapes)
-      if !setup_status[:paypal] && listing_shapes.present? &&
-        listing_shapes.any? {|shape|
-          Maybe(TransactionProcess.where(id: shape[:transaction_process_id]).first)
-            .map { |p| p[:process] == "none" }
-            .or_else(false)
-        }
-        :paypal
       end
     end
 
@@ -143,7 +137,6 @@ module Admin
                   .joins(author: :community_membership)
                   .where('community_memberships.admin' => true).first
       invitation = Invitation.find_by(community_id: community.id)
-      listing_shapes = ListingShape.where(community_id: community.id)
 
       m = MarketplaceSetupSteps.find_or_create_by(community_id: community_id)
       setup_status = to_setup_status(m)
@@ -152,10 +145,9 @@ module Admin
         community_customizations_updated(setup_status, community_customizations),
         community_updated(setup_status, community),
         custom_field_created(setup_status, custom_field),
-        paypal_preferences_updated(setup_status, community),
+        payment_preferences_updated(setup_status, community),
         listing_created(setup_status, listing),
         invitation_created(setup_status, invitation),
-        listing_shape_updated(setup_status, listing_shapes)
       ].compact.map { |status| [status, true] }.to_h
 
       m.update_attributes(updates)

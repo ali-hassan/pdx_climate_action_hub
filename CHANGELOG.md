@@ -20,6 +20,101 @@ This file follows the best practices from [keepachangelog.com](http://keepachang
 
 ### Security
 
+## [7.3.1] - 2018-06-07
+
+### Added
+
+- Add soundcloud link support in custom landing page footer [#3300](https://github.com/sharetribe/sharetribe/pull/3300)
+- Add checkbox for consent for receiving emails from admins to signup process [#3318](https://github.com/sharetribe/sharetribe/pull/3318)
+- Add popup notification when giving admin rights to a new user [#3329](https://github.com/sharetribe/sharetribe/pull/3329)
+- Add link to privacy policy in the signup page [#3328](https://github.com/sharetribe/sharetribe/pull/3328)
+- Allow admins to disable end-user Analytics [#3319](https://github.com/sharetribe/sharetribe/pull/3319)
+- Allow links in custom listing text fields [#3297](https://github.com/sharetribe/sharetribe/pull/3297)
+- Add View reviews section in the admin panel [#3267](https://github.com/sharetribe/sharetribe/pull/3267)
+- Add possibility to export transaction as CSV file [#3245](https://github.com/sharetribe/sharetribe/pull/3245)
+
+
+### Changed
+
+- Improve user deletion to clear personal data more thoroughly [#3325](https://github.com/sharetribe/sharetribe/pull/3325)
+- Delete automatically transactions that fail with Stripe [#3326](https://github.com/sharetribe/sharetribe/pull/3326)
+- Prevent an admin from deleting their account if they are the only admin in the marketplace[#3320](https://github.com/sharetribe/sharetribe/pull/3320)
+- Split first name and last name from Stripe account connection form [#3317](https://github.com/sharetribe/sharetribe/pull/3317)
+
+### Removed
+
+- Remove feature flag for export transactions feature [#3288](https://github.com/sharetribe/sharetribe/pull/3288)
+
+### Fixed
+
+- Fix Dockerfile issue where bundler was trying to install binaries in root-owner directory [#3321](https://github.com/sharetribe/sharetribe/pull/3321). Thanks, Nick Meiremans.
+- Fix Stripe payout scheduler [#3309](https://github.com/sharetribe/sharetribe/pull/3309)
+- Fix last 4 digits of SSN passing to Stripe for US bank accounts [#3282](https://github.com/sharetribe/sharetribe/pull/3283)
+
+### Security
+
+- [Critical] Fix several parameter validation bugs that opened the app to SQL injection
+- Update sinatra dependency [#3344](https://github.com/sharetribe/sharetribe/pull/3344)
+- Update multiple dependencies
+- Present form auto-complete for Stripe secret keys [#3338](https://github.com/sharetribe/sharetribe/pull/3338)
+
+## [7.3.0] - 2018-02-23
+
+### Added
+
+- Per hour availability [3166](https://github.com/sharetribe/sharetribe/pull/3166)
+- Support for NZ bank account with Stripe [3165](https://github.com/sharetribe/sharetribe/pull/3165)
+- "View conversations" section in admin panel [3173](https://github.com/sharetribe/sharetribe/pull/3173)
+- Account tokens for Stripe bank account connections [3234](https://github.com/sharetribe/sharetribe/pull/3234)
+
+### Changed
+
+- Made user confirmation form more secure [3170](https://github.com/sharetribe/sharetribe/pull/3170)
+
+### Removed
+
+- Confirmation days x after end time of the transaction [3205](https://github.com/sharetribe/sharetribe/pull/3205)
+
+### Fixed
+
+- Improvements to PayPal workflow (IPNs) [3176](https://github.com/sharetribe/sharetribe/pull/3176)
+- Some bugs related to sending emails from admin[#3183](https://github.com/sharetribe/sharetribe/pull/3183)
+
+## [7.2.0] - 2017-11-22
+
+### Added
+
+- Add rack-attack for request throttling [#3078](https://github.com/sharetribe/sharetribe/pull/3078)
+- Stripe integration [#3018](https://github.com/sharetribe/sharetribe/pull/3018)
+- Sending emails from admin to specified subset of users [#3058](https://github.com/sharetribe/sharetribe/pull/3058)
+- Custom Scripts are now also enabled in Custom Landing Page [#3080](https://github.com/sharetribe/sharetribe/pull/3080/files)
+- Allow admins to edit their Custom Outgoing Email and Sender Name [#3106](https://github.com/sharetribe/sharetribe/pull/3106)
+- Allow admins to unban users [3108](https://github.com/sharetribe/sharetribe/pull/3108)
+- Ability to disable Stripe and PayPal [3112](https://github.com/sharetribe/sharetribe/pull/3112)
+- Allow admins to search users by name or email [3113](https://github.com/sharetribe/sharetribe/pull/3113)
+- Add an unsubscribe link to invitation emails [3136](https://github.com/sharetribe/sharetribe/pull/3136)
+- Add more information texts about holding funds with Stripe [3150](https://github.com/sharetribe/sharetribe/pull/3150)
+
+### Changed
+
+- Lowered daily limits for invitations from 50 to 10 [3134](https://github.com/sharetribe/sharetribe/pull/3134)
+- Increased unsubscribe auth token validity from 1 week to 4 weeks [3138](https://github.com/sharetribe/sharetribe/pull/3138)
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+- Fixed correct use of outgoing email address, if configured, when sending manual emails to users [#3058](https://github.com/sharetribe/sharetribe/pull/3058)
+- Fixed sounds of videos in Custom Landing Pages not working [#3101](https://github.com/sharetribe/sharetribe/pull/3101)
+- Fixed listing image reordering when some images were deleted [#3107](https://github.com/sharetribe/sharetribe/pull/3107)
+- Fixed incorrect use of name of receipt email [3127](https://github.com/sharetribe/sharetribe/pull/3127)
+- Fixed many bugs related to Stripe integration
+- Fixed many bugs related to code refactoring
+
+### Security
+
 ## [7.1.0] - 2017-09-15
 
 ### Added
@@ -429,7 +524,10 @@ This file follows the best practices from [keepachangelog.com](http://keepachang
 
 For older releases, see [RELEASE_NOTES.md](https://github.com/sharetribe/sharetribe/blob/v5.0.0/RELEASE_NOTES.md).
 
-[Unreleased]: https://github.com/sharetribe/sharetribe/compare/v7.1.0...HEAD
+[Unreleased]: https://github.com/sharetribe/sharetribe/compare/v7.3.1...HEAD
+[7.3.1]: https://github.com/sharetribe/sharetribe/compare/v7.3.0...v7.3.1
+[7.3.0]: https://github.com/sharetribe/sharetribe/compare/v7.2.0...v7.3.0
+[7.2.0]: https://github.com/sharetribe/sharetribe/compare/v7.1.0...v7.2.0
 [7.1.0]: https://github.com/sharetribe/sharetribe/compare/v7.0.0...v7.1.0
 [7.0.0]: https://github.com/sharetribe/sharetribe/compare/v6.4.0...v7.1.0
 [6.4.0]: https://github.com/sharetribe/sharetribe/compare/v6.3.0...v6.4.0

@@ -92,12 +92,13 @@ module Result
   Error = Struct.new(
     :success,
     :error_msg,
-    :data
+    :data,
+    :exception
   ) do
 
     def initialize(error_msg, data = nil)
       self.success = false
-
+      self.exception = [error_msg, caller.join(", ")]
       if (error_msg.is_a? StandardError)
         ex = error_msg
         self.error_msg = ex.message
@@ -106,6 +107,7 @@ module Result
         self.error_msg = error_msg
         self.data = data
       end
+      rewrite_stripe_errors
     end
 
     # Error a -> Error a
@@ -135,6 +137,18 @@ module Result
     # Error a -> None
     def maybe()
       Maybe(nil)
+    end
+
+    def rewrite_stripe_errors
+      if error_msg && error_msg =~ /You can only create new accounts if you've registered your platform/
+        self.error_msg = I18n.t("payment_settings.wrong_setup")
+      end
+      if error_msg && error_msg =~ /You cannot use a live bank account number when making transfers or debits in test mode|We couldn't find the bank for this account number/
+        self.error_msg = I18n.t("payment_settings.invalid_bank_account_number")
+      end
+      if error_msg && error_msg =~ /Invalid (\w\w) postal code/
+        self.error_msg = I18n.t("payment_settings.invalid_postal_code", :country => CountryI18nHelper.translate_country(Regexp.last_match[1]))
+      end
     end
 
   end

@@ -4,7 +4,7 @@ class AcceptPreauthorizedConversationsController < ApplicationController
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_accept_or_reject")
   end
 
-  before_action :fetch_conversation
+  before_action :fetch_transaction
   before_action :fetch_listing
 
   before_action :ensure_is_author
@@ -14,17 +14,17 @@ class AcceptPreauthorizedConversationsController < ApplicationController
 
   def accept
     tx_id = params[:id]
-    tx = TransactionService::API::Api.transactions.query(tx_id)
+    tx = @current_community.transactions.find(tx_id)
 
-    if tx[:current_state] != :preauthorized
+    if tx.current_state != 'preauthorized'
       redirect_to person_transaction_path(person_id: @current_user.id, id: tx_id)
       return
     end
 
-    payment_type = tx[:payment_gateway]
+    payment_type = tx.payment_gateway
     case payment_type
-    when :paypal
-      render_paypal_form("accept")
+    when :paypal, :stripe
+      render_payment_form("accept", payment_type)
     else
       raise ArgumentError.new("Unknown payment type: #{payment_type}")
     end
@@ -32,17 +32,17 @@ class AcceptPreauthorizedConversationsController < ApplicationController
 
   def reject
     tx_id = params[:id]
-    tx = TransactionService::API::Api.transactions.query(tx_id)
+    tx = @current_community.transactions.find(tx_id)
 
-    if tx[:current_state] != :preauthorized
+    if tx.current_state != 'preauthorized'
       redirect_to person_transaction_path(person_id: @current_user.id, id: tx_id)
       return
     end
 
-    payment_type = tx[:payment_gateway]
+    payment_type = tx.payment_gateway
     case payment_type
-    when :paypal
-      render_paypal_form("reject")
+    when :paypal, :stripe
+      render_payment_form("reject", payment_type)
     else
       raise ArgumentError.new("Unknown payment type: #{payment_type}")
     end
@@ -50,13 +50,13 @@ class AcceptPreauthorizedConversationsController < ApplicationController
 
   def accepted_or_rejected
     tx_id = params[:id]
-    message = params[:listing_conversation][:message_attributes][:content]
-    status = params[:listing_conversation][:status].to_sym
+    message = params[:transaction][:message_attributes][:content]
+    status = params[:transaction][:status].to_sym
     sender_id = @current_user.id
 
-    tx = TransactionService::API::Api.transactions.query(tx_id)
+    tx = @current_community.transactions.find(tx_id)
 
-    if tx[:current_state] != :preauthorized
+    if tx.current_state != 'preauthorized'
       redirect_to person_transaction_path(person_id: @current_user.id, id: tx_id)
       return
     end
@@ -66,16 +66,16 @@ class AcceptPreauthorizedConversationsController < ApplicationController
     if res[:success]
       flash[:notice] = success_msg(res[:flow])
 
-      Analytics.record_event(
+      record_event(
         flash,
         status == :paid ? "PreauthorizedTransactionAccepted" : "PreauthorizedTransactionRejected",
-        { listing_id: tx[:listing_id],
-          listing_uuid: tx[:listing_uuid].to_s,
-          transaction_id: tx[:id] })
+        { listing_id: tx.listing_id,
+          listing_uuid: UUIDUtils.parse_raw(tx.listing_uuid).to_s,
+          transaction_id: tx.id })
 
       redirect_to person_transaction_path(person_id: sender_id, id: tx_id)
     else
-      flash[:error] = error_msg(res[:flow])
+      flash[:error] = error_msg(res[:flow], tx)
       redirect_to accept_preauthorized_person_message_path(person_id: sender_id , id: tx_id)
     end
   end
@@ -120,11 +120,20 @@ class AcceptPreauthorizedConversationsController < ApplicationController
     end
   end
 
-  def error_msg(flow)
+  def error_msg(flow, tx)
+    payment_gateway = tx.payment_gateway
     if flow == :accept
-      t("error_messages.paypal.accept_authorization_error")
+      if payment_gateway == :paypal
+        t("error_messages.paypal.accept_authorization_error")
+      elsif payment_gateway == :stripe
+        t("error_messages.stripe.accept_authorization_error")
+      end
     elsif flow == :reject
-      t("error_messages.paypal.reject_authorization_error")
+      if payment_gateway == :paypal
+        t("error_messages.paypal.reject_authorization_error")
+      elsif payment_gateway == :stripe
+        t("error_messages.stripe.reject_authorization_error")
+      end
     end
   end
 
@@ -136,38 +145,48 @@ class AcceptPreauthorizedConversationsController < ApplicationController
   end
 
   def fetch_listing
-    @listing = @listing_conversation.listing
+    @listing = @transaction.listing
   end
 
-  def fetch_conversation
-    @listing_conversation = @current_community.transactions.find(params[:id])
+  def fetch_transaction
+    @transaction = @current_community.transactions.find(params[:id])
   end
 
-  def render_paypal_form(preselected_action)
-    transaction_conversation = MarketplaceService::Transaction::Query.transaction(@listing_conversation.id)
-    result = TransactionService::Transaction.get(community_id: @current_community.id, transaction_id: @listing_conversation.id)
-    transaction = result[:data]
+  def render_payment_form(preselected_action, payment_type)
     community_country_code = LocalizationUtils.valid_country_code(@current_community.country)
+    payment_details = TransactionService::Transaction.payment_details(@transaction)
 
     render "accept", locals: {
-      payment_gateway: :paypal,
       listing: @listing,
-      listing_quantity: transaction[:listing_quantity],
-      booking: transaction[:booking],
-      orderer: @listing_conversation.starter,
-      sum: transaction[:item_total],
-      fee: transaction[:commission_total],
-      shipping_price: transaction[:shipping_price],
-      shipping_address: transaction[:shipping_address],
-      seller_gets: transaction[:checkout_total] - transaction[:commission_total],
-      form: @listing_conversation, # TODO FIX ME, DONT USE MODEL
+      sum: @transaction.item_total + (payment_details[:payment_gateway_fee] || 0),
+      fee: @transaction.commission,
+      gateway_fee: payment_details[:payment_gateway_fee],
+      seller_gets: payment_details[:total_price]- @transaction.commission,
+      form: @transaction,
       form_action: acceptance_preauthorized_person_message_path(
         person_id: @current_user.id,
-        id: @listing_conversation.id
+        id: @transaction.id
       ),
       preselected_action: preselected_action,
-      paypal_fees_url: PaypalCountryHelper.fee_link(community_country_code)
+      paypal_fees_url: PaypalCountryHelper.fee_link(community_country_code),
+      stripe_fees_url: "https://stripe.com/#{community_country_code.downcase}/pricing",
+      paypal_commission: paypal_tx_settings[:commission_from_seller],
+      stripe_commission: stripe_tx_settings[:commission_from_seller]
     }
+  end
+
+  def paypal_tx_settings
+    Maybe(TransactionService::API::Api.settings.get(community_id: @current_community.id, payment_gateway: :paypal, payment_process: :preauthorize))
+    .select { |result| result[:success] }
+    .map { |result| result[:data] }
+    .or_else({})
+  end
+
+  def stripe_tx_settings
+    Maybe(TransactionService::API::Api.settings.get(community_id: @current_community.id, payment_gateway: :stripe, payment_process: :preauthorize))
+    .select { |result| result[:success] }
+    .map { |result| result[:data] }
+    .or_else({})
   end
 
 end

@@ -143,7 +143,12 @@ pt-PT:
         amazon_ses_notification: ~
         this_is_how_it_will_look: ~
         send_verification_button: ~
+        change_sender_email: ~
         successfully_saved: ~
+        successfully_saved_name: ~
+        set_sender_name: ~
+        change_sender_name: ~
+        change_sender_prompt: ~
         status: ~
         status_verified: ~
         status_error: ~
@@ -212,6 +217,7 @@ pt-PT:
         twitter_handle: "Twitter handle (usado com o botão de tweet na página de anúncio)"
         update_settings: ~
         automatically_confirmed_no_escrow: ~
+        automatically_confirmed_no_escrow_stripe_info: ~
         automatic_newsletter_frequency: ~
         newsletter_daily: ~
         newsletter_weekly: ~
@@ -224,6 +230,7 @@ pt-PT:
         last_community_updates: "Por favor note que após a exclusão, você e os utilizadores do seu marketplace podem ainda receber alguns e-mails do marketplace."
         you_will_be_redirected_to: ~
         delete_this_marketplace: ~
+        payment_preferences: ~
       manage_members:
         manage_members: "Gerir utilizadores"
         email: ~
@@ -238,7 +245,13 @@ pt-PT:
         export_all_as_csv: ~
         save_user_status_error: ~
         ban_user_confirmation: "Isso remove o utilizador do mercado virtual e o impede de acessar o site novamente com esta conta. Tem certeza de que deseja continuar?"
+        unban_user_confirmation: ~
         ban_me_error: ~
+        search: ~
+        search_by_name_email: ~
+        reset_search: ~
+        for_search_terms: ~
+        this_makes_the_user_an_admin: ~
       new_layout:
         new_layout: ~
         description_roadmap_new: ~
@@ -262,6 +275,7 @@ pt-PT:
         invalid_facebook_connect_id: ~
         facebook_connect_secret: ~
         invalid_facebook_connect_secret: ~
+        enable_facebook_login: ~
         save: ~
       analytics:
         analytics: ~
@@ -269,6 +283,10 @@ pt-PT:
         google_analytics_key_info_text: ~
         google_analytics_key_info_text_with_instructions: ~
         google_analytics_instructions_link_text: ~
+        sharetribe_analytics: ~
+        sharetribe_analytics_info_text_with_instructions: ~
+        sharetribe_analytics_instructions_link_text: ~
+        end_user_analytics: ~
         save: ~
       menu_links:
         menu_links: ~
@@ -290,6 +308,7 @@ pt-PT:
         invalid_post_listing_button_label: ~
       transactions:
         export_all_as_csv: ~
+        processing_export: ~
         transactions: ~
         headers:
           conversation: ~
@@ -301,6 +320,7 @@ pt-PT:
           initiated_by: ~
           other_party: ~
         status:
+          conversation: ~
           free: ~
           pending: ~
           preauthorized: ~
@@ -311,9 +331,57 @@ pt-PT:
           canceled: ~
           initiated: ~
           pending_ext: ~
+          none:
+            free: ~
+          paypal:
+            free: ~
+            pending: ~
+            preauthorized: ~
+            accepted: ~
+            rejected: ~
+            paid: ~
+            confirmed: ~
+            canceled: ~
+            initiated: ~
+            pending_ext: ~
+          stripe:
+            free: ~
+            pending: ~
+            preauthorized: ~
+            accepted: ~
+            rejected: ~
+            paid: ~
+            confirmed: ~
+            canceled: ~
+            initiated: ~
+            pending_ext: ~
         not_available: ~
-      paypal_account:
-        paypal_admin_account: ~
+      conversations:
+        conversations: ~
+        headers:
+          started_from: ~
+          status: ~
+          started: ~
+          last_activity: ~
+          initiated_by: ~
+          other_party: ~
+        participants: ~
+        profile: ~
+      testimonials:
+        testimonials: ~
+        no_testimonials_found: ~
+        displaying_xx_reviews: ~
+        headers:
+          transaction: ~
+          author: ~
+          receiver: ~
+          status: ~
+          grade: ~
+          note: ~
+        status:
+          waiting: ~
+          skipped: ~
+          published: ~
     custom_fields:
       edit:
         edit_listing_field: "Alterar anúncio '%{field_name}'"
@@ -371,14 +439,32 @@ pt-PT:
       new:
         send_email_to_members: "Envie e-mail aos utilizadores"
         send_email_to_members_title: "Enviar e-mail para todos os utilizadores"
+        send_email: ~
+        send_email_or: ~
+        send_test_email: ~
+        test_sent: ~
+        send_email_article_title: ~
+        send_email_article_text: ~
+        recipients:
+          title: ~
+          options:
+            all_users: ~
+            with_listing: ~
+            with_listing_no_payment: ~
+            with_payment_no_listing: ~
+            no_listing_no_payment: ~
         email_subject: ~
         email_content: ~
         email_content_placeholder: "O que você gostaria de dizer aos utilizadores?"
         email_language: ~
         any_language: ~
-        send_email: ~
         message_will_be_sent_only_to_people_with_this_language: "Nota: o e-mail será enviado apenas aos utilizadores que utilizam a %{service_name} no idioma que você escolheu."
         email_sent: ~
+        to_improve_email_deliverability: ~
+        email_subject_text: ~
+        firstname_cannot_be_removed: ~
+        hello_firstname: ~
+        hello_firstname_text: ~
     left_hand_navigation:
       general: ~
       users_and_transactions: "Utilizadores & transações"
@@ -391,9 +477,11 @@ pt-PT:
       read_more: ~
       read_more_availability_management: ~
       allow_providers_to_manage_availability: ~
+      per_hour_availability: ~
       per_day_availability: ~
       per_night_availability: ~
       pricing_units_disabled_info: ~
+      can_not_find_name: ~
       index:
         listing_shapes: ~
         description: "O tipo da ordem define a forma como a ordem é processada no seu site. Você pode decidir se seus utilizador poderão alugar ou vender ou talvez apenas criar anúncios e se comunicar através de mensagens gratuitas."
@@ -485,6 +573,8 @@ pt-PT:
       integration_info_text: "O sistema de pagamento de Sharetribe é gerido pelo PayPal. Se quiser permitir que os seus utilizadores façam pagamentos através do seu mercado virtual, deve conectar-se à sua conta PayPal e decidir o valor mínimo da transação e a taxa que quer ganhar com cada transação."
       link_paypal_personal_account_label: ~
       link_paypal_personal_account: ~
+      link_stripe_personal_account: ~
+      link_paypal_and_stripe_personal_account: ~
       personal_payment_preferences_link_text: ~
       read_more_about_paypal: ~
       edit_payment_settings: ~
@@ -497,13 +587,81 @@ pt-PT:
       save_settings: ~
       minimum_listing_price_below_tx_fee: ~
       minimum_listing_price_below_min: ~
+    payment_preferences:
+      title: ~
+      general_settings: ~
+      connect_a_payment_provider: ~
+      contact_support: ~
+      no_payments_link_text: ~
+      your_country: ~
+      you_cannot_use_online_payments: ~
+      which_to_choose: ~
+      you_can_use_stripe_or_paypal: ~
+      you_can_use_stripe_only: ~
+      read_more_stripe: ~
+      you_can_use_paypal_only: ~
+      read_more_paypal: ~
+      read_more_about_paypal_and_stripe: ~
+      general_settings_updated: ~
+      transaction_fee_settings_updated: ~
+      choose_popup_text: ~
+      invalid_api_keys: ~
+      missing_api_keys: ~
+      stripe_verified: ~
+      change_settings: ~
+      configure_stripe: ~
+      configure_paypal: ~
+      transaction_fee_settings: ~
+      transaction_fee_save: ~
+      stripe_fee: ~
+      stripe_fee_notice: ~
+      fee_should_be_less_than_minimum_price: ~
+      confirm_disable: ~
+      stripe_connected:
+        title: ~
+        disable: ~
+        disabled: ~
+        enable: ~
+      paypal_connected:
+        title: ~
+        disable: ~
+        disabled: ~
+        enable: ~
+      cannot_enable_gateway: ~
+      cannot_disable_gateway: ~
+      stripe_form:
+        add_your_api_keys: ~
+        how_to_get_these: ~
+        publishable_key_example: ~
+        secret_key_example: ~
+        save_api_keys: ~
+        invalid_secret: ~
+        invalid_publishable: ~
+      index:
+        header: ~
+        info: ~
+        active: ~
+        gateway: ~
+        process: ~
+        commission: ~
+        minimum_price: ~
+        minimum_fee: ~
+        api_verified: ~
+        actions: ~
+        payments_not_enabled: ~
     transaction_types:
       sell: ~
+      sell_w_online_payment: ~
+      sell_wo_online_payment: ~
       rent: ~
+      rent_w_online_payment: ~
+      rent_wo_online_payment: ~
       give: ~
       lend: ~
       swap: ~
       service: ~
+      service_w_online_payment: ~
+      service_wo_online_payment: ~
       request: ~
       inquiry: ~
       share_for_free: ~
@@ -561,11 +719,20 @@ pt-PT:
     username_or_email: "Email ou nome de utilizador"
     what_is_this: "O que é isto?"
     removed_user: "Utilizador removido"
+    payment_fee_info:
+      title: ~
+      stripe: ~
+      paypal: ~
+      info: ~
     paypal_fee_info:
       title: ~
       body_text: ~
-      body_with_shipping_text: ~
+      body_text_accept: ~
       link_to_paypal_text: ~
+    stripe_fee_info:
+      title: ~
+      body_text: ~
+      link_to_stripe_text: ~
   conversations:
     accept:
       details: ~
@@ -586,8 +753,12 @@ pt-PT:
       you_will_get_label: ~
       total_label: ~
       total_value: ~
+      total_value_paypal: ~
+      total_value_stripe: ~
       paypal_fee_info: ~
+      payment_fee_info: ~
       shipping_price_label: ~
+      stripe-fee_label: ~
     confirm:
       confirm_description: "Se o seu pedido foi realizado, você deve confirmá-lo como concluído"
       cancel_description: "Se sua ordem não foi realizada, pode marcá-la como \"não efetuada\". Pode também dar feedback à outra parte e descrever o que aconteceu."
@@ -633,6 +804,9 @@ pt-PT:
       canceled_offer: ~
       paid: ~
       payment_preauthorized: ~
+      stripe:
+        held_payment: ~
+        confirmed_request: ~
     new:
       message: Mensagem
       message_to: ~
@@ -705,6 +879,8 @@ pt-PT:
           intl: ~
           unknown_reason: ~
           verify: ~
+      stripe:
+        waiting_confirmation_from_requester: ~
     status_link:
       accept_offer: "Aceitar oferta"
       accept_request: "Aceitar pedido"
@@ -770,10 +946,12 @@ pt-PT:
       here_is_a_message_from: ~
       request_marked_as_confirmed: "Ordem concluída - não se esqueça de dar feedback"
       request_marked_as_canceled: "Ordem cancelada"
-      has_marked_request_as_confirmed: ~
+      has_marked_request_as_confirmed: "%{other_party_full_name} marcou a ordem de '%{request}' como terminada. Já pode dar o seu feedback a %{other_party_given_name}."
       has_marked_request_as_canceled: ~
       giving_feedback_is_good_idea: ~
       give_feedback_to: ~
+      stripe:
+        has_marked_request_as_confirmed: "%{other_party_full_name} marcou a ordem de '%{request}' como terminada. O pagamento por esta ordem será agora transferido para a sua conta bancária. Já pode dar o seu feedback a %{other_party_given_name}."
     transaction_automatically_confirmed:
       subject: ~
       we_have_marked_request_as_confirmed: ~
@@ -798,7 +976,10 @@ pt-PT:
       message_not_displaying_correctly: "Este email não está a ser corretamente mostrado?"
       view_it_in_your_browser: "Visualizar no seu browser."
       or: ~
+      unsubscribe_from_these_emails_info: ~
       unsubscribe_from_these_emails: "cancele a recepção destes emails"
+      unsubscribe_from_invitation_emails_info: ~
+      unsubscribe_from_invitation_emails: ~
     conversation_status_changed:
       has_accepted_your_offer: "%{accepter} aceitou a sua oferta %{listing}"
       has_accepted_your_request: "%{accepter} aceitou o seu pedido %{listing}"
@@ -833,6 +1014,34 @@ pt-PT:
       price_per_unit_type: ~
       quantity: ~
       you_have_received_new_payment: "Você recebeu <b>%{payment_sum}</b> por <b>%{listing_title}</b> de %{payer_full_name}. Aqui está o seu recibo."
+      listing_per_unit_title: ~
+    payment_receipt_to_seller:
+      payment_gateway_fee: ~
+      shipping_total: ~
+      product: ~
+      price_payer_paid: ~
+      service_fee: ~
+      you_will_get: ~
+      new_payment: ~
+      price_per_unit_type: ~
+      quantity: ~
+      you_have_received_new_payment: ~
+      stripe:
+        you_have_received_new_payment: ~
+    payment_receipt_to_payer:
+      receipt_of_payment: ~
+      you_have_made_new_payment: ~
+      product: ~
+      price_per_unit_type: ~
+      duration: ~
+      quantity: ~
+      subtotal: ~
+      total: ~
+      price: ~
+      service_fee: ~
+      stripe_gateway_fee: ~
+      paypal_gateway_fee: ~
+      money_will_be_transferred: ~
     paypal_new_payment:
       paypal_gateway_fee: ~
       shipping_total: ~
@@ -852,7 +1061,12 @@ pt-PT:
       total: ~
       price: ~
       service_fee: ~
+      stripe_gateway_fee: ~
+      paypal_gateway_fee: ~
       money_will_be_transferred: ~
+      listing_per_unit_title: ~
+      stripe:
+        you_have_made_new_payment: ~
     new_testimonial:
       has_given_you_feedback_in_kassi: "%{name} deu-lhe uma opinião sobre %{service_name}"
       you_can_give_feedback_to: "Ainda não deu uma opinião a %{name}"
@@ -887,8 +1101,9 @@ pt-PT:
       subject: ~
       transaction_requested_by_user: ~
       you_have_time_to_accept: ~
-      if_you_do_accept: ~
-      if_you_do_not_accept: ~
+      if_you_do_accept: "Se você aceitar o pedido, dentro deste prazo, o pagamento vserá enviado para sua conta."
+      if_you_do_accept_stripe: ~
+      if_you_do_not_accept: "Se você rejeitar o pedido ou não o aceitar nesse prazo, a transação será automaticamente cancelada, %{requester} não será cobrado e você não receberá o pagamento."
       click_here_to_reply: ~
     transaction_preauthorized_reminder:
       subject: "Não se esqueça de aceitar o pedido de %{requester} sobre o anúncio %{listing_title}"
@@ -935,6 +1150,10 @@ pt-PT:
       seller_express_checkout_disabled: "O PayPal Express Checkout foi desabilitado para a conta PayPal do autor deste anúncio. Por favor contacte o autor, informe-o que há um problema com a conta PayPal e aconselhe-o a entrar em contacto com o atendimento ao cliente do PayPal."
       generic_error: ~
       cancel_error: ~
+      accept_authorization_error: ~
+      reject_authorization_error: ~
+    stripe:
+      generic_error: ~
       accept_authorization_error: ~
       reject_authorization_error: ~
   error_pages:
@@ -1234,8 +1453,10 @@ pt-PT:
       feedback_sent_to: "Opinião enviada a %{target_person}."
       feedback_skipped: ~
       invitation_cannot_be_sent: "O convite não pôde ser enviado"
+      invitation_cannot_unsubscribe: ~
       invitation_limit_reached: ~
       invitation_sent: "Convite enviado com sucesso"
+      invitation_successfully_unsubscribed: ~
       inviting_new_users_is_not_allowed_in_this_community: "Não é permitido convidar novos utilizadores."
       login_again: "Por favor, faça novamente login"
       login_failed: "Falha no acesso à sua conta. Por favor entre com os dados correctos."
@@ -1325,11 +1546,14 @@ pt-PT:
       listing_author_payment_details_missing: ~
       images_are_processing: "Estamos a processar as suas imagens. Estarão visíveis dentro de um ou dois minutos."
       automatically_logged_out_please_sign_in: ~
+      stripe_you_account_balance_is_not_0: ~
     settings:
       account: Conta
       notifications: "Notificações "
       profile: "Informação de perfil"
       settings: configurações
+      paypal_payments: ~
+      stripe_payments: ~
       payments: ~
   listings:
     bubble_listing_not_visible:
@@ -1426,8 +1650,9 @@ pt-PT:
         long_time: ~
         after_service_fee_you_will_get: ~
         no_service_fee_you_will_get_paypal_text: ~
-        after_service_fee_you_will_get_paypal_text: ~
-        paypal_fee_info_link_text: ~
+        no_service_fee_you_will_get_payment_text: ~
+        after_service_fee_you_will_get_payment_text: ~
+        payment_fee_info_link_text: ~
         delivery: ~
         shipping: ~
         shipping_price: ~
@@ -1513,6 +1738,10 @@ pt-PT:
       how_paypal_works: ~
       payment_help: ~
       unable_load_availability: ~
+      booking_date: ~
+      select_one: ~
+      start_time: ~
+      end_time: ~
     new:
       listing: anúncio
       selected_category: "Categoria: %{category}"
@@ -1601,6 +1830,17 @@ pt-PT:
       invalid_parameters: ~
     transaction_agreement_checkbox:
       read_more: ~
+    stripe_payment:
+      payment: ~
+      pay_with_card: ~
+      address: ~
+      address_country: ~
+      address_name: ~
+      address_city: ~
+      address_state: ~
+      address_street1: ~
+      address_street2: ~
+      address_postal_code: ~
   mapview:
     index:
       all_categories: "Todas as categorias"
@@ -1644,6 +1884,7 @@ pt-PT:
     contact_admin_link_text: ~
     you_are_ready_to_accept_payments: ~
     commission: ~
+    not_now: ~
     new:
       payout_info_you_need_to_connect: ~
       payout_info_text: ~
@@ -1690,6 +1931,8 @@ pt-PT:
     paypal_permission_granted_summary: ~
   paypal:
     pay_with_paypal: ~
+    checkout_with: ~
+    or_pay_with_paypal: ~
     checkout_with_paypal: ~
     cancel_succesful: ~
     transaction:
@@ -1716,12 +1959,14 @@ pt-PT:
       email_is_in_use: "O email já está em uso."
       email_is_in_use_or_not_allowed: "Este endereço de email não é permitido ou já está a ser utilizado. Se não conseguir entrar, contacte-nos."
       email_not_allowed: "Este email não foi aceite pelo %{service_name}. Por favor, utilize um email válido. Se não conseguir conectar-se, entre em contacto conosco."
+      invalid_username_or_email: ~
       email_restriction_instructions:
         one: "O acesso ao %{service_name} é restrito. Para aderir precisa de um '%{allowed_emails}' email address."
         other: "O acesso ao %{service_name} é restrito. Precisa de um endereço de email que mostre que está autorizado a aderir."
       family_name: Apelido
       given_name: Nome
-      i_accept_the: "Aceito os"
+      i_accept_the_terms_and_privacy: ~
+      admin_emails_consent: ~
       invalid_invitation_code: "O código de convite não é válido."
       invitation_code: "Código de convite"
       not_required: ", não necessaria"
@@ -1730,6 +1975,7 @@ pt-PT:
       show_my_name_to_others: "Mostrar o meu nome completo aos utilizadores do %{service_name}"
       sign_up: "Criar uma conta no %{service_name}"
       terms: "Termos de utilização"
+      privacy: ~
       username_is_in_use: "Este nome de utilizador já está em uso."
       username_is_invalid: "Nome de utilizador é inválido. Os caracteres permitidos são letras, números e sublinhado."
       visible_only_to_you: "visível apenas para si e para o administrador do mercado virtual"
@@ -1834,6 +2080,7 @@ pt-PT:
       delete_personal_information: "Se apagar a sua conta, as suas informações pessoais (nome, número de telefone, endereço, email, foto do perfil, etc.) serão apagadas permanentemente e não poderão ser recuperadas. Todos os anúncios que criou serão removidos. Não será possível reativar a conta."
       delete_information_others_involved: "Informação em que outros membros estejam envolvidos (conversas com outras pessoas, transações que realizou, avaliações que tenha feito dos outros, etc) não será removida quando apagar a sua conta. No entanto, o seu nome não aparecerá mais junto dessa informação."
       unfinished_transactions: ~
+      only_admin: ~
       new_password: "Nova palavra-passe"
       save: Salvar
       these_fields_are_shown_only_to_you: "Seu nome de utilizador é mostrado no seu perfil a menos que você tenha dado o seu nome. Outras informações só é mostrado a você."
@@ -1941,6 +2188,7 @@ pt-PT:
   date:
     formats:
       long_with_abbr_day_name: ~
+    first_day_of_week: ~
   datepicker:
     days:
       sunday: ~
@@ -2000,6 +2248,7 @@ pt-PT:
       short: ~
       shorter: ~
       short_date: ~
+      hours_only: "%H:%M"
   timestamps:
     day_ago: "há %{count} dia"
     days_ago: "há %{count} dias"
@@ -2021,14 +2270,19 @@ pt-PT:
       booked_nights: ~
       price_per_day: ~
       price_per_night: ~
+      price_per_hour: ~
+      price_per_unit: ~
       quantity: ~
       subtotal: ~
       shipping-price: ~
+      stripe-fee: ~
+      start_end_time: ~
     price_per_quantity: ~
     price: ~
     quantity: ~
     unit_price: ~
     total: ~
+    total_to_pay: ~
   unit:
     day: ~
     days: ~
@@ -2038,6 +2292,10 @@ pt-PT:
         availability:
           something_went_wrong: ~
           saving_failed: ~
+        working_hours:
+          required: ~
+          overlaps: ~
+          covers: ~
       pricing_units:
         piece: ~
         hour: ~
@@ -2050,6 +2308,13 @@ pt-PT:
       confirm_discarding_unsaved_availability_changes_explanation: ~
       confirm_discarding_unsaved_availability_changes_question: ~
       edit_listing_availability: ~
+      working_hours:
+        default_schedule: ~
+        i_am_available_on: ~
+        start_time: ~
+        end_time: ~
+        add_another_time_slot: ~
+        save: ~
     no_listings:
       sorry: ~
       try_other_search_terms: ~
@@ -2093,3 +2358,92 @@ pt-PT:
     page_entries_info:
       multi_page: ~
       multi_page_html: ~
+    person:
+      community_members_entries_info:
+        multi_page: ~
+        multi_page_html: ~
+  stripe_accounts:
+    admin_account_not_connected: ~
+    contact_admin_link_text: ~
+    you_are_ready_to_accept_payments: ~
+    commission: ~
+    pay_with_stripe: ~
+    add_and_pay: ~
+    card_not_stored: ~
+    missing_payment: ~
+    stripe_bank_connected: ~
+    stripe_can_accept: ~
+    stripe_credit_card: ~
+    paypal: ~
+    paypal_connected: ~
+    paypal_can_accept: ~
+    paypal_connected_give_permission: ~
+    form_new:
+      need_info: ~
+      select_country: ~
+      legal_name: ~
+      first_name: ~
+      last_name: ~
+      country: ~
+      birth_date: ~
+      ssn_last_4: ~
+      personal_id_number: ~
+      address_country: ~
+      address_state: ~
+      address_province: ~
+      address_city: ~
+      address_postal_code: ~
+      address_line1: ~
+      tos_link: ~
+      tos_link_title: ~
+      save_details: ~
+      edit: ~
+      cancel: ~
+    form_bank:
+      bank_account_number: ~
+      bank_routing_number: ~
+      bank_routing_1: ~
+      bank_routing_2: ~
+      bank_currency: ~
+      update_also_bank_account: ~
+      messages:
+        account_number: ~
+        routing_number: ~
+        bank_code: ~
+        branch_code: ~
+        transit_number: ~
+        institution_number: ~
+        format_varies_by_bank: ~
+        bsb: ~
+        error_message: ~
+        clearing_code: ~
+        sort_code: ~
+        must_match: ~
+        a_dash: ~
+        digits: ~
+        digits_or_chars: ~
+    form_verification:
+      personal_id_number: ~
+      document: ~
+      send_verification: ~
+      need_verification: ~
+    form_pin:
+      social_insurance_number: ~
+      social_security_number: ~
+      ssn_last_4: ~
+      hong_kong_identity_card: ~
+      singapore_identity_card: ~
+      messages:
+        social_insurance_number: ~
+  payment_settings:
+    title: "Preferências de pagamento"
+    bank_account: ~
+    paypal: ~
+    bank_account_details: ~
+    add_bank_details: ~
+    can_accept_stripe_and_paypal: "Pode receber dinheiro na sua conta bancária ou na sua conta PayPal."
+    to_accept_paypal: ~
+    connect_paypal: ~
+    wrong_setup: ~
+    invalid_bank_account_number: ~
+    invalid_postal_code: ~

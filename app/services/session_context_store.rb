@@ -31,7 +31,7 @@ module SessionContextStore
     role =
       if person.nil?
         nil
-      elsif person.has_admin_rights?(community)
+      elsif community && person.has_admin_rights?(community)
         :admin
       else
         :user
@@ -51,21 +51,21 @@ module SessionContextStore
 
   def set_from_transaction(actor:, tx:)
     marketplace_session_ctx = {
-      marketplace_id: tx[:community_id],
-      marketplace_uuid: tx[:community_uuid]
+      marketplace_id: tx.community_id,
+      marketplace_uuid: tx.community_uuid_object
     }
 
     user_session_ctx =
       case actor
       when :starter
         {
-          user_id: tx[:starter_id],
-          user_uuid: tx[:starter_uuid]
+          user_id: tx.starter_id,
+          user_uuid: tx.starter_uuid_object
         }
       when :author
         {
-          user_id: tx[:listing_author_id],
-          user_uuid: tx[:listing_author_uuid]
+          user_id: tx.listing_author_id,
+          user_uuid: tx.listing_author_uuid_object
         }
       when :unknown
         # Unknown user

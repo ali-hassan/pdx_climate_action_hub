@@ -2,46 +2,48 @@
 #
 # Table name: people
 #
-#  id                                 :string(22)       not null, primary key
-#  uuid                               :binary(16)       not null
-#  community_id                       :integer          not null
-#  created_at                         :datetime
-#  updated_at                         :datetime
-#  is_admin                           :integer          default(0)
-#  locale                             :string(255)      default("fi")
-#  preferences                        :text(65535)
-#  active_days_count                  :integer          default(0)
-#  last_page_load_date                :datetime
-#  test_group_number                  :integer          default(1)
-#  username                           :string(255)      not null
-#  email                              :string(255)
-#  encrypted_password                 :string(255)      default(""), not null
-#  legacy_encrypted_password          :string(255)
-#  reset_password_token               :string(255)
-#  reset_password_sent_at             :datetime
-#  remember_created_at                :datetime
-#  sign_in_count                      :integer          default(0)
-#  current_sign_in_at                 :datetime
-#  last_sign_in_at                    :datetime
-#  current_sign_in_ip                 :string(255)
-#  last_sign_in_ip                    :string(255)
-#  password_salt                      :string(255)
-#  given_name                         :string(255)
-#  family_name                        :string(255)
-#  display_name                       :string(255)
-#  phone_number                       :string(255)
-#  description                        :text(65535)
-#  image_file_name                    :string(255)
-#  image_content_type                 :string(255)
-#  image_file_size                    :integer
-#  image_updated_at                   :datetime
-#  image_processing                   :boolean
-#  facebook_id                        :string(255)
-#  authentication_token               :string(255)
-#  community_updates_last_sent_at     :datetime
-#  min_days_between_community_updates :integer          default(1)
-#  deleted                            :boolean          default(FALSE)
-#  cloned_from                        :string(22)
+#  id                                      :string(22)       not null, primary key
+#  uuid                                    :binary(16)       not null
+#  community_id                            :integer          not null
+#  created_at                              :datetime
+#  updated_at                              :datetime
+#  is_admin                                :integer          default(0)
+#  locale                                  :string(255)      default("fi")
+#  preferences                             :text(65535)
+#  active_days_count                       :integer          default(0)
+#  last_page_load_date                     :datetime
+#  test_group_number                       :integer          default(1)
+#  username                                :string(255)      not null
+#  email                                   :string(255)
+#  encrypted_password                      :string(255)      default(""), not null
+#  legacy_encrypted_password               :string(255)
+#  reset_password_token                    :string(255)
+#  reset_password_sent_at                  :datetime
+#  remember_created_at                     :datetime
+#  sign_in_count                           :integer          default(0)
+#  current_sign_in_at                      :datetime
+#  last_sign_in_at                         :datetime
+#  current_sign_in_ip                      :string(255)
+#  last_sign_in_ip                         :string(255)
+#  password_salt                           :string(255)
+#  given_name                              :string(255)
+#  family_name                             :string(255)
+#  display_name                            :string(255)
+#  phone_number                            :string(255)
+#  description                             :text(65535)
+#  image_file_name                         :string(255)
+#  image_content_type                      :string(255)
+#  image_file_size                         :integer
+#  image_updated_at                        :datetime
+#  image_processing                        :boolean
+#  facebook_id                             :string(255)
+#  authentication_token                    :string(255)
+#  community_updates_last_sent_at          :datetime
+#  min_days_between_community_updates      :integer          default(1)
+#  deleted                                 :boolean          default(FALSE)
+#  cloned_from                             :string(22)
+#  is_payment_setup_notification_dismissed :boolean          default(FALSE)
+#  google_id                               :string(255)
 #
 # Indexes
 #
@@ -67,6 +69,7 @@ class Person < ApplicationRecord
 
   include ErrorsHelper
   include ApplicationHelper
+  include DeletePerson
 
   self.primary_key = "id"
 
@@ -148,8 +151,8 @@ class Person < ApplicationRecord
 
   validates_length_of :phone_number, :maximum => 25, :allow_nil => true, :allow_blank => true
   validates_length_of :username, :within => 3..20
-  validates_length_of :given_name, :within => 1..255, :allow_nil => true, :allow_blank => true
-  validates_length_of :family_name, :within => 1..255, :allow_nil => true, :allow_blank => true
+  validates_length_of :given_name, :within => 1..30, :allow_nil => true, :allow_blank => true
+  validates_length_of :family_name, :within => 1..30, :allow_nil => true, :allow_blank => true
   validates_length_of :display_name, :within => 1..30, :allow_nil => true, :allow_blank => true
 
   validates_format_of :username,
@@ -157,7 +160,7 @@ class Person < ApplicationRecord
 
   USERNAME_BLACKLIST = YAML.load_file("#{Rails.root}/config/username_blacklist.yml")
 
-  validates :username, :exclusion => USERNAME_BLACKLIST
+  validates :username, exclusion: USERNAME_BLACKLIST, uniqueness: {scope: :community_id}
 
   has_attached_file :image, :styles => {
                       :medium => "288x288#",
@@ -643,6 +646,11 @@ class Person < ApplicationRecord
     super
   end
 
+  def unsubscribe_from_community_updates
+    self.min_days_between_community_updates = 100000
+    self.save!
+  end
+
   private
 
   def digest(password, salt)
@@ -650,4 +658,13 @@ class Person < ApplicationRecord
     ::Digest::SHA256.hexdigest(str)
   end
 
+  def logger
+    @logger ||= SharetribeLogger.new(:person, logger_metadata.keys).tap { |logger|
+      logger.add_metadata(logger_metadata)
+    }
+  end
+
+  def logger_metadata
+    { person_uuid: uuid }
+  end
 end

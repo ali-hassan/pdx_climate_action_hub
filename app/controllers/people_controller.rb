@@ -93,7 +93,7 @@ class PeopleController < Devise::RegistrationsController
 
     if params[:person].blank? || params[:person][:input_again].present? # Honey pot for spammerbots
       flash[:error] = t("layouts.notifications.registration_considered_spam")
-      ApplicationHelper.send_error_notification("Registration Honey Pot is hit.", "Honey pot")
+      Rails.logger.error "Honey pot: Registration Honey Pot is hit."
       redirect_to error_redirect_path and return
     end
 
@@ -113,23 +113,21 @@ class PeopleController < Devise::RegistrationsController
       end
     end
 
-    # Check that email is not taken
-    unless Email.email_available?(params[:person][:email], @current_community.id)
-      flash[:error] = t("people.new.email_is_in_use")
+    return if email_not_valid(params, error_redirect_path)
+
+    email = nil
+    begin
+      ActiveRecord::Base.transaction do
+        @person, email = new_person(params, @current_community)
+      end
+    rescue => e
+      flash[:error] = t("people.new.invalid_username_or_email")
       redirect_to error_redirect_path and return
     end
-
-    # Check that the email is allowed for current community
-    if @current_community && ! @current_community.email_allowed?(params[:person][:email])
-      flash[:error] = t("people.new.email_not_allowed")
-      redirect_to error_redirect_path and return
-    end
-
-    @person, email = new_person(params, @current_community)
 
     # Make person a member of the current community
     if @current_community
-      membership = CommunityMembership.new(:person => @person, :community => @current_community, :consent => @current_community.consent)
+      membership = CommunityMembership.new(person: @person, community: @current_community, consent: @current_community.consent)
       membership.status = "pending_email_confirmation"
       membership.invitation = invitation if invitation.present?
       # If the community doesn't have any members, make the first one an admin
@@ -145,7 +143,7 @@ class PeopleController < Devise::RegistrationsController
 
     Delayed::Job.enqueue(CommunityJoinedJob.new(@person.id, @current_community.id)) if @current_community
 
-    Analytics.record_event(flash, "SignUp", method: :email)
+    record_event(flash, "SignUp", method: :email)
 
     # send email confirmation
     # (unless disabled for testing environment)
@@ -162,7 +160,9 @@ class PeopleController < Devise::RegistrationsController
   end
 
   def build_devise_resource_from_person(person_params)
-    person_params.delete(:terms) #remove terms part which confuses Devise
+    #remove terms part which confuses Devise
+    person_params.delete(:terms)
+    person_params.delete(:admin_emails_consent)
 
     # This part is copied from Devise's regstration_controller#create
     build_resource(person_params)
@@ -193,6 +193,11 @@ class PeopleController < Devise::RegistrationsController
       Email.create!(:address => session["devise.facebook_data"]["email"], :send_notifications => true, :person => @person, :confirmed_at => Time.now, community_id: @current_community.id)
 
       @person.set_default_preferences
+
+      # By default no email consent is given
+      @person.preferences["email_from_admins"] = false
+      @person.save
+
       CommunityMembership.create(person: @person, community: @current_community, status: "pending_consent")
     end
 
@@ -211,7 +216,7 @@ class PeopleController < Devise::RegistrationsController
 
     session[:fb_join] = "pending_analytics"
 
-    Analytics.record_event(flash, "SignUp", method: :facebook)
+    record_event(flash, "SignUp", method: :facebook)
 
     redirect_to pending_consent_path
   end
@@ -326,18 +331,26 @@ class PeopleController < Devise::RegistrationsController
     target_user = Person.find_by!(username: params[:id], community_id: @current_community.id)
 
     has_unfinished = TransactionService::Transaction.has_unfinished_transactions(target_user.id)
-    return redirect_to search_path if has_unfinished
+    only_admin = @current_community.is_person_only_admin(target_user)
+
+    return redirect_to search_path if has_unfinished || only_admin
+
+    stripe_del = StripeService::API::Api.accounts.delete_seller_account(community_id: @current_community.id,
+                                                                        person_id: target_user.id)
+    unless stripe_del[:success]
+      flash[:error] =  t("layouts.notifications.stripe_you_account_balance_is_not_0")
+      return redirect_to search_path
+    end
 
     # Do all delete operations in transaction. Rollback if any of them fails
     ActiveRecord::Base.transaction do
-      UserService::API::Users.delete_user(target_user.id)
-      MarketplaceService::Listing::Command.delete_listings(target_user.id)
-
-      PaypalService::API::Api.accounts.delete(community_id: target_user.community_id, person_id: target_user.id)
+      Person.delete_user(target_user.id)
+      Listing.delete_by_author(target_user.id)
+      PaypalAccount.where(person_id: target_user.id, community_id: target_user.community_id).delete_all
     end
 
     sign_out target_user
-    report_analytics_event('user', "deleted", "by user")
+    record_event(flash, 'user', {action: "deleted", opt_label: "by user"})
     flash[:notice] = t("layouts.notifications.account_deleted")
     redirect_to search_path
   end
@@ -349,7 +362,7 @@ class PeopleController < Devise::RegistrationsController
   end
 
   def check_email_availability_and_validity
-    email = params[:person][:email]
+    email = params[:person][:email].to_s.downcase
 
     allowed_and_available = @current_community.email_allowed?(email) && Email.email_available?(email, @current_community.id)
 
@@ -386,6 +399,7 @@ class PeopleController < Devise::RegistrationsController
     initial_params[:person][:community_id] = current_community.id
 
     params = person_create_params(initial_params)
+    admin_emails_consent = params[:admin_emails_consent]
     person = Person.new
 
     email = Email.new(:person => person, :address => params[:email].downcase, :send_notifications => true, community_id: current_community.id)
@@ -402,6 +416,8 @@ class PeopleController < Devise::RegistrationsController
     end
 
     person.set_default_preferences
+    person.preferences["email_from_admins"] = (admin_emails_consent == "on")
+    person.save
 
     [person, email]
   end
@@ -424,6 +440,7 @@ class PeopleController < Devise::RegistrationsController
         :username,
         :test_group_number,
         :community_id,
+        :admin_emails_consent,
     ).permit!
   end
 
@@ -454,7 +471,29 @@ class PeopleController < Devise::RegistrationsController
           :email_about_completed_transactions,
           :email_about_new_payments,
           :email_about_new_listings_by_followed_people,
+          :empty_notification
         ] }
       )
+  end
+
+  def email_not_valid(params, error_redirect_path)
+    # strip trailing spaces
+    params[:person][:email] = params[:person][:email].to_s.downcase.strip
+
+    # Check that email is not taken
+    unless Email.email_available?(params[:person][:email], @current_community.id)
+      flash[:error] = t("people.new.email_is_in_use")
+      redirect_to error_redirect_path
+      return true
+    end
+
+    # Check that the email is allowed for current community
+    if @current_community && ! @current_community.email_allowed?(params[:person][:email])
+      flash[:error] = t("people.new.email_not_allowed")
+      redirect_to error_redirect_path
+      return true
+    end
+
+    false
   end
 end

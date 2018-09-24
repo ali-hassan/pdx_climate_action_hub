@@ -46,10 +46,11 @@ class LandingPageController < ActionController::Metal
     default_locale = community(request).default_locale
     version = CLP::LandingPageStore.released_version(cid)
     locale_param = params[:locale]
+    script_digest = Digest::MD5.hexdigest(custom_head_scripts.to_s)
 
     begin
       content = nil
-      cache_meta = CLP::Caching.fetch_cache_meta(cid, version, locale_param, cta)
+      cache_meta = CLP::Caching.fetch_cache_meta(cid, version, locale_param, cta, script_digest)
       cache_hit = true
 
       if cache_meta.nil?
@@ -62,7 +63,7 @@ class LandingPageController < ActionController::Metal
           cta: cta
         )
         cache_meta = CLP::Caching.cache_content!(
-          cid, version, locale_param, content, CACHE_TIME, cta)
+          cid, version, locale_param, content, CACHE_TIME, cta, script_digest)
       end
 
       if stale?(etag: cache_meta[:digest],
@@ -122,9 +123,6 @@ class LandingPageController < ActionController::Metal
     begin
       structure = CLP::LandingPageStore.load_structure(cid, preview_version)
 
-      # Uncomment to use static data instead of dynamic from DB
-      # structure = JSON.parse(CustomLandingPage::ExampleData::DATA_STR)
-
       # Tell robots to not index and to not follow any links
       headers["X-Robots-Tag"] = "none"
 
@@ -141,22 +139,6 @@ class LandingPageController < ActionController::Metal
   end
 
   include ActionView::Helpers::JavaScriptHelper
-
-  def custom_head_scripts
-    @current_community = request.env[:current_marketplace]
-    FeatureFlagHelper.init(community_id: @current_community.id,
-                           user_id: @current_user&.id,
-                           request: request,
-                           is_admin: Maybe(@current_user).is_admin?.or_else(false),
-                           is_marketplace_admin: Maybe(@current_user).is_marketplace_admin?(@current_community).or_else(false))
-
-    if FeatureFlagHelper.feature_enabled?(:landing_scripts)
-      js = @current_community.custom_head_script.to_s
-      render body: "document.write(\"#{escape_javascript js}\")", content_type: 'text/javascript'
-    else
-      render body: "", content_type: 'text/javascript'
-    end
-  end
 
 
   private
@@ -276,6 +258,7 @@ class LandingPageController < ActionController::Metal
       facebook_locale: facebook_locale(locale),
       facebook_connect_id: c.facebook_connect_id,
       google_maps_key: MarketplaceHelper.google_maps_key(c.id),
+      end_user_analytics: c.end_user_analytics,
       google_analytics_key: c.google_analytics_key }
   end
 
@@ -419,5 +402,15 @@ class LandingPageController < ActionController::Metal
 
   def locale
     raise ArgumentError.new("You called `locale` method. This was probably a mistake. Most likely you'd want to use `landing_page_locale`, `default_locale`, or `locale_param`")
+  end
+
+  def custom_head_scripts
+    FeatureFlagHelper.init(community_id: @current_community.id,
+                           user_id: @current_user&.id,
+                           request: request,
+                           is_admin: Maybe(@current_user).is_admin?.or_else(false),
+                           is_marketplace_admin: Maybe(@current_user).is_marketplace_admin?(@current_community).or_else(false))
+
+    @current_community.custom_head_script.to_s
   end
 end
