@@ -58,36 +58,36 @@
         %input{:type => "radio", :name => "payment_option", :id => "payment_option_paypal", :value => "paypal"}
         %label{:style => "display:inline-block; width:auto;"}
           =link_to("Use Stripe or PayPal to process payments / credit cards.", "#{request.base_url}/things-to-do/en/#{@current_user.username}/settings/payments", target: "_blank")
-    .paypal_shtuff
-      %small
-        - paypal_fee_info_link = capture do
-          %a.listing-paypal-fee-info-link#paypal_fee_info_link
-            = t(".paypal_fee_info_link_text")
-
-        - if !seller_commission_in_use && payment_gateway == :paypal
-          = t(".no_service_fee_you_will_get_paypal_text", :paypal_fee_info_link => paypal_fee_info_link).html_safe
-        - elsif seller_commission_in_use
-          - content_for :seller_commission_js do
-            :javascript
-              $(function() {
-                updateSellerGetsValue(
-                  "#listing_price",
-                  "#fee_display",
-                  "#listing_currency",
-                  #{commission_from_seller},
-                  #{minimum_commission.format(decimal_mark: ".", delimiter: "", symbol: false)},
-                  #{payment_gateway == :paypal});
-              });
-          - if run_js_immediately
-            = yield :seller_commission_js
-          - else
-            - content_for :extra_javascript do
-              = yield :seller_commission_js
-
-          - if payment_gateway == :paypal
-            = t(".after_service_fee_you_will_get_paypal_text", :sum_with_currency => '<span id="fee_display"></span>', :paypal_fee_info_link => paypal_fee_info_link).html_safe
-          - else
-            = t(".after_service_fee_you_will_get", :sum_with_currency => '<span id="fee_display"></span>').html_safe
+    -#.paypal_shtuff
+    -#  %small
+    -#    - paypal_fee_info_link = capture do
+    -#      %a.listing-paypal-fee-info-link#paypal_fee_info_link
+    -#        = t(".paypal_fee_info_link_text")
+    -#
+    -#    - if !seller_commission_in_use && payment_gateway == :paypal
+    -#      = t(".no_service_fee_you_will_get_paypal_text", :paypal_fee_info_link => paypal_fee_info_link).html_safe
+    -#    - elsif seller_commission_in_use
+    -#      - content_for :seller_commission_js do
+    -#        :javascript
+    -#          $(function() {
+    -#            updateSellerGetsValue(
+    -#              "#listing_price",
+    -#              "#fee_display",
+    -#              "#listing_currency",
+    -#              #{commission_from_seller},
+    -#              #{minimum_commission.format(decimal_mark: ".", delimiter: "", symbol: false)},
+    -#              #{payment_gateway == :paypal});
+    -#          });
+    -#      - if run_js_immediately
+    -#        = yield :seller_commission_js
+    -#      - else
+    -#        - content_for :extra_javascript do
+    -#          = yield :seller_commission_js
+    -#
+    -#      - if payment_gateway == :paypal
+    -#        = t(".after_service_fee_you_will_get_paypal_text", :sum_with_currency => '<span id="fee_display"></span>', :paypal_fee_info_link => paypal_fee_info_link).html_safe
+    -#      - else
+    -#        = t(".after_service_fee_you_will_get", :sum_with_currency => '<span id="fee_display"></span>').html_safe
     .payment_option_choice
       .choice
         %input{:type => "radio", :name => "payment_option", :id => "payment_option_external", :value => "external"}
