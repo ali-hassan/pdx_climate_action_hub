@@ -2,6 +2,15 @@
 
 = form_for @listing, :html => {:multipart => true} do |form|
   = render :partial => "listings/form/title", :locals => { :form => form }
+  %br
+  #event
+    = form.simple_fields_for :event do |event|
+      = render 'event_fields', :f => event
+    - if !has_event?(@listing)
+      .links
+        %strong
+          = link_to_add_association " #{icon_tag('calendar', ['icon-fix'])} Click to add date(s) if this is an event, etc.".html_safe, form, :event, :force_non_association_create => true, :disable_with => "", :id => 'add_event'
+  = render :partial => "listings/form/images", :locals => { :form => form, :run_js_immediately => run_js_immediately }
   = render :partial => "listings/form/price", :locals => { :form => form, :run_js_immediately => run_js_immediately, shape: shape }
   = render :partial => "listings/form/shipping", :locals => { :form => form }
   = render :partial => "listings/form/description", :locals => { :form => form }
