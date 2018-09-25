@@ -95,7 +95,7 @@
     .external_shtuff
       .choice
         %label External Payment Link
-        %input{:id => "payment_option_external_link", :name => "payment_option_external_link", :value => "#{@listing.external_payment_link ? @listing.external_payment_link : 'http://'}", :style => "width: 100%;"}
+        %input{:id => "external_payment_link", :name => "external_payment_link", :value => "#{@listing.external_payment_link ? @listing.external_payment_link : 'http://'}", :style => "width: 100%;"}
     %small
       - payment_fee_info_link = capture do
         %a.listing-payment-fee-info-link#payment_fee_info_link{href: '#'}

@@ -224,6 +224,11 @@ $listing-author-avatar-height: 108;
   @include big-button($link);
   @extend .book-button;
 }
+.enabled-external-link-button {
+  @include big-button($link);
+  @extend .book-button;
+  padding: 15px !important;
+}
 
 .disabled-book-button {
   @include big-button($link);
