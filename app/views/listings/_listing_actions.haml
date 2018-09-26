@@ -166,7 +166,7 @@
       = render partial: "delivery_opts", locals: { delivery_opts: @listing_presenter.delivery_opts, is_author: @listing_presenter.is_author }
 
       = hidden_field_tag(:listing_id, @listing.id)
-      - if @listing.external_payment_link.split("http://").empty?
+      - if !@listing.external_payment_link.split("http://").empty?
         = link_to(action_button_label(@listing), @listing.external_payment_link, target: "_blank", class: "button enabled-external-link-button")
 
       - elsif @listing_presenter.quantity_per_day_or_night?
