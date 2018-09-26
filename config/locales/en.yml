@@ -2177,7 +2177,7 @@ en:
       first_name_only: "(not shown to other users)"
       location_description: "You can provide your street address or just a city or zip code. Examples: \"200 Market St., Portland, OR\" or \"Bend, OR\" or \"97701\"."
       display_name: "Display name"
-      display_name_description: "If you represent an organisation, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
+      display_name_description: "If you represent an organization, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
 
       phone_number: "Phone number"
       profile_picture: "Profile picture"
