@@ -11,10 +11,10 @@
                     %tr
                       %td{:width => "5%"}
                       %td{:valign => "top", :width => "90%"}
-                        %h1{:style => "font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-weight:400;font-size:18px;margin-top:20px;margin-bottom:5px; padding: 20px; background: #ebebeb;text-align: left;line-height:22px;"}
+                        %h1{:style => "font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-weight:400;font-size:20px;margin-top:20px;margin-bottom:5px; padding: 20px; background: #ebebeb;text-align: left;line-height:22px;"}
                           %span{:style => "color:#464646;"}
                             = t("emails.community_updates.update_mail_title", :title_link => link_to(@title_link_text, search_url(@url_params))).html_safe
-                        %div{:style => "font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;line-height:22px; padding: 10px 0;text-align:left;"}
+                        %div{:style => "font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:18px;line-height:22px; padding: 10px 0;text-align:left;"}
                           %p
                             = t("emails.newsletter.hi", :name => link_to(PersonViewUtils.person_display_name_for_type(@recipient, "first_name_only"), person_url(@recipient, @url_params))).html_safe
                           %p
@@ -35,5 +35,5 @@
                       %td{:width => "5%"}
             %tr
               %td{:style => "text-align: left;width:100%;max-width:602px;padding: 5px 30px;"}
-                %p{:style => "margin-top:10px;margin-bottom:5px;font-family:helvetica,arial,sans-serif;font-size:12px;color:#464646;"}
+                %p{:style => "margin-top:10px;margin-bottom:5px;font-family:helvetica,arial,sans-serif;font-size:16px;color:#464646;"}
                   = t("emails.community_updates.reduce_email_footer_text", :settings_link => link_to(t("emails.community_updates.settings_link_text"), notifications_person_settings_url(@recipient, @url_params)), :unsubscribe_link => link_to(t("emails.community_updates.unsubscribe_link_text"), unsubscribe_person_settings_url(@recipient, @url_params.merge({:email_type => "community_updates", auth: unsubscribe_token})))).html_safe
