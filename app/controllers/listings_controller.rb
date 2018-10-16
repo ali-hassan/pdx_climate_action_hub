@@ -1,4 +1,3 @@
-# rubocop:disable ClassLength
 class ListingsController < ApplicationController
   class ListingDeleted < StandardError; end
 
@@ -384,6 +383,14 @@ class ListingsController < ApplicationController
 
     @listing.event.update_attributes(event_rule_hash: hash)
   end
+  def ensure_current_user_is_listing_author(error_message)
+    @listing = Listing.find(params[:id])
+    return if current_user?(@listing.author) || @current_user.has_admin_rights?(@current_community)
+    flash[:error] = error_message
+    redirect_to @listing and return
+  end
+
+  private
 
   def update_flash(old_availability:, new_availability:)
     case [new_availability.to_sym == :booking, old_availability.to_sym == :booking]
@@ -415,36 +422,13 @@ class ListingsController < ApplicationController
     end
   end
 
-  def get_blocked_dates(start_on:, end_on:, community:, user:, listing:)
-    HarmonyClient.get(
-      :query_timeslots,
-      params: {
-        marketplaceId: community.uuid_object,
-        refId: listing.uuid_object,
-        start: start_on,
-        end: end_on
-      }
-    ).rescue {
-      Result::Error.new(nil, code: :harmony_api_error)
-    }.and_then do |res|
-      available_slots = dates_to_ts_set(
-        res[:body][:data].map { |timeslot| timeslot[:attributes][:start].to_date }
-      )
-      Result::Success.new(
-        dates_to_ts_set(start_on..end_on).subtract(available_slots)
-      )
-    end
-  end
-
-  def dates_to_ts_set(dates)
-    Set.new(dates.map { |d| DateUtils.to_midnight_utc(d) })
-  end
-
-  def select_shape(shapes, id)
-    if shapes.size == 1
+  def select_shape(shapes, listing)
+    if listing.listing_shape_id.nil?
+      ListingShape.new(transaction_process_id: listing.transaction_process_id)
+    elsif shapes.size == 1
       shapes.first
     else
-      shapes.find { |shape| shape[:id] == @listing.listing_shape_id }
+      shapes.find { |shape| shape[:id] == listing.listing_shape_id }
     end
   end
 

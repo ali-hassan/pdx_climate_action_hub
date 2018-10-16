@@ -18,6 +18,7 @@ Rails.application.config.assets.paths << Rails.root.join("app", "assets", "webpa
 Rails.application.config.assets.precompile << "server-bundle.js"
 
 Rails.application.config.assets.precompile += ["application.js", "application_reactpage.js", "application.css", "react_page/styles.css"]
+
 Rails.application.config.assets.precompile += %w( ckeditor/*)
 
 if Rails.env == 'test'

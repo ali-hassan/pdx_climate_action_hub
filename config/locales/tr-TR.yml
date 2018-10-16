@@ -126,6 +126,7 @@ tr-TR:
         invalid_color_code: "Renk kodu 6 rakam veya A-F arası harf içerebilir. Örneğin: D96E21"
         custom_head_script: "Kişiselleştirilmiş betik"
         custom_head_script_instructions_text: "Bu betik her sayfanın <ana> başlığına eklenmiştir ve kişiselleştirilmiş CSS, JavaScript ya da HTML eklemek için kullanılabilir. Lütfen gelecekteki düzenlemelerde betiğinizin uyumsuz kalabileceğini unutmayın."
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: "Yönerge metinleri"
       edit_welcome_email:
@@ -388,6 +389,20 @@ tr-TR:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: "Kullanıcı alanları"
     custom_fields:
       edit:
         edit_listing_field: "'%{field_name}' listeleme alanını düzenle"
@@ -441,6 +456,30 @@ tr-TR:
         dropdown: "Açılır menü"
         checkbox_group: "İşaret kutucuğu grubu"
         date: Tarih
+        file: Dosya
+        location: Konum
+    person_custom_fields:
+      saving_failed: "Kullanıcı alan kayıt hatası"
+      index:
+        user_fields: "Kullanıcı alanları"
+        field_title: "Alan başlığı"
+        field_type: "Alan türü"
+        add_new_field: "Yeni alan ekle"
+        save: Kaydet
+        cancel: "İptal et"
+        minimum_value: Minimum
+        maximum_value: Maksimum
+        allow_decimals: "Küsürlere izin ver"
+        add_option: "Seçenek ekle"
+      new:
+        new_user_field: "Yeni kullanıcı alanı"
+      form:
+        field_required:
+          this_field_is_required: "Pazaryerine kayıt olurken bu alanı zorunlu kıl"
+          this_field_is_required_checkbox: "Pazaryerine kayıt olurken bu alanın doldurulması gereklidir (kullanıcı en az bir seçenek belirtmelidir)"
+          this_field_is_public: "Bu alanı herkese açık profil sayfasında göster"
+      edit:
+        edit_user_field: "Kullanıcı alanını düzenle '%{field_name}'"
     emails:
       new:
         send_email_to_members: "Kullanıcılara e-posta gönderin"
@@ -1544,6 +1583,8 @@ tr-TR:
       images_are_processing: ~
       automatically_logged_out_please_sign_in: "Oturumunuzun süresi doldu, lütfen tekrar giriş yapın."
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: "İstermisiniz%{link}?"
+      visit_admin_link: "Yönetici panelinizi ziyaret edin"
     settings:
       account: Hesap
       notifications: Bildirimler
@@ -1979,6 +2020,7 @@ tr-TR:
       create_account_with_facebook: "Facebook hesabınla kayıt ol"
       OR: "YA DA"
       signup_with_email: "E-posta ile kayıt ol"
+      this_field_will_be_publicly_visible: "(Bu alan herkese görünür olacak)"
     profile_feedback:
       grade: "değerlendirme:"
       and_gave_following_feedback: "ve aşağıdaki geri bildirimi bıraktı"
@@ -2129,6 +2171,7 @@ tr-TR:
       display_name: "Görüntülenen isim"
       display_name_description: "Bir kuruluşu temsil ediyorsanız eğer, adını gözüken ekran adı olarak kullanabilirsiniz. Güzüken ad diğer kullanıcılara isminiz ve soyisminiz yerine gösterilir."
       location_description: "Açık adresinizi ya da sadece örneğin posta kodunuzu girebilirsiniz. Lütfen en azından posta kodunuzu ekleyin. Ya da aşağıdaki haritadan konumunuzu işaretleyebilirsiniz."
+      profile_picture_description: ~
       phone_number: "Telefon numarası"
       profile_picture: "Profil resmi"
       postal_code: "Posta kodu"
@@ -2141,6 +2184,7 @@ tr-TR:
       default_in_listing: "(Sadece yeni listeleme oluşturulurken default olarak kullanılır.)"
       invisible: "(Diğer kullanıcılara gösterilmez.)"
       image_is_processing: "Profil fotoğrafınız hazırlanıyor. Lütfen birazdan sayfayı tekrar yükleyiniz..."
+      shown_in_your_public_profile: "(herkese açık profilinizde gösterilir)"
     save_information: "Bu bilgiyi kaydet"
   shipping_address:
     shipping_address: "Gönderim Adresi"

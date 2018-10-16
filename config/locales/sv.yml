@@ -129,6 +129,7 @@ sv:
         invalid_color_code: "Färgkod bör innehålla 6 siffror eller bokstäver A-F t ex D96E21"
         custom_head_script: "Anpassat script"
         custom_head_script_instructions_text: "Detta script finns under <head> taggen för varje sida och kan användas för att lägga in anpassad CSS, Javascript eller HTML. Vänligen notera att framtida ändringar av Sharetribe kan göra ditt script inkomplett."
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: Instruktionstext
       edit_welcome_email:
@@ -391,6 +392,20 @@ sv:
           waiting: "Väntar på recension"
           skipped: "Hoppade över"
           published: Publicerad
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "Redigera annonsfält %{field_name}"
@@ -444,6 +459,30 @@ sv:
         dropdown: Rullgardin
         checkbox_group: Kryssrutor
         date: Datum
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: "Skicka e-post till användare"
@@ -1570,6 +1609,8 @@ sv:
         other: "Hemsidan kommer gå offline for underhåll om %{count} minuter"
       automatically_logged_out_please_sign_in: "Du har blivit utloggad. Vänligen logga in igen."
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: Konto
       notifications: Aviseringar
@@ -2006,6 +2047,7 @@ sv:
       create_account_with_facebook: "Registrera dig med Facebook"
       OR: ELLER
       signup_with_email: "Registrering med e-post"
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: "betyg:"
       and_gave_following_feedback: "och gav följande feedback"
@@ -2156,6 +2198,7 @@ sv:
       display_name: "Synligt namn"
       display_name_description: "Om du representerar en organisation kan du använda organisationens namn som synligt namn. Det synliga namnet visas åt andra användare istället för ditt för och efternamn."
       location_description: "Du kan antingen ange hela din address eller t ex bara ditt postnummer eller stad. Det är också bra att lägga till ditt land då du väljer en plats. Till exempel: 753 20 Uppsala Sverige\" Eller \"Gustav Adolfsgatan 34,Malmö, Sverige\"."
+      profile_picture_description: ~
       phone_number: Telefonnummer
       profile_picture: Profilbild
       postal_code: Postnummer
@@ -2168,6 +2211,7 @@ sv:
       default_in_listing: "(används endast som standard när man skapar en ny annons)"
       invisible: "(visas inte för andra användare)"
       image_is_processing: "Din profilbild förbereds. Den kommer vara klar om några minuter."
+      shown_in_your_public_profile: ~
     save_information: "Spara information"
   shipping_address:
     shipping_address: Leveransadress
@@ -2374,7 +2418,7 @@ sv:
       page_of_pages: "av %{total_number_of_pages}"
     topbar:
       menu: Meny
-      more: Mera
+      more: Mer
       search_placeholder: Sök...
       search_location_placeholder: Plats
       user: Användare

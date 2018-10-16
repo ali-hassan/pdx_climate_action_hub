@@ -93,7 +93,7 @@ module ListingFormViewUtils
         shape_name_tr_key: shape[:name_tr_key],
         action_button_tr_key: shape[:action_button_tr_key],
         availability: shape[:availability],
-        external_payment_link: params[:external_payment_link]
+        availability: shape[:availability]
     ).merge(unit_to_listing_opts(m_unit)).except(:unit)
 
     Result::Success.new(listing_params)
@@ -116,8 +116,7 @@ module ListingFormViewUtils
       price_cents: params[:price_cents],
       shipping_price_cents: params[:shipping_price_cents],
       shipping_price_additional_cents: params[:shipping_price_additional_cents],
-      currency: params[:currency],
-      external_payment_link: params[:external_payment_link]
+      currency: params[:currency]
     )
 
     add_location_params(listing_params, params)

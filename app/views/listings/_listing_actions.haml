@@ -26,82 +26,8 @@
 
       - if @listing_presenter.quantity_per_day_or_night?
         - @listing_presenter.blocked_dates_result.on_success do |blocked_dates|
-          - days = [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
-          - months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
-          - translated_days = days.map { |day_symbol| t("datepicker.days.#{day_symbol}") }.to_json
-          - translated_days_short = days.map { |day_symbol| t("datepicker.days_short.#{day_symbol}") }.to_json
-          - translated_days_min = days.map { |day_symbol| t("datepicker.days_min.#{day_symbol}") }.to_json
-          - translated_months = months.map { |day_symbol| t("datepicker.months.#{day_symbol}") }.to_json
-          - translated_months_short = months.map { |day_symbol| t("datepicker.months_short.#{day_symbol}") }.to_json
-
           - content_for :extra_javascript do
             :javascript
-              var disabledDates = [
-                #{str_dates}
-              ];
-
-              $.fn.datepicker.dates['#{I18n.locale}'] = {
-                days: #{raw translated_days},
-                daysShort: #{raw translated_days_short},
-                daysMin: #{raw translated_days_min},
-                months: #{raw translated_months},
-                monthsShort: #{raw translated_months_short},
-                today: "#{t("datepicker.today")}",
-                weekStart: #{t("datepicker.week_start", default: 0)},
-                clear: "#{t("datepicker.clear")}",
-                format: "#{t("datepicker.format")}"
-              }
-              $.validator.addMethod("night_selected",
-                function(value, element, params) {
-                  var startVal = $(params.startOnSelector).val()
-                  if (!!startVal == false) {
-                    return true;
-                  } else {
-                    return startVal !== value
-                  }
-                });
-              $.validator.addMethod("availability_range",
-                function(value, element, params) {
-                  var startVal = $(params.startOnSelector).datepicker('getDates');
-                  var endVal = $(element).datepicker('getDates');
-
-                  if (!startVal || startVal.length !== 1 || !endVal || endVal.length !== 1) {
-                    return false;
-                  }
-
-                  var startDate = startVal[0].getTime();
-                  var endDate = endVal[0].getTime();
-
-                  // Validate that all booked dates are outside the selected range
-                  return disabledDates.every(function(d) {
-                    var date = d.getTime();
-                    if (startDate === endDate) {
-                      return date !== startDate;
-                    }
-                    return date < startDate || date >= endDate;
-                  });
-                });
-              var rules = #{@listing.quantity_selector&.to_sym == :night} ? {
-                "end_on": {
-                  night_selected: {startOnSelector: "#start-on"},
-                  availability_range: {startOnSelector: "#start-on"}
-                }
-              } : {
-                "end_on": {
-                  availability_range: {startOnSelector: "#start-on"}
-                }
-              };
-              $("#booking-dates").validate({
-                rules: rules,
-                submitHandler: function(form) {
-                  var $form = $(form);
-                  $form.find("#start-on").attr("name", "");
-                  $form.find("#end-on").attr("name", "");
-
-                  form.submit();
-                }
-              });
-
               window.ST.FromToDatePicker.setupPerDayOrNight(#{raw @listing_presenter.datepicker_per_day_or_night_setup(blocked_dates).to_json});
           .input-daterange.input-group.clearfix#datepicker{:data => {:locale => I18n.locale, :dateformat => t("datepicker.format")}}
             .datepicker-start-wrapper
@@ -111,7 +37,7 @@
 
             .datepicker-end-wrapper
               = label_tag t(".booking_to")
-              %input.input-sm.form-control.required#end-on{:type => 'text', :name => "end_on", :placeholder => t("datepicker.format"), :data => { :output => "booking-end-output" }, :autocomplete => 'off'}
+              %input.input-sm.form-control.required#end-on{:type => 'text', :name => "end_on_datepicker", :placeholder => t("datepicker.format"), :data => { :output => "booking-end-output" }, :autocomplete => 'off'}
               %input#booking-end-output{:type => 'hidden', :name => 'end_on'}
 
         - @listing_presenter.blocked_dates_result.on_error do
@@ -242,7 +168,6 @@
             .icon-with-text-container
               = icon_tag("mail", ["icon-part"])
               .text-part#add-to-updates-email-text{data: {:"action-loading" => t("listings.edit_links.show_in_updates_email_loading"), :"action-error" => t("listings.edit_links.show_in_updates_email_error"), :"action-success"=> t("listings.edit_links.show_in_updates_email_success")}}= t("listings.edit_links.show_in_updates_email")
-
 
 - content_for :extra_javascript do
   :javascript

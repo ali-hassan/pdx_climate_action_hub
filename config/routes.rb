@@ -270,6 +270,7 @@ Rails.application.routes.draw do
           get "getting_started_guide/invitation",             to: redirect("/admin/getting_started_guide/invitation")
 
         end
+        resources :listings, controller: :community_listings, only: [:index]
         resources :transactions, controller: :community_transactions, only: :index do
           collection do
             get 'export'
@@ -312,6 +313,11 @@ Rails.application.routes.draw do
           put :update_location
           get :edit_expiration
           put :update_expiration
+        end
+      end
+      resources :person_custom_fields, path: 'user_fields' do
+        collection do
+          post :order
         end
       end
       resources :categories do

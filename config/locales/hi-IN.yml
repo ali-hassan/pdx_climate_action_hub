@@ -114,6 +114,7 @@ hi-IN:
         invalid_color_code: ~
         custom_head_script: ~
         custom_head_script_instructions_text: ~
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: ~
       edit_welcome_email:
@@ -376,6 +377,20 @@ hi-IN:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: ~
@@ -429,6 +444,30 @@ hi-IN:
         dropdown: ~
         checkbox_group: ~
         date: ~
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: ~
@@ -1529,6 +1568,8 @@ hi-IN:
       images_are_processing: ~
       automatically_logged_out_please_sign_in: ~
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: ~
       notifications: ~
@@ -1962,6 +2003,7 @@ hi-IN:
       create_account_with_facebook: ~
       OR: ~
       signup_with_email: ~
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: ~
       and_gave_following_feedback: ~
@@ -2112,6 +2154,7 @@ hi-IN:
       display_name: ~
       display_name_description: ~
       location_description: ~
+      profile_picture_description: ~
       phone_number: ~
       profile_picture: ~
       postal_code: ~
@@ -2124,6 +2167,7 @@ hi-IN:
       default_in_listing: ~
       invisible: ~
       image_is_processing: ~
+      shown_in_your_public_profile: ~
     save_information: ~
   shipping_address:
     shipping_address: ~

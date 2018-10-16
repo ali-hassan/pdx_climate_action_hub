@@ -75,7 +75,7 @@ fr:
         private_community_homepage_content: "Page d'accueil de la place de marché privée"
         edit_private_community_homepage_content_description: "Ce contenu n'est visible qu'aux utilisateurs non connectés, sur la page d'accueil de la place de marché privée. Vous pouvez décrire ici votre place de marché et comment la rejoindre. Vous pouvez aussi ajouter des images, des vidéos et du contenu HTML. %{see_how_it_looks_like}."
         update_information: "Sauvegarder les paramètres"
-        invite_people: "Inviter des nouveaux utilisateurs sur %{service_name}"
+        invite_people: "Inviter de nouveaux utilisateurs"
         edit_signup_info: "Informations lors de l'inscription"
         edit_signup_info_description: "Ce texte peut être affiché aux utilisateurs sur la page d'inscription. Vous pouvez y donner des instructions à propos de l'inscription, des conseils pour obtenir une invitation, etc. Par défaut, il n'y a pas d'instructions."
         edit_info: "Modifier les informations"
@@ -129,6 +129,7 @@ fr:
         invalid_color_code: "Le code de la couleur doit être une suite de 6 chiffres ou lettres (de A à F), par exemple D96E21"
         custom_head_script: "Script personnalisé"
         custom_head_script_instructions_text: "Ce script est inséré dans le tag <head> de chaque page et peut être utilisé pour insérer du contenu CSS, JavaScript ou HTML personnalisé. Notez que des futures évolutions de Sharetribe pourraient rendre votre script incompatible."
+        current_image: "Image actuelle :"
       edit_text_instructions:
         edit_text_instructions: "Instructions textuelles"
       edit_welcome_email:
@@ -241,7 +242,7 @@ fr:
         delete_this_marketplace: "Supprimer cette place de marché"
         payment_preferences: "Système de paiements"
       manage_members:
-        manage_members: "Gérer les utilisateurs"
+        manage_members: Utilisateurs
         email: Email
         name: Nom
         display_name: "Nom d'affichage"
@@ -318,7 +319,7 @@ fr:
       transactions:
         export_all_as_csv: "Exporter au format CSV"
         processing_export: "Export au format CSV en cours..."
-        transactions: "Voir les transactions"
+        transactions: Transactions
         headers:
           conversation: "Fil de conversation"
           listing: Annonce
@@ -366,7 +367,7 @@ fr:
             pending_ext: "En attente du paiement Stripe"
         not_available: "Non disponible"
       conversations:
-        conversations: "Voir les conversations"
+        conversations: Conversations
         headers:
           started_from: "Commencée sur"
           status: Statut
@@ -377,7 +378,7 @@ fr:
         participants: "Conversation : %{starter} avec %{author}"
         profile: "Profil de %{author}"
       testimonials:
-        testimonials: "Voir les avis"
+        testimonials: Avis
         no_testimonials_found: "Aucun avis trouvé"
         displaying_xx_reviews: "Affichage de <b>%{count}</b> avis pour les transactions %{tx_from} - %{tx_to} sur un total de <b>%{all_count}</b> avis."
         headers:
@@ -391,6 +392,20 @@ fr:
           waiting: "En attente"
           skipped: Ignorée
           published: Publiée
+      listings:
+        listings: Annonces
+        headers:
+          title: Titre
+          author: Auteur
+          created: "Publiée le"
+          updated: "Mise à jour le"
+          category: Catégorie
+          status: Statut
+        open: Ouverte
+        closed: Close
+        expired: Expirée
+      user_fields:
+        user_fields: "Champs d'utilisateurs"
     custom_fields:
       edit:
         edit_listing_field: "Modifier le champ d'annonce '%{field_name}'"
@@ -415,14 +430,14 @@ fr:
           date_cant_be_filtered: "Il n'y a pas de filtre possible pour un champ date."
           text_cant_be_filtered: "Il n'y a pas de filtre possible pour un champ texte. La recherche prend en compte les champs texte."
       index:
-        listing_fields: "Champs d'annonces & filtres"
+        listing_fields: "Champs et filtres d'annonces"
         listing_fields_help: "Vous pouvez ici modifier les champs qu'un utilisateur doit compléter lors de la création d'une annonce. Notez que certains champs sont prédéfinis et ne peuvent être modifiés."
         add_new_field: "Ajouter un nouveau champ : "
         remove_field_confirmation: "Voulez-vous vraiment supprimer le champ '%{field_name}' ?"
         cancel: Annuler
         save: Sauvegarder
         field_title: "Nom du champ"
-        field_type: "Type de champ"
+        field_type: "Type du champ"
         categories: "Catégories d'annonces pour lequel le champ est utilisé"
         select_all: "Tout cocher"
         clear_all: "Tout décocher"
@@ -444,6 +459,30 @@ fr:
         dropdown: "Liste déroulante"
         checkbox_group: "Cases à cocher"
         date: Date
+        file: Fichier
+        location: Adresse
+    person_custom_fields:
+      saving_failed: "La sauvegarde du champ d'utilisateur a échoué"
+      index:
+        user_fields: "Champs d'utilisateurs"
+        field_title: "Nom du champ"
+        field_type: "Type du champ"
+        add_new_field: "Ajouter un nouveau champ :"
+        save: Sauvegarder
+        cancel: Annuler
+        minimum_value: Minimum
+        maximum_value: Maximum
+        allow_decimals: "Autoriser les décimales"
+        add_option: "+ Ajouter une option"
+      new:
+        new_user_field: "Nouveau champ d'utilisateur"
+      form:
+        field_required:
+          this_field_is_required: "Rendre ce champ obligatoire lors de la création d'un compte utilisateur"
+          this_field_is_required_checkbox: "Rendre ce champ obligatoire lors de la création d'un compte utilisateur (au moins une option doit être sélectionnée)"
+          this_field_is_public: "Afficher ce champ à tous sur la page de profil"
+      edit:
+        edit_user_field: "Modifier le champ d'utilisateur '%{field_name}'"
     emails:
       new:
         send_email_to_members: "Envoyer un email aux utilisateurs"
@@ -476,8 +515,8 @@ fr:
         hello_firstname_text: "Bonjour %{person},"
     left_hand_navigation:
       general: Général
-      users_and_transactions: "Utilisateurs et transactions"
-      configure: Configuration
+      users_and_transactions: Gérer
+      configure: Configurer
       emails_title: Emails
       subscription: Abonnement
       preview: "Prévisualiser le site"
@@ -1568,6 +1607,8 @@ fr:
         other: "Le site sera inaccessible pour maintenance dans %{count} minutes"
       automatically_logged_out_please_sign_in: "Vous avez été déconnecté automatiquement. Veuillez vous connecter de nouveau."
       stripe_you_account_balance_is_not_0: "Le solde de votre compte n'est pas nul, il ne peut donc pas être supprimé. Cela peut être car vous avez des transactions non encore réalisées ou bien des paiements vers votre compte en banque sont en attente. Veuillez contacter l'équipe %{service_name} pour en savoir plus."
+      visit_admin: "Voulez-vous aller dans %{link} ?"
+      visit_admin_link: "votre panneau d'administration"
     settings:
       account: Compte
       notifications: Notifications
@@ -2004,6 +2045,7 @@ fr:
       create_account_with_facebook: "S'inscrire avec Facebook"
       OR: OU
       signup_with_email: "S'inscrire avec un email"
+      this_field_will_be_publicly_visible: "(Ce champ sera visible à tous)"
     profile_feedback:
       grade: "note :"
       and_gave_following_feedback: "et a donné l'avis suivant"
@@ -2154,6 +2196,7 @@ fr:
       display_name: "Nom d'affichage"
       display_name_description: "Si vous êtes une entreprise, vous pouvez utiliser son nom comme nom d'affichage. Le nom d'affichage sera visible par les autres utilisateurs à la place de votre nom et prénom."
       location_description: "Vous pouvez entrer votre adresse ou simplement une ville ou un code postal. Il est également utile de préciser votre pays lorsque vous entrez votre adresse. Exemples : \"10117 Berlin, Allemagne\" ou \"2000 Sand Hill Road, CA, USA\"."
+      profile_picture_description: "La photo de profil doit être dans un format carré (ratio de 1:1), par exemple 800x800 pixels. Autrement, la photo sera coupée."
       phone_number: "Numéro de téléphone"
       profile_picture: "Photo de profil"
       postal_code: "Code postal"
@@ -2166,6 +2209,7 @@ fr:
       default_in_listing: "(utilisée par défaut lors de la création d'une nouvelle annonce)"
       invisible: "(non visible par les autres utilisateurs)"
       image_is_processing: "C'est presque prêt ! Nous sommes en train de traiter votre photo de profil. Elle sera visible dans une ou deux minutes."
+      shown_in_your_public_profile: "(Visible dans votre profile public)"
     save_information: "Sauvegarder les informations"
   shipping_address:
     shipping_address: "Adresse de livraison"
@@ -2266,7 +2310,7 @@ fr:
     format: dd/mm/yyyy
   time:
     formats:
-      short: "%e. %b %Y heure %H:%M"
+      short: "%e. %b %Y à %H:%M"
       shorter: "%e. %b h %H:%M"
       short_date: "%e %b %Y"
       hours_only: "%H:%M"

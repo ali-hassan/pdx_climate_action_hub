@@ -190,6 +190,17 @@ namespace :sharetribe do
       LEFT JOIN custom_fields cf ON cfn.custom_field_id = cf.id
       WHERE cf.community_id = #{id};
 
+    DELETE cfv
+      FROM custom_field_values cfv
+      LEFT JOIN custom_fields cf ON cfv.custom_field_id = cf.id
+      WHERE cf.community_id = #{id};
+
+    DELETE cfos
+      FROM custom_field_option_selections cfos
+      LEFT JOIN custom_field_options cfo ON cfos.custom_field_option_id = cfo.id
+      LEFT JOIN custom_fields cf ON cfo.custom_field_id = cf.id
+      WHERE cf.community_id = #{id};
+
     DELETE cfot, cfo
       FROM custom_field_option_titles cfot
       LEFT JOIN custom_field_options cfo ON cfo.id = cfot.custom_field_option_id
@@ -230,7 +241,7 @@ SQL
       skip_delete_images = (args[:skip_delete_images] == "true") || false
 
       unless marketplace_id =~ /^\d+$/
-        railse "Invalid marketplace id."
+        raise "Invalid marketplace id."
       end
 
       community = Community.find(marketplace_id)
@@ -267,7 +278,7 @@ SQL
 
         puts "Deleting listing images..."
         Listing.where(community_id: community.id).flat_map { |l|
-          l.listing_images
+          l.listing_images.select { |i| i.image.present? }
         }.flat_map { |i|
           i.image.styles.map { |s, _| {key: i.image.s3_object(s).key }}
         }.each_slice(1000) { |objects|

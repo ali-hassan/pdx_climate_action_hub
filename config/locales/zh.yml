@@ -124,6 +124,7 @@ zh:
         invalid_color_code: 颜色代码需要包含6个数字或者字符A-F，比如D96E21
         custom_head_script: 定制脚本
         custom_head_script_instructions_text: 该脚本注入在每一个页面的<head>标签中，可以插入自定义CSS，JavaScript或者HTML。请注意对Sharetribe的未来改动可能会导致你的脚本不兼容。
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: 说明文本
       edit_welcome_email:
@@ -386,6 +387,20 @@ zh:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "编辑信息字段“%{field_name}”"
@@ -439,6 +454,30 @@ zh:
         dropdown: 下拉
         checkbox_group: 复选框
         date: 日期
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: 发送电子邮件给用户
@@ -1547,6 +1586,8 @@ zh:
       images_are_processing: ~
       automatically_logged_out_please_sign_in: 你已被自动登出。请重新登录。
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: 帐号
       notifications: 通知
@@ -1985,6 +2026,7 @@ zh:
       create_account_with_facebook: 用Facebook帐号注册
       OR: 或
       signup_with_email: 使用你自己的邮箱注册
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: 评分：
       and_gave_following_feedback: 并且给出以下反馈
@@ -2135,6 +2177,7 @@ zh:
       display_name: ~
       display_name_description: ~
       location_description: 你可以选择提供你的准确住址或仅仅提供邮政编码。请至少填写邮政编码。你也可以通过地图选择一个地点。
+      profile_picture_description: ~
       phone_number: 电话号码
       profile_picture: 个人头像
       postal_code: 邮政编码
@@ -2147,6 +2190,7 @@ zh:
       default_in_listing: （只有在发布新信息时作为默认值使用）
       invisible: （不显示给其他用户）
       image_is_processing: 你的个人头像图片正在准备。请过一会重新刷新页面。
+      shown_in_your_public_profile: ~
     save_information: 保存信息
   shipping_address:
     shipping_address: 送货地址

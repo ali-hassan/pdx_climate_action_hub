@@ -71,7 +71,6 @@ gem 'paypal-sdk-permissions', '~> 1.96.4'
 gem 'paypal-sdk-merchant', '~> 1.116.0'
 gem 'airbrake', '~> 6.1.2'
 gem 'stripe', '~> 3.0.0'
-
 gem 'simple_form'
 gem 'cocoon'
 

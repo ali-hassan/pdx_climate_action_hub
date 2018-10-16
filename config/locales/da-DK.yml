@@ -129,6 +129,7 @@ da-DK:
         invalid_color_code: "Farvekoden skal indeholde 6 cifre eller bogstaver, eksempelvis D96E21"
         custom_head_script: "Brugerdefineret script"
         custom_head_script_instructions_text: "Dit script vil blive indsat i <head> tag på enhver side på din markedsplads. Du kan indsætte CSS, JavaScript eller HTML. Du skal være opmærksom på at fremtidige opdateringer hos Sharetribe kan skabe problemer med dine egne scripts."
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: "Instruktion tekster"
       edit_welcome_email:
@@ -391,6 +392,20 @@ da-DK:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "Rediger annoncefelt '%{field_name}'"
@@ -444,6 +459,30 @@ da-DK:
         dropdown: Dropdown
         checkbox_group: Tjekboks
         date: Dato
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: "Send email til brugere"
@@ -1562,6 +1601,8 @@ da-DK:
         other: "Dette website vil være offline for vedligeholdelse i %{count} minutter"
       automatically_logged_out_please_sign_in: "Du er blevet automatisk logget ud. Log venligst ind igen."
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: Konto
       notifications: Notifikationer
@@ -1998,6 +2039,7 @@ da-DK:
       create_account_with_facebook: "Opret med Facebook"
       OR: ELLER
       signup_with_email: "Opret med email"
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: "klasse:"
       and_gave_following_feedback: "og gav følgende feedback"
@@ -2148,6 +2190,7 @@ da-DK:
       display_name: "Vist navn"
       display_name_description: "Hvis du repræsenterer en virksomhed eller organisation, kan du benytte dennes navn som brugernavn. Brugernavnet vises til andre brugere i stedet for dit for- og efternavn."
       location_description: "Angiv enten nøjagtig placering eller postnummer, eller vælg en placering på kortet."
+      profile_picture_description: ~
       phone_number: Telefonnnummer
       profile_picture: Profilbillede
       postal_code: Postnummer
@@ -2160,6 +2203,7 @@ da-DK:
       default_in_listing: "(bruges kun som standard når du opretter nye annoncer)"
       invisible: "(vises ikke til andre brugere)"
       image_is_processing: "Din profil er ved at blive forberedt. Opdatér venligst siden om et øjeblik."
+      shown_in_your_public_profile: ~
     save_information: Gem
   shipping_address:
     shipping_address: Forsendelsesadresse

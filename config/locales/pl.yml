@@ -139,6 +139,7 @@ pl:
         invalid_color_code: "Kod kolory powinien zawierać sześć cyfr lub liter od A do F, np. D96E21."
         custom_head_script: "Skrypt niestandardowy"
         custom_head_script_instructions_text: "Ten skrypt jest osadzony wewnątrz tagu <head>  dla każdej strony i może być użyty do wstawienia niestandardowego kodu CSS, JavaScript czy HTML. Zwróć proszę uwagę, że przyszłe zmiany w Sharetribe mogą spowodować, ze Twój skrypt stanie się niekompatybilny."
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: "Tekst instrukcji"
       edit_welcome_email:
@@ -401,6 +402,20 @@ pl:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "Edytuje pole %{field_name} oferty"
@@ -454,6 +469,30 @@ pl:
         dropdown: "Pokazuj jako rozwijalne menu"
         checkbox_group: "Pole wybory grupy"
         date: Data
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: "Wyślij wiadomość do użytkowników"
@@ -1430,7 +1469,7 @@ pl:
       how_to_use: "Jak to działa"
       info_about_kassi: "Informacje o %{service_name}"
       news: Nowości
-      register_details: Prywatność
+      register_details: "Polityka Prywatności"
       terms: "Zasady użytkowania"
     logged_in:
       admin: Administrator
@@ -1582,6 +1621,8 @@ pl:
         other: "Strona stanie się niedostępna ze względów serwisowych za %{count} minut"
       automatically_logged_out_please_sign_in: "Zostałeś automatycznie wylogowany. Proszę zaloguj się ponownie."
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: "czy chciałbyś %{link}?"
+      visit_admin_link: "zobacz w panelu administratora"
     settings:
       account: Konto
       notifications: Powiadomienia
@@ -1773,10 +1814,10 @@ pl:
       how_paypal_works: "Jak działa PayPal"
       payment_help: "Pomoc w sprawie płatności"
       unable_load_availability: "Nie można załadować informacji o dostępności. Proszę spróbować ponownie później."
-      booking_date: ~
+      booking_date: "Data rezerwacji"
       select_one: ~
-      start_time: ~
-      end_time: ~
+      start_time: Początek
+      end_time: Koniec
     new:
       listing: oferta
       selected_category: "Kategoria: %{category}"
@@ -2020,6 +2061,7 @@ pl:
       create_account_with_facebook: "Zarejestruj się poprzez Facebooka"
       OR: LUB
       signup_with_email: "Zarejestruj się przez email"
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: "stopień:"
       and_gave_following_feedback: "oraz daj następującą opinię"
@@ -2170,6 +2212,7 @@ pl:
       display_name: "Imię wyświetlane"
       display_name_description: "Jeśli reprezentujesz organizację lub firmę, możesz użyć jej nazwy jako imię wyświetlane. Imię wyświetlane jest pokazywane innym użytkownikom zamiast twojego imienia i nazwiska."
       location_description: "Możesz podać albo adres albo miasto lub kod pocztowy. Dobrze jest także dodać nazwę kraju podając lokalizację. Przykład: \"87-100 Toruń, Polska\" albo \"Marszałkowska 16, Warszawa, Polska\""
+      profile_picture_description: ~
       phone_number: "Numer telefonu"
       profile_picture: "Zdjęcie profilowe"
       postal_code: "Kod pocztowy"
@@ -2182,6 +2225,7 @@ pl:
       default_in_listing: "(używane wyłącznie jako domyślne przy tworzeniu nowej oferty)"
       invisible: "(nie widoczne dla innych użytkowników)"
       image_is_processing: "Trzymaj się mocno. Przetwarzamy właśnie Twoje zdjęcie profilowe. Będzie gotowe za minutę lub dwie."
+      shown_in_your_public_profile: ~
     save_information: "Zapisz informacje"
   shipping_address:
     shipping_address: "Adres dostawy"
@@ -2381,8 +2425,8 @@ pl:
       working_hours:
         default_schedule: ~
         i_am_available_on: ~
-        start_time: ~
-        end_time: ~
+        start_time: Początek
+        end_time: Koniec
         add_another_time_slot: ~
         save: ~
     no_listings:

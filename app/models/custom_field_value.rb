@@ -25,9 +25,12 @@ class CustomFieldValue < ApplicationRecord
 
   belongs_to :listing
   belongs_to :question, :class_name => "CustomField", :foreign_key => "custom_field_id"
+  belongs_to :person
 
-  delegate :with_type, :to => :question
+  delegate :with_type, :sort_priority, :to => :question
 
   default_scope { includes(:question).order("custom_fields.sort_priority") }
+
+  scope :by_question, ->(question){ where(custom_field_id: question.id) }
 
 end
