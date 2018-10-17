@@ -8,13 +8,14 @@ ro:
   admin:
     categories:
       edit:
-        edit_listing_category: "Editați categoria '%{category}'"
+        edit_listing_category: ~
       index:
-        listing_categories: "Listarea categoriilor"
-        create_a_new_category: "+ Creaza o noua categorie"
+        listing_categories: ~
+        create_a_new_category: ~
         remove_category_confirmation: "Sunteti sigur ca vreti sa stergeti categoria %{category_name}?"
-        saving_order: "Se salveaza ordinea in categorie"
-        save_order_successful: "Ordinea in categorie salvata cu succes"        save_order_error: ~
+        saving_order: ~
+        save_order_successful: ~
+        save_order_error: ~
       new:
         new_listing_category: "Categorie noua"
       form:

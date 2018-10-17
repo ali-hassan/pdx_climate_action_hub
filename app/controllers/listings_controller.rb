@@ -341,8 +341,6 @@ class ListingsController < ApplicationController
     redirect_to @listing and return
   end
 
-  private
-
   def create_repeat_rule
     repeats_every_counter = params[:repeats_every].to_i
 
@@ -382,12 +380,6 @@ class ListingsController < ApplicationController
     hash = schedule.to_hash
 
     @listing.event.update_attributes(event_rule_hash: hash)
-  end
-  def ensure_current_user_is_listing_author(error_message)
-    @listing = Listing.find(params[:id])
-    return if current_user?(@listing.author) || @current_user.has_admin_rights?(@current_community)
-    flash[:error] = error_message
-    redirect_to @listing and return
   end
 
   private
