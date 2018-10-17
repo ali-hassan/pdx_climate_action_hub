@@ -36,6 +36,10 @@ module ListingIndexViewUtils
     :small_3x2,
     :medium)
 
+  Event = Struct.new(
+      :start_at,
+      :end_at)
+
   module_function
 
   def to_struct(result:, includes:, per_page:, page:)
