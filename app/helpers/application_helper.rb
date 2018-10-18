@@ -66,7 +66,7 @@ module ApplicationHelper
 
   #  Transforms URLs to links
   def text_with_url_links(&block)
-    haml_concat add_links(capture_haml(&block)).html_safe
+    haml_concat add_links(capture_haml(&block)).try(:html_safe)
   end
 
   def small_avatar_thumb(person, avatar_html_options={})
