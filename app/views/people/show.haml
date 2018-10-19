@@ -36,8 +36,7 @@
                   = render 'people/custom_fields/checkbox', custom_field: custom_field,
                   custom_field_value: custom_field_value
                 - elsif custom_field.is_a?(TextField)
-                  - text_with_url_links do
-                    = custom_field_value.display_value
+                  = auto_link(custom_field_value.display_value, html: { target: "_blank" })
                 - else
                   %span.people-custom-fields-value
                     = custom_field_value.display_value
