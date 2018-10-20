@@ -6,6 +6,8 @@ module TransactionHelper
       "ss-check"
     when "free_accepted"
       "ss-check"
+    when "free_rejected"
+      "ss-delete"
     when "confirmed"
       "ss-check"
     when "rejected"
@@ -416,21 +418,21 @@ module TransactionHelper
 
   def waiting_for_current_user_to_accept_free_request(transaction)
     status_links([
-                     {
-                         link_href: accept_free_person_message_path(@current_user, :id => transaction.id),
-                         link_classes: "accept_preauthorized",
-                         link_icon_with_text_classes: icon_for("accept_preauthorized"),
-                         link_text_with_icon: link_text_with_icon(transaction, "accept_preauthorized"),
-                         link_data: { :method => "put" }
-                     },
-                     {
-                         link_href: reject_free_person_message_path(@current_user, :id => transaction.id),
-                         link_classes: "reject_preauthorized",
-                         link_icon_with_text_classes: icon_for("reject_preauthorized"),
-                         link_text_with_icon: link_text_with_icon(transaction, "reject_preauthorized"),
-                         link_data: { :method => "put" }
-                     }
-                 ]);
+       {
+           link_href: accept_free_person_message_path(@current_user, :id => transaction.id),
+           link_classes: "accept_preauthorized",
+           link_icon_with_text_classes: icon_for("accept_preauthorized"),
+           link_text_with_icon: link_text_with_icon(transaction, "accept_preauthorized"),
+           link_data: { :method => "put" }
+       },
+       {
+           link_href: reject_free_person_message_path(@current_user, :id => transaction.id),
+           link_classes: "reject_preauthorized",
+           link_icon_with_text_classes: icon_for("reject_preauthorized"),
+           link_text_with_icon: link_text_with_icon(transaction, "reject_preauthorized"),
+           link_data: { :method => "put" }
+       }
+   ]);
   end
 
   def feedback_pending_status(conversation)
@@ -460,7 +462,7 @@ module TransactionHelper
 
   def link_text_with_icon(conversation, status_link_name)
     if ["accept", "reject", "accept_preauthorized", "reject_preauthorized"].include?(status_link_name)
-      t("conversations.status_link.#{status_link_name}_request")
+      t("conversations.status_link.#{status_link_name}_offer")
     else
       t("conversations.status_link.#{status_link_name}")
     end
@@ -491,10 +493,10 @@ module TransactionHelper
 
   def waiting_for_author_to_accept_free_request(transaction)
     text = t("conversations.status.waiting_for_listing_author_to_accept_free_request",
-             :listing_author_name => link_to(
-                 transaction.author.given_name_or_username,
-                 transaction.author
-             )
+     :listing_author_name => link_to(
+         transaction.author.given_name_or_username,
+         transaction.author
+     )
     ).html_safe
     status_info(text, icon_classes: 'ss-clock')
   end
