@@ -181,15 +181,12 @@
 
     .row-with-divider.listing-author-activity
       .col-12
+        = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
+        = link_to("Add a Review for #{ @listing.author.full_name }", "#")
+        .row-with-divider.listing-author-activity
         %i.listing-author-activity-icon{:class => icon_class("testimonial")}
         .listing-author-activity-item
           .listing-author-activity-value
-
-            = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
-            = link_to("Add a Review for #{ @listing.author.full_name }", "#")
-
-            .row-with-divider.listing-author-activity
-
             - if @listing_presenter.received_testimonials.size > 0
               = @listing_presenter.feedback_positive_percentage.to_s + "%"
               = t("people.show.positive")
