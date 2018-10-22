@@ -160,6 +160,13 @@ class Listing < ApplicationRecord
     self.uuid ||= UUIDUtils.create_raw
   end
 
+  def create_free_transaction_for_review(starter)
+    transaction = Transaction.create(listing_id: self.id, starter_id: starter.id, starter_uuid: starter.uuid, listing_author_id: self.author_id, listing_author_uuid: self.author.uuid, unit_price_cents: 0.0, unit_price: 0.0, listing_uuid: self.uuid, payment_gateway: "none", community_uuid: Community.last.uuid, listing_quantity: 1, starter_skipped_feedback: false, author_skipped_feedback: false, listing_title: self.title, unit_type: "custom", availability: "none", delivery_method: "none", payment_process: "none", commission_from_seller: 0, automatic_confirmation_after_days: 0, community_id: Community.last.id)
+    transaction.conversation = Conversation.new(title: "Check", listing_id: id, last_message_at: DateTime.now, community_id: Community.last.id)
+    transaction.save
+    transaction
+  end
+
   before_validation do
     # Normalize browser line-breaks.
     # Reason: Some browsers send line-break as \r\n which counts for 2 characters making the

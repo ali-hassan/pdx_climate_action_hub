@@ -30,20 +30,26 @@ class TestimonialsController < ApplicationController
   end
 
   def create
+    is_free = params[:testimonial][:free]
     testimonial_params = params.require(:testimonial).permit(
       :text,
       :grade,
+      :free,
     ).merge(
       receiver_id: @transaction.other_party(@current_user).id,
       author_id: @current_user.id
     )
 
-    @testimonial = @transaction.testimonials.build(testimonial_params)
+    @testimonial = @transaction.testimonials.build(testimonial_params.except(:free))
 
     if @testimonial.save
       Delayed::Job.enqueue(TestimonialGivenJob.new(@testimonial.id, @current_community.id))
       flash[:notice] = t("layouts.notifications.feedback_sent_to", :target_person => view_context.link_to(PersonViewUtils.person_display_name_for_type(@transaction.other_party(@current_user), "first_name_only"), @transaction.other_party(@current_user))).html_safe
-      redirect_to person_transaction_path(:person_id => @current_user.id, :id => @transaction.id)
+      if is_free == "true"
+        redirect_to listing_path(@transaction.listing_id)
+      else
+        redirect_to person_transaction_path(:person_id => @current_user.id, :id => @transaction.id)
+      end
     else
       render :action => new
     end
