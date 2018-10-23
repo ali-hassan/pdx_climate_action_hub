@@ -182,7 +182,7 @@
     .row-with-divider.listing-author-activity
       .col-12
         = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
-        = link_to("Add a Review for #{ @listing.author.full_name }", "#", id: "myBtn")
+        = link_to("Add a Review for #{ @listing.author.given_name }", "#", id: "myBtn", class: "review-weight")
         = render "reviews", locals: { listing: @listing }
 
         .row-with-divider.listing-author-activity
