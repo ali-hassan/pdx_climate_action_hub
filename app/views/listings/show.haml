@@ -180,9 +180,10 @@
 
     .row-with-divider.listing-author-activity
       .col-12
-        = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
-        = link_to("Add a Review for #{ @listing.author.given_name }", "#", id: "myBtn", class: "review-weight")
-        = render "reviews", locals: { listing: @listing }
+        - if @current_user.present?
+          = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
+          = link_to("Add a Review for #{ @listing.author.given_name }", "#", id: "myBtn", class: "review-weight")
+          = render "reviews", locals: { listing: @listing }
 
         - if @listing_presenter.received_testimonials.size > 0
           -#.row-with-divider.listing-author-activity
