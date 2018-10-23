@@ -1639,6 +1639,9 @@ en:
       stripe_payments: "Stripe Payments"
       payments: Payments
   listings:
+    testimonials:
+      testimonials: Reviews
+      no_testimonials_found: "No reviews found"
     bubble_listing_not_visible:
       listing_not_visible: "You do not have permission to view this post."
     comment:
