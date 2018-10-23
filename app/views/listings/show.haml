@@ -186,7 +186,7 @@
           = render "reviews", locals: { listing: @listing }
 
         - if @listing_presenter.received_testimonials.size > 0
-          -#.row-with-divider.listing-author-activity
+          .row-with-divider.listing-author-activity
           %i.listing-author-activity-icon{:class => icon_class("testimonial")}
           .listing-author-activity-item
             .listing-author-activity-value
