@@ -29,10 +29,10 @@
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
+  margin: 1% auto;
+  padding: 0px 5px 0px 5px;
   border: 1px solid #888;
-  width: 50%; /* Could be more or less, depending on screen size */
+  width: 45%;
 }
 
 /* The Close Button */
@@ -51,4 +51,7 @@
 }
 .review-weight {
   font-weight: bold;
+}
+.review-font {
+  font-size: 14pt;
 }
