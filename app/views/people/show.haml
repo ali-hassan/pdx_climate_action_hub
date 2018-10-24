@@ -73,8 +73,6 @@
           - if received_testimonials.size > 0
             = pluralize(received_testimonials.size, t(".review"), t(".reviews"))
             = "(#{feedback_positive_percentage.to_s}% #{t("people.show.positive")}, #{received_positive_testimonials.size}/#{received_testimonials.size})"
-          - else
-            -#= t(".no_reviews")
           .row-with-divider.listing-author-activity
           - if @current_user.present?
             .row
