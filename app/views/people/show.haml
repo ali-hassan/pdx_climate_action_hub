@@ -77,10 +77,11 @@
         - if received_testimonials.size > 0
           #profile-testimonials-list
             = render :partial => "testimonials", :locals => {:received_testimonials => received_testimonials, :limit => 3}
-      .row
+
+      - if @current_user.present?
         .col-12
           = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
-          .review-font= link_to("Add a Review for #{ @person.given_name }", "#", id: "myBtn", class: "review-weight")
+          = link_to("Add a Review for #{ @person.given_name }", "#", id: "myBtn", class: "review-weight review-font")
           - @listing = Listing.find_by(id: listings.last.id)
           .username{ data: { user: @person.username } }
           = render "listings/reviews"
