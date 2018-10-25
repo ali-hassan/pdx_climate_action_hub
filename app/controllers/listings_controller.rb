@@ -109,7 +109,7 @@ class ListingsController < ApplicationController
         latitude: @listing.origin_loc.try(:latitude),
         longitude: @listing.origin_loc.try(:longitude),
         distance_max: 50.0,
-        # distance_unit: "kilometer",
+        distance_unit: :km,
         per_page: @per_page
     }
 

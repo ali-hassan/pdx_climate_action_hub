@@ -2,9 +2,12 @@ module ListingIndexService::Search::DatabaseSearchHelper
 
   module_function
 
-  def success_result(count, listings, includes)
-    Result::Success.new(
-      {count: count, listings: listings.map { |l| ListingIndexService::Search::Converters.listing_hash(l, includes) }})
+  def success_result(count, listings, includes, distances = {})
+    converted_listings = listings.map do |listing|
+      distance_hash = distances[listing.id] || {}
+      ListingIndexService::Search::Converters.listing_hash(listing, includes, distance_hash)
+    end
+    Result::Success.new({count: count, listings: converted_listings})
   end
 
   def fetch_from_db(community_id:, search:, included_models:, includes:)
@@ -18,7 +21,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
       })
 
     if search[:distance_max].present? && search[:address].present?
-      query = Listing.near(search[:address], search[:distance_max], :order => ' ')
+      query = Listing.near(search[:address], search[:distance_max], :unit => :kilometers, :order => :distance)
                   .includes(included_models)
                   .paginate(per_page: search[:per_page], page: search[:page])
 
