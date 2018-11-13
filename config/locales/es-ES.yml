@@ -75,7 +75,7 @@ es-ES:
         private_community_homepage_content: "Contenido de la página de inicio de la comunidad privada"
         edit_private_community_homepage_content_description: "Este contenido se muestra en la página de inicio de las comunidades privadas a los usuarios que no se han registrado. Aquí puedes describir tu comunidad y el proceso para registrarse. Aquí también puedes añadir imágenes, videos y contenido HTML. %{see_how_it_looks_like}."
         update_information: "Guardar configuración"
-        invite_people: "Invita nuevos usuarios a %{service_name}"
+        invite_people: "Invitar nuevos usuarios"
         edit_signup_info: "Información de registro"
         edit_signup_info_description: "Este es un texto informativo que puede mostrarse a los usuarios en la página de registro. Aquí puedes darles instrucciones para iniciar sesión, información sobre cómo conseguir una invitación, etc. Por defecto, no hay instrucciones para mostrar."
         edit_info: "Editar información"
@@ -129,6 +129,7 @@ es-ES:
         invalid_color_code: "El código de color debe contener 6 caracteres, números o letras de la A a la F, por ejemplo D96E21"
         custom_head_script: "Script personalizado"
         custom_head_script_instructions_text: "Éste script será añadido al <head> de cada página y se puede usar para añadir un CSS personalizado, JavaScript o HTML. Por favor, recuerda que futuras actualizaciones de Sharetribe pueden hacer que tu script deje de funcionar correctamente."
+        current_image: "Imagen actual:"
       edit_text_instructions:
         edit_text_instructions: "Textos de instrucción"
       edit_welcome_email:
@@ -241,7 +242,7 @@ es-ES:
         delete_this_marketplace: "Eliminar esta comunidad"
         payment_preferences: "Sistema de pagos"
       manage_members:
-        manage_members: "Administrar usuarios"
+        manage_members: Usuarios
         email: Email
         name: Nombre
         display_name: "Nombre Personalizado"
@@ -318,7 +319,7 @@ es-ES:
       transactions:
         export_all_as_csv: "Exportar todos en formato CSV"
         processing_export: "Procesando la exportación a CSV..."
-        transactions: "Ver transacciones"
+        transactions: Transacciones
         headers:
           conversation: Conversación
           listing: Anuncio
@@ -349,7 +350,7 @@ es-ES:
             accepted: Aceptada
             rejected: Rechazada
             paid: Pagada
-            confirmed: Confirmada
+            confirmed: Completada
             canceled: Cancelada
             initiated: "Esperando el pago de PayPal"
             pending_ext: "Esperando el pago de PayPal"
@@ -360,13 +361,13 @@ es-ES:
             accepted: Aceptada
             rejected: Rechazada
             paid: Pagada
-            confirmed: Confirmada
+            confirmed: Completada
             canceled: Cancelada
             initiated: "Esperando el pago de Stripe"
             pending_ext: "Esperando el pago de Stripe"
         not_available: "No disponible"
       conversations:
-        conversations: "Ver conversaciones"
+        conversations: Conversaciones
         headers:
           started_from: "Creada desde"
           status: Status
@@ -377,7 +378,7 @@ es-ES:
         participants: "Conversación: %{starter} con %{author}"
         profile: "Perfil de %{author}"
       testimonials:
-        testimonials: "Ver reseñas"
+        testimonials: Reseñas
         no_testimonials_found: "No hay feedback"
         displaying_xx_reviews: "Mostrando <b>%{count}</b> feedbacks en las transacciones %{tx_from} - %{tx_to} de <b>%{all_count}</b> feedbacks en total"
         headers:
@@ -391,6 +392,20 @@ es-ES:
           waiting: "Esperando reseña"
           skipped: Omitida
           published: Publicada
+      listings:
+        listings: Anuncios
+        headers:
+          title: Título
+          author: Autor
+          created: Creación
+          updated: Modificación
+          category: Categoría
+          status: Estatus
+        open: Abierto
+        closed: Cerrado
+        expired: Expirado
+      user_fields:
+        user_fields: "Datos de usuarios"
     custom_fields:
       edit:
         edit_listing_field: "Editar campo '%{field_name}'"
@@ -444,9 +459,33 @@ es-ES:
         dropdown: Desplegable
         checkbox_group: "Selección de grupo"
         date: Fecha
+        file: Archivo
+        location: Ubicación
+    person_custom_fields:
+      saving_failed: "No se pudo guardar el campo"
+      index:
+        user_fields: "Datos de usuarios"
+        field_title: "Título del campo"
+        field_type: "Tipo de campo"
+        add_new_field: "Añadir un nuevo campo:"
+        save: Guardar
+        cancel: Cancelar
+        minimum_value: Mínimo
+        maximum_value: Máximo
+        allow_decimals: "Permitir decimales"
+        add_option: "Añadir opción"
+      new:
+        new_user_field: "Nuevo campo de usuario"
+      form:
+        field_required:
+          this_field_is_required: "Hacer este campo obligatorio al registrarse"
+          this_field_is_required_checkbox: "Hacer este campo obligatorio al registrarse (el usuario tiene que elegir al menos una opción)"
+          this_field_is_public: "Mostrar este campo en el perfil público de los usuarios"
+      edit:
+        edit_user_field: "Editar el campo '%{field_name}'"
     emails:
       new:
-        send_email_to_members: "Enviar correo electrónico a los usuarios"
+        send_email_to_members: "Enviar correo a usuarios"
         send_email_to_members_title: "Enviar correo electrónico a tus usuarios"
         send_email: Enviar
         send_email_or: o
@@ -476,8 +515,8 @@ es-ES:
         hello_firstname_text: "Hola %{person},"
     left_hand_navigation:
       general: General
-      users_and_transactions: "Usuarios y transacciones"
-      configure: Configuración
+      users_and_transactions: Administrar
+      configure: Configurar
       emails_title: Emails
       subscription: Subscripción
       preview: "Vista Previa"
@@ -1568,6 +1607,8 @@ es-ES:
         other: "La página estará fuera de servicio por mantenimiento en %{count} minutos"
       automatically_logged_out_please_sign_in: "Por favor, inicia sesión de nuevo, ya que tu sesión ha caducado."
       stripe_you_account_balance_is_not_0: "El balance de tu cuenta no es 0 y por lo tanto no puede ser eliminada. Esto puede significar que tienes transacciones esperando a ser completadas o que hay dinero esperando a ser transferido a tu cuenta de banco. Por favor contacta al equipo de %{service_name} si tienes alguna duda."
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: Cuenta
       notifications: Notificaciones
@@ -1683,7 +1724,7 @@ es-ES:
         location: Ubicación
         origin: Origen
       send_button:
-        save_listing: "Guardar anuncio"
+        save_listing: "Publicar anuncio"
       share_type:
         select: Seleccionar
         borrow: "Tomar Prestado"
@@ -1891,7 +1932,7 @@ es-ES:
   paypal_accounts:
     payout_info_title: "Recibo de fondos"
     paypal_account_email_connected: "<del>Conectar cuenta PayPal</del> Completado!"
-    payout_info_paypal: "%{service_name} usa PayPal como su proveedor de pagos. %{create_paypal_account_link} y conectarla a %{service_name} es necesario para aceptar pagos por sus anuncios en línea."
+    payout_info_paypal: "%{service_name} usa PayPal como su proveedor de pagos. Una %{create_paypal_account_link}, conectada a %{service_name}, es necesario para aceptar pagos por sus anuncios en línea."
     paypal_billing_agreement_made: "<del>Otorgar permiso a %{service_name} para cobrar la cuota de servicio</del> Completado!"
     commission_permission_needed: "También es necesario que otorgue permiso a %{service_name} para cobrar la comisión de servicio"
     create_paypal_account_link_text: "cuenta de PayPal"
@@ -2004,6 +2045,7 @@ es-ES:
       create_account_with_facebook: "Registrate con tu cuenta de Facebook"
       OR: O
       signup_with_email: "Regístrate con tu correo electrónico"
+      this_field_will_be_publicly_visible: "(Esta campo será público)"
     profile_feedback:
       grade: "puntaje:"
       and_gave_following_feedback: "e hizo los siguientes comentarios"
@@ -2154,6 +2196,7 @@ es-ES:
       display_name: "Nombre Personalizado"
       display_name_description: "Si representas a una organización, puedes utilizar este campo para añadir el nombre que quieres mostrar a los otros usuarios. El nombre personalizado se mostrará a los otros usuarios en lugar de tu nombre y apellido."
       location_description: "Puedes dar tu ubicación exacta o indicar sólo tu código postal. Es buena idea indicar tu país al momento de añadir tu ubicación. Ejemplos son: \"10117 Berlin, Alemania\" or \"2000 Sand Hill Road, CA, USA\". ."
+      profile_picture_description: "La foto de perfil debe de ser en formato cuadrado (1:1), por ejemplo, 800x800 pixeles. De lo contrario será recortada para cuadrar."
       phone_number: "Número de teléfono:"
       profile_picture: "Foto de perfil"
       postal_code: "Código postal:"
@@ -2166,6 +2209,7 @@ es-ES:
       default_in_listing: "(usada por defecto al publicar un nuevo anuncio)"
       invisible: "(no se mostrará a otros usuarios)"
       image_is_processing: "Espera un momento. Tu imagen de perfil se está procesando. Estará lista en unos minutos."
+      shown_in_your_public_profile: "(se muestra en tu perfil público)"
     save_information: "Guardar Información"
   shipping_address:
     shipping_address: "Dirección de envío"

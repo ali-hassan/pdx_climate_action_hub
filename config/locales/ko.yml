@@ -124,6 +124,7 @@ ko:
         invalid_color_code: "컬러 코드는 6자리의 숫자 또는 알파벳 A-F로 구성됩니다 (예: D96E21)."
         custom_head_script: "사용자 정의 스크립트"
         custom_head_script_instructions_text: "이 스크립트는 모든 페이지의 <head> 태그 안에 삽입되며 사용자 정의 CSS, JavaScript 또는 HTML을 삽입하는 데 사용될 수 있습니다. 나중에 Sharetribe를 변경하면 스크립트가 호환되지 않을 수 있습니다."
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: 설명서
       edit_welcome_email:
@@ -386,6 +387,20 @@ ko:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "항목 '%{field_name}' 편집"
@@ -439,6 +454,30 @@ ko:
         dropdown: 드롭다운
         checkbox_group: "체크박스 그룹"
         date: 날짜
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: "사용자에게 이메일 발송"
@@ -1558,6 +1597,8 @@ ko:
         other: "%{count} 분 후에 웹 사이트가 유지 관리를 위해 오프라인 상태가됩니다."
       automatically_logged_out_please_sign_in: "자동으로 로그 아웃되었습니다. 다시 로그인하십시오."
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: 계정
       notifications: 공지
@@ -1994,6 +2035,7 @@ ko:
       create_account_with_facebook: "페이스북으로 로그인하기"
       OR: 또는
       signup_with_email: "이메일 가입"
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: "등급:"
       and_gave_following_feedback: "그리고 다음과 같은 피드백을 주었다."
@@ -2144,6 +2186,7 @@ ko:
       display_name: "표기 이름"
       display_name_description: "조직을 대표하는 경우 조직의 이름을 표시 이름으로 사용할 수 있습니다. 표시 이름은 성 및 이름 대신 다른 사용자에게 표시됩니다."
       location_description: "당신은 번지 또는시 / 우편 번호만 제공 할 수 있습니다. 위치를 추가 할 때 국가를 추가하는 것도 좋습니다. 예 : \"10117 Berlin, Germany\"또는 \"2000 Sand Hill Road, CA, USA\"."
+      profile_picture_description: ~
       phone_number: 전화번호
       profile_picture: "프로필 사진"
       postal_code: 우편번호
@@ -2156,6 +2199,7 @@ ko:
       default_in_listing: "(새 목록을 만들때 기본값으로만 사용됨)"
       invisible: "(다른 사용자에게는 표시되지 않음)"
       image_is_processing: "잠시만 기다려주세요. 귀하의 프로필 사진을 처리 중입니다. 1 ~ 2 분 안에 준비될 것입니다."
+      shown_in_your_public_profile: ~
     save_information: "정보 저장하기"
   shipping_address:
     shipping_address: 배송주소

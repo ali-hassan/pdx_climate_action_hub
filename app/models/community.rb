@@ -134,6 +134,12 @@ class Community < ApplicationRecord
   has_many :custom_fields, :dependent => :destroy
   has_many :custom_dropdown_fields, -> { where("type = 'DropdownField'") }, :class_name => "CustomField", :dependent => :destroy
   has_many :custom_numeric_fields, -> { where("type = 'NumericField'") }, :class_name => "NumericField", :dependent => :destroy
+  has_many :custom_fields, -> { for_listing },  :dependent => :destroy
+  has_many :custom_dropdown_fields, -> { for_listing.dropdown }, :class_name => "CustomField", :dependent => :destroy
+  has_many :custom_numeric_fields, -> { for_listing.numeric }, :class_name => "NumericField", :dependent => :destroy
+  has_many :person_custom_fields, -> { for_person.sorted }, :class_name => "CustomField",  :dependent => :destroy
+  has_many :person_custom_dropdown_fields, -> { for_person.sorted.dropdown }, :class_name => "CustomField", :dependent => :destroy
+  has_many :person_custom_numeric_fields, -> { for_person.sorted.numeric }, :class_name => "NumericField", :dependent => :destroy
   has_many :marketplace_sender_emails
 
   has_one :configuration, class_name: 'MarketplaceConfigurations'

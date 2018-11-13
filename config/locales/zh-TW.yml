@@ -124,6 +124,7 @@ zh-TW:
         invalid_color_code: 颜色代码需要包含6个数字或者字符A-F，比如D96E21
         custom_head_script: 定制脚本
         custom_head_script_instructions_text: 该脚本注入在每一个页面的<head>标签中，可以插入自定义CSS，JavaScript或者HTML。请注意对Sharetribe的未来改动可能会导致你的脚本不兼容。
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: 说明文本
       edit_welcome_email:
@@ -386,6 +387,20 @@ zh-TW:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "編輯刊登名稱“%{field_name}”"
@@ -439,6 +454,30 @@ zh-TW:
         dropdown: 下拉
         checkbox_group: 勾選欄
         date: 日期
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: 发送电子邮件给用户
@@ -1554,6 +1593,8 @@ zh-TW:
         other: "該網站準備在%{count}分鐘內進行維護"
       automatically_logged_out_please_sign_in: 您已自動登出，請再次登入。
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: 帳號
       notifications: 通知
@@ -1989,6 +2030,7 @@ zh-TW:
       create_account_with_facebook: 使用Facebook帳號註冊
       OR: 或
       signup_with_email: "Email 註冊"
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: 評分：
       and_gave_following_feedback: 並且給出以下反饋
@@ -2139,6 +2181,7 @@ zh-TW:
       display_name: 顯示名稱
       display_name_description: "如果您代表一個組織，則可以使用其名稱作為您的顯示名稱。 顯示名稱將顯示給其他用戶，而不是您的名字和姓氏。"
       location_description: "請提供您的服務地點，也可以只提供城市或郵政編碼。 "
+      profile_picture_description: ~
       phone_number: 電話號碼
       profile_picture: 個人頭像
       postal_code: 郵遞區號
@@ -2151,6 +2194,7 @@ zh-TW:
       default_in_listing: （只在刊登新服務時自動使用）
       invisible: （不公開顯示）
       image_is_processing: 別急。我們正在處理您的個人頭像，請於一兩分鐘後重新整理頁面。
+      shown_in_your_public_profile: ~
     save_information: 保存信息
   shipping_address:
     shipping_address: 送货地址

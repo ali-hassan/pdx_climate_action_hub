@@ -129,6 +129,7 @@ en-NZ:
         invalid_color_code: "Color code should contain 6 numbers or letters A-F, for example D96E21"
         custom_head_script: "Custom script"
         custom_head_script_instructions_text: "This script is injected inside the <head> tag of every page and can be used to insert custom CSS, JavaScript or HTML. Please note that future changes to Sharetribe may render your script incompatible."
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: "Instruction texts"
       edit_welcome_email:
@@ -391,6 +392,20 @@ en-NZ:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "Edit listing field '%{field_name}'"
@@ -444,6 +459,30 @@ en-NZ:
         dropdown: Dropdown
         checkbox_group: "Checkbox group"
         date: Date
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: "Send email to users"
@@ -1568,6 +1607,8 @@ en-NZ:
         other: "The website will be offline for maintenance in %{count} minutes"
       automatically_logged_out_please_sign_in: "You have been automatically logged out. Please log in again."
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: Account
       notifications: Notifications
@@ -2004,6 +2045,7 @@ en-NZ:
       create_account_with_facebook: "Sign up with Facebook"
       OR: OR
       signup_with_email: "Sign up with email"
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: "grade:"
       and_gave_following_feedback: "and gave the following feedback"
@@ -2154,6 +2196,7 @@ en-NZ:
       display_name: "Display name"
       display_name_description: "If you represent an organisation, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
       location_description: "You can provide either your street address or only a city or zip/postal code. It’s good to also add your country when adding your location. Examples: \"10117 Berlin, Germany\" or \"2000 Sand Hill Road, CA, USA\"."
+      profile_picture_description: ~
       phone_number: "Phone number"
       profile_picture: "Profile picture"
       postal_code: "Postal code"
@@ -2166,6 +2209,7 @@ en-NZ:
       default_in_listing: "(used only as a default when creating a new listing)"
       invisible: "(not shown to other users)"
       image_is_processing: "Hang on tight. We are processing your profile picture. It will be ready in a minute or two."
+      shown_in_your_public_profile: ~
     save_information: "Save information"
   shipping_address:
     shipping_address: "Shipping address"

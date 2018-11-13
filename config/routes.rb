@@ -270,6 +270,7 @@ Rails.application.routes.draw do
           get "getting_started_guide/invitation",             to: redirect("/admin/getting_started_guide/invitation")
 
         end
+        resources :listings, controller: :community_listings, only: [:index]
         resources :transactions, controller: :community_transactions, only: :index do
           collection do
             get 'export'
@@ -312,6 +313,11 @@ Rails.application.routes.draw do
           put :update_location
           get :edit_expiration
           put :update_expiration
+        end
+      end
+      resources :person_custom_fields, path: 'user_fields' do
+        collection do
+          post :order
         end
       end
       resources :categories do
@@ -455,6 +461,8 @@ Rails.application.routes.draw do
             get :accept_preauthorized, to: 'accept_preauthorized_conversations#accept'
             get :reject_preauthorized, to: 'accept_preauthorized_conversations#reject'
             put :acceptance_preauthorized, to: 'accept_preauthorized_conversations#accepted_or_rejected'
+            put :accept_free,              to: 'accept_free_conversations#accept'
+            put :reject_free,              to: 'accept_free_conversations#reject'
           end
           resources :messages
           resources :feedbacks, :controller => :testimonials do

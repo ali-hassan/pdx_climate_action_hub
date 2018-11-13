@@ -66,7 +66,7 @@ module ApplicationHelper
 
   #  Transforms URLs to links
   def text_with_url_links(&block)
-    haml_concat add_links(capture_haml(&block)).html_safe
+    haml_concat add_links(capture_haml(&block)).try(:html_safe)
   end
 
   def small_avatar_thumb(person, avatar_html_options={})
@@ -365,6 +365,34 @@ module ApplicationHelper
       },
       {
         :topic => :manage,
+        :text => t("admin.communities.listings.listings"),
+        :icon_class => icon_class("thumbnails"),
+        :path => admin_community_listings_path(@current_community, sort: "updated"),
+        :name => "listings"
+      },
+      {
+        :topic => :manage,
+        :text => t("admin.communities.transactions.transactions"),
+        :icon_class => icon_class("coins"),
+        :path => admin_community_transactions_path(@current_community, sort: "last_activity", direction: "desc"),
+        :name => "transactions"
+      },
+      {
+        :topic => :manage,
+        :text => t("admin.communities.conversations.conversations"),
+        :icon_class => icon_class("chat_bubble"),
+        :path => admin_community_conversations_path(@current_community, sort: "last_activity", direction: "desc"),
+        :name => "conversations"
+      },
+      {
+        :topic => :manage,
+        :text => t("admin.communities.testimonials.testimonials"),
+        :icon_class => icon_class("like"),
+        :path => admin_community_testimonials_path(@current_community),
+        :name => "testimonials"
+      },
+      {
+        :topic => :manage,
         :text => t("admin.emails.new.send_email_to_members"),
         :icon_class => icon_class("send"),
         :path => new_admin_community_email_path(:community_id => @current_community.id),
@@ -440,6 +468,16 @@ module ApplicationHelper
         :name => "landing_page",
       }
     end
+
+    links += [
+      {
+        :topic => :configure,
+        :text => t("admin.communities.user_fields.user_fields"),
+        :icon_class => icon_class("user_edit"),
+        :path => admin_person_custom_fields_path,
+        :name => "user_fields"
+      }
+    ]
 
     links += [
       {

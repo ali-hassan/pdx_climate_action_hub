@@ -130,6 +130,7 @@ hu:
         invalid_color_code: "A színkód 6 számból vagy betűből kell álljon A-F, például D96E21"
         custom_head_script: "Egyedi leírás"
         custom_head_script_instructions_text: "Ez a szkript be van injektálva  az összes oldal  <head> tag-jébe és egyedi CSS, JavaScript vagy HTML beszúrására használható. A Sharetribe jövőbeni fejlesztéseinek/valtoztatásainak következtében arra számíthat, hogy a szkriptje inkompatibilissé válik."
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: "Útmutató szöveg"
       edit_welcome_email:
@@ -392,6 +393,20 @@ hu:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "Mező szerkesztése %{field_name}"
@@ -445,6 +460,30 @@ hu:
         dropdown: Lenyíló
         checkbox_group: "Jelölőnégyzet csoport"
         date: Dátum
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: "E-mail küldése a felhasználóknak"
@@ -1565,6 +1604,8 @@ hu:
         other: "Karbantartási munkálatok miatt %{count} perc múlva a weboldal nem lesz elérhető "
       automatically_logged_out_please_sign_in: "Ön automatikusan kijlépett. Kérjük lépjen be újra."
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: "Felhasználói fiók"
       notifications: Megjegyzések
@@ -2002,6 +2043,7 @@ hu:
       create_account_with_facebook: "Regisztráció Facebookkal"
       OR: VAGY
       signup_with_email: "Bejelentkezés emaillel"
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: "fokozat:"
       and_gave_following_feedback: "és következő értékelést adta"
@@ -2152,6 +2194,7 @@ hu:
       display_name: ~
       display_name_description: ~
       location_description: "Ön megadhatja a pontos címét vagy például csak az irányítószámát. Kérjük adja meg legalább az irányítószámát. Továbbá az alábbi térképen is kiválaszthat egy helyet."
+      profile_picture_description: ~
       phone_number: Telefonszám
       profile_picture: Profilkép
       postal_code: Irányítószám
@@ -2164,6 +2207,7 @@ hu:
       default_in_listing: "(alapbeállításként használt kizárólag új hirdetés feladásakor)"
       invisible: "(a többi felhasználó számára nem látható)"
       image_is_processing: "A profilképe feldolgozása folyamatban van. Kérjük, frissítse az oldalt egy kis idő elteltével."
+      shown_in_your_public_profile: ~
     save_information: Mentés
   shipping_address:
     shipping_address: "Szállítási cím"

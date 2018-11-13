@@ -37,8 +37,8 @@ module ListingIndexViewUtils
     :medium)
 
   Event = Struct.new(
-    :start_at,
-    :end_at)
+      :start_at,
+      :end_at)
 
   module_function
 

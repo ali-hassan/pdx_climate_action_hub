@@ -120,6 +120,7 @@ pt-PT:
         invalid_color_code: ~
         custom_head_script: ~
         custom_head_script_instructions_text: ~
+        current_image: ~
       edit_text_instructions:
         edit_text_instructions: ~
       edit_welcome_email:
@@ -382,6 +383,20 @@ pt-PT:
           waiting: ~
           skipped: ~
           published: ~
+      listings:
+        listings: ~
+        headers:
+          title: ~
+          author: ~
+          created: ~
+          updated: ~
+          category: ~
+          status: ~
+        open: ~
+        closed: ~
+        expired: ~
+      user_fields:
+        user_fields: ~
     custom_fields:
       edit:
         edit_listing_field: "Alterar anúncio '%{field_name}'"
@@ -435,6 +450,30 @@ pt-PT:
         dropdown: ~
         checkbox_group: ~
         date: ~
+        file: ~
+        location: ~
+    person_custom_fields:
+      saving_failed: ~
+      index:
+        user_fields: ~
+        field_title: ~
+        field_type: ~
+        add_new_field: ~
+        save: ~
+        cancel: ~
+        minimum_value: ~
+        maximum_value: ~
+        allow_decimals: ~
+        add_option: ~
+      new:
+        new_user_field: ~
+      form:
+        field_required:
+          this_field_is_required: ~
+          this_field_is_required_checkbox: ~
+          this_field_is_public: ~
+      edit:
+        edit_user_field: ~
     emails:
       new:
         send_email_to_members: "Envie e-mail aos utilizadores"
@@ -1547,6 +1586,8 @@ pt-PT:
       images_are_processing: "Estamos a processar as suas imagens. Estarão visíveis dentro de um ou dois minutos."
       automatically_logged_out_please_sign_in: ~
       stripe_you_account_balance_is_not_0: ~
+      visit_admin: ~
+      visit_admin_link: ~
     settings:
       account: Conta
       notifications: "Notificações "
@@ -1983,6 +2024,7 @@ pt-PT:
       create_account_with_facebook: "Registe-se com seu Facebook"
       OR: ~
       signup_with_email: "Registe-se com seu e-mail"
+      this_field_will_be_publicly_visible: ~
     profile_feedback:
       grade: "nota:"
       and_gave_following_feedback: "deu a seguinte opinião "
@@ -2133,6 +2175,7 @@ pt-PT:
       display_name: ~
       display_name_description: ~
       location_description: "Indique a sua localização exata ou o seu código postal. Também pode selecionar uma posição no mapa abaixo."
+      profile_picture_description: ~
       phone_number: "Número de telefone"
       profile_picture: ~
       postal_code: "Código postal"
@@ -2145,6 +2188,7 @@ pt-PT:
       default_in_listing: "(usado apenas por defeito ao criar um novo anúncio)"
       invisible: "(não será mostrado a outros utilizadores)"
       image_is_processing: ~
+      shown_in_your_public_profile: ~
     save_information: "Salvar informação"
   shipping_address:
     shipping_address: ~
@@ -2215,31 +2259,31 @@ pt-PT:
       friday: ~
       saturday: ~
     months:
-      january: ~
-      february: ~
-      march: ~
-      april: ~
-      may: ~
-      june: ~
-      july: ~
-      august: ~
-      september: ~
-      october: ~
-      november: ~
-      december: ~
+      january: Janeiro
+      february: Fevereiro
+      march: Março
+      april: Abril
+      may: Maio
+      june: Junho
+      july: Julho
+      august: Agosto
+      september: Setembro
+      october: Outubro
+      november: Novembro
+      december: Dezembro
     months_short:
-      january: ~
-      february: ~
-      march: ~
-      april: ~
-      may: ~
-      june: ~
-      july: ~
-      august: ~
-      september: ~
-      october: ~
-      november: ~
-      december: ~
+      january: Jan
+      february: Fev
+      march: Mar
+      april: Abr
+      may: Mai
+      june: Jun
+      july: Jul
+      august: Ago
+      september: Set
+      october: Out
+      november: Nov
+      december: Dez
     today: ~
     clear: ~
     format: dd/mm/yyyy
