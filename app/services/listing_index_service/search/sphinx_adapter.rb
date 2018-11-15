@@ -71,7 +71,7 @@ module ListingIndexService::Search
             price_cents: search[:price_cents],
             listing_id: numeric_search_match_listing_ids,
             geodist: geo_search[:distance_max],
-            event_ends_at: search[:upcoming_events] ? DateTime.now..DateTime.now + 2.year : []
+            event_ends_at: DateTime.now..DateTime.now + 2.year
           })
 
         selection_groups = search[:fields].select { |v| v[:type] == :selection_group }
