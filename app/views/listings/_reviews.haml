@@ -8,7 +8,7 @@
       input: ".js-testimonial-grade"
     });
 
-- transaction = @listing.create_free_transaction_for_review(@current_user)
+- transaction = @listing.create_free_transaction_for_review(@current_user) rescue nil
 
 #myModal.modal
   .modal-content
