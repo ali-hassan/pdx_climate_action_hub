@@ -33,3 +33,7 @@ $ ->
         if event.target == modal
           modal.style.display = 'none'
         return
+
+
+
+#  map_class = $(".google-maps-link").replaceWith("Lahorea")
