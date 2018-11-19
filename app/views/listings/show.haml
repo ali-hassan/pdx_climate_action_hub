@@ -103,6 +103,16 @@
               .listing-description-youtube-wrapper
                 %iframe.listing-description-youtube-iframe{ title: t("listings.show.youtube_video_player"), width: 640, height:390, src: sanitize("https://www.youtube.com/embed/#{youtube_id}", tags:[]), frameborder: 0, allowfullscreen: true}
 
+          .googlemap
+            - maps_key = MarketplaceHelper.google_maps_key(@current_community.id)
+            .embed-container
+              %iframe{width: "600", height: "450", frameborder: "0",
+                src: "https://www.google.com/maps/embed/v1/place?key=#{maps_key}&q=#{CGI.escape(@listing.location.address)}&language=#{I18n.locale}"}
+            .map-link
+              %a.icon-with-text-container{href: "//maps.google.com/?q=#{CGI.escape(@listing.location.google_address)}", target: "_blank"}
+                = icon_tag("external_link", ["icon-part"])
+                .text-part= @listing.location.google_address
+
 
     - @listing.custom_field_values.each do |custom_field_value|
       .row
@@ -205,5 +215,5 @@
       .row
         .col-12
           #googlemap
-            = render :partial => "googlemap", :locals => { :listing => @listing}
+            -#= render :partial => "googlemap", :locals => { :listing => @listing}
             = render :partial => "origin", :locals => { :origin_loc => @listing.origin_loc }
