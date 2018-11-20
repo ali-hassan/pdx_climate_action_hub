@@ -9,6 +9,13 @@ module ApplicationHelper
     haml_concat capture_haml(&block).gsub("\n", '').html_safe
   end
 
+  def mobile_device
+    agent = request.user_agent
+    return "tablet" if agent =~ /(tablet|ipad)|(android(?!.*mobile))/i
+    return "mobile" if agent =~ /Mobile/
+    return "desktop"
+  end
+
   # Returns a human friendly format of the time stamp
   # Origin: http://snippets.dzone.com/posts/show/6229
   def time_ago(from_time, to_time = Time.now)
