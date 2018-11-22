@@ -93,9 +93,8 @@ module ListingIndexService::Search
           star: true,
           with: with,
           with_all: with_all,
-          # order: geo_search[:order] || 'sort_date DESC',
           geo: geo_search[:origin],
-          order: search[:upcoming_events] ? 'geodist ASC' : 'geodist ASC',
+          order: 'geodist ASC'
         )
 
         begin
