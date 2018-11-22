@@ -83,7 +83,6 @@ module ListingIndexService::Search
 #          event_id: search[:upcoming_events] ? [0..1000000] : [],
         }
 
-        debugger
         models = Listing.search(
           Riddle::Query.escape(search[:keywords] || ""),
           sql: {
