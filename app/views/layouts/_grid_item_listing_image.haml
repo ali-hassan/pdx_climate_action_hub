@@ -18,7 +18,7 @@
         = icon_tag('calendar', ["icon-fix"])
       = listing.title
 
-    .fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class}"}
+    .fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class} #{@hide_price}"}
       - if listing.price
         %span.fluid-thumbnail-grid-image-price
           = MoneyViewUtils.to_humanized(listing.price)
