@@ -93,9 +93,9 @@ module ListingIndexService::Search
           star: true,
           with: with,
           with_all: with_all,
-          order: geo_search[:order] || 'sort_date DESC',
+          # order: geo_search[:order] || 'sort_date DESC',
           geo: geo_search[:origin],
-          order: search[:upcoming_events] ? 'event_starts_at ASC' : 'sort_date DESC',
+          order: search[:upcoming_events] ? 'geodist ASC' : 'geodist ASC',
         )
 
         begin
@@ -140,7 +140,7 @@ module ListingIndexService::Search
     def parse_geo_search_params(search)
       return {} unless search[:latitude].present? && search[:longitude].present?
       geo_params = {
-          order: (search[:sort] == :distance ? 'geodist ASC' : nil),
+          order: (search[:sort] == :distance ? 'geodist DESC' : nil),
           origin: [radians(search[:latitude]), radians(search[:longitude])]
       }
       if search[:distance_max].present?
