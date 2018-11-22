@@ -83,6 +83,7 @@ module ListingIndexService::Search
 #          event_id: search[:upcoming_events] ? [0..1000000] : [],
         }
 
+        debugger
         models = Listing.search(
           Riddle::Query.escape(search[:keywords] || ""),
           sql: {
@@ -94,7 +95,7 @@ module ListingIndexService::Search
           with: with,
           with_all: with_all,
           geo: geo_search[:origin],
-          order: 'geodist ASC'
+          order: search[:distance_max] ? 'geodist ASC' : 'sort_date DESC',
         )
 
         begin
