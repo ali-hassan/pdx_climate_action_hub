@@ -29,7 +29,7 @@ class Location < ApplicationRecord
 
   def search_and_fill_latlng(address=nil, locale=APP_CONFIG.default_locale)
     okresponse = false
-    geocoder = "http://maps.googleapis.com/maps/api/geocode/json?address="
+    geocoder = "https://maps.googleapis.com/maps/api/geocode/json?address="
 
     if address == nil
       address = self.address
