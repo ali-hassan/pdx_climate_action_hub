@@ -29,7 +29,7 @@
     = t("admin.left_hand_navigation.users_and_transactions")
 
   .admin-left-navi-link-group
-    - grouped_links[:manage].each do |link|
+    - grouped_links[:manage].uniq.each do |link|
       %a{:id => link[:id], :href => link[:path], :title => link[:text], :class => (link[:name].eql?(sel_link) ? "selected left-navi-link" : "left-navi-link")}
         .left-navi-link-icon{:class => link[:icon_class]}
         .left-navi-link-text= link[:text]
