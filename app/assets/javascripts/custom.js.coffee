@@ -33,3 +33,5 @@ $ ->
         if event.target == modal
           modal.style.display = 'none'
         return
+
+  $(this).scrollTop(0);
