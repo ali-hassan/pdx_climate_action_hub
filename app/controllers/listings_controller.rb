@@ -108,8 +108,9 @@ class ListingsController < ApplicationController
         address: @listing.origin,
         latitude: @listing.origin_loc.try(:latitude),
         longitude: @listing.origin_loc.try(:longitude),
-        distance_max: 180.0,
+        distance_max: 200.0,
         distance_unit: :km,
+        sort: :distance,
         per_page: @per_page
     }
 
