@@ -249,7 +249,7 @@ en:
         manage_members: Users
         email: Email
         name: Name
-        display_name: "Display name"
+        display_name: "Display Name"
         join_date: Joined
         admin: Admin
         posting_allowed: "Posting allowed"
@@ -1399,7 +1399,7 @@ en:
       show_more: "Show more"
     profile_info_empty_notification:
       add_your_info: "Add your contact info"
-      add_a_profile_picture: "Add a profile picture"
+      add_a_profile_picture: "Add a Profile Picture"
       you_have_not_added_your_info: "You have not added your contact information. Please do, so others can get in touch with you more easily. Also add a profile picture so it's easier for others to trust you."
       add_your_info_link: "Add your info now"
     recent_listing:
@@ -1857,8 +1857,8 @@ en:
     reply_link:
       listing_closed: "Post is closed"
     show:
-      add_your_phone_number: "Add your phone number"
-      add_profile_picture: "Add profile picture"
+      add_your_phone_number: "Add your Phone Number"
+      add_profile_picture: "Add Profile Picture"
       comments: "Add to the Discussion"
       contact_by_phone: "Contact by phone:"
       contact: Contact
@@ -2089,7 +2089,7 @@ en:
       about_me: "About me:"
       add_description: "Please add to your profile to help build trust and the ShareOregon community."
       add_location: "Add location"
-      add_phone_number: "Add phone number"
+      add_phone_number: "Add Phone Number"
       address: "Location:"
       as_expected: "As expected"
       edit_profile_info: "Edit profile"
@@ -2097,7 +2097,7 @@ en:
       positive: positive
       hide_description: "Show less"
       less_than_expected: "Worse than expected"
-      phone_number: "Phone number:"
+      phone_number: "Phone Number:"
       show_all_feedback: "Show all feedback"
       show_all_testimonials: "Show all feedback"
       show_full_description: "Show more"
@@ -2232,11 +2232,11 @@ en:
       first_name_with_initial: "(only first letter shown to other users)"
       first_name_only: "(not shown to other users)"
       location_description: "You can provide your street address or just a city or zip code. Examples: \"200 Market St., Portland, OR\" or \"Bend, OR\" or \"97701\"."
-      display_name: "Display name"
-      display_name_description: "If you represent an organisation, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
+      display_name: "Display Name"
+      display_name_description: "If you represent an organization, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
       profile_picture_description: "The profile picture should be in a square format (1:1 ratio), for example, 800x800 pixels. Otherwise, it will be cropped to fit."
-      phone_number: "Phone number"
-      profile_picture: "Profile picture"
+      phone_number: "Phone Number"
+      profile_picture: "Profile Picture"
       postal_code: "Zip code"
       profile_page: "in your profile page"
       profilemap: Mapview
