@@ -177,7 +177,8 @@
       .col-12
 
         -#.row-with-divider.listing-author-activity
-        %i.listing-author-activity-icon{:class => icon_class("like")}
+        - if @listing_presenter.received_testimonials.size > 0
+          %i.listing-author-activity-icon{:class => icon_class("like")}
         .listing-author-activity-item
           .listing-author-activity-value
             - if @listing_presenter.received_testimonials.size > 0
