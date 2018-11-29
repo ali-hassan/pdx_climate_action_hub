@@ -66,12 +66,12 @@ module ListingIndexService::Search::Converters
   end
 
   def event_hash(l, includes)
-    if includes.include?(:event)
-      {event: {
-         id: l.event.id,
-         start_at: l.event.start_at,
-         end_at: l.event.end_at
-       }
+    if includes.include?(:event) && l.event.end_at > DateTime.now
+      { event: {
+          id: l.event.id,
+          start_at: l.event.start_at,
+          end_at: l.event.end_at
+        }
       }
     else
       {}

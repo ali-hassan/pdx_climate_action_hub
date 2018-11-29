@@ -3,11 +3,26 @@ module ListingIndexService::Search::DatabaseSearchHelper
   module_function
 
   def success_result(count, listings, includes, distances = {})
+    listings = exculde_passed_events_listings(listings)
     converted_listings = listings.map do |listing|
       distance_hash = distances[listing.id] || {}
       ListingIndexService::Search::Converters.listing_hash(listing, includes, distance_hash)
     end
     Result::Success.new({count: count, listings: converted_listings})
+  end
+
+  def exculde_passed_events_listings(listings)
+    new_listings = []
+    listings.each do |listing|
+      if listing.event
+        if listing.event.end_at > DateTime.now
+          new_listings << listing
+        end
+      else
+        new_listings << listing
+      end
+    end
+    new_listings
   end
 
   def fetch_from_db(community_id:, search:, included_models:, includes:)
