@@ -60,11 +60,11 @@ en:
         community_details: "Basic details"
         community_look_and_feel: Design
         edit_community: "Basic details"
-        enabled_languages: "Enabled languages"
+        enabled_languages: "Enabled Languages"
         enabled_languages_description: "The set of languages available for users. The first one is used as default."
         default_language: "Default language"
         language_selection_disabled: "Language selection is disabled for your website because you are using following unofficial languages: %{languages}. Please contact Sharetribe support if you want to modify your language settings."
-        community_name: "Website Name"
+        community_name: "WebsiteEnabled Name"
         edit_community_name_description: "The name of your website. This is shown to users in emails and various other places."
         community_slogan: "Website slogan"
         edit_community_slogan_description: "This is shown on the homepage of the website for the users who are not logged in. %{see_how_it_looks_like}."
@@ -881,8 +881,8 @@ en:
       send_message: "Send Message"
       send: Send
       this_message_is_private: "This message is private between you and %{person}. %{person} will be notified of this message by email."
-      you_will_get_notified_of_acceptance: "You will get an email notification when %{person} accepts or rejects your proposal."
-      you_will_get_notified: "You will get an email notification when %{person} answers you."
+      you_will_get_notified_of_acceptance: "You will get an Email Notification when %{person} accepts or rejects your proposal."
+      you_will_get_notified: "You will get an Email Notification when %{person} answers you."
       title: Title
       send_message_to_user: "Send message to %{person}"
       about_listing: "About post %{listing_title}"
@@ -1958,7 +1958,7 @@ en:
     member_id: "Member id"
     member_id_or_email: "Member id or email"
   paypal_accounts:
-    payout_info_title: "Receiving funds"
+    payout_info_title: "Receiving Funds"
     paypal_account_email_connected: "<del>Connect PayPal account</del> Completed!"
     payout_info_paypal: "%{service_name} uses PayPal as its payment provider. A %{create_paypal_account_link} is required in order to accept payments, and it must be connected to %{service_name}."
     paypal_billing_agreement_made: "<del>Grant %{service_name} permission to charge a transaction fee</del> Completed!"
@@ -2202,7 +2202,7 @@ en:
         status_pending: Pending
     notifications:
       email_from_admins: "I'm willing to receive occasional emails from ShareOregon."
-      i_want_to_get_email_notification_when: "I want to get an email notification when..."
+      i_want_to_get_email_notification_when: "Receive Email Notifications When..."
       newsletters: "Emails from administrators"
       community_updates: Newsletters
       email_about_confirm_reminders: "...I have forgotten to confirm an order as completed."
@@ -2241,7 +2241,7 @@ en:
       profile_page: "in your profile page"
       profilemap: Mapview
       street_address: Location
-      these_fields_are_shown_in_your: "This information is visible to all %{service_name} users."
+      these_fields_are_shown_in_your: "This information is visible to all %{service_name} users"
       visible_to_everybody: "visible to everybody"
       visible_to_registered_users: "(visible to users who have logged in)"
       default_in_listing: "(used only as a default when creating a new post)"
@@ -2586,8 +2586,8 @@ en:
       messages:
         social_insurance_number: "must be valid Social Insurance Number (SIN)"
   payment_settings:
-    title: "Payout preferences"
-    bank_account: "Bank account"
+    title: "Payout Preferences"
+    bank_account: "Bank Account"
     paypal: PayPal
     bank_account_details: "To receive money to your bank account, you need to provide your bank details. Your customers will be able to pay with their credit card."
     add_bank_details: "Add bank details"
