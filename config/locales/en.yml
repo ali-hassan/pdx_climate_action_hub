@@ -262,7 +262,7 @@ en:
         unban_user_confirmation: "This unbans the user in the website and allows them to access the site again with this account. Are you sure you want to proceed?"
         ban_me_error: "You cannot ban yourself."
         search: Search
-        search_by_name_email: "Search for a name, email or display name"
+        search_by_name_email: "Search for a name, email or Display Name"
         reset_search: "Show all"
         for_search_terms: "for: %{terms}"
         this_makes_the_user_an_admin: "This makes the user an admin. You should notify the user about their responsibilities and that they should review the Sharetribe terms of use. Are you sure you want to proceed?"
@@ -1873,7 +1873,7 @@ en:
       offer: Offer
       listing_created: Created
       open_until: "Open until %{date}"
-      feedback: Feedback
+      feedback: feedback
       qr_code: "QR code"
       request: Request
       rideshare_offer: "Rideshare offer"
@@ -2233,7 +2233,7 @@ en:
       first_name_only: "(not shown to other users)"
       location_description: "You can provide your street address or just a city or zip code. Examples: \"200 Market St., Portland, OR\" or \"Bend, OR\" or \"97701\"."
       display_name: "Display Name"
-      display_name_description: "If you represent an organization, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
+      display_name_description: "If you represent an organization, you can use its name as your Display Name. Display Name is shown to other users instead of your first and last name."
       profile_picture_description: "The profile picture should be in a square format (1:1 ratio), for example, 800x800 pixels. Otherwise, it will be cropped to fit."
       phone_number: "Phone Number"
       profile_picture: "Profile Picture"
