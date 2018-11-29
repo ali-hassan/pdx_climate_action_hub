@@ -190,7 +190,7 @@
               = t(".feedback")
           - if @current_user.present?
             = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
-            = link_to("Add a Review for #{ @listing.author.given_name }", "#", id: "myBtn", class: "review-weight")
+            = link_to("Add a Review for #{ PersonViewUtils.person_display_name(@listing.author, @current_community) }", "#", id: "myBtn", class: "review-weight")
             = render "reviews", locals: { listing: @listing }
           - else
             = link_to("Add a Review for #{ @listing.author.given_name }", login_path, class: "review-weight")
