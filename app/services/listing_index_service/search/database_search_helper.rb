@@ -22,7 +22,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
         new_listings << listing
       end
     end
-    new_listings.first(31)
+    new_listings
   end
 
   def fetch_from_db(community_id:, search:, included_models:, includes:)
