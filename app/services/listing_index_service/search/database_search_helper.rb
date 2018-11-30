@@ -3,7 +3,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
   module_function
 
   def success_result(count, listings, includes, distances = {})
-    # listings = exculde_passed_events_listings(listings)
+    listings = exculde_passed_events_listings(listings)
     converted_listings = listings.map do |listing|
       distance_hash = distances[listing.id] || {}
       ListingIndexService::Search::Converters.listing_hash(listing, includes, distance_hash)
