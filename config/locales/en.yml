@@ -60,20 +60,20 @@ en:
         community_details: "Basic details"
         community_look_and_feel: Design
         edit_community: "Basic details"
-        enabled_languages: "Enabled languages"
+        enabled_languages: "Enabled Languages"
         enabled_languages_description: "The set of languages available for users. The first one is used as default."
         default_language: "Default language"
-        language_selection_disabled: "Language selection is disabled for your marketplace because you are using following unofficial languages: %{languages}. Please contact Sharetribe support if you want to modify your language settings."
-        community_name: "Marketplace name"
-        edit_community_name_description: "The name of your marketplace. This is shown to users in emails and various other places."
-        community_slogan: "Marketplace slogan"
-        edit_community_slogan_description: "This is shown on the homepage of the marketplace for the users who are not logged in. %{see_how_it_looks_like}."
-        community_description: "Marketplace description"
-        edit_community_description_description: "This is shown on the homepage of the marketplace for the users who are not logged in. %{see_how_it_looks_like}."
+        language_selection_disabled: "Language selection is disabled for your website because you are using following unofficial languages: %{languages}. Please contact Sharetribe support if you want to modify your language settings."
+        community_name: "Website Name"
+        edit_community_name_description: "The name of your website. This is shown to users in emails and various other places."
+        community_slogan: "Tagline"
+        edit_community_slogan_description: "This is shown on the homepage of the website for the users who are not logged in. %{see_how_it_looks_like}."
+        community_description: "Website Description"
+        edit_community_description_description: "This is shown on the homepage of the website for the users who are not logged in. %{see_how_it_looks_like}."
         community_search_placeholder: "Search help text"
-        edit_community_search_placeholder_description: "This is shown on the homepage of the marketplace as a placeholder text in the search bar. %{see_how_it_looks_like}."
-        private_community_homepage_content: "Private marketplace homepage content"
-        edit_private_community_homepage_content_description: "This content is shown on the homepage of private marketplaces to users who are not logged in. Here you can describe your marketplace and the process to join it. You can also add images, videos and HTML content here. %{see_how_it_looks_like}."
+        edit_community_search_placeholder_description: "This is shown on the homepage of the website as a placeholder text in the search bar. %{see_how_it_looks_like}."
+        private_community_homepage_content: "Private website homepage content"
+        edit_private_community_homepage_content_description: "This content is shown on the homepage of private websites to users who are not logged in. Here you can describe your website and the process to join it. You can also add images, videos and HTML content here. %{see_how_it_looks_like}."
         update_information: "Save settings"
         invite_people: "Invite new users"
         edit_signup_info: "Signup info"
@@ -103,9 +103,9 @@ en:
         community_custom_color1: "Main color"
 
         new_listing_button_custom_color: "Add a Post button color"
-        community_slogan_color: "Marketplace slogan color"
+        community_slogan_color: "Tagline color"
         community_slogan_color_instructions_text: "You can change the color of the slogan on the homepage by entering a hex color value. The slogan is shown to users that are not logged in. %{colorpicker} can help you choose the color and give you the hex color code. You can then copy the code here. %{see_how_it_looks_like}."
-        community_description_color: "Marketplace description color"
+        community_description_color: "Website description color"
         community_description_color_instructions_text: "You can change the color of the description on the homepage by entering a hex color value. The description is shown to users that are not logged in. %{colorpicker} can help you choose the color and give you the hex color code. You can then copy the code here. %{see_how_it_looks_like}."
         logo_instructions_text_with_dimensions: "The logo size should be %{width}x%{height}px. It will be shown to users with bigger screens."
         logo_instructions_text_with_dimensions_no_placing: "The logo size should be %{width}x%{height}px."
@@ -241,15 +241,15 @@ en:
         once_you_delete: "Once you delete ShareOregon, you will not be able to access it anymore. Be careful."
         are_you_sure: "Are you sure?"
         i_understand_button: "I understand that by clicking this button, ShareOregon will be deleted."
-        last_community_updates: "Please note that after deletion, you and your marketplace users may still receive the last marketplace update emails."
-        you_will_be_redirected_to: "After you have deleted your marketplace you will be redirected to %{destination}. You will not be able to access your marketplace anymore."
-        delete_this_marketplace: "Delete this marketplace"
+        last_community_updates: "Please note that after deletion, you and your website users may still receive the last website update emails."
+        you_will_be_redirected_to: "After you have deleted your website you will be redirected to %{destination}. You will not be able to access your website anymore."
+        delete_this_marketplace: "Delete this website"
         payment_preferences: "Payment system"
       manage_members:
         manage_members: Users
         email: Email
         name: Name
-        display_name: "Display name"
+        display_name: "Display Name"
         join_date: Joined
         admin: Admin
         posting_allowed: "Posting allowed"
@@ -259,10 +259,10 @@ en:
         export_all_as_csv: "Export all as CSV"
         save_user_status_error: "Saving failed. Please refresh the page and try again."
         ban_user_confirmation: "This removes the user from the ShareOregon and prevents them from accessing the site again with this account. Are you sure you want to proceed?"
-        unban_user_confirmation: "This unbans the user in the marketplace and allows them to access the site again with this account. Are you sure you want to proceed?"
+        unban_user_confirmation: "This unbans the user in the website and allows them to access the site again with this account. Are you sure you want to proceed?"
         ban_me_error: "You cannot ban yourself."
         search: Search
-        search_by_name_email: "Search for a name, email or display name"
+        search_by_name_email: "Search for a name, email or Display Name"
         reset_search: "Show all"
         for_search_terms: "for: %{terms}"
         this_makes_the_user_an_admin: "This makes the user an admin. You should notify the user about their responsibilities and that they should review the Sharetribe terms of use. Are you sure you want to proceed?"
@@ -270,7 +270,7 @@ en:
         new_layout: "New layout"
         description_roadmap: "We are in the process of rolling out a new and improved layout. During the transition period, you can select which parts should continue using the old layout using the menu below. New features will only be available on the new layout."
         description_process: "Support for the old layout will be removed in the future. The ShareOregon team will notify you before this happens. Questions? Contact the team via %{support_link}."
-        description_roadmap_new: "When new layout components are made available for your marketplace, you can choose whether you want to start using the new component or continue using the old one. You can toggle the selection at any point from this page. It's recommended to always be using the new version, as the old components might be phased out at some point. In case a component you're currently using is going to be phased out, you will be contacted in advance."
+        description_roadmap_new: "When new layout components are made available for your website, you can choose whether you want to start using the new component or continue using the old one. You can toggle the selection at any point from this page. It's recommended to always be using the new version, as the old components might be phased out at some point. In case a component you're currently using is going to be phased out, you will be contacted in advance."
         enabled_for_you: "Enabled for you"
         enabled_for_all: "Enabled for all"
         new_topbar: "New top bar (visible on every page)"
@@ -278,14 +278,14 @@ en:
       social_media:
         social_media: "Social media"
         twitter_handle: "Twitter handle"
-        twitter_handle_info_text: "Username of the Twitter account of your marketplace (if you have one). It will be mentioned when people use the tweet button on the post."
-        twitter_handle_info_text_with_instructions: "Username of the Twitter account of your marketplace (if you have one). It will be mentioned when people use the tweet button on the post. %{instructions_link}."
+        twitter_handle_info_text: "Username of the Twitter account of your website (if you have one). It will be mentioned when people use the tweet button on the post."
+        twitter_handle_info_text_with_instructions: "Username of the Twitter account of your website (if you have one). It will be mentioned when people use the tweet button on the post. %{instructions_link}."
         twitter_instructions_link_text: "Read more"
         twitter_handle_placeholder: username
         invalid_twitter_handle: "Twitter handle should contain only at maximum 15 alphanumeric (letters A-Z and numbers 0-9) characters."
         facebook_connect: Facebook
-        facebook_connect_info_text: "In order to enable Facebook Login, create an application for your marketplace in the <a href='https://developers.facebook.com/'>Facebook developers dashboard</a>. Add the generated id and secret key of the application here."
-        facebook_connect_info_text_with_instructions: "In order to enable Facebook Login, create an application for your marketplace in the <a href='https://developers.facebook.com/'>Facebook developers dashboard</a>. Add the generated id and secret key of the application here. %{instructions_link}"
+        facebook_connect_info_text: "In order to enable Facebook Login, create an application for your website in the <a href='https://developers.facebook.com/'>Facebook developers dashboard</a>. Add the generated id and secret key of the application here."
+        facebook_connect_info_text_with_instructions: "In order to enable Facebook Login, create an application for your website in the <a href='https://developers.facebook.com/'>Facebook developers dashboard</a>. Add the generated id and secret key of the application here. %{instructions_link}"
         facebook_instructions_link_text: "See instructions for configuring Facebook Connect."
         facebook_connect_id: "Facebook client id"
         invalid_facebook_connect_id: "Client id should contain only numbers."
@@ -300,7 +300,7 @@ en:
         google_analytics_key_info_text_with_instructions: "Tracking ID of your Google Analytics account. %{instructions_link}."
         google_analytics_instructions_link_text: "Read more about connecting Google Analytics"
         sharetribe_analytics: "Sharetribe analytics"
-        sharetribe_analytics_info_text_with_instructions: "To improve Sharetribe's services and support, Sharetribe tracks marketplace members activity. Personal data is not collected and this information is not shared outside the Sharetribe team. This tracking can be disabled entirely. %{instructions_link}"
+        sharetribe_analytics_info_text_with_instructions: "To improve Sharetribe's services and support, Sharetribe tracks website members activity. Personal data is not collected and this information is not shared outside the Sharetribe team. This tracking can be disabled entirely. %{instructions_link}"
         sharetribe_analytics_instructions_link_text: "Read more about Sharetribe's analytics."
         end_user_analytics: "Allow Sharetribe to track members activity in order to improve Sharetribe's services"
         save: "Save settings"
@@ -487,8 +487,8 @@ en:
         new_user_field: "New user field"
       form:
         field_required:
-          this_field_is_required: "Make it mandatory to fill this field when signing up to the marketplace"
-          this_field_is_required_checkbox: "Make it mandatory to fill this field when signing up to the marketplace (user has to select at least one option)"
+          this_field_is_required: "Make it mandatory to fill this field when signing up to the website"
+          this_field_is_required_checkbox: "Make it mandatory to fill this field when signing up to the website (user has to select at least one option)"
           this_field_is_public: "Show this field in the public profile page"
       edit:
         edit_user_field: "Edit user field '%{field_name}'"
@@ -579,7 +579,7 @@ en:
         confirm_delete_order_type:
           one: "There is %{count} post with this order type. If you delete the order type, this post will be closed. Are you sure you want to delete the order type?"
           other: "There are %{count} posts with this order type. If you delete the order type, those posts will be closed. Are you sure you want to delete the order type?"
-        can_not_delete_last: "You can't delete this order type because it's the only type in your marketplace."
+        can_not_delete_last: "You can't delete this order type because it's the only type in your website."
         can_not_delete_only_one_in_categories: "You can't delete this order type because in following categories this order type is the only one in use: %{categories}"
       listing_shape_name: Name
       listing_shape_name_placeholder: "e.g. Sell"
@@ -634,12 +634,12 @@ en:
       link_paypal_personal_account: "If so, you will also need to connect your PayPal account to %{personal_payment_preferences_link}."
       link_stripe_personal_account: "If so, you will also need to add your payout details to %{personal_payment_preferences_link}."
       link_paypal_and_stripe_personal_account: "If so, you will also need to connect your PayPal or Stripe account to %{personal_payment_preferences_link}."
-      personal_payment_preferences_link_text: "your personal marketplace account"
+      personal_payment_preferences_link_text: "your personal website account"
       read_more_about_paypal: "Read more about the payment system"
       edit_payment_settings: "Edit payment settings"
-      supported_currencies_information_text: "Sharetribe's online payment system supports 24 currencies. If your currency is not on the list, please %{contact_support_link}. If you change the marketplace currency, existing listings will retain their old currency. You need to edit those listings individually to convert them to the new currency."
+      supported_currencies_information_text: "Sharetribe's online payment system supports 24 currencies. If your currency is not on the list, please %{contact_support_link}. If you change the website currency, existing listings will retain their old currency. You need to edit those listings individually to convert them to the new currency."
       currency_change_warning_text: "Heads up: if you move forward with this currency change, don't forget to ask your sellers to manually edit their existing listings to get the currency update."
-      marketplace_currency_label: "Marketplace currency:"
+      marketplace_currency_label: "Website currency:"
       minimum_listing_price_label: "Minimum transaction size:"
       transaction_fee_label: "Transaction fee:"
       minimum_transaction_fee_label: "Minimum transaction fee:"
@@ -664,7 +664,7 @@ en:
       general_settings_updated: "Payment system general settings updated"
       transaction_fee_settings_updated: "Transaction fee settings updated"
       choose_popup_text: |-
-          If you want to allow your users to accept online payments, you need to choose the currency for your marketplace and then connect at least one of the two payment providers supported by Sharetribe: Stripe and PayPal. You can also choose to use both, which means your users will be able to accept payments with either payment method.
+          If you want to allow your users to accept online payments, you need to choose the currency for your website and then connect at least one of the two payment providers supported by Sharetribe: Stripe and PayPal. You can also choose to use both, which means your users will be able to accept payments with either payment method.
           You can create a new account with either service if you don't have one already. Once you have connected an account, you can choose a possible fee you're charging from each transaction.
           What's the difference between Stripe and PayPal? Stripe allows you to delay payout to the seller up to 3 months and offers one payment method (credit/debit card). Stripe also allows your sellers to receive money directly to their bank account simply by providing their bank details. PayPal provides two payment methods (credit card and PayPal account) and offers a protection program for buyers and sellers. It requires your sellers to create a PayPal Business Account to accept payments.
           If you use Stripe, its fees will be deducted from your transaction fee, so remember to set a high enough minimum fee. If you use PayPal, its fees will be charged from the seller separately, in addition to your transaction fee. Stripe and PayPal have a bit different fee structure. In most cases Stripe's fees are a bit lower.
@@ -702,7 +702,7 @@ en:
         invalid_publishable: "That doesn't look like a correct %{publishable_key}"
       index:
         header: "Available Payment Settings"
-        info: "You can configure available payment gateways for use in your marketplace. Currently PayPal and Stripe are supported."
+        info: "You can configure available payment gateways for use in your website. Currently PayPal and Stripe are supported."
         active: Active
         gateway: Gateway
         process: Process
@@ -711,7 +711,7 @@ en:
         minimum_fee: Min.fee
         api_verified: "API verified?"
         actions: Actions
-        payments_not_enabled: "Payments are not enabled for your marketplace"
+        payments_not_enabled: "Payments are not enabled for your website"
     transaction_types:
       sell: Selling
       sell_w_online_payment: "Selling with online payment"
@@ -737,7 +737,7 @@ en:
   common:
     edit_page: "Edit page"
     default_community_slogan: "Share the Best of Oregon"
-    default_community_description: "This is a place to sell, rent, swap and share goods and services with the other members of the marketplace."
+    default_community_description: "This is a place to sell, rent, swap and share goods and services with the other members of the website."
     cancel: Cancel
     fields_that_are_mandatory: "Fields marked with * are mandatory."
     or: or
@@ -881,8 +881,8 @@ en:
       send_message: "Send Message"
       send: Send
       this_message_is_private: "This message is private between you and %{person}. %{person} will be notified of this message by email."
-      you_will_get_notified_of_acceptance: "You will get an email notification when %{person} accepts or rejects your proposal."
-      you_will_get_notified: "You will get an email notification when %{person} answers you."
+      you_will_get_notified_of_acceptance: "You will get an Email Notification when %{person} accepts or rejects your proposal."
+      you_will_get_notified: "You will get an Email Notification when %{person} answers you."
       title: Title
       send_message_to_user: "Send message to %{person}"
       about_listing: "About post %{listing_title}"
@@ -999,8 +999,8 @@ en:
       you_have_not_yet_accepted_or_rejected_request: "You have not yet accepted or rejected the request %{title} you received %{date}."
       show_thread: "Show conversation"
     branding:
-      powered_by: "%{service_name} is powered by the %{sharetribe_link} marketplace platform."
-      create_own: "Want to create your own online marketplace website like %{service_name}? %{learn_more}."
+      powered_by: "%{service_name} is powered by the %{sharetribe_link} website platform."
+      create_own: "Want to create your own online website website like %{service_name}? %{learn_more}."
       learn_more: "Learn More"
     confirm_reminder:
       you_have_not_yet_confirmed_or_canceled_request: "You have not yet completed or canceled the order %{request_link}. If the order has been completed, you should confirm that. After that you can give feedback to %{other_party_given_name}."
@@ -1303,7 +1303,7 @@ en:
     offers: Offers
     requests: Requests
     search_kassi: "Search %{service_name}"
-    create_new_marketplace: "Create a new marketplace"
+    create_new_marketplace: "Create a new website"
     contact_us: "Contact Us"
     profile: Profile
     manage_listings: "Manage Posts"
@@ -1399,7 +1399,7 @@ en:
       show_more: "Show more"
     profile_info_empty_notification:
       add_your_info: "Add your contact info"
-      add_a_profile_picture: "Add a profile picture"
+      add_a_profile_picture: "Add a Profile Picture"
       you_have_not_added_your_info: "You have not added your contact information. Please do, so others can get in touch with you more easily. Also add a profile picture so it's easier for others to trust you."
       add_your_info_link: "Add your info now"
     recent_listing:
@@ -1857,8 +1857,8 @@ en:
     reply_link:
       listing_closed: "Post is closed"
     show:
-      add_your_phone_number: "Add your phone number"
-      add_profile_picture: "Add profile picture"
+      add_your_phone_number: "Add your Phone Number"
+      add_profile_picture: "Add Profile Picture"
       comments: "Add to the Discussion"
       contact_by_phone: "Contact by phone:"
       contact: Contact
@@ -1873,7 +1873,7 @@ en:
       offer: Offer
       listing_created: Created
       open_until: "Open until %{date}"
-      feedback: Feedback
+      feedback: feedback
       qr_code: "QR code"
       request: Request
       rideshare_offer: "Rideshare offer"
@@ -1958,7 +1958,7 @@ en:
     member_id: "Member id"
     member_id_or_email: "Member id or email"
   paypal_accounts:
-    payout_info_title: "Receiving funds"
+    payout_info_title: "Receiving Funds"
     paypal_account_email_connected: "<del>Connect PayPal account</del> Completed!"
     payout_info_paypal: "%{service_name} uses PayPal as its payment provider. A %{create_paypal_account_link} is required in order to accept payments, and it must be connected to %{service_name}."
     paypal_billing_agreement_made: "<del>Grant %{service_name} permission to charge a transaction fee</del> Completed!"
@@ -2089,7 +2089,7 @@ en:
       about_me: "About me:"
       add_description: "Please add to your profile to help build trust and the ShareOregon community."
       add_location: "Add location"
-      add_phone_number: "Add phone number"
+      add_phone_number: "Add Phone Number"
       address: "Location:"
       as_expected: "As expected"
       edit_profile_info: "Edit profile"
@@ -2097,7 +2097,7 @@ en:
       positive: positive
       hide_description: "Show less"
       less_than_expected: "Worse than expected"
-      phone_number: "Phone number:"
+      phone_number: "Phone Number:"
       show_all_feedback: "Show all feedback"
       show_all_testimonials: "Show all feedback"
       show_full_description: "Show more"
@@ -2181,7 +2181,7 @@ en:
       delete_personal_information: "If you delete your account, your personal information (name, phone number, address, email, profile picture, etc.) will be deleted permanently and can't be recovered. All the listings you have created will be removed. You won't be able to reactivate your account. Your username will become available for others to register on %{service_name}."
       delete_information_others_involved: "Information where other members are involved (conversations with other people, transactions you've made, reviews you've given to others, etc) is not removed when you delete your account. However, your name will no longer be displayed next to this information."
       unfinished_transactions: "Your account can't be deleted because you have ongoing transactions. Please complete all transactions before deleting your account."
-      only_admin: "Your account can't be deleted because you are the only administrator of the marketplace."
+      only_admin: "Your account can't be deleted because you are the only administrator of the website."
       new_password: "New password"
       save: Save
       these_fields_are_shown_only_to_you: "Username is shown in your profile unless you have given your name. Other information is only shown to you."
@@ -2202,7 +2202,7 @@ en:
         status_pending: Pending
     notifications:
       email_from_admins: "I'm willing to receive occasional emails from ShareOregon."
-      i_want_to_get_email_notification_when: "I want to get an email notification when..."
+      i_want_to_get_email_notification_when: "Receive Email Notifications When..."
       newsletters: "Emails from administrators"
       community_updates: Newsletters
       email_about_confirm_reminders: "...I have forgotten to confirm an order as completed."
@@ -2232,16 +2232,16 @@ en:
       first_name_with_initial: "(only first letter shown to other users)"
       first_name_only: "(not shown to other users)"
       location_description: "You can provide your street address or just a city or zip code. Examples: \"200 Market St., Portland, OR\" or \"Bend, OR\" or \"97701\"."
-      display_name: "Display name"
-      display_name_description: "If you represent an organisation, you can use its name as your display name. Display name is shown to other users instead of your first and last name."
+      display_name: "Display Name"
+      display_name_description: "If you represent an organization, you can use its name as your Display Name. Display Name is shown to other users instead of your first and last name."
       profile_picture_description: "The profile picture should be in a square format (1:1 ratio), for example, 800x800 pixels. Otherwise, it will be cropped to fit."
-      phone_number: "Phone number"
-      profile_picture: "Profile picture"
+      phone_number: "Phone Number"
+      profile_picture: "Profile Picture"
       postal_code: "Zip code"
       profile_page: "in your profile page"
       profilemap: Mapview
       street_address: Location
-      these_fields_are_shown_in_your: "This information is visible to all %{service_name} users."
+      these_fields_are_shown_in_your: "This information is visible to all %{service_name} users"
       visible_to_everybody: "visible to everybody"
       visible_to_registered_users: "(visible to users who have logged in)"
       default_in_listing: "(used only as a default when creating a new post)"
@@ -2586,8 +2586,8 @@ en:
       messages:
         social_insurance_number: "must be valid Social Insurance Number (SIN)"
   payment_settings:
-    title: "Payout preferences"
-    bank_account: "Bank account"
+    title: "Payout Preferences"
+    bank_account: "Bank Account"
     paypal: PayPal
     bank_account_details: "To receive money to your bank account, you need to provide your bank details. Your customers will be able to pay with their credit card."
     add_bank_details: "Add bank details"
