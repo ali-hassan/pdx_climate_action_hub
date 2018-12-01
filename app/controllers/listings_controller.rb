@@ -101,14 +101,14 @@ class ListingsController < ApplicationController
     @person  = @listing.author
     @per_page = params[:per_page] || 30 # the point is to show all here by default
     includes = [:author, :listing_images]
-    include_closed = @person == @current_user && params[:show_closed]
+    include_closed = @person == @current_user && params[:show_closed] || false
     search = {
         include_closed: include_closed,
         page: 1,
         address: @listing.origin,
         latitude: @listing.origin_loc.try(:latitude),
         longitude: @listing.origin_loc.try(:longitude),
-        distance_max: 250.0,
+        distance_max: 400.0,
         distance_unit: :miles,
         sort: :distance,
         per_page: @per_page
