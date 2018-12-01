@@ -15,7 +15,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
     new_listings = []
     listings.each do |listing|
       if listing.event
-        if listing.event.try(:end_date).nil? || listing.event.end_at > DateTime.now
+        if listing.event.try(:end_at).nil? || listing.event.end_at > DateTime.now
           new_listings << listing
         end
       else
