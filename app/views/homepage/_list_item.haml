@@ -40,14 +40,14 @@
                 - if listing_event['start_at_time'].nil? or listing_event['end_at_time'].nil?
                   - if listing_event
                     - if listing_event['start_at'].to_date == listing_event['end_at'].to_date
-                      = listing_event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' - ' + listing_event['end_at'].strftime('%I:%M%P')
+                      = listing_event['start_at'].strftime('%a %b %e @ %-I:%M%P') + ' - ' + listing_event['end_at'].strftime('%-I:%M%P')
                     - else
-                      = listing_event['start_at'].strftime('%a %b %e @ %I:%M%P') + ' to ' + listing_event['end_at'].strftime('%a %b %e @ %I:%M%P')
+                      = listing_event['start_at'].strftime('%a %b %e @ %-I:%M%P') + ' to ' + listing_event['end_at'].strftime('%a %b %e @ %-I:%M%P')
                 - else
                   - if listing_event['start_at'].to_date == listing_event['end_at'].to_date
-                    = listing_event['start_at'].strftime('%a %b %e') + ' - ' + listing_event['start_at_time'].strftime('%I:%M%P') + "-" + listing_event['end_at_time'].strftime('%I:%M%P')
+                    = listing_event['start_at'].strftime('%a %b %e') + ' - ' + listing_event['start_at_time'].strftime('%-I:%M%P') + "-" + listing_event['end_at_time'].strftime('%-I:%M%P')
                   - else
-                    = listing_event['start_at'].strftime('%a %b %e') + ' - ' + listing_event['start_at_time'].strftime('%I:%M%P') + ' to ' + listing_event['end_at'].strftime('%a %b %e') + ' - ' + listing_event['end_at_time'].strftime('%I:%M%P')
+                    = listing_event['start_at'].strftime('%a %b %e') + ' - ' + listing_event['start_at_time'].strftime('%-I:%M%P') + ' to ' + listing_event['end_at'].strftime('%a %b %e') + ' - ' + listing_event['end_at_time'].strftime('%-I:%M%P')
 
         .home-list-price-mobile{:class => (listing.listing_images.size > 0 ? "home-list-price-mobile-with-listing-image" : "home-list-price-mobile-without-listing-image")}
           - if listing.price
