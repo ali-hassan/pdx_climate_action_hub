@@ -319,29 +319,30 @@ module ApplicationHelper
   # Admin view left hand navigation content
   def admin_links_for(community)
     links = [
-      {
-        :topic => :general,
-        :text => t("admin.communities.getting_started.getting_started"),
-        :icon_class => icon_class("openbook"),
-        :path => admin_getting_started_guide_path,
-        :name => "getting_started_guide"
-      },
-      {
-        :id => "admin-help-center-link",
-        :topic => :general,
-        :text => t("admin.left_hand_navigation.help_center"),
-        :icon_class => icon_class("help"),
-        :path => "#{APP_CONFIG.knowledge_base_url}/?utm_source=marketplaceadminpanel&utm_medium=referral&utm_campaign=leftnavi",
-        :name => "help_center"
-      },
-      {
-        :id => "admin-academy-link",
-        :topic => :general,
-        :text => t("admin.left_hand_navigation.academy"),
-        :icon_class => icon_class("academy"),
-        :path => "https://www.sharetribe.com/academy/guide/?utm_source=marketplaceadminpanel&utm_medium=referral&utm_campaign=leftnavi",
-        :name => "academy"
-      }
+      # {
+      #   :topic => :general,
+      #   :text => t("admin.communities.getting_started.getting_started"),
+      #   :icon_class => icon_class("openbook"),
+      #   :path => admin_getting_started_guide_path,
+      #   :name => "getting_started_guide"
+      # },
+      # {
+      #   :id => "admin-help-center-link",
+      #   :topic => :general,
+      #   :text => t("admin.left_hand_navigation.help_center"),
+      #   :icon_class => icon_class("help"),
+      #   :path => "#{APP_CONFIG.knowledge_base_url}/?utm_source=marketplaceadminpanel&utm_medium=referral&utm_campaign=leftnavi",
+      #   :name => "help_center"
+      # }
+      #,
+      # {
+      #   :id => "admin-academy-link",
+      #   :topic => :general,
+      #   :text => t("admin.left_hand_navigation.academy"),
+      #   :icon_class => icon_class("academy"),
+      #   :path => "https://www.sharetribe.com/academy/guide/?utm_source=marketplaceadminpanel&utm_medium=referral&utm_campaign=leftnavi",
+      #   :name => "academy"
+      # }
     ]
 
     if APP_CONFIG.external_plan_service_in_use
