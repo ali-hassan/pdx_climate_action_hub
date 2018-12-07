@@ -116,7 +116,8 @@ module ListingFormViewUtils
       price_cents: params[:price_cents],
       shipping_price_cents: params[:shipping_price_cents],
       shipping_price_additional_cents: params[:shipping_price_additional_cents],
-      currency: params[:currency]
+      currency: params[:currency],
+      external_payment_link: params[:external_payment_link]
     )
 
     add_location_params(listing_params, params)
