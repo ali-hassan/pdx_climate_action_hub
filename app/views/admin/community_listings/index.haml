@@ -9,6 +9,14 @@
 .left-navi-section
   %h2= t("admin.communities.listings.listings")
 
+  = form_tag '', :method => :get do
+    .row
+      .col-8
+        = text_field_tag :q, params[:q], placeholder: t('admin.communities.manage_members.search_by_name_email')
+      .col-4
+        = submit_tag t("admin.communities.manage_members.search"), class: 'button search-button'
+        = link_to    t("admin.communities.manage_members.reset_search"), admin_community_community_memberships_path(@current_community.id)
+
   %span#admin_listings_count= page_entries_info(@listings, :model => "Listing").html_safe
 
   %table#admin_listings
