@@ -14,7 +14,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
   def exculde_passed_events_listings(listings)
     new_listings = []
     listings.each do |listing|
-      if listing.event.present? && listing.event.try(:end_at).present?
+      if listing.event.present? && listing.event.try(:end_at).present? && listing.event.try(:end_at_time).present?
         end_at      = listing.event.end_at.strftime("%d/%m/%Y")
         end_at_time = listing.event.try(:end_at_time).strftime("%H:%M:%S")
         if end_at && end_at >= DateTime.now.strftime("%d/%m/%Y") and end_at_time && end_at_time >= Time.now.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S")
