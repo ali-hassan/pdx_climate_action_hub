@@ -260,6 +260,7 @@ class ListingsController < ApplicationController
     update_successful = @listing.update_fields(listing_params)
     @listing.upsert_field_values!(params.to_unsafe_hash[:custom_fields])
 
+    @listing.update(external_payment_link: params[:external_payment_link]) if params[:external_payment_link].present?
     if update_successful
       if shape.booking_per_hour? && !@listing.per_hour_ready
         @listing.working_hours_new_set(force_create: true)
