@@ -387,7 +387,7 @@ class ListingsController < ApplicationController
 
   def destroy
     @listing = Listing.find_by_id(params[:id].split("-")[0])
-    @listing.update(is_deleted: true, deleted: true)
+    @listing.destroy
     redirect_to request.referer
   end
 
