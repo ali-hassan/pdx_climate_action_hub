@@ -35,6 +35,7 @@
             title: t("admin.communities.listings.headers.updated") }
         %th= t("admin.communities.listings.headers.category")
         %th= t("admin.communities.listings.headers.status")
+        %th= "Deleted"
         %th
 
     %tbody
@@ -57,6 +58,8 @@
             - expired = listing.valid_until && listing.valid_until < DateTime.current
             - key = expired ? 'expired' : (listing.open? ? 'open' : 'closed')
             = t("admin.communities.listings.#{key}")
+          %td
+            = link_to(check_box_tag('deleted', "#{listing.is_deleted}", listing.is_deleted ? {:checked => "checked"} : false), listing, method: :delete, data: { confirm: 'Are you sure?' })
           %td
             = link_to edit_listing_path(listing) do
               = icon_tag("edit")

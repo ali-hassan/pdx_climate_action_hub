@@ -51,6 +51,7 @@
 #  per_hour_ready                  :boolean          default(FALSE)
 #  latitude                        :float(24)
 #  longitude                       :float(24)
+#  is_deleted                      :boolean          default(FALSE)
 #
 # Indexes
 #

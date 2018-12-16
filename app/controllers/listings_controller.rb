@@ -385,6 +385,12 @@ class ListingsController < ApplicationController
     @listing.event.update_attributes(event_rule_hash: hash)
   end
 
+  def destroy
+    @listing = Listing.find_by_id(params[:id].split("-")[0])
+    @listing.update(is_deleted: true, deleted: true)
+    redirect_to request.referer
+  end
+
   private
 
   def update_flash(old_availability:, new_availability:)
