@@ -82,7 +82,7 @@ CREATE TABLE `bookings` (
   `end_time` datetime DEFAULT NULL,
   `per_hour` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `index_bookings_on_transaction_id` (`transaction_id`) USING BTREE,
+  KEY `index_bookings_on_transaction_id` (`transaction_id`),
   KEY `index_bookings_on_per_hour` (`per_hour`),
   KEY `index_bookings_on_start_time` (`start_time`),
   KEY `index_bookings_on_end_time` (`end_time`)
@@ -366,9 +366,9 @@ CREATE TABLE `conversations` (
   `community_id` int(11) DEFAULT NULL,
   `starting_page` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `index_conversations_on_community_id` (`community_id`) USING BTREE,
-  KEY `index_conversations_on_last_message_at` (`last_message_at`) USING BTREE,
-  KEY `index_conversations_on_listing_id` (`listing_id`) USING BTREE,
+  KEY `index_conversations_on_listing_id` (`listing_id`),
+  KEY `index_conversations_on_community_id` (`community_id`),
+  KEY `index_conversations_on_last_message_at` (`last_message_at`),
   KEY `index_conversations_on_starting_page` (`starting_page`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -446,8 +446,8 @@ CREATE TABLE `custom_field_values` (
   `delta` tinyint(1) NOT NULL DEFAULT '1',
   `person_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `index_custom_field_values_on_listing_id` (`listing_id`) USING BTREE,
-  KEY `index_custom_field_values_on_type` (`type`) USING BTREE,
+  KEY `index_custom_field_values_on_listing_id` (`listing_id`),
+  KEY `index_custom_field_values_on_type` (`type`),
   KEY `index_custom_field_values_on_person_id` (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -539,16 +539,16 @@ DROP TABLE IF EXISTS `export_task_results`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `export_task_results` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `file_file_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `file_content_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `file_file_name` varchar(255) DEFAULT NULL,
+  `file_content_type` varchar(255) DEFAULT NULL,
   `file_file_size` int(11) DEFAULT NULL,
   `file_updated_at` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `feature_flags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -608,7 +608,7 @@ CREATE TABLE `invitation_unsubscribes` (
   PRIMARY KEY (`id`),
   KEY `index_invitation_unsubscribes_on_community_id` (`community_id`),
   KEY `index_invitation_unsubscribes_on_email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `invitations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -744,7 +744,7 @@ CREATE TABLE `listing_working_time_slots` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `index_listing_working_time_slots_on_listing_id` (`listing_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `listings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -798,6 +798,7 @@ CREATE TABLE `listings` (
   `per_hour_ready` tinyint(1) DEFAULT '0',
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
   KEY `index_listings_on_open` (`open`),
@@ -893,7 +894,6 @@ CREATE TABLE `marketplace_setup_steps` (
   `paypal` tinyint(1) NOT NULL DEFAULT '0',
   `listing` tinyint(1) NOT NULL DEFAULT '0',
   `invitation` tinyint(1) NOT NULL DEFAULT '0',
-  `stripe` tinyint(1) DEFAULT '0',
   `payment` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_marketplace_setup_steps_on_community_id` (`community_id`)
@@ -1307,7 +1307,7 @@ CREATE TABLE `stripe_accounts` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `stripe_payments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -1332,7 +1332,7 @@ CREATE TABLE `stripe_payments` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `testimonials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -2302,23 +2302,11 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20170613153965'),
 ('20170616114938'),
 ('20170626065542'),
-('20170629113013'),
-('20170630085303'),
-('20170703123959'),
-('20170704120024'),
-('20170704121638'),
-('20170705132856'),
-('20170706020608'),
-('20170707053914'),
-('20170707053915'),
-('20170707104010'),
-('20170707130931'),
-('20170710081759'),
-('20170711064018'),
-('20170728065012'),
+('20170706193821'),
 ('20170801125553'),
 ('20170814125622'),
 ('20170817035830'),
+('20170929211550'),
 ('20171023070523'),
 ('20171107063241'),
 ('20171117062422'),
@@ -2332,6 +2320,11 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20180518073348'),
 ('20180523121344'),
 ('20180524075239'),
-('20180524081429');
+('20180524081429'),
+('20180810123440'),
+('20180816175248'),
+('20180826074607'),
+('20180918172641'),
+('20181216162138');
 
 
