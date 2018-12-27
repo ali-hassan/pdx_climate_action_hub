@@ -97,8 +97,9 @@
 
         - if @listing.description && !@listing.description.blank?
           - text_with_line_breaks do
-            - text = @listing.description.html_safe
-            = auto_link(text, :link => :all, :html => { :target => '_blank' })
+            - text        = @listing.description.html_safe
+            - description = auto_link(text, :link => :all, :html => { :target => '_blank' })
+            = a_with_target_blank(description).html_safe
           - if( @listing_presenter.youtube_link_ids.present?)
             - @listing_presenter.youtube_link_ids.each do |youtube_id|
               .listing-description-youtube-wrapper
