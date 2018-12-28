@@ -795,5 +795,13 @@ module ApplicationHelper
   def regex_definition_to_js(string)
     string.gsub('\A', '^').gsub('\z', '$').gsub('\\', '\\\\')
   end
+
+  def a_with_target_blank(text)
+    doc = Nokogiri::HTML(text)
+    doc.css('a').each do |link|
+      link['target'] = '_blank'
+    end
+    doc.to_s
+  end
 end
 # rubocop:enable Metrics/ModuleLength
