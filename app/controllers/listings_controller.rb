@@ -241,7 +241,6 @@ class ListingsController < ApplicationController
     end
 
     shape = get_shape(params[:listing][:listing_shape_id])
-
     unless create_booking(shape, @listing.uuid_object)
       flash[:error] = t("listings.error.update_failed_to_connect_to_booking_service")
       return redirect_to edit_listing_path(@listing)
@@ -598,6 +597,7 @@ class ListingsController < ApplicationController
   end
 
   def create_booking(shape, listing_uuid)
+    shape.update availability: shape.name
     if shape.present?
       if shape.booking_per_hour?
         true
