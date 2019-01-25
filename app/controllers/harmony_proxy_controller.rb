@@ -153,8 +153,6 @@ class HarmonyProxyController < ApplicationController
 
     # Pipe `ctx` through following methods
     result = ctx.and_then(&method(:find_endpoint))
-               .and_then(&method(:authenticate))
-               .and_then(&method(:authorize))
                .and_then(&method(:call_harmony))
 
     # Handle result
