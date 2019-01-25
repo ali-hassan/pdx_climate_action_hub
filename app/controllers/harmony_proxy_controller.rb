@@ -212,7 +212,7 @@ class HarmonyProxyController < ApplicationController
              encode_request: false }
 
     res =
-      case req[:method]
+      case endpoint[:name] == :create_blocks ? "POST" : req[:method]
       when "GET"
         HarmonyClient.get(endpoint[:name], params: req[:query_params], opts: opts)
       when "POST"
