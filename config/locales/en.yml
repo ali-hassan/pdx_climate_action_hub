@@ -2436,7 +2436,7 @@ en:
       save_and_close_availability_editing: "Save and close"
       confirm_discarding_unsaved_availability_changes_explanation: "You have unsaved changes to your availability information. If you proceed, these changes will be lost."
       confirm_discarding_unsaved_availability_changes_question: "Are you sure you want to discard your changes?"
-      edit_listing_availability: "Edit listing availability"
+      edit_listing_availability: "Edit Availability Calendar"
       working_hours:
         default_schedule: "Default schedule"
         i_am_available_on: "I'm available on..."
