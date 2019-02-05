@@ -107,7 +107,8 @@ class ListingShape < ApplicationRecord
   end
 
   def booking_per_hour?
-    booking? && listing_units.unit_type_hour.any?
+    false
+    # booking? && listing_units.unit_type_hour.any?
   end
 
   def booking_per_day_or_night?

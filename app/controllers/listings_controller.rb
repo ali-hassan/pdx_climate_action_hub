@@ -199,7 +199,7 @@ class ListingsController < ApplicationController
         notify_about_new_listing
 
         if shape.booking?
-          anchor = shape.booking_per_hour? ? 'manage-working-hours' : 'manage-availability'
+          anchor = shape.booking_per_hour? ? 'manage-working-hours' : ''
           @listing.working_hours_new_set(force_create: true) if shape.booking_per_hour?
           redirect_to listing_path(@listing, anchor: anchor, listing_just_created: true), status: 303
         else
@@ -241,7 +241,6 @@ class ListingsController < ApplicationController
     end
 
     shape = get_shape(params[:listing][:listing_shape_id])
-
     unless create_booking(shape, @listing.uuid_object)
       flash[:error] = t("listings.error.update_failed_to_connect_to_booking_service")
       return redirect_to edit_listing_path(@listing)
@@ -598,6 +597,7 @@ class ListingsController < ApplicationController
   end
 
   def create_booking(shape, listing_uuid)
+    shape.update availability: shape.name
     if shape.present?
       if shape.booking_per_hour?
         true

@@ -29,7 +29,7 @@ const reader = createReader();
 const writer = createWriter();
 
 const sendRequest = (method, url, queryParams, body) => {
-  const harmonyApiUrl = '/harmony_proxy';
+  const harmonyApiUrl = '/things-to-do/harmony_proxy';
 
   const headers = new Headers({
     'Content-Type': 'application/transit+json',

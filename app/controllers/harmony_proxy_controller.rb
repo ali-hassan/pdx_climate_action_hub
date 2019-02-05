@@ -153,8 +153,6 @@ class HarmonyProxyController < ApplicationController
 
     # Pipe `ctx` through following methods
     result = ctx.and_then(&method(:find_endpoint))
-               .and_then(&method(:authenticate))
-               .and_then(&method(:authorize))
                .and_then(&method(:call_harmony))
 
     # Handle result
@@ -213,15 +211,15 @@ class HarmonyProxyController < ApplicationController
              decode_response: false,
              encode_request: false }
 
-    res =
-      case req[:method]
-      when "GET"
-        HarmonyClient.get(endpoint[:name], params: req[:query_params], opts: opts)
-      when "POST"
-        HarmonyClient.post(endpoint[:name], params: req[:query_params], body: req[:raw_body], opts: opts)
-      else
-        raise ArgumentError.new("Unknown method: #{req[:method]}")
-      end
+    end_point = endpoint[:name] == :create_blocks ? "POST" : req[:method]
+
+    if end_point == "GET"
+      res = HarmonyClient.get(endpoint[:name], params: req[:query_params], opts: opts)
+    elsif end_point == "POST"
+      res = HarmonyClient.post(endpoint[:name], params: req[:query_params], body: req[:raw_body], opts: opts)
+    else
+      res = raise ArgumentError.new("Unknown method: #{req[:method]}")
+    end
 
     res.and_then { |response|
       Result::Success.new(ctx.merge(response: response))
