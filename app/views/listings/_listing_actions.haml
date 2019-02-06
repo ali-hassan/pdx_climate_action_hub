@@ -122,10 +122,10 @@
 
   - if @listing_presenter.is_authorized
     .listing-view-admin-links
-      -#.listing-view-admin-link
-      -#  %a.icon-with-text-container{href: edit_listing_path(@listing)}
-      -#    = icon_tag("edit", ["icon-part"])
-      -#    .text-part= t("listings.edit_links.edit_listing")
+      .listing-view-admin-link
+        %a.icon-with-text-container{href: edit_listing_path(@listing)}
+          = icon_tag("edit", ["icon-part"])
+          .text-part= t("listings.edit_links.edit_listing")
       -#.listing-view-admin-link
         -#%a.icon-with-text-container.edit-calendar-availability{href: "#"}
         -#  = icon_tag("calendar", ["icon-part"])
