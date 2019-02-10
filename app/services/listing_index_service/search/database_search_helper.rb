@@ -15,10 +15,10 @@ module ListingIndexService::Search::DatabaseSearchHelper
     new_listings = []
     listings.each do |listing|
       if listing.event.present? && listing.event.try(:end_at).present? && listing.event.try(:end_at_time).present?
-        end_at      = listing.event.end_at.in_time_zone("Pacific Time (US & Canada)")
+        end_at      = listing.event.end_at.to_date
         end_at_time = listing.event.try(:end_at_time).strftime("%H:%M:%S")
-        today_date  = DateTime.now.in_time_zone("Pacific Time (US & Canada)")
-        if end_at && end_at > today_date or ( end_at == today_date and end_at_time >= Time.now.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S"))
+        today_date  = Time.current.to_date
+        if end_at && end_at > today_date or ( end_at.to_date == today_date and end_at_time >= Time.now.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S"))
           new_listings << listing
         end
       else
