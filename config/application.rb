@@ -167,7 +167,8 @@ module Kassi
     config.encoding = "utf-8"
 
     # ActiveRecord should be in UTC timezone.
-    config.time_zone = 'UTC'
+    # config.time_zone = 'UTC'
+    config.time_zone = 'Pacific Time (US & Canada)'
 
     # Configure Paperclip
     paperclip_options = {

@@ -63,7 +63,7 @@ en:
         enabled_languages: "Enabled Languages"
         enabled_languages_description: "The set of languages available for users. The first one is used as default."
         default_language: "Default language"
-        language_selection_disabled: "Language selection is disabled for your website because you are using following unofficial languages: %{languages}. Please contact Sharetribe support if you want to modify your language settings."
+        language_selection_disabled: "Language selection is disabled for your website because you are using following unofficial languages: %{languages}. Please contact Shareoregon support if you want to modify your language settings."
         community_name: "Website Name"
         edit_community_name_description: "The name of your website. This is shown to users in emails and various other places."
         community_slogan: "Tagline"
@@ -131,7 +131,7 @@ en:
         first_name_only: "First name only (First)"
         invalid_color_code: "Color code should contain 6 numbers or letters A-F, for example D96E21"
         custom_head_script: "Custom script"
-        custom_head_script_instructions_text: "This script is injected inside the <head> tag of every page and can be used to insert custom CSS, JavaScript or HTML. Please note that future changes to Sharetribe may render your script incompatible."
+        custom_head_script_instructions_text: "This script is injected inside the <head> tag of every page and can be used to insert custom CSS, JavaScript or HTML. Please note that future changes to Shareoregon may render your script incompatible."
         current_image: "Current image:"
       edit_text_instructions:
         edit_text_instructions: "Instruction texts"
@@ -266,7 +266,7 @@ en:
         search_by_title_description: "Search for a Title or Description"
         reset_search: "Show all"
         for_search_terms: "for: %{terms}"
-        this_makes_the_user_an_admin: "This makes the user an admin. You should notify the user about their responsibilities and that they should review the Sharetribe terms of use. Are you sure you want to proceed?"
+        this_makes_the_user_an_admin: "This makes the user an admin. You should notify the user about their responsibilities. Are you sure you want to proceed?"
       new_layout:
         new_layout: "New layout"
         description_roadmap: "We are in the process of rolling out a new and improved layout. During the transition period, you can select which parts should continue using the old layout using the menu below. New features will only be available on the new layout."
@@ -300,10 +300,10 @@ en:
         google_analytics_key_info_text: "Tracking ID of your Google Analytics account."
         google_analytics_key_info_text_with_instructions: "Tracking ID of your Google Analytics account. %{instructions_link}."
         google_analytics_instructions_link_text: "Read more about connecting Google Analytics"
-        sharetribe_analytics: "Sharetribe analytics"
-        sharetribe_analytics_info_text_with_instructions: "To improve Sharetribe's services and support, Sharetribe tracks website members activity. Personal data is not collected and this information is not shared outside the Sharetribe team. This tracking can be disabled entirely. %{instructions_link}"
-        sharetribe_analytics_instructions_link_text: "Read more about Sharetribe's analytics."
-        end_user_analytics: "Allow Sharetribe to track members activity in order to improve Sharetribe's services"
+        sharetribe_analytics: "Shareoregon analytics"
+        sharetribe_analytics_info_text_with_instructions: "To improve Shareoregon's services and support, Shareoregon tracks website members activity. Personal data is not collected and this information is not shared outside the Shareoregon team. This tracking can be disabled entirely. %{instructions_link}"
+        sharetribe_analytics_instructions_link_text: "Read more about Shareoregon's analytics."
+        end_user_analytics: "Allow Shareoregon to track members activity in order to improve Shareoregon's services"
         save: "Save settings"
       menu_links:
         menu_links: "Menu links"
@@ -638,7 +638,7 @@ en:
       personal_payment_preferences_link_text: "your personal website account"
       read_more_about_paypal: "Read more about the payment system"
       edit_payment_settings: "Edit payment settings"
-      supported_currencies_information_text: "Sharetribe's online payment system supports 24 currencies. If your currency is not on the list, please %{contact_support_link}. If you change the website currency, existing listings will retain their old currency. You need to edit those listings individually to convert them to the new currency."
+      supported_currencies_information_text: "Shareoregon's online payment system supports 24 currencies. If your currency is not on the list, please %{contact_support_link}. If you change the website currency, existing listings will retain their old currency. You need to edit those listings individually to convert them to the new currency."
       currency_change_warning_text: "Heads up: if you move forward with this currency change, don't forget to ask your sellers to manually edit their existing listings to get the currency update."
       marketplace_currency_label: "Website currency:"
       minimum_listing_price_label: "Minimum transaction size:"
@@ -665,7 +665,7 @@ en:
       general_settings_updated: "Payment system general settings updated"
       transaction_fee_settings_updated: "Transaction fee settings updated"
       choose_popup_text: |-
-          If you want to allow your users to accept online payments, you need to choose the currency for your website and then connect at least one of the two payment providers supported by Sharetribe: Stripe and PayPal. You can also choose to use both, which means your users will be able to accept payments with either payment method.
+          If you want to allow your users to accept online payments, you need to choose the currency for your website and then connect at least one of the two payment providers supported by Shareoregon: Stripe and PayPal. You can also choose to use both, which means your users will be able to accept payments with either payment method.
           You can create a new account with either service if you don't have one already. Once you have connected an account, you can choose a possible fee you're charging from each transaction.
           What's the difference between Stripe and PayPal? Stripe allows you to delay payout to the seller up to 3 months and offers one payment method (credit/debit card). Stripe also allows your sellers to receive money directly to their bank account simply by providing their bank details. PayPal provides two payment methods (credit card and PayPal account) and offers a protection program for buyers and sellers. It requires your sellers to create a PayPal Business Account to accept payments.
           If you use Stripe, its fees will be deducted from your transaction fee, so remember to set a high enough minimum fee. If you use PayPal, its fees will be charged from the seller separately, in addition to your transaction fee. Stripe and PayPal have a bit different fee structure. In most cases Stripe's fees are a bit lower.
@@ -1450,7 +1450,7 @@ en:
       join_this_community: "Join ShareOregon"
       read_more: "Read more"
       feedback: "Your message to the %{service_name} team"
-      dont_use_to_contact_support: "We noticed you're an admin of %{service_name}. This form is what your users use to contact you. You cannot use this form to contact Sharetribe support. You can do that via the support widget in the bottom right corner of the admin panel instead."
+      dont_use_to_contact_support: "We noticed you're an admin of %{service_name}. This form is what your users use to contact you. You cannot use this form to contact Shareoregon support. You can do that via the support widget in the bottom right corner of the admin panel instead."
       feedback_forum: "feedback forum"
       feedback_handle: Feedback
       give_feedback: "Contact Us"
