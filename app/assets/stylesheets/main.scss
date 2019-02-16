@@ -417,6 +417,9 @@ form {
         margin: lines(0.5) 0 lines(0.5) 0;
         position: relative;
       }
+      &.label-normal {
+        font-weight: normal;
+      }
     }
 
     label.radio {
@@ -723,6 +726,7 @@ a.lightbox-x {
   right: 0;
   top: 0;
   color: #aaacad;
+  z-index: 1;
 
   &:hover {
     color: #919294;
@@ -2080,10 +2084,16 @@ figure.fluidratio {
       @include huge-type;
       line-height: em(15);
     }
+    &.hidden-title-part {
+      opacity: 0 !important;
+    }
   }
 
   .marketplace-lander-content-description {
       color: $descriptioncolor;
+      &.hidden-title-part {
+        opacity: 0 !important;
+      }
   }
 
   .title-container {
@@ -2271,4 +2281,17 @@ figure.fluidratio {
 }
 .text-center {
   text-align: center;
+}
+.ui-tooltip {
+  background-color: #ffffff;
+}
+.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  a {
+    color: currentColor;
+    display: inline-block;  /* For IE11/ MS Edge bug */
+    pointer-events: none;
+    text-decoration: none;
+  }
 }
