@@ -131,7 +131,7 @@
         -#  = icon_tag("calendar", ["icon-part"])
         -#  .text-part= t("listings.edit_links.edit_availability")
         -##calendar-availability
-      - if @listing_presenter.show_manage_availability
+      - if @listing_presenter.show_manage_availability && @listing.external_payment_link.nil?
         - availability_link_id = "edit-listing-availability-#{SecureRandom.urlsafe_base64(5)}"
         .listing-view-admin-link
           - if @listing_presenter.booking_per_hour?
