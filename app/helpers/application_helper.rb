@@ -448,13 +448,13 @@ module ApplicationHelper
         :path => admin_look_and_feel_edit_path,
         :name => "tribe_look_and_feel"
       },
-      {
-        :topic => :configure,
-        :text => t("admin.communities.domain.domain"),
-        :icon_class => icon_class("domain"),
-        :path => admin_domain_path,
-        :name => "domain"
-      },
+      # {
+      #   :topic => :configure,
+      #   :text => t("admin.communities.domain.domain"),
+      #   :icon_class => icon_class("domain"),
+      #   :path => admin_domain_path,
+      #   :name => "domain"
+      # },
       {
         :topic => :configure,
         :text => t("admin.communities.new_layout.new_layout"),
