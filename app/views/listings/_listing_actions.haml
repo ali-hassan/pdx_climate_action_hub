@@ -43,7 +43,7 @@
         - @listing_presenter.blocked_dates_result.on_error do
           = t("listings.listing_actions.unable_load_availability")
 
-      - elsif @listing_presenter.booking_per_hour? && @listing.external_payment_link.nil?
+      - elsif @listing_presenter.booking_per_hour? && @listing.external_payment_link == "http://"
         .input-daterange.input-group.clearfix
           .datepicker-per-hour
             .field
@@ -131,7 +131,7 @@
         -#  = icon_tag("calendar", ["icon-part"])
         -#  .text-part= t("listings.edit_links.edit_availability")
         -##calendar-availability
-      - if @listing_presenter.show_manage_availability && @listing.external_payment_link.nil?
+      - if @listing_presenter.show_manage_availability && @listing.external_payment_link == "http://"
         - availability_link_id = "edit-listing-availability-#{SecureRandom.urlsafe_base64(5)}"
         .listing-view-admin-link
           - if @listing_presenter.booking_per_hour?
