@@ -16,7 +16,7 @@ module MoneyViewUtils
     zero_cents = "0" * precision
 
     number_to_currency(m.amount,
-                       unit: formatting[:symbol],
+                       unit: "$",
                        delimiter: formatting[:delimiter],
                        separator: formatting[:separator],
                        format: formatting[:format],
