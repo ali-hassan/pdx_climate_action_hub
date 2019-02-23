@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 ruby '2.3.4'
-gem 'rails', '5.1.1'
+gem 'rails', '5.1.6.1'
 
 gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '~> 3.2.0'
@@ -14,10 +14,11 @@ gem 'jquery-rails', '~> 4.3.1'
 # Bundle the extra gems:
 
 # gem 'heroku' install the Heroku toolbelt (https://toolbelt.heroku.com/) instead (as gem had some problems)
-gem "passenger", '~> 5.1.4'
+gem "passenger", '~> 6.0.1'
 
+gem "mysql2", '0.4.10'
+gem "bcrypt", '3.1.12'
 
-gem "mysql2", '~> 0.4.6'
 gem 'haml', '~> 5.0.1'
 gem 'sass', '~> 3.4.24'
 gem 'rack-attack', '~> 5.0.1'
@@ -50,7 +51,9 @@ gem 'rails-i18n', '~> 5.0.4'
 gem 'devise', '~> 4.3.0'
 gem 'devise-encryptable', '~> 0.2.0'
 gem "omniauth-facebook", '~> 4.0.0'
-gem 'omniauth-google-oauth2'
+gem "omniauth-google-oauth2", '>= 0.6.0'
+gem "omniauth-linkedin-oauth2", '>= 1.0.0'
+
 # Dynamic form adds helpers that are needed, e.g. error_messages
 gem 'dynamic_form', '~> 1.1.4'
 gem "truncate_html", '~> 0.9.3'
@@ -73,10 +76,6 @@ gem 'airbrake', '~> 6.1.2'
 gem 'stripe', '~> 3.0.0'
 gem 'simple_form'
 gem 'cocoon'
-
-gem 'jwt', '~> 1.5.6'
-
-gem 'oauth2', '~> 1.3.1'
 
 gem 'lograge', '~> 0.5.1'
 gem 'public_suffix', '~> 2.0.5' # Needed currently to set GA hostname right, probably not
@@ -178,3 +177,5 @@ gem 'ckeditor', '~> 4.2', '>= 4.2.4'
 gem 'twitter_cldr'
 gem 'memoist'
 gem 'biz'
+gem 'ffi', '>= 1.9.25'
+gem 'rubyzip', '~> 1.2.2'

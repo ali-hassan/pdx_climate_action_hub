@@ -155,7 +155,6 @@ class ListingsController < ApplicationController
     return redirect_to action: :new unless request.xhr?
 
     @listing = Listing.new
-    @listing.init_origin_location(@current_user.location)
 
     form_content
   end
@@ -169,6 +168,9 @@ class ListingsController < ApplicationController
   end
 
   def create
+    if new_listing_author != @current_user
+      logger.info "ADMIN ACTION: admin='#{@current_user.id}' create listing params=#{params.inspect}"
+    end
     params[:listing].delete("origin_loc_attributes") if params[:listing][:origin_loc_attributes][:address].blank?
 
     shape = get_shape(Maybe(params)[:listing][:listing_shape_id].to_i.or_else(nil))
@@ -190,7 +192,7 @@ class ListingsController < ApplicationController
     @listing = Listing.new(result.data)
 
     ActiveRecord::Base.transaction do
-      @listing.author = @current_user
+      @listing.author = new_listing_author
 
       if @listing.save
         @listing.update(external_payment_link: params[:external_payment_link])
@@ -440,6 +442,10 @@ class ListingsController < ApplicationController
   def form_content
     make_listing_presenter
 
+    if @listing.new_record?
+      @listing.init_origin_location(@listing_presenter.new_listing_author.location)
+    end
+
     @listing.category = @current_community.categories.find(params[:subcategory].blank? ? params[:category] : params[:subcategory])
     @custom_field_questions = @listing.category.custom_fields
     @numeric_field_ids = numeric_field_ids(@custom_field_questions)
@@ -453,7 +459,7 @@ class ListingsController < ApplicationController
     payment_type = @current_community.active_payment_types
     allow_posting, error_msg = payment_setup_status(
                      community: @current_community,
-                     user: @current_user,
+                     user: @listing_presenter.new_listing_author,
                      listing: @listing,
                      payment_type: payment_type,
                      process: process)
@@ -503,8 +509,14 @@ class ListingsController < ApplicationController
   end
 
   def is_authorized_to_post
+    if new_listing_author != @current_user
+      unless @current_user.has_admin_rights?(@current_community)
+        flash[:error] = t("layouts.notifications.you_are_not_authorized_to_do_this")
+        redirect_to root_path
+      end
+    end
     if @current_community.require_verification_to_post_listings?
-      unless @current_user.has_admin_rights?(@current_community) || @current_community_membership.can_post_listings?
+      unless new_listing_author.has_admin_rights?(@current_community) || new_listing_author.community_membership.can_post_listings?
         redirect_to verification_required_listings_path
       end
     end
@@ -609,5 +621,15 @@ class ListingsController < ApplicationController
     else
       true
     end
+  end
+
+  def new_listing_author
+    @new_listing_author ||=
+      if params[:person_id].present? &&
+         @current_user.has_admin_rights?(@current_community)
+        @current_community.members.find_by!(username: params[:person_id])
+      else
+        @current_user
+      end
   end
 end

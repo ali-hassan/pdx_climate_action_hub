@@ -47,15 +47,6 @@ class SessionsController < ApplicationController
 
     flash[:error] = nil
 
-    # Store Facebook ID and picture if connecting with FB
-    if session["devise.facebook_data"]
-      @current_user.update_attribute(:facebook_id, session["devise.facebook_data"]["id"])
-      # FIXME: Currently this doesn't work for very unknown reason. Paper clip seems to be processing, but no pic
-      if @current_user.image_file_size.nil?
-        @current_user.store_picture_from_facebook!
-      end
-    end
-
     sign_in @current_user
 
     setup_intercom_user
@@ -249,7 +240,7 @@ class SessionsController < ApplicationController
     flash[:error] = t("devise.omniauth_callbacks.failure",:kind => kind.humanize, :reason => error_message.humanize)
     redirect_to search_path
   end
-  
+
   def passthru
     render status: 404, plain: "Not found. Authentication passthru."
   end
@@ -258,12 +249,4 @@ class SessionsController < ApplicationController
   def terms_accepted?(user, community)
     user && community.consent.eql?(user.consent)
   end
-
-  def get_origin_locale(request, available_locales)
-    locale_string ||= URLUtils.extract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
-    if locale_string && available_locales.include?(locale_string)
-      locale_string
-    end
-  end
-
 end

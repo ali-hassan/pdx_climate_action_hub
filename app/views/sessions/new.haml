@@ -6,6 +6,7 @@
   -#%h1= @google_merge ? t('.connect_your_google_to_kassi') : t('.login_to_kassi')
 
 .login-form.centered-section-narrow
+
   - if @facebook_merge
     .facebook-account-info
       = icon_tag("facebook", ["fb-icon"])
@@ -21,6 +22,7 @@
     %p
       = t(".we_will_not_post_without_asking_you")
     %br/
+
   - if @google_merge
     .google-account-info
       = icon_tag("google", ["fb-icon"])
@@ -40,7 +42,6 @@
     = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".log_in_with_your_facebook_account") }
     = render :partial => "layouts/google_connect_button", :locals => { :button_text => t(".log_in_with_your_google_account") }
     %p= t(".or_sign_up_with_your_username")
-
   = form_tag("#{APP_CONFIG.login_domain}#{sessions_path}",:action => "create") do
     %label{:for => "login"}
       = username_or_email_label + ":"
