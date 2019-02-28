@@ -71,3 +71,13 @@
   border-bottom: none !important;
   margin-bottom: 0 !important;
 }
+.custom-upper-map:before{
+  content: '';
+  background: #aadaff;
+  position: absolute;
+  top: 0;
+  z-index: 999999;
+  height: 100px;
+  right: 0;
+  width: 100px;
+}
