@@ -71,13 +71,14 @@
   border-bottom: none !important;
   margin-bottom: 0 !important;
 }
-.custom-upper-map:before{
+.embed-container:before{
   content: '';
-  background: #aadaff;
+  background: #fff;
   position: absolute;
-  top: 0;
+  top: 10px;
   z-index: 999999;
-  height: 100px;
-  right: 0;
-  width: 100px;
+  height: 92px;
+  right: 6px;
+  width: 133px;
+  box-shadow: 4px 2px 3px rgba(0,0,0,0.1);
 }
