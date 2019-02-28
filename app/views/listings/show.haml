@@ -201,7 +201,7 @@
       .row
         .googlemap{ class: "#{ mobile_device == "mobile" || mobile_device == "tablet" ? "" : "map-width"}" }
           - maps_key = MarketplaceHelper.google_maps_key(@current_community.id)
-          .embed-container
+          .embed-container{style:"width:490px;"}
             %div
               %iframe{width: "600", height: "550", frameborder: "0",
                     src: "https://www.google.com/maps/embed/v1/place?key=#{maps_key}&q=#{CGI.escape(@listing.location.address)}&language=#{I18n.locale}"}
