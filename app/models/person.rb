@@ -44,6 +44,8 @@
 #  cloned_from                             :string(22)
 #  is_payment_setup_notification_dismissed :boolean          default(FALSE)
 #  google_id                               :string(255)
+#  google_oauth2_id                        :string(255)
+#  linkedin_id                             :string(255)
 #
 # Indexes
 #

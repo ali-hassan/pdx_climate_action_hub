@@ -65,8 +65,8 @@ class Transaction < ApplicationRecord
   has_many :testimonials
   belongs_to :listing_author, class_name: 'Person'
 
-  delegate :author, to: :listing
-  delegate :title, to: :listing, prefix: true
+  delegate :author, to: :listing, allow_nil: true
+  delegate :title, to: :listing, prefix: true, allow_nil: true
 
   accepts_nested_attributes_for :booking
 

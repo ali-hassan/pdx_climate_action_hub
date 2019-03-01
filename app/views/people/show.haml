@@ -78,12 +78,12 @@
           #profile-testimonials-list
             = render :partial => "testimonials", :locals => {:received_testimonials => @service.received_testimonials, :limit => 3}
 
-      - if @current_user.present? and listings.present?
+      - if @current_user.present? and @service.listings.present?
         .col-12
           = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
-          = link_to("Add a Review for #{ @person.given_name }", "#", id: "myBtn", class: "review-weight review-font")
-          - @listing = Listing.find_by(id: listings.last.try(:id))
-          .username{ data: { user: @person.username } }
+          = link_to("Add a Review for #{ @service.person.given_name }", "#", id: "myBtn", class: "review-weight review-font")
+          - @listing = Listing.find_by(id: @service.listings.last.try(:id))
+          .username{ data: { user: @service.person.username } }
           = render "listings/reviews"
 
   .col-4
@@ -98,3 +98,14 @@
 - content_for :extra_javascript do
   :javascript
     window.ST.initializeFollowButtons();
+:css
+  .custom-upper-map:before{
+    content: '';
+    background: #aadaff;
+    position: absolute;
+    top: 0;
+    z-index: 999999;
+    height: 100px;
+    right: 0;
+    width: 100px;
+  }

@@ -48,7 +48,7 @@
     %tbody
       - @transactions_presenter.transactions.each do |transaction|
         %tr
-          - listing_title = transaction.listing_title || t("admin.communities.transactions.not_available")
+          - listing_title = transaction.try(:listing_title) || t("admin.communities.transactions.not_available")
           %td=Maybe(transaction.listing).map { |listing| link_to_unless(listing.deleted, listing_title, listing_path(transaction.listing_id)) }.or_else(listing_title)
           %td
             = link_to person_transaction_path(person_id: @current_user.id, id: transaction.id) do
@@ -66,4 +66,3 @@
   = js_t ["admin.communities.transactions.status_filter.all", "admin.communities.transactions.status_filter.selected_js"], true
   :javascript
     window.ST.initializeTransactionSearchFormSelector();
-
