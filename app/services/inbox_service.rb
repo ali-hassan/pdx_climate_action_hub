@@ -121,6 +121,7 @@ module InboxService
     last_message_conv_ids, last_transition_transaction_ids = reduce_transaction_and_conv_ids(result_set)
     message_store = latest_messages_for_conversations(last_message_conv_ids)
 
+    result_set.reject!{|x| x[:listing_id].nil?}
     result_set.map do |result|
       if result[:transaction_id].present?
         InboxTransaction[
@@ -171,7 +172,6 @@ module InboxService
     current_id = common[:current_id]
     other_id   = common[:other_id]
     starter_id = common[:current_is_starter] ? common[:current_id] : common[:other_id]
-
     content, message_at = message_store[common[:conversation_id]]
 
     common.merge(
