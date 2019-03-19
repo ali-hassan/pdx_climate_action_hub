@@ -57,7 +57,7 @@
 
     %tbody
       - index = 0
-      - @service.transactions.each do |tx|
+      - Transaction.all.each do |tx|
         - [:starter, :author].each do |participant|
           = render 'testimonial', tx: tx, participant: participant, index: index
           - index += 1
