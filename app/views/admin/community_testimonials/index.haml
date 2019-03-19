@@ -57,7 +57,7 @@
 
     %tbody
       - index = 0
-      - Transaction.all.each do |tx|
+      - Transaction.all.collect{|tx| tx unless tx.testimonials.empty?}.compact!.each do |tx|
         - [:starter, :author].each do |participant|
           = render 'testimonial', tx: tx, participant: participant, index: index
           - index += 1
