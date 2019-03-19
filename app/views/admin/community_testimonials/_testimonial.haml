@@ -61,3 +61,12 @@
           remote: true, class: 'edit' do
           = icon_tag("edit", ["icon-fix"])
 
+  %td
+    - tx.testimonials.try(:last).try(:text)
+  %td
+    - grade = tx.testimonials.try(:last).try(:grade) || 0.0
+    .testimonial-icon{:class => grade > 0.25 ? 'positive' : 'negative'}
+    - if grade > 0.25
+      = icon_tag("like", ["positive"])
+    - else
+      = icon_tag("dislike", ["negative"])
