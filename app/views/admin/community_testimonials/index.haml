@@ -31,15 +31,15 @@
         = submit_tag t("admin.communities.testimonials.search"), class: 'button search-button'
         = link_to t("admin.communities.testimonials.reset_search"), admin_community_testimonials_path(@current_community.id)
 
-  %span#admin_testimonials_count
-    - pages = @service.testimonials[:tx_total_pages]
-    - if pages == 0
-      = t('admin.communities.testimonials.no_reviews_found')
-    - else
-      = raw t('admin.communities.testimonials.displaying_xx_reviews', count: @service.testimonials[:page_count], all_count: @service.testimonials[:all_count], tx_from: @service.testimonials[:tx_from], tx_to: @service.testimonials[:tx_to])
-      - if @service.filter?
-        = ' '
-        = t('admin.communities.testimonials.for_keyword', keyword: params[:q]).html_safe
+  -#%span#admin_testimonials_count
+    -#- pages = @service.testimonials[:tx_total_pages]
+    -#- if pages == 0
+    -#  = t('admin.communities.testimonials.no_reviews_found')
+    -#- else
+    -#  = raw t('admin.communities.testimonials.displaying_xx_reviews', count: @service.testimonials[:page_count], all_count: @service.testimonials[:all_count], tx_from: @service.testimonials[:tx_from], tx_to: @service.testimonials[:tx_to])
+    -#  - if @service.filter?
+    -#    = ' '
+    -#    = t('admin.communities.testimonials.for_keyword', keyword: params[:q]).html_safe
 
   %table#admin_testimonials
     %thead
@@ -57,7 +57,7 @@
 
     %tbody
       - index = 0
-      - @service.transactions.each do |tx|
+      - Transaction.all.collect{|tx| tx unless tx.testimonials.empty?}.compact!.each do |tx|
         - [:starter, :author].each do |participant|
           = render 'testimonial', tx: tx, participant: participant, index: index
           - index += 1

@@ -483,7 +483,8 @@ en:
           receiver: Receiver
           status: Status
           grade: Grade
-          text: Text
+          text: Feedback
+#          review_text: Feedback
         status:
           waiting: "Waiting for review"
           skipped: Skipped
