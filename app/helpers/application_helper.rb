@@ -177,6 +177,7 @@ module ApplicationHelper
 
   def facebook_like(recommend=false)
     "<div class=\"fb-like\" data-send=\"true\" data-layout=\"button_count\" data-width=\"200\" data-show-faces=\"true\" #{recommend ? 'data-action="recommend"' : ''}></div>".html_safe
+    #"<div class=\"fb-like\" data-href=\"https://developers.facebook.com/docs/plugins\" data-send=\"true\" data-layout=\"button_count\" data-width=\"200\" data-show-faces=\"true\" #{recommend ? 'data-action="recommend"' : ''}></div>".html_safe
   end
 
   def self.random_sting(length=6)
