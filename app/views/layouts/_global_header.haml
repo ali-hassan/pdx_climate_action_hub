@@ -32,9 +32,17 @@
       .header-right
         = link_to sign_up_path, class: "header-text-link header-hover" do
           = t("header.signup")
+
     .header-right
       = link_to about_infos_path, class: "header-text-link header-hover" do
         = t("header.about")
+    .header-right
+      = form_tag update_user_language_path, method: :post, id: "edit_community" do |form|
+
+        .row
+          .col-12
+            .col-9.pull-left= render partial: "layouts/language", locals: @locale_selection_locals[:locale_selection_locals]
+            .col-3.pull-right= button_tag "Save"
 
     .header-left.hidden-tablet
       .header-menu-container.toggle.hidden{data: {toggle: '#header-menu-toggle-menu', 'toggle-position' => 'absolute'}}
