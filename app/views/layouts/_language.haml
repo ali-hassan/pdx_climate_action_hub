@@ -14,12 +14,10 @@
           $('#edit_community').valid();
         });
     -#= render :partial => "layouts/info_text", :locals => { :text => t("admin.communities.edit_details.enabled_languages_description") }
-    .row
-      .col-10{style: "padding-top: 12px !important; padding-right: 36px;"}
-        %select.locale-selection__input-widget.required{ style: "width: 437px;", multiple: true, name: "enabled_locales[]", id: "locale-selection" }
-          - all_locales.each do |locale|
-            %option{ value: locale[:locale_key] }
-              = locale[:translated_name]
+    %select.locale-selection__input-widget.required{ style: "width: 100%;", multiple: true, name: "enabled_locales[]", id: "locale-selection" }
+      - all_locales.each do |locale|
+        %option{ value: locale[:locale_key] }
+          = locale[:translated_name]
         -#%p#selected-default-language{ style: "clear: both;" }
           -#= t("admin.communities.edit_details.default_language") + ": "
           -#-#%span.selected-default-language-name
