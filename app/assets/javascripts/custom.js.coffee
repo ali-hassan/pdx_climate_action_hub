@@ -35,3 +35,21 @@ $ ->
         return
   $(document).ready ->
     $(this).scrollTop 0
+
+
+  $(document).on "click", "#submit_locals_form", (e) ->
+    debugger
+    valueArray = $('#locale-selection').val()
+    options = new Array()
+    options.push("<select name='enabled_locales[]' multiple='multiple'>")
+    $form = $("<form class='enable-locals-custom-form' style='display:none;' action='#{$(@).data("url")}' method='post' >")
+
+    $.each valueArray, (index, value) ->
+      options.push("<option value='#{value}' selected></option>")
+    options.push("</select>")
+    options.push("</form>")
+    $form.html(options.join(""))
+    $('.enable-locals-custom-form').remove()
+    $('body').prepend($form.clone())
+    $('.enable-locals-custom-form').submit()
+    debugger
