@@ -15,6 +15,12 @@ $ ->
       return
     ),8000
 
+  $(document).ready ->
+    setTimeout (->
+      $(".goog-logo-link")[0].innerHTML = "ShareOregon";
+      return
+    ),2000
+
 
   username  = $(".username").data("user")
   href      = window.location.href
@@ -38,7 +44,6 @@ $ ->
 
 
   $(document).on "click", "#submit_locals_form", (e) ->
-    debugger
     valueArray = $('#locale-selection').val()
     options = new Array()
     options.push("<select name='enabled_locales[]' multiple='multiple'>")
@@ -52,4 +57,3 @@ $ ->
     $('.enable-locals-custom-form').remove()
     $('body').prepend($form.clone())
     $('.enable-locals-custom-form').submit()
-    debugger

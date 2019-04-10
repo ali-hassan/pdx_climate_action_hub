@@ -75,10 +75,15 @@
               = "Events"
             - when "map"
               = "Places"
-    %div.col-5
-      = form_tag update_user_language_path, method: :post, id: "edit_community" do |form|
-        .col-8.pull-left= render partial: "layouts/language", locals: @locale_selection_locals[:locale_selection_locals]
-        .col-4.pull-right= button_tag "Save", type: :button, style: "margin: 0;", data: {url: update_user_language_path}, id: 'submit_locals_form'
+    .col-2
+    %div.col-2
+      #google_translate_element
+      %script{:src => "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit", :type => "text/javascript"}
+
+      :javascript
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
 
 
     - if listing_shape_menu_enabled || @category_menu_enabled
