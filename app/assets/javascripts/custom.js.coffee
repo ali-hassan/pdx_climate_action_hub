@@ -15,11 +15,13 @@ $ ->
       return
     ),8000
 
-  $(document).ready ->
-    setTimeout (->
-      $(".goog-logo-link")[0].innerHTML = "ShareOregon";
-      return
-    ),2000
+#  $(document).ready ->
+#    setTimeout (->
+#      $(".goog-logo-link")[0].innerHTML = "";
+#      $g_div = $(".goog-te-gadget")
+#      $g_div.html($g_div.html().split("Powered by ").join(""));
+#      return
+#    ),2000
 
 
   username  = $(".username").data("user")

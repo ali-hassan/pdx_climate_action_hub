@@ -2,6 +2,15 @@
 %header.header
   .header-wrapper
     .header-right.header-padding.visible-tablet
+      #google_translate_element{style: "width: 70px;"}
+      %script{:src => "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit", :type => "text/javascript"}
+
+      :javascript
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+
+    .header-right.header-padding.visible-tablet
       = link_to t("homepage.index.post_new_listing"), new_listing_path, :class => "new-listing-link", :id => "new-listing-link"
 
     .header-right.visible-tablet
@@ -36,6 +45,7 @@
     .header-right
       = link_to about_infos_path, class: "header-text-link header-hover" do
         = t("header.about")
+
     .header-left.hidden-tablet
       .header-menu-container.toggle.hidden{data: {toggle: '#header-menu-toggle-menu', 'toggle-position' => 'absolute'}}
         #header-menu-mobile-anchor.header-menu-toggle-container.toggle-header-container
