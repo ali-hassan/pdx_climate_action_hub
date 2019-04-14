@@ -23,6 +23,10 @@ $ ->
 #      return
 #    ),2000
 
+  $("#google_translate_element").on "click", ->
+    $(".goog-te-combo")[0].style.setProperty('background-color', '#A9A9A9');
+    $(".goog-te-combo")[0].style.setProperty('color', 'white');
+
 
   username  = $(".username").data("user")
   href      = window.location.href
