@@ -15,13 +15,11 @@ $ ->
       return
     ),8000
 
-#  $(document).ready ->
-#    setTimeout (->
-#      $(".goog-logo-link")[0].innerHTML = "";
-#      $g_div = $(".goog-te-gadget")
-#      $g_div.html($g_div.html().split("Powered by ").join(""));
-#      return
-#    ),2000
+  $(document).ready ->
+    setTimeout (->
+      $(".goog-te-combo option:selected")[0].text = "Language"
+      return
+    ),3000
 
   $("#google_translate_element").on "click", ->
     $(".goog-te-combo")[0].style.setProperty('background-color', '#A9A9A9');
