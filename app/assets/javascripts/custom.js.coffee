@@ -17,14 +17,23 @@ $ ->
 
   $(document).ready ->
     setTimeout (->
-      $(".goog-te-combo option:selected")[0].text = "Language"
-      return
+      lang_text = $(".goog-te-combo option:selected")[0].text;
+      if lang_text == "Select Language"
+        $(".goog-te-combo option:selected")[0].text = "Language"
+        $(".goog-te-combo")[0].style.setProperty('width', '115px');
+        $(".goog-te-combo")[0].style.setProperty('background-color', '#e8e8e8');
     ),3000
+
 
   $("#google_translate_element").on "click", ->
     $(".goog-te-combo")[0].style.setProperty('background-color', '#A9A9A9');
+    $(".goog-te-combo")[0].style.setProperty('width', '115px');
     $(".goog-te-combo")[0].style.setProperty('color', 'white');
 
+  $(".goog-te-combo").on "change", ->
+    $(".goog-te-combo option:selected")[0].text = "Language"
+    $(".goog-te-combo")[0].style.setProperty('width', '115px');
+    $(".goog-te-combo")[0].style.setProperty('background-color', '#e8e8e8');
 
   username  = $(".username").data("user")
   href      = window.location.href
