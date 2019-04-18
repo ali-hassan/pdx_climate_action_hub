@@ -62,7 +62,7 @@
         .home-toolbar-show-filters-button#home-toolbar-show-filters
           = t(".filter")
 
-    .col-5.home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
+    .home-toolbar-button-group{:class => listing_shape_menu_enabled || @category_menu_enabled ? "filters-enabled" : ""}
       - ["grid", "list", "map"].each do |view_type|
         - selected_class = @view_type == view_type ? "selected" : ""
         = link_to search_path(search_params.merge(view: view_type)), :class => "home-toolbar-button-group-button #{selected_class}", :title => t("homepage.filters.#{view_type}_button") do
@@ -75,15 +75,6 @@
               = "Events"
             - when "map"
               = "Places"
-    -#%div.col-2
-    -#  #google_translate_element
-    -#  %script{:src => "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit", :type => "text/javascript"}
-    -#
-    -#  :javascript
-    -#    function googleTranslateElementInit() {
-    -#      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    -#    }
-
 
     - if listing_shape_menu_enabled || @category_menu_enabled
       .home-toolbar-filters.home-toolbar-filters-mobile-hidden#home-toolbar-filters
