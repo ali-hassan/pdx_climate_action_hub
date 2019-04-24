@@ -7,7 +7,7 @@ $(function() {
     });
   }
 
-  function toggleMenu(el) {
+  window.toggleMenu = function(el) {
     var $menu = $(el.attr('data-toggle'));
     var anchorElement = $(el.attr('data-toggle-anchor-element') || el);
     var anchorPosition = el.attr('data-toggle-anchor-position') || "left";
@@ -56,7 +56,10 @@ $(function() {
     });
 
     $menu.click(function(event){
-      event.stopPropagation();
+
+        if(!$(this).data('stop-propagation')){
+            event.stopPropagation();
+        }
     });
 
     return {
