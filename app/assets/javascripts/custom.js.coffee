@@ -25,7 +25,7 @@ $ ->
         $(".goog-te-combo option:selected")[0].text = "Language"
         $(".goog-te-combo")[0].style.setProperty('width', '115px');
         $(".goog-te-combo")[0].style.setProperty('background-color', '#e8e8e8');
-    ),100000
+    ),50000
 
   googleBoxLoaded = false
   $("body").on 'click', '.lang-href', (e) ->
