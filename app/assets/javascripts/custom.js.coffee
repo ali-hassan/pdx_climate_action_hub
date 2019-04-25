@@ -26,6 +26,7 @@ $ ->
         $(".goog-te-combo")[0].style.setProperty('width', '115px');
         $(".goog-te-combo")[0].style.setProperty('background-color', '#e8e8e8');
     ),3000
+
   googleBoxLoaded = false
   $("body").on 'click', '.lang-href', (e) ->
     e.preventDefault()
@@ -43,16 +44,16 @@ $ ->
         optList = new Array()
         $selectBox.find("option").each ->
           optList.push({text: @text, value: @value})
-        dropDownListContainer = "<div class='toggle-container g-clone-cont home-toolbar-toggle-container home_listing_shapes'>"
+        dropDownListContainer = "<div class='toggle-container g-clone-cont home-toolbar-toggle-container home_listing_shapes custom-style'>"
         dropDownListContainer += "<div class=\"toggle with-borders\" data-toggle=\".google-toolbar-share-type-menu\" id=\"google_toolbar-select-share-type\">"
         dropDownListContainer += "<div class='toggle-header-container'>"
         dropDownListContainer += "<div class='toggle-header'>"
-        dropDownListContainer += "Ali sheeda"
+        dropDownListContainer += "Select Language"
         dropDownListContainer += "</div>"
         dropDownListContainer += "<i class=\"icon-caret-down icon-dropdown\"></i>"
         dropDownListContainer += "</div>"
         dropDownListContainer += "</div>"
-        dropDownListContainer += "<div class='google-toolbar-share-type-menu toggle-menu hidden' data-stop-propagation='true'>"
+        dropDownListContainer += "<div class='google-toolbar-share-type-menu toggle-menu toggle-menu-custom hidden' data-stop-propagation='true'>"
         $.each optList, (index, hsh) ->
           dropDownListContainer += "<a href='#' data-lang='#{hsh.value || '#'}' class='lang-href'>#{hsh.text}</a>"
 
