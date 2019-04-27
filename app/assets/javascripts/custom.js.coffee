@@ -19,13 +19,6 @@ $ ->
     ),8000
 
   $(document).ready ->
-    setTimeout (->
-      lang_text = $(".goog-te-combo option:selected")[0].text;
-      if lang_text == "Select Language"
-        $(".goog-te-combo option:selected")[0].text = "Language"
-        $(".goog-te-combo")[0].style.setProperty('width', '115px');
-        $(".goog-te-combo")[0].style.setProperty('background-color', '#e8e8e8');
-    ),50000
 
   googleBoxLoaded = false
   $("body").on 'click', '.lang-href', (e) ->
@@ -36,9 +29,18 @@ $ ->
     window.location.hash = "googtrans/#{lang}"
     window.location.reload(true)
 
-  $("body").on "DOMSubtreeModified", ".goog-te-combo", (e) ->
-    $selectBox = $(@)
+  #$("body").on "DOMSubtreeModified", ".goog-te-combo", (e) ->
+  window.initGoogleTranslate = ->
+    $selectBox = $('.goog-te-combo')
     if $selectBox.find("option").length >= 104
+      googleBoxLoaded=true
+      setTimeout(loadGoogleTranslate, 50)
+    else
+      setTimeout(initGoogleTranslate, 50)
+
+  window.loadGoogleTranslate = ->
+    $selectBox = $('.goog-te-combo')
+    if $selectBox.find("option").length >= 100
 
       if googleBoxLoaded
         optList = new Array()
@@ -55,7 +57,8 @@ $ ->
         dropDownListContainer += "</div>"
         dropDownListContainer += "<div class='google-toolbar-share-type-menu toggle-menu toggle-menu-custom hidden' data-stop-propagation='true'>"
         $.each optList, (index, hsh) ->
-          dropDownListContainer += "<a href='#' data-lang='#{hsh.value || '#'}' class='lang-href'>#{hsh.text}</a>"
+          if hsh.value
+            dropDownListContainer += "<a href='#' data-lang='#{hsh.value || '#'}' class='lang-href'>#{hsh.text}</a>"
 
         dropDownListContainer += "</div>"
         dropDownListContainer += "</div>"
