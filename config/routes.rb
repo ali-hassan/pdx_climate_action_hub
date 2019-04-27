@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   get "/listings/new/:type" => "listings#new", :as => :new_request_without_locale # needed for some emails, where locale part is already set
   get "/change_locale" => "i18n#change_locale", :as => :change_locale
   post "/toggle_availability" => "listings#toggle_availability"
-  
+
   # Internal API
   namespace :int_api do
     post "/create_trial_marketplace" => "marketplaces#create"
@@ -78,7 +78,7 @@ Rails.application.routes.draw do
   # Conditional routes for custom landing pages
   get '/:locale/' => 'landing_page#index', as: :landing_page_with_locale, constraints: ->(request) {
     locale_matcher_anchored.match(request.params["locale"]) &&
-      CustomLandingPage::LandingPageStore.enabled?(request.env[:current_marketplace]&.id)
+        CustomLandingPage::LandingPageStore.enabled?(request.env[:current_marketplace]&.id)
   }
   get '/' => 'landing_page#index', as: :landing_page_without_locale, constraints: ->(request) {
     CustomLandingPage::LandingPageStore.enabled?(request.env[:current_marketplace]&.id)
@@ -87,7 +87,7 @@ Rails.application.routes.draw do
   # Conditional routes for search view if landing page is enabled
   get '/:locale/s' => 'homepage#index', as: :search_with_locale, constraints: ->(request) {
     locale_matcher_anchored.match(request.params["locale"]) &&
-      CustomLandingPage::LandingPageStore.enabled?(request.env[:current_marketplace]&.id)
+        CustomLandingPage::LandingPageStore.enabled?(request.env[:current_marketplace]&.id)
   }
   get '/s' => 'homepage#index', as: :search_without_locale, constraints: ->(request) {
     CustomLandingPage::LandingPageStore.enabled?(request.env[:current_marketplace]&.id)
@@ -99,7 +99,7 @@ Rails.application.routes.draw do
   get '/' => 'homepage#index', as: :homepage_without_locale
   get '/:locale/s', to: redirect('/%{locale}', status: 307), constraints: { locale: locale_matcher }
   get '/s', to: redirect('/', status: 307)
-  post '/update_user_language' => 'homepage#update_user_language', constraints: { locale: locale_matcher }, as: :update_user_language
+
   # error handling: 3$: http://blog.plataformatec.com.br/2012/01/my-five-favorite-hidden-features-in-rails-3-2/
   get '/500' => 'errors#server_error'
   get '/404' => 'errors#not_found', :as => :error_not_found
@@ -467,7 +467,7 @@ Rails.application.routes.draw do
             get :received, to: 'inboxes#show'
           end
           member do
-            # get :confirm, to: 'confirm_conversations#confirm'
+            get :confirm, to: 'confirm_conversations#confirm'
             get :cancel, to: 'confirm_conversations#cancel'
             put :confirmation, to: 'confirm_conversations#confirmation' #TODO these should be under transaction
             get :accept_preauthorized, to: 'accept_preauthorized_conversations#accept'
