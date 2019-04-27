@@ -543,5 +543,4 @@ Rails.application.routes.draw do
   #catches all non matched routes, shows 404 and logs more reasonably than the alternative RoutingError + stacktrace
 
   match "*path" => "errors#not_found", via: :all
-
 end
