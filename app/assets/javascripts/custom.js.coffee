@@ -48,7 +48,7 @@ $ ->
           optList.push({text: @text, value: @value})
         dropDownListContainer = "<div class='toggle-container g-clone-cont home-toolbar-toggle-container home_listing_shapes custom-style'>"
         dropDownListContainer += "<div class=\"toggle with-borders\" data-toggle=\".google-toolbar-share-type-menu\" id=\"google_toolbar-select-share-type\">"
-        dropDownListContainer += "<div class='toggle-header-container'>"
+        dropDownListContainer += "<div class='toggle-header-container custom-height'>"
         dropDownListContainer += "<div class='toggle-header'>"
         dropDownListContainer += "Select Language"
         dropDownListContainer += "</div>"
