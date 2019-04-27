@@ -467,7 +467,7 @@ Rails.application.routes.draw do
             get :received, to: 'inboxes#show'
           end
           member do
-            get :confirm, to: 'confirm_conversations#confirm'
+            # get :confirm, to: 'confirm_conversations#confirm'
             get :cancel, to: 'confirm_conversations#cancel'
             put :confirmation, to: 'confirm_conversations#confirmation' #TODO these should be under transaction
             get :accept_preauthorized, to: 'accept_preauthorized_conversations#accept'
