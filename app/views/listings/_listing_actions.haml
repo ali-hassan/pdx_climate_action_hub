@@ -100,7 +100,12 @@
           .col-12
             %span.buyer-fees
               = t('.marketplace_fees_may_apply')
-      - if @listing_presenter.quantity_per_day_or_night?
+      - if @listing.external_payment_link
+        .row
+          .col-12
+            Clicking the blue button above will take you to an external site to complete the transaction.
+
+      - elsif @listing_presenter.quantity_per_day_or_night?
         - @listing_presenter.blocked_dates_result.on_success do
           %button.enabled-book-button
             .content
@@ -115,10 +120,6 @@
           .content
             = action_button_label(@listing)
 
-    - if @listing.external_payment_link
-      .row
-        .col-12
-          Clicking the blue button above will take you to an external site to complete the transaction.
 
     - if @listing_presenter.payments_enabled?
       .row
