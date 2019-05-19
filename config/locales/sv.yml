@@ -240,6 +240,7 @@ sv:
         update_settings: "Spara inställningar"
         automatically_confirmed_no_escrow: "Transaktionen kommer automatiskt att markeras som slutförd %{days_dropdown} dagar efter att betalningen har gjorts"
         automatically_confirmed_no_escrow_stripe_info: "För transaktioner porcesserade med Stripe är utbetalningen till försäljarna fördröjd tills förfrågan har marketats som slutförd. %{learn_more}"
+        buyer_transaction_fees_are_only_supported_with_stripe: ~
         automatic_newsletter_frequency: "Skicka automatiskt nyhetsbrev: %{frequency_dropdown}"
         newsletter_daily: Dagligen
         newsletter_weekly: Veckovis
@@ -253,6 +254,7 @@ sv:
         you_will_be_redirected_to: "Efter att du har tagit bort din marknadsplats så kommer du skickas vidare till %{destination}. Du kommer inte att kunna komma in på din marknadsplats längre."
         delete_this_marketplace: "Ta bort denna marknadsplats"
         payment_preferences: Betalningssystem
+        pre_approved_listings: ~
       manage_members:
         manage_members: "Hantera användare"
         email: E-post
@@ -338,6 +340,53 @@ sv:
         enable_linkedin_login: ~
         linkedin_connect_id: ~
         linkedin_connect_secret: ~
+      seo_settings:
+        seo: ~
+        title: ~
+        meta_title_label: ~
+        meta_title_info: ~
+        meta_title_link_text: ~
+        meta_description_label: ~
+        meta_description_info: ~
+        meta_description_link_text: ~
+        search_title: ~
+        search_meta_title_label: ~
+        search_meta_title_info: ~
+        search_meta_title_link_text: ~
+        search_meta_description_label: ~
+        search_meta_description_info: ~
+        search_meta_description_link_text: ~
+        listing_title: ~
+        listing_meta_title_label: ~
+        listing_meta_title_info: ~
+        listing_meta_title_link_text: ~
+        listing_meta_description_label: ~
+        listing_meta_description_info: ~
+        listing_meta_description_link_text: ~
+        category_title: ~
+        category_meta_title_label: ~
+        category_meta_title_info: ~
+        category_meta_title_link_text: ~
+        category_meta_description_label: ~
+        category_meta_description_info: ~
+        category_meta_description_link_text: ~
+        profile_title: ~
+        profile_meta_title_label: ~
+        profile_meta_title_info: ~
+        profile_meta_title_link_text: ~
+        profile_meta_description_label: ~
+        profile_meta_description_info: ~
+        profile_meta_description_link_text: ~
+        sitemap_label: ~
+        sitemap_info: ~
+        sitemap_info_link_text: ~
+        sitemap_info_public: ~
+        sitemap_info_private: ~
+        robots_label: ~
+        robots_info: ~
+        robots_info_link_text: ~
+        robots_info_2: ~
+        save: ~
       analytics:
         analytics: Analytics
         google_analytics_key: "Google Analytics tracking ID"
@@ -521,6 +570,8 @@ sv:
           open: Öppen
           closed: ~
           expired: ~
+          approval_pending: ~
+          approval_rejected: ~
         headers:
           title: Titel
           author: Författare
@@ -531,6 +582,14 @@ sv:
         open: Öppen
         closed: Stängd
         expired: ~
+        approved: ~
+        approval_pending: ~
+        approval_rejected: ~
+        form:
+          this_listing_has_not_not_been_approved_yet: ~
+          approve: ~
+          reject: ~
+          cancel: ~
       user_fields:
         user_fields: Användarfält
       footer:
@@ -834,6 +893,8 @@ sv:
       stripe_fee_notice: "%{stripe_fee_link} kommer dras av från transaktionsavgiften du tar."
       fee_should_be_less_than_minimum_price: "Lägsta transaktionsavgiften måste vara lägre än lägsta annonspriset"
       confirm_disable: "Är du säker du vill inaktivera %{gateway}? Om du inaktiverar detta betalningssystem kommer dina försäljare inte kunna ta emot pengar och köpare kommer inte kunna göra köp via detta betalningssystem. Om dina försäljare inte har aktiverat det andra betalsystemet kommer användare inte kunna köpa från dem."
+      commission_from_buyer_label: ~
+      minimum_buyer_transaction_fee_label: ~
       stripe_connected:
         title: "Stripe är kopplat"
         disable: "Inaktivera Stripe"
@@ -846,6 +907,7 @@ sv:
         enable: "Aktivera PayPal igen"
       cannot_enable_gateway: "Kan inte aktivera betalningssystemet %{gateway}"
       cannot_disable_gateway: "Kan inte inaktivera betalningssystemet %{gateway}"
+      cannot_enable_gateway_because_of_buyer_commission: ~
       stripe_form:
         add_your_api_keys: "Lägg till dina Stripe API nycklar"
         how_to_get_these: "Hur får jag dessa?"
@@ -971,6 +1033,7 @@ sv:
       quantity_label: "Antal:"
       sum_label: "Delsumma:"
       service_fee_label: "%{service_name} avgift:"
+      buyer_service_fee_label: ~
       you_will_get_label: "Du kommer att få:"
       total_label: "Totalt:"
       total_value: "%{seller_gets}*"
@@ -1016,6 +1079,7 @@ sv:
     message:
       accepted_request: "accepterade förfrågan"
       received_payment: "accepterade förfrågan, mottog betalningen för %{sum}"
+      received_payment_wo_sum: ~
       accepted_offer: "acceptera erbjudandet"
       rejected_request: "avslagit förfrågan, betalningen är avbruten"
       rejected_offer: "avslagit erbjudandet"
@@ -1025,8 +1089,10 @@ sv:
       canceled_offer: "avbröt erbjudandet"
       paid: "Betalt %{sum}"
       payment_preauthorized: "Betalningen är auktoriserad: %{sum}"
+      payment_preauthorized_wo_sum: ~
       stripe:
         held_payment: "Accepterade förfrågan. Betalningen för %{sum} hålls av %{service_name} tills förfrågan har blivit markerad som slutförd."
+        held_payment_wo_sum: ~
         confirmed_request: "Markerade förfrågan som slutförd. Betalningen har nu överförts till %{author_name} bankkonto eller kommer snart att överföras."
     new:
       message: Meddelande
@@ -1241,7 +1307,9 @@ sv:
       shipping_total: "Leverans:"
       product: "Produkt:"
       price_payer_paid: "Pris som %{payer_full_name} har betalat:"
+      subtotal: ~
       service_fee: "%{service_name} serviceavgift:"
+      buyer_service_fee: ~
       you_will_get: "Totalt:"
       new_payment: "Du har fått en ny inbetalning"
       price_per_unit_type: "Pris per %{unit_type}"
@@ -1257,6 +1325,7 @@ sv:
       duration: Varaktighet
       quantity: "Antal:"
       subtotal: "Delsumma:"
+      buyer_service_fee: ~
       total: Totalt
       price: Pris
       service_fee: Serviceavgift
@@ -1281,7 +1350,7 @@ sv:
       subtotal: "Delsumma:"
       total: Totalt
       price: Pris
-      service_fee: Serviceavgift
+      buyer_service_fee: ~
       stripe_gateway_fee: "Stripes avgift:"
       paypal_gateway_fee: "PayPals avgift:"
       money_will_be_transferred: "Pengarna kommer att överföras till %{recipient_name} när a) du har markerat förfrågan som slutförd eller b)%{automatic_confirmation_days} dagar har passerat sedan du betalade."
@@ -1349,6 +1418,24 @@ sv:
       this_is_automatic_message: "Detta är ett automatisk meddelande skickat åt administratörerna av %{community}."
       person_name: "Namn:"
       person_email: "E-post:"
+    listing_submited_for_review:
+      subject: ~
+      there_is_a_new_listing_to_review: ~
+      review_the_listing: ~
+      this_is_automatic_message: ~
+    listing_approved:
+      subject: ~
+      listing_has_been_approved: ~
+      view_the_listing: ~
+    listing_rejected:
+      subject: ~
+      listing_has_been_rejected: ~
+      contact_link: ~
+      edit_the_listing: ~
+    edited_listing_submited_for_review:
+      subject: ~
+      there_is_a_edited_listing_to_review: ~
+      review_the_listing: ~
   error_messages:
     booking:
       booking_failed_payment_voided: "Bokningen misslyckades på grund av ett oväntat fel. Vänligen försök igen senare. Du har inte blivit debiterad."
@@ -1815,6 +1902,10 @@ sv:
       show_in_updates_email_loading: Laddar...
       show_in_updates_email_error: "Det gick inte att nå servern. Försök igen efter att du laddat om sidan."
       show_in_updates_email_success: "Dessa annonser kommer att visas i nästa automatiska uppdateringsmail som skickas till användarna."
+      listing_is_pending: ~
+      listing_is_rejected: ~
+      approve_listing: ~
+      reject_listing: ~
     map:
       open_in_google_maps: "Öppna i Google Maps"
     error:
@@ -1895,6 +1986,9 @@ sv:
         origin: Ursprung
       send_button:
         save_listing: "Spara annons"
+        submit_for_review: ~
+        will_be_reviewed: ~
+        we_noticed_youre_an_admin: ~
       share_type:
         select: Välj
         borrow: Utlåning
@@ -1974,6 +2068,7 @@ sv:
       select_one: "Välj en"
       start_time: Starttid
       end_time: Sluttid
+      marketplace_fees_may_apply: ~
     new:
       listing: annons
       selected_category: "Kategori: %{category}"
@@ -2257,7 +2352,7 @@ sv:
       show_all_listings: "Visa alla annonser"
       show_all_open_listings: "Visa alla öppna annonser"
       show_all_reviews: "Visa alla recensioner"
-      admin_actions: ~
+      admin_actions: "Admin åtgärder"
       post_listing_as: "Skapa annons som"
     followed_people:
       you_follow_plural: "Du följer %{count} person"
@@ -2695,6 +2790,7 @@ sv:
       address_kanji_line1: ~
       male: ~
       female: ~
+      mcc: ~
     form_bank:
       bank_account_number: Bankkontonummer
       bank_routing_number: Clearingnummer
@@ -2743,3 +2839,12 @@ sv:
     wrong_setup: "Det är något fel med marknadsplatsens betalsystem, platformen har inte blivit registrerad. Vänligen kontakta marknadsplatsens administratörer och meddela att de bör registrera platformen hos Stripe."
     invalid_bank_account_number: "Vänligen kontrollera att ditt banknummer är skrivet rätt och matchar ditt valda land."
     invalid_postal_code: "Ogiltig postnummer för %{country}"
+  seo_sections:
+    you_can_use_variables: ~
+    placeholder:
+      search_results: ~
+      search_results_for: ~
+      listing_description: ~
+      category_description: ~
+      profile_title: ~
+      profile_description: ~

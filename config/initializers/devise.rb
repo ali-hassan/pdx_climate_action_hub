@@ -258,14 +258,15 @@ Devise.setup do |config|
   
 
   config.omniauth :facebook,
-                  setup: true,
+                  setup: Person::OmniauthService::SetupPhase,
                   client_options: {
                     site: "https://graph.facebook.com/#{facebook_api_version}",
                     authorize_url: "https://www.facebook.com/#{facebook_api_version}/dialog/oauth"
                   }
 
   # config.omniauth :google_oauth2, setup: true
-  config.omniauth :linkedin, setup: true
+  config.omniauth :google_oauth2, setup: Person::OmniauthService::SetupPhase
+  config.omniauth :linkedin, setup: Person::OmniauthService::SetupPhase
 
   # ==> Warden configuration
   # see config/initializers/warden.rb

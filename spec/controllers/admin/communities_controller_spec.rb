@@ -20,17 +20,6 @@ describe Admin::CommunitiesController, type: :controller do
     end
   end
 
-  describe "#update_settings" do
-    it "should allow changing 'private'" do
-      update_community_with(:update_settings, private: true)
-    end
-
-    it "should not allow changes to a different community" do
-      attempt_to_update_different_community_with(:update_settings, private: true)
-    end
-
-  end
-
   describe "#update_look_and_feel" do
     it "should allow changing custom_color1" do
       update_community_with(:update_look_and_feel, custom_color1: "8C1515")
@@ -118,6 +107,35 @@ describe Admin::CommunitiesController, type: :controller do
           linkedin_connect_enabled: true,
           linkedin_connect_id: '678',
           linkedin_connect_secret: 'IJK'
+        }
+      }
+      @community.reload
+      expect(@community.twitter_handle).to eql('ABC')
+      expect(@community.facebook_connect_enabled).to eql(true)
+      expect(@community.facebook_connect_id).to eql('123')
+      expect(@community.facebook_connect_secret).to eql('46a4591952bdc5c00cfba5a607885f8a')
+      expect(@community.google_connect_enabled).to eql(true)
+      expect(@community.google_connect_id).to eql('345')
+      expect(@community.google_connect_secret).to eql('FGH')
+      expect(@community.linkedin_connect_enabled).to eql(true)
+      expect(@community.linkedin_connect_id).to eql('678')
+      expect(@community.linkedin_connect_secret).to eql('IJK')
+    end
+
+    it 'strips spaces from connect fields' do
+      put :update_social_media, params: {
+        id: @community.id,
+        community: {
+          twitter_handle: ' ABC ',
+          facebook_connect_enabled: true,
+          facebook_connect_id: '    123 ',
+          facebook_connect_secret: '   46a4591952bdc5c00cfba5a607885f8a ',
+          google_connect_enabled: true,
+          google_connect_id: '  345  ',
+          google_connect_secret: '  FGH ',
+          linkedin_connect_enabled: true,
+          linkedin_connect_id: '  678  ',
+          linkedin_connect_secret: ' IJK  '
         }
       }
       @community.reload

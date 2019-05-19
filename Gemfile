@@ -1,7 +1,8 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 ruby '2.3.4'
-gem 'rails', '5.1.6.1'
+
+gem 'rails', '5.1.6.2'
 
 gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '~> 3.2.0'
@@ -48,9 +49,9 @@ gem 'delayed_job_active_record', '~> 4.1.2'
 
 gem 'web_translate_it', '~> 2.4.1'
 gem 'rails-i18n', '~> 5.0.4'
-gem 'devise', '~> 4.3.0'
+gem 'devise', '>= 4.6.1'
 gem 'devise-encryptable', '~> 0.2.0'
-gem "omniauth-facebook", '~> 4.0.0'
+gem "omniauth-facebook", '~> 5.0.0'
 gem "omniauth-google-oauth2", '>= 0.6.0'
 gem "omniauth-linkedin-oauth2", '>= 1.0.0'
 
@@ -73,9 +74,9 @@ gem 'stringex', '~> 2.7.1'
 gem 'paypal-sdk-permissions', '~> 1.96.4'
 gem 'paypal-sdk-merchant', '~> 1.116.0'
 gem 'airbrake', '~> 6.1.2'
-gem 'stripe', '~> 3.0.0'
 gem 'simple_form'
 gem 'cocoon'
+gem 'stripe', '~> 4.9.0'
 
 gem 'lograge', '~> 0.5.1'
 gem 'public_suffix', '~> 2.0.5' # Needed currently to set GA hostname right, probably not
@@ -84,7 +85,7 @@ gem 'public_suffix', '~> 2.0.5' # Needed currently to set GA hostname right, pro
 # Session store was removed from Rails 4
 gem 'activerecord-session_store', '~> 1.1.0'
 
-gem 'faraday', '~> 0.11.0'
+gem 'faraday', '~> 0.13.0'
 gem 'faraday_middleware', '~> 0.11.0'
 gem 'faraday-encoding', '~> 0.0.4'
 
@@ -100,6 +101,8 @@ gem "request_store", '~> 1.3.2'
 
 # ActionMailer dependency that needs forced update for security patch
 gem 'mail', '~> 2.6.6.rc1'
+
+gem 'tzinfo-data', '~> 1.2017', '>= 1.2017.2'
 
 group :staging, :production do
   gem 'newrelic_rpm', '~> 4.2.0.334'
@@ -128,18 +131,17 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~> 2.6.2'
+  gem 'capybara', '~> 2.18.0'
   gem "rspec-rails", '~> 3.6.0'
 
   gem 'cucumber-rails', '~> 1.5.0', require: false # require: false is needed for cucumber-rails
 
-  gem 'selenium-webdriver', '~> 2.53.4'
+  gem 'selenium-webdriver', '~> 3.6.0'
 
   # Launchy is needed by Capybara, e.g. save_and_open command needs Launchy to open a browser
   gem 'launchy', '~> 2.1'
   gem 'email_spec', '~> 2.1.1'
   gem 'timecop', '~> 0.8.1'
-  gem 'rack-test', '~> 0.6.3'
   gem 'database_cleaner', '~> 1.6.1'
   gem 'connection_pool', '~> 2.2.1'
   gem 'rails-controller-testing', '~> 1.0.2'
@@ -147,7 +149,7 @@ group :test do
   # required for CircleCI automatic test balancing
   gem 'rspec_junit_formatter'
 
-  gem 'fake_stripe', git: 'https://github.com/ithouse/fake_stripe.git', ref: '6848daab104333b2c0c493ab069731d4a0b87f6f'
+  gem 'fake_stripe', git: 'https://github.com/ithouse/fake_stripe.git', ref: '42b9dd09a1db3fb2b7ec11809ac93647f178a115'
 end
 
 group :development, :test do

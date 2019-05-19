@@ -242,6 +242,7 @@ nl:
         update_settings: "Instellingen opslaan"
         automatically_confirmed_no_escrow: "%{days_dropdown} dagen nadat de betaling is uitgevoerd, zal de transactie automatisch als afgerond worden gemarkeerd"
         automatically_confirmed_no_escrow_stripe_info: "Voor transacties die worden verwerkt met Stripe wordt de betaling aan de leveranciers uitgesteld totdat de bestelling als voltooid is gemarkeerd. %{learn_more}"
+        buyer_transaction_fees_are_only_supported_with_stripe: ~
         automatic_newsletter_frequency: "Zend automatische nieuwsbrief: %{frequency_dropdown}"
         newsletter_daily: Dagelijks
         newsletter_weekly: Wekelijks
@@ -255,6 +256,7 @@ nl:
         you_will_be_redirected_to: "Nadat je jouw marktplaats hebt verwijderd word je doorgelinkt naar %{destination}. Je hebt dan niet langer toegang tot je marktplaats."
         delete_this_marketplace: "Verwijder deze marktplaats"
         payment_preferences: Betalingsysteem
+        pre_approved_listings: ~
       manage_members:
         manage_members: Gebruikers
         email: E-mail
@@ -334,12 +336,59 @@ nl:
         google_connect_id: "Google client id"
         google_connect_secret: "Google client secret"
         linkedin_connect: "LinkedIn Sign in"
-        linkedin_instructions_link_text: "Zie instructies voor het configureren van Linkedin Sign In"
+        linkedin_instructions_link_text: "Zie instructies voor het configureren van Linkedin Sign In."
         linkedin_connect_info_text_with_instructions: "Voor het instellen van LinkedIn Sign In, creeer een app voor je marktplaats in de <a href='https://www.linkedin.com/developers/'>LinkedIn developers dashboard</a>. Voeg de gegenereerde ID en secret key van de app hier toe. %{instructions_link}"
         linkedin_connect_info_text: "Voor het instellen van LinkedIn Sign In, creeer een app voor je marktplaats in de <a href='https://www.linkedin.com/developers/'>LinkedIn developers dashboard</a>. Voeg de gegenereerde ID en secret key van de app hier toe."
         enable_linkedin_login: "Sta gebruikers toe om in te loggen met hun LinkedIn account"
         linkedin_connect_id: "LinkedIn client id"
         linkedin_connect_secret: "LinkedIn client secret"
+      seo_settings:
+        seo: ~
+        title: ~
+        meta_title_label: ~
+        meta_title_info: ~
+        meta_title_link_text: ~
+        meta_description_label: ~
+        meta_description_info: ~
+        meta_description_link_text: ~
+        search_title: ~
+        search_meta_title_label: ~
+        search_meta_title_info: ~
+        search_meta_title_link_text: ~
+        search_meta_description_label: ~
+        search_meta_description_info: ~
+        search_meta_description_link_text: ~
+        listing_title: ~
+        listing_meta_title_label: ~
+        listing_meta_title_info: ~
+        listing_meta_title_link_text: ~
+        listing_meta_description_label: ~
+        listing_meta_description_info: ~
+        listing_meta_description_link_text: ~
+        category_title: ~
+        category_meta_title_label: ~
+        category_meta_title_info: ~
+        category_meta_title_link_text: ~
+        category_meta_description_label: ~
+        category_meta_description_info: ~
+        category_meta_description_link_text: ~
+        profile_title: ~
+        profile_meta_title_label: ~
+        profile_meta_title_info: ~
+        profile_meta_title_link_text: ~
+        profile_meta_description_label: ~
+        profile_meta_description_info: ~
+        profile_meta_description_link_text: ~
+        sitemap_label: ~
+        sitemap_info: ~
+        sitemap_info_link_text: ~
+        sitemap_info_public: ~
+        sitemap_info_private: ~
+        robots_label: ~
+        robots_info: ~
+        robots_info_link_text: ~
+        robots_info_2: ~
+        save: ~
       analytics:
         analytics: Analytics
         google_analytics_key: "Google Analytics tracking ID"
@@ -523,6 +572,8 @@ nl:
           open: Open
           closed: Gesloten
           expired: Verlopen
+          approval_pending: ~
+          approval_rejected: ~
         headers:
           title: Titel
           author: Auteur
@@ -533,6 +584,14 @@ nl:
         open: Open
         closed: Gesloten
         expired: Verlopen
+        approved: ~
+        approval_pending: ~
+        approval_rejected: ~
+        form:
+          this_listing_has_not_not_been_approved_yet: ~
+          approve: ~
+          reject: ~
+          cancel: ~
       user_fields:
         user_fields: Gebruikersvelden
       footer:
@@ -837,6 +896,8 @@ nl:
       stripe_fee_notice: "%{stripe_fee_link} wordt afgetrokken van de commissie die jij in rekening brengt."
       fee_should_be_less_than_minimum_price: "Minimale transactiekosten dienen lager te zijn dan de minimale transactieomvang."
       confirm_disable: "Weet je zeker dat je %{gateway} wilt uitschakelen? Als je dit uitschakelt, zijn leveranciers niet meer in staat geld te ontvangen en kopers niet meer in staat te betalen met deze methode. Als leveranciers nog geen andere methoden hebben geconfigureerd, kan er van hen niet gekocht worden."
+      commission_from_buyer_label: ~
+      minimum_buyer_transaction_fee_label: ~
       stripe_connected:
         title: "Stripe gekoppeld"
         disable: "Schakel Stripe uit"
@@ -849,6 +910,7 @@ nl:
         enable: "Schakel PayPal weer in"
       cannot_enable_gateway: "Kan betaalmethode %{gateway} niet inschakelen."
       cannot_disable_gateway: "Kan betaalmethode %{gateway} niet uitschakelen."
+      cannot_enable_gateway_because_of_buyer_commission: ~
       stripe_form:
         add_your_api_keys: "Voeg je Stripe API keys toe"
         how_to_get_these: "Hoe krijg ik deze?"
@@ -974,6 +1036,7 @@ nl:
       quantity_label: "Aantal:"
       sum_label: "Subtotaal:"
       service_fee_label: "%{service_name} kost:"
+      buyer_service_fee_label: ~
       you_will_get_label: "Je krijgt:"
       total_label: "Totaal:"
       total_value: "%{seller_gets}*"
@@ -1019,6 +1082,7 @@ nl:
     message:
       accepted_request: "heeft het verzoek aanvaard"
       received_payment: "accepteerde het verzoek, ontving betaling voor %{sum}"
+      received_payment_wo_sum: ~
       accepted_offer: "heeft het voorstel aanvaard"
       rejected_request: "heeft het verzoek niet aanvaard, betaling geannuleerd"
       rejected_offer: "heeft het voorstel niet aanvaard"
@@ -1028,8 +1092,10 @@ nl:
       canceled_offer: "heeft het voorstel geannuleerd"
       paid: "betaald %{sum}"
       payment_preauthorized: "Betaling gemachtigd: %{sum}"
+      payment_preauthorized_wo_sum: ~
       stripe:
         held_payment: "Verzoek geaccepteerd. De betaling voor %{sum} wordt vastgehouden door %{service_name} totdat de bestelling als voltooid wordt gemarkeerd."
+        held_payment_wo_sum: ~
         confirmed_request: "Bestelling is gemarkeerd als voltooid. De betaling is nu of zal spoedig worden overgemaakt naar %{author_name}'s rekening."
     new:
       message: Bericht
@@ -1244,7 +1310,9 @@ nl:
       shipping_total: "Verzenden:"
       product: "Product:"
       price_payer_paid: "Prijs die %{payer_full_name} betaalde:ie"
+      subtotal: ~
       service_fee: "%{service_name} service toeslag:"
+      buyer_service_fee: ~
       you_will_get: "Totaal:"
       new_payment: "Je hebt een nieuwe betaling ontvangen"
       price_per_unit_type: "Prijs per %{unit_type}"
@@ -1260,6 +1328,7 @@ nl:
       duration: Duur
       quantity: Aantal
       subtotal: Subtotaal
+      buyer_service_fee: ~
       total: Totaal
       price: Prijs
       service_fee: Servicetoeslag
@@ -1284,7 +1353,7 @@ nl:
       subtotal: Subtotaal
       total: Totaal
       price: Prijs
-      service_fee: "Service toeslag"
+      buyer_service_fee: ~
       stripe_gateway_fee: "toeslag Stripe"
       paypal_gateway_fee: "toeslag Stripe"
       money_will_be_transferred: "Het geld zal overgemaakt worden naar %{recipient_name} wanneer a) je het verzoek als afgehandeld hebt gemarkeerd of b) wanneer er %{automatic_confirmation_days} dagen verstreken zijn sinds jouw betaling."
@@ -1350,6 +1419,24 @@ nl:
       this_is_automatic_message: "Dit is een automatisch bericht, verzonden naar de beheerders van %{community}."
       person_name: "Naam:"
       person_email: "Email:"
+    listing_submited_for_review:
+      subject: ~
+      there_is_a_new_listing_to_review: ~
+      review_the_listing: ~
+      this_is_automatic_message: ~
+    listing_approved:
+      subject: ~
+      listing_has_been_approved: ~
+      view_the_listing: ~
+    listing_rejected:
+      subject: ~
+      listing_has_been_rejected: ~
+      contact_link: ~
+      edit_the_listing: ~
+    edited_listing_submited_for_review:
+      subject: ~
+      there_is_a_edited_listing_to_review: ~
+      review_the_listing: ~
   error_messages:
     booking:
       booking_failed_payment_voided: "Boeking mislukt door een onverwachte fout. Probeer het later opnieuw. Er is niets in rekening gebracht."
@@ -1816,6 +1903,10 @@ nl:
       show_in_updates_email_loading: Laden...
       show_in_updates_email_error: "Kan de server niet bereiken. Probeer opnieuw na herladen van de pagina."
       show_in_updates_email_success: "Deze advertentie zal getoond worden in de volgende automatische update e-mail die naar gebruikers verstuurd wordt"
+      listing_is_pending: ~
+      listing_is_rejected: ~
+      approve_listing: ~
+      reject_listing: ~
     map:
       open_in_google_maps: "Open in Google Maps"
     error:
@@ -1896,6 +1987,9 @@ nl:
         origin: Oorsprong
       send_button:
         save_listing: "Plaats advertentie"
+        submit_for_review: ~
+        will_be_reviewed: ~
+        we_noticed_youre_an_admin: ~
       share_type:
         select: Selecteer
         borrow: Lenen
@@ -1975,6 +2069,7 @@ nl:
       select_one: "Selecteer er een"
       start_time: Starttijd
       end_time: Eindtijd
+      marketplace_fees_may_apply: ~
     new:
       listing: advertentie
       selected_category: "Categorie: %{category}"
@@ -2704,6 +2799,7 @@ nl:
       address_kanji_line1: "Adres (in Kanji)"
       male: man
       female: vrouw
+      mcc: ~
     form_bank:
       bank_account_number: Bankrekeningnummer
       bank_routing_number: "Routing nummer"
@@ -2752,3 +2848,12 @@ nl:
     wrong_setup: "Er is iets mis met de instellingen van het betalingssysteem op deze marktplaats: Stripe Connect is niet ingeschakeld. Neem contact op met het team om ze te laten weten dat ze Stripe Connect moeten inschakelen op hun Stripe Dashboard."
     invalid_bank_account_number: "Controleer aub of je bankrekeningnummer correct is ingevoerd en met je land overeenkomt."
     invalid_postal_code: "Ongeldige postcode voor %{country}"
+  seo_sections:
+    you_can_use_variables: ~
+    placeholder:
+      search_results: ~
+      search_results_for: ~
+      listing_description: ~
+      category_description: ~
+      profile_title: ~
+      profile_description: ~

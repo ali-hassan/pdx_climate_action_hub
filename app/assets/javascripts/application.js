@@ -100,6 +100,7 @@
 //= require ckeditor/init
 //= require ckeditor/config
 //= require stripe_form
+//= require stripe_form2
 //= require analytics
 //= require social-insurance-number
 //= require_self

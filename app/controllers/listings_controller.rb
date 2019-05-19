@@ -58,7 +58,7 @@ class ListingsController < ApplicationController
   def listing_bubble
     if params[:id]
       @listing = Listing.find(params[:id])
-      if @listing.visible_to?(@current_user, @current_community)
+      if Policy::ListingPolicy.new(@listing, @current_community, @current_user).visible?
         render :partial => "homepage/listing_bubble", :locals => { :listing => @listing }
       else
         render :partial => "bubble_listing_not_visible"
@@ -137,6 +137,7 @@ class ListingsController < ApplicationController
 
     make_listing_presenter
     @listing_presenter.form_path = new_transaction_path(listing_id: @listing.id)
+    @seo_service.listing = @listing
 
     record_event(
       flash.now,
@@ -190,15 +191,18 @@ class ListingsController < ApplicationController
     end
 
     @listing = Listing.new(result.data)
+    service = Admin::ListingsService.new(community: @current_community, params: params, person: @current_user)
 
     ActiveRecord::Base.transaction do
       @listing.author = new_listing_author
+      service.create_state(@listing)
 
       if @listing.save
         @listing.update(external_payment_link: params[:external_payment_link])
         @listing.upsert_field_values!(params.to_unsafe_hash[:custom_fields])
         @listing.reorder_listing_images(params, @current_user.id)
         notify_about_new_listing
+        service.create_successful(@listing)
 
         if shape.booking?
           anchor = shape.booking_per_hour? ? 'manage-working-hours' : ''
@@ -256,6 +260,8 @@ class ListingsController < ApplicationController
     end
 
     listing_params = result.data.merge(@listing.closed? ? {open: true} : {})
+    service = Admin::ListingsService.new(community: @current_community, params: params, person: @current_user)
+    listing_params.merge!(service.update_by_author_params(@listing))
 
     old_availability = @listing.availability.to_sym
     update_successful = @listing.update_fields(listing_params)
@@ -273,6 +279,7 @@ class ListingsController < ApplicationController
       flash[:notice] = update_flash(old_availability: old_availability, new_availability: shape[:availability])
       Delayed::Job.enqueue(ListingUpdatedJob.new(@listing.id, @current_community.id))
       reprocess_missing_image_styles(@listing) if @listing.closed?
+      service.update_by_author_successful(@listing)
       redirect_to @listing
     else
       logger.error("Errors in editing listing: #{@listing.errors.full_messages.inspect}")
@@ -480,7 +487,7 @@ class ListingsController < ApplicationController
 
     raise ListingDeleted if @listing.deleted?
 
-    unless @listing.visible_to?(@current_user, @current_community)
+    unless Policy::ListingPolicy.new(@listing, @current_community, @current_user).visible?
       if @current_user
         flash[:error] = if @listing.closed?
           t("layouts.notifications.listing_closed")

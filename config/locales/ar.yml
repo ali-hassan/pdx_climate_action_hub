@@ -225,6 +225,7 @@ ar:
         update_settings: "حفظ الإعدادات"
         automatically_confirmed_no_escrow: ~
         automatically_confirmed_no_escrow_stripe_info: "للعمليات الشرائية التي تتم من خلال سترب يتم تأخير الدفعات لمزود الخدمة إلى أن يتم تحديد الطلب بالمكتمل. ‎%{learn_more}‎"
+        buyer_transaction_fees_are_only_supported_with_stripe: ~
         automatic_newsletter_frequency: "‎%{frequency_dropdown}‎: أرسل نشرات إخبارية تلقائيا"
         newsletter_daily: يومي
         newsletter_weekly: أسبوعي
@@ -238,6 +239,7 @@ ar:
         you_will_be_redirected_to: ~
         delete_this_marketplace: ~
         payment_preferences: "نظام الدفع"
+        pre_approved_listings: ~
       manage_members:
         manage_members: "إدارة المستخدمين"
         email: "بريد إلكتروني"
@@ -323,6 +325,53 @@ ar:
         enable_linkedin_login: ~
         linkedin_connect_id: ~
         linkedin_connect_secret: ~
+      seo_settings:
+        seo: ~
+        title: ~
+        meta_title_label: ~
+        meta_title_info: ~
+        meta_title_link_text: ~
+        meta_description_label: ~
+        meta_description_info: ~
+        meta_description_link_text: ~
+        search_title: ~
+        search_meta_title_label: ~
+        search_meta_title_info: ~
+        search_meta_title_link_text: ~
+        search_meta_description_label: ~
+        search_meta_description_info: ~
+        search_meta_description_link_text: ~
+        listing_title: ~
+        listing_meta_title_label: ~
+        listing_meta_title_info: ~
+        listing_meta_title_link_text: ~
+        listing_meta_description_label: ~
+        listing_meta_description_info: ~
+        listing_meta_description_link_text: ~
+        category_title: ~
+        category_meta_title_label: ~
+        category_meta_title_info: ~
+        category_meta_title_link_text: ~
+        category_meta_description_label: ~
+        category_meta_description_info: ~
+        category_meta_description_link_text: ~
+        profile_title: ~
+        profile_meta_title_label: ~
+        profile_meta_title_info: ~
+        profile_meta_title_link_text: ~
+        profile_meta_description_label: ~
+        profile_meta_description_info: ~
+        profile_meta_description_link_text: ~
+        sitemap_label: ~
+        sitemap_info: ~
+        sitemap_info_link_text: ~
+        sitemap_info_public: ~
+        sitemap_info_private: ~
+        robots_label: ~
+        robots_info: ~
+        robots_info_link_text: ~
+        robots_info_2: ~
+        save: ~
       analytics:
         analytics: تحليلات
         google_analytics_key: ~
@@ -506,6 +555,8 @@ ar:
           open: ~
           closed: ~
           expired: ~
+          approval_pending: ~
+          approval_rejected: ~
         headers:
           title: ~
           author: ~
@@ -516,6 +567,14 @@ ar:
         open: ~
         closed: ~
         expired: ~
+        approved: ~
+        approval_pending: ~
+        approval_rejected: ~
+        form:
+          this_listing_has_not_not_been_approved_yet: ~
+          approve: ~
+          reject: ~
+          cancel: ~
       user_fields:
         user_fields: ~
       footer:
@@ -817,6 +876,8 @@ ar:
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
       confirm_disable: ~
+      commission_from_buyer_label: ~
+      minimum_buyer_transaction_fee_label: ~
       stripe_connected:
         title: ~
         disable: "تعطيل سترب"
@@ -829,6 +890,7 @@ ar:
         enable: "إعادة تفعيل باي بال"
       cannot_enable_gateway: "‎%{gateway}‎ لا يمكنك تفعيل طريقة الدفع ."
       cannot_disable_gateway: "‎%{gateway}‎ لا يمكنك تعطيل طريقة الدفع ."
+      cannot_enable_gateway_because_of_buyer_commission: ~
       stripe_form:
         add_your_api_keys: ~
         how_to_get_these: ~
@@ -952,6 +1014,7 @@ ar:
       quantity_label: "الكمية:"
       sum_label: "المجموع الفرعي:"
       service_fee_label: ":‎%{service_name}‎ رسوم خدمة"
+      buyer_service_fee_label: ~
       you_will_get_label: "ستحصل على:"
       total_label: "المجموع:"
       total_value: "*‎%{seller_gets}‎"
@@ -997,6 +1060,7 @@ ar:
     message:
       accepted_request: "قَبِل الطلب"
       received_payment: "‎%{sum}‎ قبل الطلب وتم استقبال دفعة بقيمة"
+      received_payment_wo_sum: ~
       accepted_offer: "قَبِل العرض"
       rejected_request: "رفض الطلب، وألغى عملية الشراء"
       rejected_offer: "ألغى العرض"
@@ -1006,8 +1070,10 @@ ar:
       canceled_offer: "ألغى العرض"
       paid: "‎%{sum}‎ تم دفع"
       payment_preauthorized: ~
+      payment_preauthorized_wo_sum: ~
       stripe:
         held_payment: ~
+        held_payment_wo_sum: ~
         confirmed_request: ~
     new:
       message: رسالة
@@ -1225,7 +1291,9 @@ ar:
       shipping_total: ~
       product: ~
       price_payer_paid: ~
+      subtotal: ~
       service_fee: ~
+      buyer_service_fee: ~
       you_will_get: ~
       new_payment: ~
       price_per_unit_type: ~
@@ -1241,6 +1309,7 @@ ar:
       duration: ~
       quantity: ~
       subtotal: ~
+      buyer_service_fee: ~
       total: ~
       price: ~
       service_fee: ~
@@ -1265,7 +1334,7 @@ ar:
       subtotal: "المجموع الجزئي"
       total: المجموع
       price: السعر
-      service_fee: "رسوم الخدمة"
+      buyer_service_fee: ~
       stripe_gateway_fee: ~
       paypal_gateway_fee: ~
       money_will_be_transferred: ~
@@ -1335,6 +1404,24 @@ ar:
       this_is_automatic_message: "‎%{community}‎ رسالة تلقائية مرسلة من قبل"
       person_name: "الإسم:"
       person_email: "البريد الإلكتروني:"
+    listing_submited_for_review:
+      subject: ~
+      there_is_a_new_listing_to_review: ~
+      review_the_listing: ~
+      this_is_automatic_message: ~
+    listing_approved:
+      subject: ~
+      listing_has_been_approved: ~
+      view_the_listing: ~
+    listing_rejected:
+      subject: ~
+      listing_has_been_rejected: ~
+      contact_link: ~
+      edit_the_listing: ~
+    edited_listing_submited_for_review:
+      subject: ~
+      there_is_a_edited_listing_to_review: ~
+      review_the_listing: ~
   error_messages:
     booking:
       booking_failed_payment_voided: "فشل في الحجز بسبب خطأ غير معروف. يرجى المحاولة مرة أخرى. لم يتم احتساب أي تكلفة عليك."
@@ -1797,6 +1884,10 @@ ar:
       show_in_updates_email_loading: "جاري التحميل..."
       show_in_updates_email_error: "تعذر الوصول إلى الخادم. رجاء قم بإعادة تهيئة الصفحة وحاول مرة أخرى"
       show_in_updates_email_success: ~
+      listing_is_pending: ~
+      listing_is_rejected: ~
+      approve_listing: ~
+      reject_listing: ~
     map:
       open_in_google_maps: "افتح بواسطة خرائط جوجل"
     error:
@@ -1877,6 +1968,9 @@ ar:
         origin: الأصل
       send_button:
         save_listing: "حفظ الإعلان"
+        submit_for_review: ~
+        will_be_reviewed: ~
+        we_noticed_youre_an_admin: ~
       share_type:
         select: اختر
         borrow: استعارة
@@ -1956,6 +2050,7 @@ ar:
       select_one: ~
       start_time: ~
       end_time: ~
+      marketplace_fees_may_apply: ~
     new:
       listing: إعلان
       selected_category: "‎%{category}‎ :قسم"
@@ -2675,6 +2770,7 @@ ar:
       address_kanji_line1: ~
       male: ~
       female: ~
+      mcc: ~
     form_bank:
       bank_account_number: ~
       bank_routing_number: ~
@@ -2723,3 +2819,12 @@ ar:
     wrong_setup: ~
     invalid_bank_account_number: ~
     invalid_postal_code: ~
+  seo_sections:
+    you_can_use_variables: ~
+    placeholder:
+      search_results: ~
+      search_results_for: ~
+      listing_description: ~
+      category_description: ~
+      profile_title: ~
+      profile_description: ~
