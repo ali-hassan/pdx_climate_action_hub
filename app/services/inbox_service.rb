@@ -97,7 +97,7 @@ module InboxService
       conversation_ids: conversation_ids
     )
 
-    connection.select_value(sql)
+    connection.select_value(sql) == 1 ? 0 : connection.select_value(sql)
   end
 
   def query_inbox_data(person_id, community_id, limit, offset)
