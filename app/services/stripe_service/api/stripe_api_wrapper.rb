@@ -9,7 +9,7 @@ class StripeService::API::StripeApiWrapper
     end
 
     def configure_payment_for(settings)
-      Stripe.api_version = '2017-06-05'
+      Stripe.api_version = '2019-02-19'
       Stripe.api_key = settings.api_private_key
     end
 
@@ -107,11 +107,16 @@ class StripeService::API::StripeApiWrapper
           payout_mode = {}
         when :destination
           # managed accounts, make payout after completion om funds availability date
-          payout_mode = {
-            payout_schedule: {
-              interval: 'manual'
+          payout_mode =
+            {
+              settings: {
+                payouts: {
+                  schedule: {
+                    interval: 'manual'
+                  }
+                }
+              }
             }
-          }
         end
         data = {
           type: 'custom',
@@ -119,6 +124,13 @@ class StripeService::API::StripeApiWrapper
           email: account_info[:email],
           account_token: account_info[:token],
         }
+        if account_info[:address_country] == 'US'
+          data[:requested_capabilities] = ['card_payments']
+          data[:business_profile] = {
+            mcc: account_info[:mcc],
+            url: account_info[:url]
+          }
+        end
         data.deep_merge!(payout_mode).deep_merge!(metadata: metadata)
         Stripe.api_key = APP_CONFIG.feature_stripe_private_key
         Stripe::Account.create(data)
@@ -129,7 +141,7 @@ class StripeService::API::StripeApiWrapper
       with_stripe_payment_config(community) do |payment_settings|
         Stripe::Balance.retrieve
       end
-    rescue => e
+    rescue
       nil
     end
 
@@ -249,10 +261,14 @@ class StripeService::API::StripeApiWrapper
       end
     end
 
-    def update_account(community:, account_id:, token:)
+    def update_account(community:, account_id:, attrs:)
       with_stripe_payment_config(community) do |payment_settings|
         account = Stripe::Account.retrieve(account_id)
-        account.account_token = token
+        account.account_token = attrs[:token]
+        if attrs[:address_country] == 'US'
+          account.business_profile.mcc = attrs[:mcc]
+          account.business_profile.url = attrs[:url]
+        end
         account.save
       end
     end

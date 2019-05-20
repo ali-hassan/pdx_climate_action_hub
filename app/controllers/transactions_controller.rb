@@ -272,7 +272,7 @@ class TransactionsController < ApplicationController
         "layouts.notifications.you_cannot_reply_to_a_closed_offer"
       elsif listing_model.author == current_user
        "layouts.notifications.you_cannot_send_message_to_yourself"
-      elsif !listing_model.visible_to?(current_user, current_community)
+      elsif !Policy::ListingPolicy.new(listing_model, current_community, current_user).visible?
         "layouts.notifications.you_are_not_authorized_to_view_this_content"
       end
 
@@ -378,7 +378,7 @@ class TransactionsController < ApplicationController
         quantity: quantity,
         subtotal: show_subtotal ? tx.item_total : nil,
         total: Maybe(tx.payment_total).or_else(payment[:total_price]),
-        seller_gets: Maybe(tx.payment_total).or_else(payment[:total_price]) - tx.commission,
+        seller_gets: Maybe(tx.payment_total).or_else(payment[:total_price]) - tx.commission - tx.buyer_commission,
         fee: tx.commission,
         shipping_price: tx.shipping_price,
         total_label: total_label,
@@ -386,6 +386,7 @@ class TransactionsController < ApplicationController
         per_hour: booking_per_hour,
         start_time: booking_per_hour ? tx.booking.start_time : nil,
         end_time: booking_per_hour ? tx.booking.end_time : nil,
+        buyer_fee: tx.buyer_commission
       })
     end
   end

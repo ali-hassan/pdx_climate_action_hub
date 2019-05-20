@@ -67,6 +67,7 @@ ICON_MAP = {
       "link" => "ss-link",
       "external_link" => "ss-action",
       "social_media" => "ss-share",
+      "seo" => "ss-desktop",
       "analytics" => "ss-analytics",
       "openbook" => "ss-openbook",
       "order_types" => "ss-cart",
@@ -166,6 +167,8 @@ ICON_MAP = {
       "footer_menu" => "ss-downloadbox",
       "invitations" => "ss-adduser",
       "domain" => "ss-globe",
+      "pending" => "ss-clockwise",
+      "minus" => "ss-hyphen",
     },
     "font-awesome" => {
       "map" => "icon-map-marker",
@@ -282,5 +285,8 @@ ICON_MAP = {
       "invitations" => "icon-random",
       "plus" => "icon-plus",
       "domain" => "icon-globe",
+      "seo" => "icon-external-link",
+      "pending" => "icon-time",
+      "minus" => "icon-minus",
     }
   }

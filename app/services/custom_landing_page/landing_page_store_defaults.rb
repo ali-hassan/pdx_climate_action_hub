@@ -8,8 +8,12 @@ module CustomLandingPage
     DEFAULT_SOCIAL_DATA = {
       "page" => {
         "social_media_title"       => { "type" => "marketplace_data", "id" => "social_media_title" },
-        "social_media_description" => { "type" => "marketplace_data", "id" => "social_media_description" }
+        "social_media_description" => { "type" => "marketplace_data", "id" => "social_media_description" },
+        "meta_description" => { "type" => "marketplace_data", "id" => "meta_description" }
       }
+    }.freeze
+    DEFAULT_FOOTER_DATA = {
+      "logo"  => { "type" => "marketplace_data", "id" => "logo" }
     }.freeze
 
     module_function
@@ -27,6 +31,8 @@ module CustomLandingPage
         case kind
         when "info", "categories", "listings"
           DEFAULT_PARAGRAPH_LINK_COLORS.merge(section)
+        when "footer"
+          DEFAULT_FOOTER_DATA.merge(section)
         else
           section
         end

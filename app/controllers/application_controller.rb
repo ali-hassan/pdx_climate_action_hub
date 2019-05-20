@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   include Analytics
   include RefererHider
   include HSTS::Concern
+  include EnsureAdmin
   protect_from_forgery
   layout 'application'
 
@@ -30,6 +31,7 @@ class ApplicationController < ActionController::Base
     :redirect_removed_locale,
     :set_locale,
     :redirect_locale_param,
+    :setup_seo_service,
     :fetch_community_admin_status,
     :warn_about_missing_payment_info,
     :set_homepage_path,
@@ -440,20 +442,6 @@ class ApplicationController < ActionController::Base
     date && date.to_date.eql?(comp)
   end
 
-  def ensure_is_admin
-    unless @is_current_community_admin
-      flash[:error] = t("layouts.notifications.only_kassi_administrators_can_access_this_area")
-      redirect_to search_path and return
-    end
-  end
-
-  def ensure_is_superadmin
-    unless Maybe(@current_user).is_admin?.or_else(false)
-      flash[:error] = t("layouts.notifications.only_kassi_administrators_can_access_this_area")
-      redirect_to search_path and return
-    end
-  end
-
   def fetch_translations
     WebTranslateIt.fetch_translations
   end
@@ -643,5 +631,9 @@ class ApplicationController < ActionController::Base
     if params[:disarm].present? && !ActiveModel::Type::Boolean::FALSE_VALUES.include?(params[:disarm])
       @disable_custom_head_script = true
     end
+  end
+
+  def setup_seo_service
+    @seo_service = SeoService.new(@current_community, params)
   end
 end

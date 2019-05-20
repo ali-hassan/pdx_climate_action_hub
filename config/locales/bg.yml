@@ -225,6 +225,7 @@ bg:
         update_settings: ~
         automatically_confirmed_no_escrow: ~
         automatically_confirmed_no_escrow_stripe_info: ~
+        buyer_transaction_fees_are_only_supported_with_stripe: ~
         automatic_newsletter_frequency: ~
         newsletter_daily: ~
         newsletter_weekly: ~
@@ -238,6 +239,7 @@ bg:
         you_will_be_redirected_to: ~
         delete_this_marketplace: ~
         payment_preferences: ~
+        pre_approved_listings: ~
       manage_members:
         manage_members: ~
         email: ~
@@ -323,6 +325,53 @@ bg:
         enable_linkedin_login: ~
         linkedin_connect_id: ~
         linkedin_connect_secret: ~
+      seo_settings:
+        seo: SEO
+        title: "Начална страница или персонализирана целева страница"
+        meta_title_label: "Meta tag на заглавие на начална страница или персонализирана целева страница"
+        meta_title_info: "Съдържанието на този етикет е препоръчано на търсачките и е изобразено в резултатите под формата на заглавие на което да се кликне. %{link}"
+        meta_title_link_text: "Научи още за meta tags"
+        meta_description_label: "Meta tag на описание на начална страница или персонализирана целева страница"
+        meta_description_info: "Съдържанието на този етикет е препоръчано на търсачките и се появява под сините линкове в страницата с резултати на търсачките. %{link}"
+        meta_description_link_text: "Научи още за meta tags"
+        search_title: ~
+        search_meta_title_label: ~
+        search_meta_title_info: ~
+        search_meta_title_link_text: ~
+        search_meta_description_label: ~
+        search_meta_description_info: ~
+        search_meta_description_link_text: ~
+        listing_title: ~
+        listing_meta_title_label: ~
+        listing_meta_title_info: ~
+        listing_meta_title_link_text: ~
+        listing_meta_description_label: ~
+        listing_meta_description_info: ~
+        listing_meta_description_link_text: ~
+        category_title: ~
+        category_meta_title_label: ~
+        category_meta_title_info: ~
+        category_meta_title_link_text: ~
+        category_meta_description_label: ~
+        category_meta_description_info: ~
+        category_meta_description_link_text: ~
+        profile_title: ~
+        profile_meta_title_label: ~
+        profile_meta_title_info: ~
+        profile_meta_title_link_text: ~
+        profile_meta_description_label: ~
+        profile_meta_description_info: ~
+        profile_meta_description_link_text: ~
+        sitemap_label: "Карта на сайта"
+        sitemap_info: "Картата на сайта е един лесен начин да информираш търсачките относно страниците на сайта ти които са достъпни за обхождане. %{link}"
+        sitemap_info_link_text: "Научи още за карта на сайта файл XML"
+        sitemap_info_public: "Карта на сайт е автоматично създадена за твоя онлайн пазар: тя описва до 500 от последните обяви създадени през твоя уебсайт. Можеш да влезеш в твоята карта на сайт през %{link}."
+        sitemap_info_private: "След като твоят онлайн пазар е частен, няма карта на сайт."
+        robots_label: Robots.txt
+        robots_info: "Robots.txt e един текстов файл който инструктира роботи (става въпрос за роботите които посещават търсачките) как да обхождат страниците в твоя уебсайт. %{link}."
+        robots_info_link_text: "Научи още за файла robots.txt"
+        robots_info_2: "Robots.txt файлът е автоматично създадена за твоя онлайн пазар. Можеш да го посетиш през %{link}."
+        save: "Запази настройките"
       analytics:
         analytics: ~
         google_analytics_key: ~
@@ -506,6 +555,8 @@ bg:
           open: ~
           closed: ~
           expired: ~
+          approval_pending: ~
+          approval_rejected: ~
         headers:
           title: ~
           author: ~
@@ -516,6 +567,14 @@ bg:
         open: ~
         closed: ~
         expired: ~
+        approved: ~
+        approval_pending: ~
+        approval_rejected: ~
+        form:
+          this_listing_has_not_not_been_approved_yet: ~
+          approve: ~
+          reject: ~
+          cancel: ~
       user_fields:
         user_fields: ~
       footer:
@@ -543,15 +602,15 @@ bg:
           title: ~
           url: ~
       domain:
-        domain: ~
-        marketplace_domain: ~
-        offer_pro: ~
-        upgrade_pro_plan_link: ~
-        your_marketplace_address_is: ~
-        would_you_like_to_change_address: ~
-        contact_us: ~
-        you_can_now_use_a_custom_domain: ~
-        would_you_like_to_change_domain: ~
+        domain: Домейн
+        marketplace_domain: "Домейн на платформата"
+        offer_pro: "Персонализирай своя домейн тук %{upgrade_pro_plan_link}"
+        upgrade_pro_plan_link: "Премини към Pro или по-висок план"
+        your_marketplace_address_is: "Адресът на твоята платформа е: %{address}"
+        would_you_like_to_change_address: "Би ли желал да промениш адреса на своята платформа? %{contact_us}"
+        contact_us: "Свържи се с нас"
+        you_can_now_use_a_custom_domain: "С твоя сегашен план можеш да въведеш персонализиран домейн. Да минем към неговата настройка. %{contact_us}"
+        would_you_like_to_change_domain: "Би ли желал да промениш своя персонализиран домейн към платформата? %{contact_us}"
     custom_fields:
       edit:
         edit_listing_field: ~
@@ -803,6 +862,8 @@ bg:
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
       confirm_disable: ~
+      commission_from_buyer_label: ~
+      minimum_buyer_transaction_fee_label: ~
       stripe_connected:
         title: ~
         disable: ~
@@ -815,6 +876,7 @@ bg:
         enable: ~
       cannot_enable_gateway: ~
       cannot_disable_gateway: ~
+      cannot_enable_gateway_because_of_buyer_commission: ~
       stripe_form:
         add_your_api_keys: ~
         how_to_get_these: ~
@@ -936,6 +998,7 @@ bg:
       quantity_label: ~
       sum_label: ~
       service_fee_label: ~
+      buyer_service_fee_label: ~
       you_will_get_label: ~
       total_label: ~
       total_value: ~
@@ -981,6 +1044,7 @@ bg:
     message:
       accepted_request: ~
       received_payment: ~
+      received_payment_wo_sum: ~
       accepted_offer: ~
       rejected_request: ~
       rejected_offer: ~
@@ -990,8 +1054,10 @@ bg:
       canceled_offer: ~
       paid: ~
       payment_preauthorized: ~
+      payment_preauthorized_wo_sum: ~
       stripe:
         held_payment: ~
+        held_payment_wo_sum: ~
         confirmed_request: ~
     new:
       message: Съобщение
@@ -1206,7 +1272,9 @@ bg:
       shipping_total: ~
       product: ~
       price_payer_paid: ~
+      subtotal: ~
       service_fee: ~
+      buyer_service_fee: ~
       you_will_get: ~
       new_payment: ~
       price_per_unit_type: ~
@@ -1222,6 +1290,7 @@ bg:
       duration: ~
       quantity: ~
       subtotal: ~
+      buyer_service_fee: ~
       total: ~
       price: ~
       service_fee: ~
@@ -1246,7 +1315,7 @@ bg:
       subtotal: ~
       total: ~
       price: ~
-      service_fee: ~
+      buyer_service_fee: ~
       stripe_gateway_fee: ~
       paypal_gateway_fee: ~
       money_will_be_transferred: ~
@@ -1312,6 +1381,24 @@ bg:
       this_is_automatic_message: ~
       person_name: ~
       person_email: ~
+    listing_submited_for_review:
+      subject: ~
+      there_is_a_new_listing_to_review: ~
+      review_the_listing: ~
+      this_is_automatic_message: ~
+    listing_approved:
+      subject: ~
+      listing_has_been_approved: ~
+      view_the_listing: ~
+    listing_rejected:
+      subject: ~
+      listing_has_been_rejected: ~
+      contact_link: ~
+      edit_the_listing: ~
+    edited_listing_submited_for_review:
+      subject: ~
+      there_is_a_edited_listing_to_review: ~
+      review_the_listing: ~
   error_messages:
     booking:
       booking_failed_payment_voided: ~
@@ -1774,6 +1861,10 @@ bg:
       show_in_updates_email_loading: ~
       show_in_updates_email_error: ~
       show_in_updates_email_success: ~
+      listing_is_pending: ~
+      listing_is_rejected: ~
+      approve_listing: ~
+      reject_listing: ~
     map:
       open_in_google_maps: ~
     error:
@@ -1854,6 +1945,9 @@ bg:
         origin: Произход
       send_button:
         save_listing: Запази
+        submit_for_review: ~
+        will_be_reviewed: ~
+        we_noticed_youre_an_admin: ~
       share_type:
         select: ~
         borrow: Отдаване
@@ -1933,6 +2027,7 @@ bg:
       select_one: ~
       start_time: ~
       end_time: ~
+      marketplace_fees_may_apply: ~
     new:
       listing: ~
       selected_category: ~
@@ -2606,6 +2701,7 @@ bg:
       address_kanji_line1: Адрес
       male: Мъж
       female: Жена
+      mcc: ~
     form_bank:
       bank_account_number: ~
       bank_routing_number: ~
@@ -2654,3 +2750,12 @@ bg:
     wrong_setup: ~
     invalid_bank_account_number: ~
     invalid_postal_code: ~
+  seo_sections:
+    you_can_use_variables: ~
+    placeholder:
+      search_results: ~
+      search_results_for: ~
+      listing_description: ~
+      category_description: ~
+      profile_title: ~
+      profile_description: ~

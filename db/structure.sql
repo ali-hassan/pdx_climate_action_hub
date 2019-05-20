@@ -267,10 +267,10 @@ CREATE TABLE `communities` (
   `small_cover_photo_processing` tinyint(1) DEFAULT NULL,
   `favicon_processing` tinyint(1) DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT NULL,
-  `end_user_analytics` tinyint(1) DEFAULT '1',
   `google_connect_secret` varchar(255) DEFAULT NULL,
   `google_connect_id` varchar(255) DEFAULT NULL,
   `google_connect_enabled` tinyint(1) DEFAULT '1',
+  `end_user_analytics` tinyint(1) DEFAULT '1',
   `footer_theme` int(11) DEFAULT '0',
   `footer_copyright` text,
   `footer_enabled` tinyint(1) DEFAULT '0',
@@ -281,6 +281,7 @@ CREATE TABLE `communities` (
   `linkedin_connect_enabled` tinyint(1) DEFAULT NULL,
   `linkedin_connect_id` varchar(255) DEFAULT NULL,
   `linkedin_connect_secret` varchar(255) DEFAULT NULL,
+  `pre_approved_listings` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_communities_on_uuid` (`uuid`),
   KEY `index_communities_on_domain` (`domain`),
@@ -313,6 +314,16 @@ CREATE TABLE `community_customizations` (
   `transaction_agreement_content` mediumtext,
   `social_media_title` varchar(255) DEFAULT NULL,
   `social_media_description` text,
+  `meta_title` varchar(255) DEFAULT NULL,
+  `meta_description` text,
+  `search_meta_title` varchar(255) DEFAULT NULL,
+  `search_meta_description` text,
+  `listing_meta_title` varchar(255) DEFAULT NULL,
+  `listing_meta_description` text,
+  `category_meta_title` varchar(255) DEFAULT NULL,
+  `category_meta_description` text,
+  `profile_meta_title` varchar(255) DEFAULT NULL,
+  `profile_meta_description` text,
   PRIMARY KEY (`id`),
   KEY `index_community_customizations_on_community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -353,7 +364,7 @@ CREATE TABLE `community_social_logos` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `index_community_social_logos_on_community_id` (`community_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `community_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -826,10 +837,11 @@ CREATE TABLE `listings` (
   `shipping_price_additional_cents` int(11) DEFAULT NULL,
   `external_payment_link` text,
   `availability` varchar(32) DEFAULT 'none',
-  `per_hour_ready` tinyint(1) DEFAULT '0',
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
+  `per_hour_ready` tinyint(1) DEFAULT '0',
   `is_deleted` tinyint(1) DEFAULT '0',
+  `state` varchar(255) DEFAULT 'approved',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
   KEY `index_listings_on_open` (`open`),
@@ -838,11 +850,11 @@ CREATE TABLE `listings` (
   KEY `index_listings_on_new_category_id` (`category_id`),
   KEY `index_listings_on_community_id` (`community_id`),
   KEY `person_listings` (`community_id`,`author_id`),
-  KEY `updates_email_listings` (`community_id`,`open`,`updates_email_at`),
-  KEY `homepage_query` (`community_id`,`open`,`sort_date`,`deleted`),
-  KEY `homepage_query_valid_until` (`community_id`,`open`,`valid_until`,`sort_date`,`deleted`),
   KEY `index_on_author_id_and_deleted` (`author_id`,`deleted`),
-  KEY `community_author_deleted` (`community_id`,`author_id`,`deleted`)
+  KEY `community_author_deleted` (`community_id`,`author_id`,`deleted`),
+  KEY `index_listings_on_state` (`state`),
+  KEY `listings_homepage_query` (`community_id`,`open`,`state`,`deleted`,`valid_until`,`sort_date`),
+  KEY `listings_updates_email` (`community_id`,`open`,`state`,`deleted`,`valid_until`,`updates_email_at`,`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `locations`;
@@ -1066,6 +1078,10 @@ CREATE TABLE `payment_settings` (
   `api_verified` tinyint(1) DEFAULT NULL,
   `api_visible_private_key` varchar(255) DEFAULT NULL,
   `api_country` varchar(255) DEFAULT NULL,
+  `commission_from_buyer` int(11) DEFAULT NULL,
+  `minimum_buyer_transaction_fee_cents` int(11) DEFAULT NULL,
+  `minimum_buyer_transaction_fee_currency` varchar(3) DEFAULT NULL,
+  `key_encryption_padding` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_payment_settings_on_community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1251,11 +1267,11 @@ CREATE TABLE `people` (
   UNIQUE KEY `index_people_on_email` (`email`),
   UNIQUE KEY `index_people_on_reset_password_token` (`reset_password_token`),
   UNIQUE KEY `index_people_on_facebook_id_and_community_id` (`facebook_id`,`community_id`),
+  KEY `index_people_on_username` (`username`),
+  KEY `index_people_on_community_id` (`community_id`),
   KEY `index_people_on_id` (`id`),
   KEY `index_people_on_authentication_token` (`authentication_token`),
-  KEY `index_people_on_username` (`username`),
   KEY `index_people_on_facebook_id` (`facebook_id`),
-  KEY `index_people_on_community_id` (`community_id`),
   KEY `index_people_on_google_oauth2_id` (`google_oauth2_id`),
   KEY `index_people_on_community_id_and_google_oauth2_id` (`community_id`,`google_oauth2_id`),
   KEY `index_people_on_linkedin_id` (`linkedin_id`),
@@ -1351,7 +1367,7 @@ CREATE TABLE `social_links` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `index_social_links_on_community_id` (`community_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `stripe_accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -1392,6 +1408,7 @@ CREATE TABLE `stripe_payments` (
   `available_on` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `buyer_commission_cents` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1503,6 +1520,9 @@ CREATE TABLE `transactions` (
   `availability` varchar(32) DEFAULT 'none',
   `booking_uuid` binary(16) DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT '0',
+  `commission_from_buyer` int(11) DEFAULT NULL,
+  `minimum_buyer_fee_cents` int(11) DEFAULT '0',
+  `minimum_buyer_fee_currency` varchar(3) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_transactions_on_listing_id` (`listing_id`),
   KEY `index_transactions_on_conversation_id` (`conversation_id`),
@@ -2395,6 +2415,9 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20180918172641'),
 ('20181012065625'),
 ('20181024094615'),
+('20181029064728'),
+('20181029132748'),
+('20181031072643'),
 ('20181106212306'),
 ('20181211125306'),
 ('20181216162138'),
@@ -2402,10 +2425,16 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20181221120927'),
 ('20190104083132'),
 ('20190108075512'),
-('20190111072711'),
 ('20190111122204'),
 ('20190114141250'),
 ('20190115083941'),
-('20190208032229');
+('20190121064002'),
+('20190213073532'),
+('20190213082646'),
+('20190227111355'),
+('20190228084827'),
+('20190305112030'),
+('20190319114719'),
+('20190319122745');
 
 

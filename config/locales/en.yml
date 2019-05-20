@@ -245,6 +245,7 @@ en:
         update_settings: "Save settings"
         automatically_confirmed_no_escrow: "Order will be automatically marked as completed %{days_dropdown} days after the payment has been made"
         automatically_confirmed_no_escrow_stripe_info: "For transactions processed by Stripe, payments to sellers are delayed until the order is marked as completed. %{learn_more}."
+        buyer_transaction_fees_are_only_supported_with_stripe: "Buyer transaction fees are only supported with Stripe. You will not be able to use PayPal if you configure a Buyer transaction fee with Stripe."
         automatic_newsletter_frequency: "Send automatic newsletter: %{frequency_dropdown}"
         newsletter_daily: Daily
         newsletter_weekly: Weekly
@@ -258,6 +259,7 @@ en:
         you_will_be_redirected_to: "After you have deleted your website you will be redirected to %{destination}. You will not be able to access your website anymore."
         delete_this_marketplace: "Delete this website"
         payment_preferences: "Payment system"
+        pre_approved_listings: "Review all listings before they are published"
       manage_members:
         manage_members: Users
         email: Email
@@ -347,6 +349,53 @@ en:
         enable_linkedin_login: "Allow users to log in with their LinkedIn account"
         linkedin_connect_id: "LinkedIn Client ID"
         linkedin_connect_secret: "LinkedIn Client Secret"
+      seo_settings:
+        seo: SEO
+        title: "Homepage or Custom Landing Page"
+        meta_title_label: "Homepage or Custom Landing Page title meta tag"
+        meta_title_info: "The content of this tag is suggested to search engines and displayed on results pages as the clickable headline. %{link} %{vars}."
+        meta_title_link_text: "Learn more about meta tags."
+        meta_description_label: "Homepage or Custom Landing Page description meta tag"
+        meta_description_info: "The content of this tag is suggested to search engines and appears underneath the blue clickable links in a search engine results page. %{link} %{vars}."
+        meta_description_link_text: "Learn more about meta tags."
+        search_title: "Search results page"
+        search_meta_title_label: "Search results page title meta tag"
+        search_meta_title_info: "The content of this tag is suggested to search engines and displayed on results pages as the clickable headline. %{link} %{vars}."
+        search_meta_title_link_text: "Learn more about meta tags."
+        search_meta_description_label: "Search results page description meta tag"
+        search_meta_description_info: "The content of this tag is suggested to search engines and appears underneath the blue clickable links in a search engine results page. %{link} %{vars}."
+        search_meta_description_link_text: "Learn more about meta tags."
+        listing_title: "Listing page"
+        listing_meta_title_label: "Listing page title meta tag"
+        listing_meta_title_info: "The content of this tag is suggested to search engines and displayed on results pages as the clickable headline. %{link} %{vars}."
+        listing_meta_title_link_text: "Learn more about meta tags."
+        listing_meta_description_label: "Listing page description meta tag"
+        listing_meta_description_info: "The content of this tag is suggested to search engines and appears underneath the blue clickable links in a search engine results page. %{link} %{vars}."
+        listing_meta_description_link_text: "Learn more about meta tags."
+        category_title: "Category page"
+        category_meta_title_label: "Category page title meta tag"
+        category_meta_title_info: "The content of this tag is suggested to search engines and displayed on results pages as the clickable headline. %{link} %{vars}."
+        category_meta_title_link_text: "Learn more about meta tags."
+        category_meta_description_label: "Category page description meta tag"
+        category_meta_description_info: "The content of this tag is suggested to search engines and appears underneath the blue clickable links in a search engine results page. %{link} %{vars}."
+        category_meta_description_link_text: "Learn more about meta tags."
+        profile_title: "Profile page"
+        profile_meta_title_label: "Profile page title meta tag"
+        profile_meta_title_info: "The content of this tag is suggested to search engines and displayed on results pages as the clickable headline. %{link} %{vars}."
+        profile_meta_title_link_text: "Learn more about meta tags."
+        profile_meta_description_label: "Profile page description meta tag"
+        profile_meta_description_info: "The content of this tag is suggested to search engines and appears underneath the blue clickable links in a search engine results page. %{link} %{vars}."
+        profile_meta_description_link_text: "Learn more about meta tags."
+        sitemap_label: Sitemap
+        sitemap_info: "Sitemaps are an easy way to inform search engines about pages on your site that are available for crawling. %{link}."
+        sitemap_info_link_text: "Learn more about the XML Sitemap file"
+        sitemap_info_public: "A sitemap is automatically generated for your marketplace: it references up to the 500 most recent listings in your website. You can access your sitemap at %{link}."
+        sitemap_info_private: "As your marketplace is private, there is no sitemap."
+        robots_label: Robots.txt
+        robots_info: "Robots.txt is a text file to instruct web robots (typically search engine robots) how to crawl pages on your website. %{link}."
+        robots_info_link_text: "Learn more about the robots.txt file"
+        robots_info_2: "A robots.txt file is automatically generated for your marketplace. You can access your robots.txt at %{link}."
+        save: "Save settings"
       analytics:
         analytics: Analytics
         google_analytics_key: "Google Analytics tracking ID"
@@ -531,6 +580,8 @@ en:
           open: Open
           closed: Closed
           expired: Expired
+          approval_pending: Pending
+          approval_rejected: Rejected
         headers:
           title: Title
           author: Author
@@ -541,6 +592,14 @@ en:
         open: Open
         closed: Closed
         expired: Expired
+        approved: Approved
+        approval_pending: Pending
+        approval_rejected: Rejected
+        form:
+          this_listing_has_not_not_been_approved_yet: "This listing has not been approved yet. You can now decide to approve or reject the listing. If you approve the listing it will be public and visible to all users. If you reject the listing it will not be public."
+          approve: Approve
+          reject: Reject
+          cancel: Cancel
       user_fields:
         user_fields: "User fields"
       footer:
@@ -808,8 +867,8 @@ en:
       currency_change_warning_text: "Heads up: if you move forward with this currency change, don't forget to ask your sellers to manually edit their existing listings to get the currency update."
       marketplace_currency_label: "Website currency:"
       minimum_listing_price_label: "Minimum transaction size:"
-      transaction_fee_label: "Transaction fee:"
-      minimum_transaction_fee_label: "Minimum transaction fee:"
+      transaction_fee_label: "Seller transaction fee:"
+      minimum_transaction_fee_label: "Seller minimum transaction fee:"
       save_settings: "Save settings"
       minimum_listing_price_below_tx_fee: "The minimum transaction size has to be greater than or equal to the minimum transaction fee: %{minimum_transaction_fee}."
       minimum_listing_price_below_min: "The minimum transaction size has to be greater than the minimum commission %{minimum_commission}."
@@ -847,6 +906,8 @@ en:
       stripe_fee_notice: "%{stripe_fee_link} will be deducted from the transaction fee you are charging."
       fee_should_be_less_than_minimum_price: "Minimum transaction fee must be lower than minimum transaction size"
       confirm_disable: "Are you sure you want to disable %{gateway}? If you disable it, sellers will no longer be able to receive money and buyers will no longer be able to pay through this payment method. If sellers haven't configured another payment method, buyers will not be able to buy from them."
+      commission_from_buyer_label: "Buyer transaction fee:"
+      minimum_buyer_transaction_fee_label: "Buyer minimum transaction fee:"
       stripe_connected:
         title: "Stripe connected"
         disable: "Disable Stripe"
@@ -859,6 +920,7 @@ en:
         enable: "Enable PayPal again"
       cannot_enable_gateway: "Cannot enable payment gateway %{gateway}."
       cannot_disable_gateway: "Cannot disable payment gateway %{gateway}."
+      cannot_enable_gateway_because_of_buyer_commission: "Cannot enable payment gateway %{gateway} because the buyer's commission is used"
       stripe_form:
         add_your_api_keys: "Add your Stripe API keys"
         how_to_get_these: "How to get these?"
@@ -984,6 +1046,7 @@ en:
       quantity_label: "Quantity:"
       sum_label: "Subtotal:"
       service_fee_label: "%{service_name} fee:"
+      buyer_service_fee_label: "%{service_name} service fee:"
       you_will_get_label: "You will get:"
       total_label: "Total:"
       total_value: "%{seller_gets}*"
@@ -1029,6 +1092,7 @@ en:
     message:
       accepted_request: "accepted the request"
       received_payment: "accepted the request, received payment for %{sum}"
+      received_payment_wo_sum: "accepted the request, received payment"
       accepted_offer: "accepted the offer"
       rejected_request: "rejected the request, canceled the payment"
       rejected_offer: "rejected the offer"
@@ -1038,8 +1102,10 @@ en:
       canceled_offer: "canceled the offer"
       paid: "paid %{sum}"
       payment_preauthorized: "Payment authorized: %{sum}"
+      payment_preauthorized_wo_sum: "Payment authorized"
       stripe:
         held_payment: "Accepted the request. Payment for %{sum} is being held by %{service_name} until the order is marked as completed."
+        held_payment_wo_sum: "Accepted the request. Payment is being held by %{service_name} until the order is marked as completed."
         confirmed_request: "Marked the order as completed. The payment has now been transferred to %{author_name} bank account or will be transferred soon."
     new:
       message: Message
@@ -1205,13 +1271,13 @@ en:
       give_feedback_to: "Give feedback to %{other_party_given_name}"
       show_thread: "Show conversation"
     confirmation_instructions:
-      confirmation_instructions_signature: "Best regards,<br/>The %{service_name} Team"
+      confirmation_instructions_signature: "Best regards,<br/>The %{service_name} team"
       need_to_confirm: "To join %{service_name}, confirm your email address by clicking the button below."
       confirmation_link_text: "Confirm my address"
       or_paste_link: "Alternatively, you can copy the following link to your browser's address bar:"
     common:
       hey: "Hello %{name},"
-      kassi_team: "The %{service_name} Team"
+      kassi_team: "The %{service_name} team"
       thanks: "Thanks,"
       dont_want_to_receive_these_emails: "Don't want to receive these emails?"
       edit_your_email_settings_here: "Edit your email settings here"
@@ -1262,7 +1328,9 @@ en:
       shipping_total: "Shipping:"
       product: "Product:"
       price_payer_paid: "Price %{payer_full_name} paid:"
+      subtotal: "Subtotal:"
       service_fee: "%{service_name} service fee:"
+      buyer_service_fee: "%{service_name} service fee:"
       you_will_get: "Total:"
       new_payment: "You have received a new payment"
       price_per_unit_type: "Price per %{unit_type}"
@@ -1278,6 +1346,7 @@ en:
       duration: Duration
       quantity: Quantity
       subtotal: Subtotal
+      buyer_service_fee: "%{service_name} service fee:"
       total: Total
       price: Price
       service_fee: "Service fee"
@@ -1302,7 +1371,7 @@ en:
       subtotal: Subtotal
       total: Total
       price: Price
-      service_fee: "Service fee"
+      buyer_service_fee: "%{service_name} service fee"
       stripe_gateway_fee: "Stripe's fee:"
       paypal_gateway_fee: "PayPal's fee:"
       money_will_be_transferred: "The money will be transferred to %{recipient_name} when a) you have marked the request completed or b) %{automatic_confirmation_days} days have passed since you paid."
@@ -1368,6 +1437,24 @@ en:
       this_is_automatic_message: "This is an automatic message sent to administrators of %{community}."
       person_name: "Name:"
       person_email: "Email:"
+    listing_submited_for_review:
+      subject: "New listing to review: \"%{listing_title}\" by %{author_name} in %{community}"
+      there_is_a_new_listing_to_review: "There is a new listing to review: \"%{listing_title}\" by %{author_name}. You now have to approve or reject that listing."
+      review_the_listing: "Review the new listing"
+      this_is_automatic_message: "This is an automatic message sent to administrators of %{community}."
+    listing_approved:
+      subject: "The %{community} team has approved your listing \"%{listing_title}\""
+      listing_has_been_approved: "Great news! Your listing \"%{listing_title}\" has been reviewed and approved by the %{community} team. It has been published."
+      view_the_listing: "View the listing"
+    listing_rejected:
+      subject: "The %{community} team has rejected your listing \"%{listing_title}\""
+      listing_has_been_rejected: "Unfortunately the %{community} team has rejected your listing \"%{listing_title}\" after reviewing it carefully. You can %{contact_link} to learn more or edit your listing and submit it for a new review."
+      contact_link: "contact the %{community} team"
+      edit_the_listing: "Edit the listing"
+    edited_listing_submited_for_review:
+      subject: "Edited listing to review: \"%{listing_title}\" by %{author_name} in %{community}"
+      there_is_a_edited_listing_to_review: "There is an edited listing to review: \"%{listing_title}\" by %{author_name}. You now have to approve or reject that listing."
+      review_the_listing: "Review the edited listing"
   error_messages:
     booking:
       booking_failed_payment_voided: "Booking failed due to an unexpected error. Please try again later. You haven't been charged."
@@ -1841,6 +1928,10 @@ en:
       show_in_updates_email_error: "Could not reach server. Please try again after page refresh."
       show_in_updates_email_success: "This post will be shown in the next automatic email update sent to users."
       edit_availability: "Edit Availability"
+      listing_is_pending: "Listing is pending approval"
+      listing_is_rejected: "Listing is rejected"
+      approve_listing: "Approve listing"
+      reject_listing: "Reject listing"
     map:
       open_in_google_maps: "Open in Google Maps"
     error:
@@ -1924,6 +2015,9 @@ en:
         origin: Origin
       send_button:
         save_listing: "Post listing"
+        submit_for_review: "Submit for review"
+        will_be_reviewed: "All listings on %{service_name} will be reviewed before publishing. Once your listing has been approved, you will be notified by email and it will be visible to all."
+        we_noticed_youre_an_admin: "We noticed you're an admin of %{service_name}. Your changes will be automatically applied and will not need a review or approval."
       share_type:
         select: Select
         borrow: Borrowing
@@ -2003,6 +2097,7 @@ en:
       select_one: "Select one"
       start_time: "Start time"
       end_time: "End time"
+      marketplace_fees_may_apply: "%{service_name} fees may apply"
     new:
       listing: Post
       selected_category: "Category: %{category}"
@@ -2232,7 +2327,7 @@ en:
       family_name: "Last name"
       given_name: "First name"
       i_accept_the_terms_and_privacy: "I accept the %{terms} and %{privacy}"
-      admin_emails_consent: "I accept to receive occasional emails from the %{service_name} team and understand that I can change my mind at any time"
+      admin_emails_consent: "I agree to receive occasional emails from the %{service_name} team and understand that I can change my mind at any time"
       invalid_invitation_code: "The invitation code is not valid."
       invitation_code: "Invitation code"
       not_required: ", not required"
@@ -2341,9 +2436,9 @@ en:
 #      account_confirmation_instructions_admin: "You will soon receive an email with a link to confirm your email address. Don't forget to check your spam folder!"
       before_full_access_you_need_to_confirm_email: "Please check your email and confirm your address."
       before_confirmation_only_access_admin_dashboard: "Before confirmation you can only access the %{admin_dashboard_link}."
-      admin_dashboard_link_text: "admin dashboard"
-      account_confirmation_instructions_admin: "You should have received an email at %{email_address} with a confirmation button. If you don't see it, check your spam folder or click the button below to resend the email. Once it arrives, please click the button to confirm your address and get full access to your ShareOregon account. If have any questions, please don't hesitate to %{user_feedback_link}."
       user_feedback_link_text: "contact us"
+      admin_dashboard_link_text: "admin panel"
+      account_confirmation_instructions_admin: "You should have received an email at %{email_address} with a confirmation link. If you don't see it, check your spam folder or click the button below to resend the email. Once it arrives, open the included link to confirm your address, after which you'll get full access to your marketplace. If you need any help, don't hesitate to %{support_link}."
       contact_support_link_text: "contact ShareOregon support"
   settings:
     account:
@@ -2639,10 +2734,10 @@ en:
       profile: Profile
       manage_listings: "Manage Posts"
       settings: Settings
-      logout: "Log Out"
-      login: "Log In"
-      signup: "Sign Up"
-      admin_dashboard: "Admin dashboard"
+      logout: "Log out"
+      login: "Log in"
+      signup: "Sign up"
+      admin_dashboard: "Admin panel"
       language: Language
       listings: "My listings"
     utils:
@@ -2706,6 +2801,13 @@ en:
     paypal_connected: "PayPal account connected successfully!"
     paypal_can_accept: "You are now all set to receive money to your PayPal account"
     paypal_connected_give_permission: "To complete setup and start receiving funds to your PayPal account <%{email}>, please grant permission to charge a transaction fee."
+
+    stripe_account_restricted: "Online payments to your account are restricted!"
+    stripe_account_restricted_info: "You should edit your bank account details to provide more information to the payment provider."
+    stripe_account_restricted_soon: "Online payments to your account will be restricted soon."
+    stripe_account_restricted_soon_info: "You should edit your bank account details to provide more information to the payment provider."
+    stripe_account_pending_verification: "Account details saved successfully. Waiting for account verification from Stripe."
+    stripe_account_pending_verification_info: "Check back later to make sure that everything is in order."
     form_new:
       need_info: "We need some information about you to be able to send you money."
       select_country: "Select country..."
@@ -2745,6 +2847,7 @@ en:
       address_kanji_line1: "Street address kanji"
       male: male
       female: female
+      mcc: "Industry (Merchant Category Code)"
     form_bank:
       bank_account_number: "Bank account number"
       bank_routing_number: "Routing number"
@@ -2793,3 +2896,12 @@ en:
     wrong_setup: "There is something wrong with the payment system setup in this Shareoregon: Stripe Connect has not been enabled. Please contact the team to let them know that they should enable Stripe Connect in their Stripe Dashboard."
     invalid_bank_account_number: "Please check that your bank account is entered correctly and matches your country."
     invalid_postal_code: "Invalid postal code for %{country}"
+  seo_sections:
+    you_can_use_variables: "You can use the following variables: %{vars}"
+    placeholder:
+      search_results: "Search results - %{variable}"
+      search_results_for: "Search results for: %{placeholder1} on %{placeholder2}"
+      listing_description: "%{title} for %{price} by %{author} on %{marketplace}"
+      category_description: "%{category} on %{marketplace}"
+      profile_title: "Profile of %{user} - %{marketplace}"
+      profile_description: "Learn more about %{user} on %{marketplace}"
