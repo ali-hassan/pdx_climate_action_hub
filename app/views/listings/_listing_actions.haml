@@ -92,18 +92,9 @@
       = render partial: "delivery_opts", locals: { delivery_opts: @listing_presenter.delivery_opts, is_author: @listing_presenter.is_author }
 
       = hidden_field_tag(:listing_id, @listing.id)
+
       - if @listing.external_payment_link.present? && !@listing.external_payment_link.split("http://").empty?
         = link_to(action_button_label(@listing), @listing.external_payment_link, target: "_blank", class: "button enabled-external-link-button")
-
-      - if @listing_presenter.buyer_fee?
-        .row
-          .col-12
-            %span.buyer-fees
-              = t('.marketplace_fees_may_apply')
-      - if @listing.external_payment_link
-        .row
-          .col-12
-            Clicking the blue button above will take you to an external site to complete the transaction.
 
       - elsif @listing_presenter.quantity_per_day_or_night?
         - @listing_presenter.blocked_dates_result.on_success do
@@ -120,6 +111,10 @@
           .content
             = action_button_label(@listing)
 
+    - if @listing.external_payment_link
+      .row
+        .col-12
+          Clicking the blue button above will take you to an external site to complete the transaction.
 
     - if @listing_presenter.payments_enabled?
       .row
