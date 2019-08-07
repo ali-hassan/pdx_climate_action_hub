@@ -1,5 +1,5 @@
 class PeopleController < Devise::RegistrationsController
-  skip_before_action :verify_authenticity_token, :only => [:creates]
+  skip_before_action :verify_authenticity_token, :only => [:create]
   skip_before_action :require_no_authentication, :only => [:new]
 
   before_action EnsureCanAccessPerson.new(
@@ -73,7 +73,7 @@ class PeopleController < Devise::RegistrationsController
       ActiveRecord::Base.transaction do
         @person, email = new_person(params, @current_community)
       end
-    rescue => e
+    rescue StandardError => e
       flash[:error] = t("people.new.invalid_username_or_email")
       redirect_to error_redirect_path and return
     end
@@ -255,7 +255,7 @@ class PeopleController < Devise::RegistrationsController
         target_user.emails.build(address: new_email_address, community_id: @current_community.id)
       }
 
-      if target_user.update_attributes(person_params.except(:email_attributes))
+      if target_user.custom_update(person_params.except(:email_attributes))
         if params[:person][:password]
           #if password changed Devise needs a new sign in.
           bypass_sign_in(target_user)
@@ -351,7 +351,7 @@ class PeopleController < Devise::RegistrationsController
   # Create a new person by params and current community
   def new_person(initial_params, current_community)
     initial_params[:person][:locale] =  params[:locale] || APP_CONFIG.default_locale
-    initial_params[:person][:test_group_number] = 1 + rand(4)
+    initial_params[:person][:test_group_number] = rand(1..4)
     initial_params[:person][:community_id] = current_community.id
 
     params = person_create_params(initial_params)

@@ -218,6 +218,7 @@ pt-BR:
         users_can_invite_new_users: "Todos os usuários podem convidar novos usuários para este mercado virtual"
         private: "Este mercado virtual é privado (apenas usuários cadastrados podem ver o conteúdo)"
         require_verification_to_post_listings: "Somente usuários verificados por administrador pode postar novos anúncios"
+        allow_free_conversations: ~
         search_preferences: "Preferências de Busca"
         default_search_type: "Tipo de Busca: %{select_search_type}"
         keyword_search: "Palavra-Chave da Busca"
@@ -564,6 +565,8 @@ pt-BR:
         search_by_title_author_category: "Buscar um anúncio por título"
         search: Buscar
         reset_search: "Mostrar todos"
+        export_all_as_csv: ~
+        processing_export: ~
         status:
           all: "Todos os status"
           selected_js: ~
@@ -888,6 +891,7 @@ pt-BR:
       stripe_fee: ~
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
+      the_transaction_fee_must_be_lower_than_100: ~
       confirm_disable: ~
       commission_from_buyer_label: ~
       minimum_buyer_transaction_fee_label: ~
@@ -931,7 +935,7 @@ pt-BR:
       rent: Alugando
       rent_w_online_payment: ~
       rent_wo_online_payment: ~
-      give: Doar
+      give: Doando
       lend: Empréstimo
       swap: Troca
       service: Oferta
@@ -960,7 +964,7 @@ pt-BR:
       offer: oferta
       borrow: empréstimo
       buy: comprar
-      give_away: doar
+      give_away: doando
       lend: empréstimo
       receive: "pegar de graça"
       rent: aluguel
@@ -1185,7 +1189,7 @@ pt-BR:
       contact_page_link: Reposta
     new:
       welcome_fb_user: "Seja bem-vindo ao %{service_name}, %{name} !"
-      fb_join_accept_terms: "Última étapa para fazer parte de %{service_name} : você deve aceitar as condições de uso."
+      fb_join_accept_terms: "Última etapa para fazer parte de %{service_name} : você deve aceitar as condições de uso."
       join_community: "Entrar em %{service_name}"
       you_can_join: "Para participar de %{service_name} você deve aceitar os termos de uso e clicar em 'Entrar em %{service_name}' abaixo."
       you_can_join_email_confirmation: "Para participar %{service_name}, você precisa ter um endereço de e-mail válido, que termina com %{email_ending}. Você pode participar através do preenchimento de seu endereço de e-mail, aceitando os termos de uso dessa comunidade e clicando em 'Participar da %{service_name}' abaixo, e confirmar seu e-mail."
@@ -1412,8 +1416,8 @@ pt-BR:
       person_email: "Email:"
     listing_submited_for_review:
       subject: ~
-      there_is_a_new_listing_to_review: ~
-      review_the_listing: ~
+      there_is_a_new_listing_to_review: "Há um novo anúncio para revisar: \"%{listing_title}\" de %{author_name}. Agora você tem que aprovar ou rejeitá-lo."
+      review_the_listing: "Revise o novo anúncio"
       this_is_automatic_message: ~
     listing_approved:
       subject: ~
@@ -1450,6 +1454,7 @@ pt-BR:
       buyer_cannot_pay_error: "O pagamento foi rejeitado pelo PayPal. Por favor contate o atendimento a cliente deles para maiores informações: %{customer_service_link}"
       pending_review_error: "O pagamento foi enviado mas foi marcado como \"requerendo verificação\" pelo PayPal. Quando o PayPal complete essa verificação o pagamento será automaticamente autorizado."
       seller_express_checkout_disabled: "O PayPal Express Checkout foi desabilitado para a conta PayPal do autor deste anúncio. Por favor contate o autor e informe-o que há um problema com sua conta PayPal e aconselhe-o a entrar em contato com o atendimento ao cliente do PayPal."
+      seller_express_checkout_disabled_no_free: ~
       generic_error: "Ocorreu um erro durante o processo de pagamento. Não foi possível finalizar o seu pagamento PayPal."
       cancel_error: "Um erro ocorreu durante o cancelamento. Não foi possível finalizar."
       accept_authorization_error: "Ocorreu um erro durante a tentativa de aceitar pagamento pré-autorizado pelo Paypal. Por favor, tente novamente."
@@ -1781,6 +1786,7 @@ pt-BR:
       listing_updated_successfully: "Anúncio atualizado com sucesso"
       listing_updated_availability_management_enabled: "Lista atualizada com êxito. Gerenciamento de disponibilidade ativado."
       listing_updated_availability_management_disabled: "Lista atualizada com êxito. Gerenciamento de disponibilidade desativado."
+      listing_deleted: ~
       only_kassi_administrators_can_access_this_area: "Por favor, entre com uma conta de administrador para acessar esta área."
       only_listing_author_can_close_a_listing: "Somente o autor do anúncio pode fechar o mesmo"
       only_listing_author_can_edit_a_listing: "Somente o autor do anúncio pode editar o mesmo"
@@ -1847,6 +1853,7 @@ pt-BR:
       user_does_not_have_email_to_delete: "Você não tem o endereço de e-mail que você está tentando remover"
       email_deleted: "E-mail removido"
       listing_author_payment_details_missing: "Por favor entre em contato com o anunciante pressionando o botão \"Contato\" abaixo. Ele precisa atualizar suas informações para receber pagamentos."
+      listing_author_payment_details_missing_no_free: ~
       images_are_processing: "Estamos processando suas imagens. Estarão visíveis em um ou dois minutos."
       maintenance_mode:
         zero: "O site sairá do ar agora para manutenção"
@@ -1883,6 +1890,7 @@ pt-BR:
       you_cannot_send_a_new_comment_because_listing_is_closed: "Você não pode enviar novos comentários pois este anúncio está fechado."
       you_must: "Você deve"
       subscribe_to_comments: "Avise-me quando houver novos comentários ou atualizações."
+    deleting_a_listing_cannot_be_undone: ~
     edit:
       edit_listing: "Editar anúncio"
     edit_links:
@@ -1894,10 +1902,11 @@ pt-BR:
       show_in_updates_email_loading: Carregando...
       show_in_updates_email_error: "Não foi possível acessar o servidor. Tente novamente depois de atualizar a página."
       show_in_updates_email_success: "Este anúncio será mostrado na próxima atualização automática de e-mail enviado aos usuários"
-      listing_is_pending: ~
+      listing_is_pending: "O anúncio está pendente de aprovação"
       listing_is_rejected: ~
       approve_listing: ~
       reject_listing: ~
+      delete_listing: ~
     map:
       open_in_google_maps: "Abrir no Google Maps"
     error:
@@ -1966,7 +1975,7 @@ pt-BR:
         after_service_fee_you_will_get: "Depois do processamento das taxas da %{service_name}, você receberá %{sum_with_currency}"
         no_service_fee_you_will_get_paypal_text: "%{paypal_fee_info_link} irá deduzir do preço."
         no_service_fee_you_will_get_payment_text: ~
-        after_service_fee_you_will_get_payment_text: "Quando alguém fechar o aluguel, você irá receber esse valor menos %{payment_fee_info_link}"
+        after_service_fee_you_will_get_payment_text: "Quando alguém fechar o pedido, você irá receber esse valor menos %{payment_fee_info_link}"
         payment_fee_info_link_text: "taxa de processamento do pagamento"
         delivery: "Forma de entrega"
         shipping: Envio
@@ -1978,14 +1987,14 @@ pt-BR:
         origin: Origem
       send_button:
         save_listing: "Salvar anúncio"
-        submit_for_review: ~
-        will_be_reviewed: ~
-        we_noticed_youre_an_admin: ~
+        submit_for_review: "Enviar para análise"
+        will_be_reviewed: "Todos os anúncios na %{service_name} passam por uma curadoria antes da publicação. Uma vez aprovado, você será notificado via email e o anúncio será publicado para todos."
+        we_noticed_youre_an_admin: "Nós estamos notificando que você é um administrador de %{service_name}. Suas mudanças serão automaticamente aplicada e não há necessidade de rever ou aprovar."
       share_type:
         select: Selecione
         borrow: Empréstimo
         buy: Comprando
-        give_away: Doar
+        give_away: Doando
         lend: Empréstimo
         offer_type: "Tipo de oferta"
         receive: "Aceitar gratuitamente"
@@ -2038,7 +2047,7 @@ pt-BR:
       borrows: Empréstimo
       buys: Comprar
       favors: Serviços
-      give_aways: Doar
+      give_aways: Doando
       housings: Espaços
       items: Itens
       lends: Empréstimo
@@ -2735,6 +2744,12 @@ pt-BR:
     paypal_connected: ~
     paypal_can_accept: ~
     paypal_connected_give_permission: ~
+    stripe_account_restricted: ~
+    stripe_account_restricted_info: ~
+    stripe_account_restricted_soon: ~
+    stripe_account_restricted_soon_info: ~
+    stripe_account_pending_verification: ~
+    stripe_account_pending_verification_info: ~
     form_new:
       need_info: "Precisamos de alguma informação para poder enviar-lhe o seu dinheiro."
       select_country: "Selecione o país..."
@@ -2774,7 +2789,6 @@ pt-BR:
       address_kanji_line1: ~
       male: ~
       female: ~
-      mcc: ~
     form_bank:
       bank_account_number: ~
       bank_routing_number: ~
@@ -2829,6 +2843,7 @@ pt-BR:
       search_results: ~
       search_results_for: ~
       listing_description: ~
+      listing_description_without_price: ~
       category_description: ~
       profile_title: ~
       profile_description: ~

@@ -215,6 +215,7 @@ lv:
         users_can_invite_new_users: "Atļaut visiem lietotājiem uzaicināt jaunus lietotājus"
         private: ~
         require_verification_to_post_listings: ~
+        allow_free_conversations: ~
         search_preferences: "Meklēšanas izvēle"
         default_search_type: "Meklēšanas veids: %{select_search_type}"
         keyword_search: "Meklēšana pēc atslēgvārda"
@@ -561,6 +562,8 @@ lv:
         search_by_title_author_category: ~
         search: ~
         reset_search: ~
+        export_all_as_csv: ~
+        processing_export: ~
         status:
           all: ~
           selected_js: ~
@@ -873,6 +876,7 @@ lv:
       stripe_fee: ~
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
+      the_transaction_fee_must_be_lower_than_100: ~
       confirm_disable: ~
       commission_from_buyer_label: ~
       minimum_buyer_transaction_fee_label: ~
@@ -1435,6 +1439,7 @@ lv:
       buyer_cannot_pay_error: "PayPal ir noraidījis Jūsu maksājumu. Lai iegūtu vairāk informācijas, lūdzu, sazinieties ar viņu klientu apkalpošanas dienestu: %{customer_service_link}"
       pending_review_error: "Maksājums tika iesniegts, bet PayPal to atzīmēja kā \"pārbaudāmu\". Kad PayPal pabeigs pārbaudi, maksājums tiks automātiski atļauts."
       seller_express_checkout_disabled: "PayPal Express Checkout nav iespējams sludinājuma autora PayPal kontam. Lūdzu, sazinieties ar autoru un paziņojiet viņiem, ka ir problēmas ar viņa PayPal kontu, un iesakiet viņiem sazināties ar PayPal klientu apkalpošanas dienestu."
+      seller_express_checkout_disabled_no_free: ~
       generic_error: "Maksājuma procesa laikā radās kļūda. Nevarēja pabeigt Jūsu PayPal maksājumu."
       cancel_error: "Atcelšanas laikā radās kļūda. Nevarēja pabeigt atcelšanu."
       accept_authorization_error: "Radās kļūda, mēģinot pieņemt iepriekš autorizētu PayPal maksājumu. Lūdzu, mēģiniet vēlreiz."
@@ -1766,6 +1771,7 @@ lv:
       listing_updated_successfully: "Sludinājums veiksmīgi atjaunināts"
       listing_updated_availability_management_enabled: "Sludinājums veiksmīgi atjaunināts. Pieejamības vadība aktivizēta."
       listing_updated_availability_management_disabled: "Sludinājums veiksmīgi atjaunināts. Pieejamības vadība nav aktivizēta."
+      listing_deleted: ~
       only_kassi_administrators_can_access_this_area: ~
       only_listing_author_can_close_a_listing: "Tikai ieraksta autors var dzēst ierakstu"
       only_listing_author_can_edit_a_listing: "Tikai ieraksta autors var labot ierakstu"
@@ -1832,6 +1838,7 @@ lv:
       user_does_not_have_email_to_delete: "E-pasta adrese, kuru mēģināt noņemt, nav Jūsu"
       email_deleted: "E-pasts noņemts"
       listing_author_payment_details_missing: "Lūdzu sazinieties ar autoru nospiežot zemāk atrodamo 'Kontakti' pogu. Lai saņemtu maksājumus, viņiem ir jāatjaunina sava maksājumu informācija."
+      listing_author_payment_details_missing_no_free: ~
       images_are_processing: "Mēs apstrādājam Jūsu fotoattēlus. Dodiet mums minūti vai divas un tie būs redzami."
       maintenance_mode:
         zero: "Vietne tagad nebūs pieejama "
@@ -1868,6 +1875,7 @@ lv:
       you_cannot_send_a_new_comment_because_listing_is_closed: "Jūs nevarat pievienot jaunus komentārus, jo šis sludinājums ir slēgts."
       you_must: "Jums vajag"
       subscribe_to_comments: "Paziņojiet man par jauniem komentāriem un jaunumiem"
+    deleting_a_listing_cannot_be_undone: ~
     edit:
       edit_listing: "Labot sludinājumu"
     edit_links:
@@ -1883,6 +1891,7 @@ lv:
       listing_is_rejected: ~
       approve_listing: ~
       reject_listing: ~
+      delete_listing: ~
     map:
       open_in_google_maps: "Atvērt pakalpojumā Google Maps"
     error:
@@ -2729,6 +2738,12 @@ lv:
     paypal_connected: "PayPal konts veiksmīgi pievienots!"
     paypal_can_accept: ~
     paypal_connected_give_permission: ~
+    stripe_account_restricted: ~
+    stripe_account_restricted_info: ~
+    stripe_account_restricted_soon: ~
+    stripe_account_restricted_soon_info: ~
+    stripe_account_pending_verification: ~
+    stripe_account_pending_verification_info: ~
     form_new:
       need_info: ~
       select_country: "Izvēlies valsti..."
@@ -2768,7 +2783,6 @@ lv:
       address_kanji_line1: ~
       male: ~
       female: ~
-      mcc: ~
     form_bank:
       bank_account_number: "Bankas konta numurs"
       bank_routing_number: ~
@@ -2823,6 +2837,7 @@ lv:
       search_results: ~
       search_results_for: ~
       listing_description: ~
+      listing_description_without_price: ~
       category_description: ~
       profile_title: ~
       profile_description: ~

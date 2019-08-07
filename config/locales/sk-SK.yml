@@ -223,6 +223,7 @@ sk-SK:
         users_can_invite_new_users: "Všetci užívatelia môžu pozvať nových užívateľov do tohoto trhoviska"
         private: "Toto trhovisko je súkromné (iba registrovaní užívatelia môžu zobraziť obsah)"
         require_verification_to_post_listings: "Iba správcom overení užívatelia môžu pridávať inzeráty"
+        allow_free_conversations: ~
         search_preferences: "Nastavenie vyhľadávania"
         default_search_type: "Typ vyhľadávania: %{select_search_type}"
         keyword_search: "Vyhľadávanie pomocou kľúčového slova"
@@ -569,6 +570,8 @@ sk-SK:
         search_by_title_author_category: ~
         search: ~
         reset_search: ~
+        export_all_as_csv: ~
+        processing_export: ~
         status:
           all: ~
           selected_js: ~
@@ -897,6 +900,7 @@ sk-SK:
       stripe_fee: ~
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
+      the_transaction_fee_must_be_lower_than_100: ~
       confirm_disable: ~
       commission_from_buyer_label: ~
       minimum_buyer_transaction_fee_label: ~
@@ -1461,6 +1465,7 @@ sk-SK:
       buyer_cannot_pay_error: "Platba bola odmietnutá serverom PayPal. Pre viac informácií, kontaktujte ich zákaznícky servis: %{customer_service_link}"
       pending_review_error: "Platba bola prevedená, ale bola serverom PayPal označená ako \"vyžaduje preskúmať\". Akonáhle PayPal dokončí preskúmanie platby, platba bude automaticky vybavená."
       seller_express_checkout_disabled: "PayPal express pokladňa bola zakázaná. Kontaktujte predajcu a dajte mu vedieť, že majú problém s ich PayPal účtom. Prípadne im odkázať aby kontaktovali PayPal zákaznícky servis."
+      seller_express_checkout_disabled_no_free: ~
       generic_error: "Došlo k chybe behom platobného procesu. Nemôžeme dokončiť Vašu Paypal platbu."
       cancel_error: "Nastala chyba pri stornovaní. Zrušenie sa nedá dokončiť."
       accept_authorization_error: "Došlo k chybe pri pokuse o prijatie pred schválenej PayPal platby. Prosíme, skúste to znovu."
@@ -1792,6 +1797,7 @@ sk-SK:
       listing_updated_successfully: "Inzerát bol úspešne aktualizovaný."
       listing_updated_availability_management_enabled: ~
       listing_updated_availability_management_disabled: ~
+      listing_deleted: ~
       only_kassi_administrators_can_access_this_area: ~
       only_listing_author_can_close_a_listing: "Iba autor výpisu môže uzavrieť výpis"
       only_listing_author_can_edit_a_listing: "Iba autor výpisu môže upravovať výpis"
@@ -1858,6 +1864,7 @@ sk-SK:
       user_does_not_have_email_to_delete: "E-mailová adresa, ktorú sa snažíte odstrániť Vám nepatrí"
       email_deleted: "E-mailová adresa bola odstránená"
       listing_author_payment_details_missing: "Prosím kontaktujte autora kliknutím na tlačítko 'Kontakt' nižšie. Je potrebné aktualizovať podrobnosti o platbe, aby platba mohla byť prijatá."
+      listing_author_payment_details_missing_no_free: ~
       images_are_processing: "Vaše nové obrázky, ktoré práve spracovávame budú viditeľné za niekoľko sekúnd."
       maintenance_mode:
         zero: "Webová stránka sa pre údržbu prepne do offline režimu."
@@ -1895,6 +1902,7 @@ sk-SK:
       you_cannot_send_a_new_comment_because_listing_is_closed: "Nemôžete odoslať nový komentár, lebo tento inzerát bol uzavretý."
       you_must: Musíte
       subscribe_to_comments: "Notifikujte ma v prípade nových komentárov a aktualizácií."
+    deleting_a_listing_cannot_be_undone: ~
     edit:
       edit_listing: "Upraviť inzerát"
     edit_links:
@@ -1910,6 +1918,7 @@ sk-SK:
       listing_is_rejected: ~
       approve_listing: ~
       reject_listing: ~
+      delete_listing: ~
     map:
       open_in_google_maps: "Otvoriť v Google Maps"
     error:
@@ -2756,6 +2765,12 @@ sk-SK:
     paypal_connected: ~
     paypal_can_accept: ~
     paypal_connected_give_permission: ~
+    stripe_account_restricted: ~
+    stripe_account_restricted_info: ~
+    stripe_account_restricted_soon: ~
+    stripe_account_restricted_soon_info: ~
+    stripe_account_pending_verification: ~
+    stripe_account_pending_verification_info: ~
     form_new:
       need_info: ~
       select_country: ~
@@ -2795,7 +2810,6 @@ sk-SK:
       address_kanji_line1: ~
       male: ~
       female: ~
-      mcc: ~
     form_bank:
       bank_account_number: ~
       bank_routing_number: ~
@@ -2850,6 +2864,7 @@ sk-SK:
       search_results: ~
       search_results_for: ~
       listing_description: ~
+      listing_description_without_price: ~
       category_description: ~
       profile_title: ~
       profile_description: ~

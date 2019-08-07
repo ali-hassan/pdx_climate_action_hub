@@ -213,6 +213,7 @@ ko:
         users_can_invite_new_users: "모든 사용자가 새 사용자를 초대하도록 허용"
         private: "등록된 사용자만 목록 및 사용자 프로필을 볼 수 있습니다 (마켓 플레이스를 비공개로 설정)."
         require_verification_to_post_listings: "관리자가 확인한 사용자만 새 목록을 게시 할 수 있음"
+        allow_free_conversations: ~
         search_preferences: "검색 환경 설정"
         default_search_type: "검색 유형 : %{select_search_type}"
         keyword_search: "키워드 검색"
@@ -559,6 +560,8 @@ ko:
         search_by_title_author_category: ~
         search: ~
         reset_search: ~
+        export_all_as_csv: ~
+        processing_export: ~
         status:
           all: ~
           selected_js: ~
@@ -883,6 +886,7 @@ ko:
       stripe_fee: "스트라이프 수수료"
       stripe_fee_notice: "%{stripe_fee_link}는 귀하가 청구하는 거래 수수료에서 공제됩니다."
       fee_should_be_less_than_minimum_price: "최소 거래 수수료는 최소 거래 규모보다 작아야합니다."
+      the_transaction_fee_must_be_lower_than_100: ~
       confirm_disable: "%{gateway}을(를) 비활성화 하시겠습니까? 이 기능을 사용 중지하면 제공 업체는 더 이상 돈을받을 수 없으며 구매자는 더 이상이 지불 방법으로 지불 할 수 없습니다. 공급자가 다른 지불 방법을 구성하지 않으면 구매자가 구매할 수 없습니다."
       commission_from_buyer_label: ~
       minimum_buyer_transaction_fee_label: ~
@@ -1447,6 +1451,7 @@ ko:
       buyer_cannot_pay_error: "결제가 PayPal에 의해 거부되었습니다. 자세한 정보는 고객 서비스에 문의하십시오 : %{customer_service_link}"
       pending_review_error: "결제가 들어갔지만 '검토 필요'로 PayPal에서 신고했습니다. PayPal에서 검토를 완료하면 결제가 자동으로 승인됩니다."
       seller_express_checkout_disabled: "PayPal Express Checkout이 목록 작성자의 PayPal 계정에서 사용 중지되었습니다. 권한자에게 연락하여 PayPal 계정에 문제가 있음을 알리고 PayPal 고객 서비스에 연락하도록 안내하십시오."
+      seller_express_checkout_disabled_no_free: ~
       generic_error: "결제 진행중에 오류가 발생했습니다. PayPal 지불을 완료 할 수 없습니다."
       cancel_error: "취소하는 동안 오류가 발생했습니다. 취소를 완료 할 수 없습니다."
       accept_authorization_error: "사전 승인된 Paypal 결제를 수락하는 중에 오류가 발생했습니다. 다시 시도하십시오."
@@ -1778,6 +1783,7 @@ ko:
       listing_updated_successfully: "목록이 성공적으로 업데이트되었습니다."
       listing_updated_availability_management_enabled: "목록이 업데이트되었습니다. 가용성 관리가 가능합니다."
       listing_updated_availability_management_disabled: "목록이 업데이트되었습니다. 가용성 관리가 비활성화되었습니다."
+      listing_deleted: ~
       only_kassi_administrators_can_access_this_area: ~
       only_listing_author_can_close_a_listing: "게시자만 편집할 수 있습니다."
       only_listing_author_can_edit_a_listing: "게시자만 편집할 수 있습니다."
@@ -1844,6 +1850,7 @@ ko:
       user_does_not_have_email_to_delete: "제거하려는 이메일 주소가 없습니다."
       email_deleted: "이메일이 삭제되었습니다"
       listing_author_payment_details_missing: "아래의 '문의하기'버튼을 눌러 저자에게 연락하십시오. 결제를 받으려면 결제 세부 사항을 업데이트해야 합니다."
+      listing_author_payment_details_missing_no_free: ~
       images_are_processing: "이미지를 처리 중입니다. 1 ~ 2 분만 기다려주세요."
       maintenance_mode:
         zero: "유지 보수를 위해 웹 사이트가 오프라인 상태가됩니다."
@@ -1879,6 +1886,7 @@ ko:
       you_cannot_send_a_new_comment_because_listing_is_closed: "이 목록이 폐쇄되어 있기 때문에 새로운 댓글을 보낼 수 없습니다."
       you_must: 해야합니다
       subscribe_to_comments: "새로운 의견 및 업데이트 알림"
+    deleting_a_listing_cannot_be_undone: ~
     edit:
       edit_listing: "목록 수정"
     edit_links:
@@ -1894,6 +1902,7 @@ ko:
       listing_is_rejected: ~
       approve_listing: ~
       reject_listing: ~
+      delete_listing: ~
     map:
       open_in_google_maps: "Google지도에서 열기"
     error:
@@ -2726,6 +2735,12 @@ ko:
     paypal_connected: "PayPal 계정이 성공적으로 연결되었습니다!"
     paypal_can_accept: "이제 PayPal 계정으로 돈을 받을 준비가되었습니다."
     paypal_connected_give_permission: "설정을 완료하고 PayPal 계정 <%{email}>에 대한 자금 수령을 시작하려면 거래 수수료를 청구 할 수있는 권한을 부여하십시오."
+    stripe_account_restricted: ~
+    stripe_account_restricted_info: ~
+    stripe_account_restricted_soon: ~
+    stripe_account_restricted_soon_info: ~
+    stripe_account_pending_verification: ~
+    stripe_account_pending_verification_info: ~
     form_new:
       need_info: "우리는 당신에게 돈을 보낼 수있는 당신에 관한 정보가 필요합니다."
       select_country: 국가선택...
@@ -2765,7 +2780,6 @@ ko:
       address_kanji_line1: ~
       male: ~
       female: ~
-      mcc: ~
     form_bank:
       bank_account_number: "은행 계좌 정보"
       bank_routing_number: "라우팅 번호"
@@ -2820,6 +2834,7 @@ ko:
       search_results: ~
       search_results_for: ~
       listing_description: ~
+      listing_description_without_price: ~
       category_description: ~
       profile_title: ~
       profile_description: ~

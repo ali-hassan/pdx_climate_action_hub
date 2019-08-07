@@ -60,13 +60,14 @@ class Transaction < ApplicationRecord
 
   belongs_to :community
   belongs_to :listing
-  has_many :transaction_transitions, dependent: :destroy, foreign_key: :transaction_id
+  has_many :transaction_transitions, dependent: :destroy, foreign_key: :transaction_id, inverse_of: :tx
   has_one :booking, dependent: :destroy
   has_one :shipping_address, dependent: :destroy
-  belongs_to :starter, class_name: "Person", foreign_key: :starter_id
+  belongs_to :starter, class_name: "Person", foreign_key: :starter_id, inverse_of: :starter_transactions
   belongs_to :conversation
-  has_many :testimonials
+  has_many :testimonials, dependent: :destroy
   belongs_to :listing_author, class_name: 'Person'
+  has_many :stripe_payments, dependent: :destroy
 
   delegate :author, to: :listing, allow_nil: true
   delegate :title, to: :listing, prefix: true, allow_nil: true
@@ -104,9 +105,9 @@ class Transaction < ApplicationRecord
     left_outer_joins(:conversation).merge(Conversation.payment)
   }
   scope :with_payment_conversation_latest, -> (sort_direction) {
-    with_payment_conversation.order(
+    with_payment_conversation.order(Arel.sql(
       "GREATEST(COALESCE(transactions.last_transition_at, 0),
-        COALESCE(conversations.last_message_at, 0)) #{sort_direction}")
+        COALESCE(conversations.last_message_at, 0)) #{sort_direction}"))
   }
   scope :for_csv_export, -> {
     includes(:starter, :booking, :testimonials, :transaction_transitions, :conversation => [{:messages => :sender}, :listing, :participants], :listing => :author)
@@ -142,8 +143,8 @@ class Transaction < ApplicationRecord
   scope :skipped_feedback, -> { where('starter_skipped_feedback OR author_skipped_feedback') }
 
   scope :waiting_feedback, -> {
-    where("NOT starter_skipped_feedback AND NOT #{Testimonial.with_tx_starter.select('1').exists.to_sql}
-           OR NOT author_skipped_feedback AND NOT #{Testimonial.with_tx_author.select('1').exists.to_sql}")
+    where("NOT starter_skipped_feedback AND NOT #{Testimonial.with_tx_starter.select('1').arel.exists.to_sql}
+           OR NOT author_skipped_feedback AND NOT #{Testimonial.with_tx_author.select('1').arel.exists.to_sql}")
   }
 
   def booking_uuid_object

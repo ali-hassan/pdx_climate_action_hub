@@ -282,6 +282,7 @@ CREATE TABLE `communities` (
   `linkedin_connect_id` varchar(255) DEFAULT NULL,
   `linkedin_connect_secret` varchar(255) DEFAULT NULL,
   `pre_approved_listings` tinyint(1) DEFAULT '0',
+  `allow_free_conversations` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_communities_on_uuid` (`uuid`),
   KEY `index_communities_on_domain` (`domain`),
@@ -2435,6 +2436,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190228084827'),
 ('20190305112030'),
 ('20190319114719'),
-('20190319122745');
+('20190319122745'),
+('20190717105844');
 
 

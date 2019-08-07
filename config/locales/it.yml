@@ -203,6 +203,7 @@ it:
         users_can_invite_new_users: ~
         private: ~
         require_verification_to_post_listings: ~
+        allow_free_conversations: ~
         search_preferences: ~
         default_search_type: ~
         keyword_search: ~
@@ -549,6 +550,8 @@ it:
         search_by_title_author_category: ~
         search: Cerca
         reset_search: ~
+        export_all_as_csv: ~
+        processing_export: ~
         status:
           all: ~
           selected_js: ~
@@ -861,6 +864,7 @@ it:
       stripe_fee: ~
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
+      the_transaction_fee_must_be_lower_than_100: ~
       confirm_disable: ~
       commission_from_buyer_label: ~
       minimum_buyer_transaction_fee_label: ~
@@ -1423,6 +1427,7 @@ it:
       buyer_cannot_pay_error: "Il pagamento è stato rifiutato da PayPal. Si prega di contattare il loro Servizio Clienti per maggiori informazioni: %{customer_service_link}"
       pending_review_error: "Il pagamento è stato presentato, ma è stato contrassegnato da PayPal come 'in revisione'. Quando PayPal completarà la revisione, il pagamento verrà autorizzato automaticamente."
       seller_express_checkout_disabled: "Il pagamento con PayPal non è attivo sul conto PayPal dell'autore dell'inserzione. Per favore contatta l'autore, e mettilo a conoscenza che c'è un problema con il suo conto PayPal. Consigliali per favore di contattare l'Assistenza clienti PayPal."
+      seller_express_checkout_disabled_no_free: ~
       generic_error: "Si è verificato un errore durante la procedura di pagamento. Impossibile finalizzare il pagamento di PayPal."
       cancel_error: "Si è verificato un errore durante la cancellazione. Non è stato possibile completare la cancellazione."
       accept_authorization_error: "Si è verificato un errore durante il tentativo di accettare un pagamento pre autorizzato di Paypal. Per favore, riprova nuovamente."
@@ -1754,6 +1759,7 @@ it:
       listing_updated_successfully: "L'inserzione è stata aggiornata con successo"
       listing_updated_availability_management_enabled: "Inserzioni aggiornate con successo. Gestione delle disponibilità abilitate con successo."
       listing_updated_availability_management_disabled: ""
+      listing_deleted: ~
       only_kassi_administrators_can_access_this_area: ~
       only_listing_author_can_close_a_listing: "Solo l'autore dell'inserzione può chiudere l'inserzione"
       only_listing_author_can_edit_a_listing: "Solo l'autore dell'inserzione può modificare l'inserzione"
@@ -1820,6 +1826,7 @@ it:
       user_does_not_have_email_to_delete: "Non hai l'indirizzo email che stai cercando di rimuovere"
       email_deleted: "Email rimossa"
       listing_author_payment_details_missing: "Ti preghiamo di contattare l'autore, cliccando sul pulsante 'contatta' che trovi più in basso. Deve aggiornare i dettagli di pagamento per poter ricevere pagamenti."
+      listing_author_payment_details_missing_no_free: ~
       images_are_processing: "Stiamo elaborando le tue immagini. Attendi per favore uno o due minuti e saranno visibili."
       maintenance_mode:
         zero: "Il sito web sarà messo ora offline per manutenzione."
@@ -1856,6 +1863,7 @@ it:
       you_cannot_send_a_new_comment_because_listing_is_closed: "Non puoi aggiungere nuovi commenti perché l'annuncio è chiuso."
       you_must: Devi
       subscribe_to_comments: "Inviami una notifica per ogni nuovo commento o aggiornamento"
+    deleting_a_listing_cannot_be_undone: ~
     edit:
       edit_listing: "Modifica l'inserzione"
     edit_links:
@@ -1871,6 +1879,7 @@ it:
       listing_is_rejected: ~
       approve_listing: ~
       reject_listing: ~
+      delete_listing: ~
     map:
       open_in_google_maps: "Apri in Google Maps"
     error:
@@ -2695,6 +2704,12 @@ it:
     paypal_connected: "L'account PayPal è stato connesso con successo!"
     paypal_can_accept: ~
     paypal_connected_give_permission: ~
+    stripe_account_restricted: ~
+    stripe_account_restricted_info: ~
+    stripe_account_restricted_soon: ~
+    stripe_account_restricted_soon_info: ~
+    stripe_account_pending_verification: ~
+    stripe_account_pending_verification_info: ~
     form_new:
       need_info: "Abbiamo bisogno di alcune informazioni su di te per poterti inviare denaro"
       select_country: "Scegli nazione"
@@ -2734,7 +2749,6 @@ it:
       address_kanji_line1: ~
       male: ~
       female: ~
-      mcc: ~
     form_bank:
       bank_account_number: "Numero conto corrente"
       bank_routing_number: ~
@@ -2789,6 +2803,7 @@ it:
       search_results: ~
       search_results_for: ~
       listing_description: ~
+      listing_description_without_price: ~
       category_description: ~
       profile_title: ~
       profile_description: ~

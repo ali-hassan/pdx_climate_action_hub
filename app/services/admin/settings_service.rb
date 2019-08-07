@@ -9,7 +9,7 @@ class Admin::SettingsService
   def update
     update_payment_settings
     update_configuration
-    community.update_attributes(settings_params)
+    community.update(settings_params)
   end
 
   private
@@ -27,10 +27,12 @@ class Admin::SettingsService
       :automatic_newsletters,
       :default_min_days_between_community_updates,
       :email_admins_about_new_members,
-      :pre_approved_listings
+      :pre_approved_listings,
+      :allow_free_conversations
     )
   end
 
+  # rubocop:disable Rails/SkipsModelValidations
   def update_payment_settings
     automatic_confirmation_after_days = params[:community][:automatic_confirmation_after_days]
     return unless automatic_confirmation_after_days
@@ -41,6 +43,7 @@ class Admin::SettingsService
     stripe_settings = PaymentSettings.stripe.find_by(community_id: community.id)
     stripe_settings&.update_column(:confirmation_after_days, automatic_confirmation_after_days.to_i)
   end
+  # rubocop:enable Rails/SkipsModelValidations
 
   def update_configuration
     if FeatureFlagHelper.location_search_available

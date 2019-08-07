@@ -7,8 +7,8 @@
 #    is already defined
 
 require 'rubygems'
-require File.expand_path('../../../test/helper_modules', __FILE__)
-include TestHelpers
+require File.expand_path('../../test/helper_modules', __dir__)
+include TestHelpers # rubocop:disable Style/MixinUsage
 
 require 'database_cleaner'
 
@@ -64,7 +64,7 @@ Before('@no-transaction') do
   set_strategy(:deletion)
 end
 
-Before('~@no-transaction') do
+Before('not @no-transaction') do
   set_strategy(:transaction)
   DatabaseCleaner.start
 end
@@ -73,6 +73,6 @@ After('@no-transaction') do
   clean_db()
 end
 
-After('~@no-transaction') do
+After('not @no-transaction') do
   DatabaseCleaner.clean
 end

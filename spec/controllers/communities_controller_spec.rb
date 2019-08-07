@@ -89,10 +89,10 @@
 #  small_cover_photo_processing               :boolean
 #  favicon_processing                         :boolean
 #  deleted                                    :boolean
-#  end_user_analytics                         :boolean          default(TRUE)
 #  google_connect_secret                      :string(255)
 #  google_connect_id                          :string(255)
 #  google_connect_enabled                     :boolean          default(TRUE)
+#  end_user_analytics                         :boolean          default(TRUE)
 #  footer_theme                               :integer          default("dark")
 #  footer_copyright                           :text(65535)
 #  footer_enabled                             :boolean          default(FALSE)
@@ -104,6 +104,7 @@
 #  linkedin_connect_id                        :string(255)
 #  linkedin_connect_secret                    :string(255)
 #  pre_approved_listings                      :boolean          default(FALSE)
+#  allow_free_conversations                   :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -127,7 +128,7 @@ describe CommunitiesController, type: :controller do
       marketplace_name: 'Pearl',
       marketplace_type: 'product',
       marketplace_country: 'FI',
-      marketplace_language: 'en',
+      marketplace_language: 'en'
     }
     end
     subject { post :create, params: params }

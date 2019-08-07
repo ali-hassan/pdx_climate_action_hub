@@ -203,6 +203,7 @@ ar:
         users_can_invite_new_users: "السماح لكل المشتركين بدعوة الآخرين"
         private: "السماح فقط للمشتركين المسجلين بمشاهدة الإعلانات والملفات الشخصية، اجعل هذا السوق خاص"
         require_verification_to_post_listings: "السماح فقط للمشتركين المؤكدين من المشرف بإضافة إعلانات"
+        allow_free_conversations: ~
         search_preferences: "تفضيلات البحث"
         default_search_type: "‎%{select_search_type}‎ :نوع البحث"
         keyword_search: "بحث بالكلمة"
@@ -549,6 +550,8 @@ ar:
         search_by_title_author_category: ~
         search: ~
         reset_search: ~
+        export_all_as_csv: ~
+        processing_export: ~
         status:
           all: ~
           selected_js: ~
@@ -875,6 +878,7 @@ ar:
       stripe_fee: ~
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
+      the_transaction_fee_must_be_lower_than_100: ~
       confirm_disable: ~
       commission_from_buyer_label: ~
       minimum_buyer_transaction_fee_label: ~
@@ -1444,6 +1448,7 @@ ar:
       buyer_cannot_pay_error: ~
       pending_review_error: ~
       seller_express_checkout_disabled: ~
+      seller_express_checkout_disabled_no_free: ~
       generic_error: ~
       cancel_error: ~
       accept_authorization_error: ~
@@ -1775,6 +1780,7 @@ ar:
       listing_updated_successfully: "تم تحديث الإعلان بنجاح"
       listing_updated_availability_management_enabled: ~
       listing_updated_availability_management_disabled: ~
+      listing_deleted: ~
       only_kassi_administrators_can_access_this_area: ~
       only_listing_author_can_close_a_listing: "فقط من وضع الاعلان يمكنه إغلاقه"
       only_listing_author_can_edit_a_listing: "فقط من وضع الإعلان يمكنه تعديله"
@@ -1841,6 +1847,7 @@ ar:
       user_does_not_have_email_to_delete: "أنت لا تملك البريد الإلكتروني الذي تود حذفه"
       email_deleted: "تم حذف الربيد الإلكتروني"
       listing_author_payment_details_missing: "يرجى التواصل مع المعلن عبر الضغط على زر الاتصال بالأسفل يجب عليه تعديل تفاصيل عملية الدفع ليتمكن من استقبال الدفعات"
+      listing_author_payment_details_missing_no_free: ~
       images_are_processing: "نقوم حاليا بمعالجة الصور. ستكون جاهزة في دقائق."
       automatically_logged_out_please_sign_in: "لقدم تم تسجيل خروجك تلقائيا. يرجى تسجيل الدخول مرة أخرى."
       stripe_you_account_balance_is_not_0: ~
@@ -1873,6 +1880,7 @@ ar:
       you_cannot_send_a_new_comment_because_listing_is_closed: "لا يمكنك إضافة تعليق لأن الإعلان مغلق."
       you_must: "يجب عليك"
       subscribe_to_comments: "قم بإشعاري في حال وجود تعليقات أو تحديثات"
+    deleting_a_listing_cannot_be_undone: ~
     edit:
       edit_listing: "تعديل الإعلان"
     edit_links:
@@ -1888,6 +1896,7 @@ ar:
       listing_is_rejected: ~
       approve_listing: ~
       reject_listing: ~
+      delete_listing: ~
     map:
       open_in_google_maps: "افتح بواسطة خرائط جوجل"
     error:
@@ -2731,6 +2740,12 @@ ar:
     paypal_connected: ~
     paypal_can_accept: ~
     paypal_connected_give_permission: ~
+    stripe_account_restricted: ~
+    stripe_account_restricted_info: ~
+    stripe_account_restricted_soon: ~
+    stripe_account_restricted_soon_info: ~
+    stripe_account_pending_verification: ~
+    stripe_account_pending_verification_info: ~
     form_new:
       need_info: ~
       select_country: ~
@@ -2770,7 +2785,6 @@ ar:
       address_kanji_line1: ~
       male: ~
       female: ~
-      mcc: ~
     form_bank:
       bank_account_number: ~
       bank_routing_number: ~
@@ -2825,6 +2839,7 @@ ar:
       search_results: ~
       search_results_for: ~
       listing_description: ~
+      listing_description_without_price: ~
       category_description: ~
       profile_title: ~
       profile_description: ~

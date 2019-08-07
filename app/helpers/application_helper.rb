@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 # rubocop:disable Metrics/ModuleLength
 module ApplicationHelper
 
@@ -53,7 +51,7 @@ module ApplicationHelper
 
   # used to escape strings to URL friendly format
   def self.escape_for_url(str)
-     URI.escape(str, Regexp.new("[^-_!~*()a-zA-Z\\d]"))
+     URI.escape(str, Regexp.new("[^-_!~*()a-zA-Z\\d]")) # rubocop:disable Lint/UriEscapeUnescape
   end
 
   # Changes line breaks to <br>-tags and transforms URLs to links
@@ -123,9 +121,9 @@ module ApplicationHelper
     opts = {
       :currentPage => current_page,
       :totalPages => total_pages,
-      :url        => url,
-      :loaderMsg  => loader_message,
-      :targetDiv  => target_id # extra parameter for jquery.pageless.js patch
+      :url => url,
+      :loaderMsg => loader_message,
+      :targetDiv => target_id # extra parameter for jquery.pageless.js patch
     }
 
     content_for :extra_javascript do
@@ -153,11 +151,11 @@ module ApplicationHelper
   def self.send_error_notification(message, error_class="Special Error", parameters={})
     if APP_CONFIG.use_airbrake
       Airbrake.notify(
-        :error_class      => error_class,
-        :error_message    => message,
-        :backtrace        => $@,
+        :error_class => error_class,
+        :error_message => message,
+        :backtrace => $@,
         :environment_name => ENV['RAILS_ENV'],
-        :parameters       => parameters)
+        :parameters => parameters)
     end
     Rails.logger.error "#{error_class}: #{message}"
   end
@@ -168,6 +166,7 @@ module ApplicationHelper
   def self.pick_referer_domain_part_from_request(request)
     return request.headers["HTTP_ORIGIN"] if request.headers["HTTP_ORIGIN"].present?
     return request.headers["HTTP_REFERER"][/(^[^\/]*(\/\/)?[^\/]+)/,1] if request.headers["HTTP_REFERER"]
+
     return ""
   end
 
@@ -352,7 +351,7 @@ module ApplicationHelper
         :text => t("admin.left_hand_navigation.subscription"),
         :icon_class => icon_class("credit_card"),
         :path => admin_plan_path,
-        :name => "plan",
+        :name => "plan"
       }
     end
 
@@ -361,7 +360,7 @@ module ApplicationHelper
       :text => t("admin.left_hand_navigation.preview"),
       :icon_class => icon_class("eye"),
       :path => homepage_without_locale_path(big_cover_photo: true, locale: nil),
-      :name => "preview",
+      :name => "preview"
     }
 
     links += [
@@ -491,7 +490,7 @@ module ApplicationHelper
         :text => t("admin.landing_page.landing_page"),
         :icon_class => icon_class("home"),
         :path => admin_landing_page_path,
-        :name => "landing_page",
+        :name => "landing_page"
       }
     end
 
@@ -829,35 +828,35 @@ module ApplicationHelper
   SOCIAL_LINKS = {
     facebook: {
       name: "Facebook",
-      placeholder: "https://www.facebook.com/CHANGEME",
+      placeholder: "https://www.facebook.com/CHANGEME"
     },
     twitter: {
       name: "Twitter",
-      placeholder: "https://www.twitter.com/CHANGEME",
+      placeholder: "https://www.twitter.com/CHANGEME"
     },
     instagram: {
       name: "Instagram",
-      placeholder: "https://www.instagram.com/CHANGEME",
+      placeholder: "https://www.instagram.com/CHANGEME"
     },
     youtube: {
       name: "YouTube",
-      placeholder: "https://www.youtube.com/channel/CHANGEME",
+      placeholder: "https://www.youtube.com/channel/CHANGEME"
     },
     googleplus: {
       name: "Google+",
-      placeholder: "https://plus.google.com/CHANGEME",
+      placeholder: "https://plus.google.com/CHANGEME"
     },
     linkedin: {
       name: "LinkedIn",
-      placeholder: "https://www.linkedin.com/company/CHANGEME",
+      placeholder: "https://www.linkedin.com/company/CHANGEME"
     },
     pinterest: {
       name: "Pinterest",
-      placeholder: "https://www.pinterest.com/CHANGEME",
+      placeholder: "https://www.pinterest.com/CHANGEME"
     },
     soundcloud: {
       name: "SoundCloud",
-      placeholder: "https://soundcloud.com/CHANGEME",
+      placeholder: "https://soundcloud.com/CHANGEME"
     }
   }.freeze
 

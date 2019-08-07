@@ -90,7 +90,7 @@ en:
         contact_admin_link_text: "contact the %{service_name} team"
         save: "Save settings"
         transaction_agreement: "Transaction agreement"
-        transaction_agreement_checkbox: "Require users to accept an agreement before transaction"
+        transaction_agreement_checkbox: "Require buyers to accept an agreement before starting a transaction"
         transaction_agreement_checkbox_header: "Agreement label"
         transaction_agreement_checkbox_label_description: "This text will be shown next to a checkbox in the checkout form. The user needs to check the box to proceed with the transaction. An example label would be something like \"By clicking this box I accept the agreement.\""
         transaction_agreement_text_header: "Agreement text"
@@ -222,6 +222,7 @@ en:
         users_can_invite_new_users: "Allow all users to invite new users"
         private: "Allow only registered users to see posts and user profiles (make ShareOregon private)."
         require_verification_to_post_listings: "Allow only users verified by admin to add new posts."
+        allow_free_conversations: "Allow users to message each others freely"
         search_preferences: "Search preferences"
         default_search_type: "Search type: %{select_search_type}"
         keyword_search: "Keyword search"
@@ -268,7 +269,7 @@ en:
         join_date: Joined
         admin: Admin
         posting_allowed: "Posting allowed"
-        ban_user: Ban
+        ban_user: Disable
         saving_user_status: Saving...
         save_user_status_successful: Saved
         export_all_as_csv: "Export all as CSV"
@@ -287,7 +288,7 @@ en:
           selected: "Selected statuses: %{count}"
           selected_js: "Selected statuses: "
           admin: Admin
-          banned: Banned
+          banned: Disabled
           posting_allowed: "Posting allowed"
           accepted: Accepted
           unconfirmed: Unconfirmed
@@ -296,7 +297,7 @@ en:
         unconfirmed_user: "Unconfirmed user: %{name}"
         resend: Resend
         cancel: Cancel
-        user_didnt_complete_the_signup_process: "This user signed up through Facebook but didn't complete the signup process. After connecting a Facebook account, users still need to accept your terms of use and fill any mandatory user fields."
+        user_didnt_complete_the_signup_process: "This user signed up through social login but didn't complete the signup process. After connecting a social login account, users still need to accept your terms of use and fill any mandatory user fields."
         pending_user: "Pending: %{name}"
       new_layout:
         new_layout: "New layout"
@@ -465,7 +466,7 @@ en:
           started: Started
           last_activity: "Latest activity"
           initiated_by: Starter
-          other_party: "Other party"
+          other_party: "Provider"
         status:
           conversation: Conversation
           free: "Free transaction"
@@ -511,7 +512,7 @@ en:
           started: Started
           last_activity: "Latest Activity"
           initiated_by: Starter
-          other_party: "Other party"
+          other_party: "Provider"
         participants: "Conversation: %{starter} with %{author}"
         profile: "%{author}'s Profile"
         search_by_keyword: "Search for a name, email or keyword"
@@ -574,6 +575,8 @@ en:
         search_by_title_author_category: "Search for a listing title, author or category name"
         search: Search
         reset_search: "Show all"
+        export_all_as_csv: "Export all as CSV"
+        processing_export: "Processing export to CSV..."
         status:
           all: "All statuses"
           selected_js: "Selected statuses: "
@@ -905,6 +908,7 @@ en:
       stripe_fee: "Stripe's fees"
       stripe_fee_notice: "%{stripe_fee_link} will be deducted from the transaction fee you are charging."
       fee_should_be_less_than_minimum_price: "Minimum transaction fee must be lower than minimum transaction size"
+      the_transaction_fee_must_be_lower_than_100: "The transaction fee must be lower than 100%"
       confirm_disable: "Are you sure you want to disable %{gateway}? If you disable it, sellers will no longer be able to receive money and buyers will no longer be able to pay through this payment method. If sellers haven't configured another payment method, buyers will not be able to buy from them."
       commission_from_buyer_label: "Buyer transaction fee:"
       minimum_buyer_transaction_fee_label: "Buyer minimum transaction fee:"
@@ -1204,7 +1208,7 @@ en:
   community_memberships:
     access_denied:
       access_denied: "Access denied"
-      you_are_banned_in_this_community: "The team has prevented you from accessing %{service_name}. If you want to contact the %{service_name} team, you can %{link_to_contact_page}."
+      you_are_banned_in_this_community: "The %{service_name} team has disabled your account. If you want to message the %{service_name} team, you can %{link_to_contact_page}."
       contact_page_link: "contact them"
     new:
       welcome_fb_user: "Welcome to %{service_name}, %{name}!"
@@ -1477,6 +1481,7 @@ en:
       buyer_cannot_pay_error: "The payment has been declined by PayPal. Please contact their Customer Service for more information: %{customer_service_link}"
       pending_review_error: "The payment was submitted but was flagged by PayPal as 'requiring a review'. When PayPal completes the review, the payment will be automatically authorized."
       seller_express_checkout_disabled: "PayPal Express Checkout has been disabled for the post author's PayPal account. Please contact the author and let them know that there's an issue with their PayPal account, and advise them to contact PayPal Customer Service."
+      seller_express_checkout_disabled_no_free: "PayPal Express Checkout has been disabled for the listing author's PayPal account. Please ask the %{service_name} team to contact the listing author and advise them to contact PayPal Customer Service."
       generic_error: "An error occurred during the payment process. Could not finalize your PayPal payment."
       cancel_error: "An error occurred during cancellation. Could not finalize cancel."
       accept_authorization_error: "An error occurred while trying to accept preauthorized Paypal payment. Please, try again."
@@ -1747,6 +1752,23 @@ en:
       messages: Messages
     logged_in_notifications_icon:
       notifications: Notifications
+    markdown_help:
+      title: Formatting help using Markdown
+      description: "Markdown is a simple way to format text that looks great on any device. It doesn’t do anything fancy like change the font size, color, or type — just the essentials, using keyboard symbols you already know."
+      formatting: Formatting
+      result: Result
+      h1: H1
+      h2: H2
+      h3: H3
+      italic: italic
+      bold: bold
+      underline: underline
+      strikethrough: strikethrough
+      inline_link: "Inline link"
+      list: List
+      one: One
+      two: Two
+      three: Three
     mobile_logged_in:
       admin: Admin
       go_to_your_profile_page: Profile
@@ -1811,13 +1833,14 @@ en:
       listing_updated_successfully: "Listing updated successfully"
       listing_updated_availability_management_enabled: "Listing updated successfully. Availability management enabled."
       listing_updated_availability_management_disabled: "Listing updated successfully. Availability management disabled."
+      listing_deleted: "Listing deleted"
       only_kassi_administrators_can_access_this_area: "Please log in with an admin account to access this area"
       only_listing_author_can_close_a_listing: "Only listing author can close a listing"
       only_listing_author_can_edit_a_listing: "Only listing author can edit a listing"
       payment_successful: "Payment successful"
       payment_canceled: "Payment cancelled"
       error_in_payment: "Error in payment. If you didn't complete the payment yet, try again. If you did, please send us feedback."
-      cannot_receive_payment: "The other party can't receive the payment due some error. Please contact the %{service_name} team to clarify the situation"
+      cannot_receive_payment: "The provider can't receive the payment due some error. Please contact the %{service_name} team to clarify the situation"
       payment_waiting_for_later_accomplishment: "When you have paid, we'll notify the seller and you will get a receipt in email"
       password_recovery_sent: "Instructions to change your password were sent to your email."
       person_activated: "User activated"
@@ -1878,6 +1901,7 @@ en:
       email_deleted: "Email removed"
       listing_author_payment_details_missing: "Please contact the author by clicking the 'Contact' button. They need to update their payment details to receive payments."
       images_are_processing: "We are processing your images. They'll be visible soon."
+      listing_author_payment_details_missing_no_free: "Please contact the ShareOregon team to ask them to contact and advise the listing author to update their payment details to receive payments."
       maintenance_mode:
         zero: "ShareOregon will now go offline for maintenance."
         one: "ShareOregon will be offline for maintenance in %{count} minute."
@@ -1916,6 +1940,7 @@ en:
       you_cannot_send_a_new_comment_because_listing_is_closed: "You cannot send new comments because this post is closed."
       you_must: "You must"
       subscribe_to_comments: "Notify me of new comments and updates."
+    deleting_a_listing_cannot_be_undone: "Deleting a listing cannot be undone. Are you sure you want to proceed?"
     edit:
       edit_listing: "Edit Post"
     edit_links:
@@ -1932,6 +1957,7 @@ en:
       listing_is_rejected: "Listing is rejected"
       approve_listing: "Approve listing"
       reject_listing: "Reject listing"
+      delete_listing: "Delete listing"
     map:
       open_in_google_maps: "Open in Google Maps"
     error:
@@ -1955,6 +1981,7 @@ en:
         detailed_description: "Detailed description"
         youtube_info: "If you add YouTube links, the videos will appear below the description."
         resize_editor: "To resize the editor, drag the triangle in the lower-right hand corner."
+        youtube_info_markdown: "You can %{link}. If your description contains YouTube links, the videos will be shown below the description."
       destination:
         destination: Destination
       form_content:
@@ -2520,6 +2547,8 @@ en:
       image_is_processing: "Hang on tight. We are processing your profile picture. It will be ready in a minute or two."
       shown_in_your_public_profile: "(shown in your public profile)"
       editing_profile_of: "You are now editing the profile of %{name}"
+      format_markdown_link: "format your description using Markdown"
+      format_markdown: "You can %{link}."
     save_information: "Save information"
   shipping_address:
     shipping_address: "Shipping address"
@@ -2801,12 +2830,11 @@ en:
     paypal_connected: "PayPal account connected successfully!"
     paypal_can_accept: "You are now all set to receive money to your PayPal account"
     paypal_connected_give_permission: "To complete setup and start receiving funds to your PayPal account <%{email}>, please grant permission to charge a transaction fee."
-
     stripe_account_restricted: "Online payments to your account are restricted!"
     stripe_account_restricted_info: "You should edit your bank account details to provide more information to the payment provider."
     stripe_account_restricted_soon: "Online payments to your account will be restricted soon."
     stripe_account_restricted_soon_info: "You should edit your bank account details to provide more information to the payment provider."
-    stripe_account_pending_verification: "Account details saved successfully. Waiting for account verification from Stripe."
+    stripe_account_pending_verification: "Account details saved successfully. Waiting for account verification from the payment provider."
     stripe_account_pending_verification_info: "Check back later to make sure that everything is in order."
     form_new:
       need_info: "We need some information about you to be able to send you money."
@@ -2847,7 +2875,6 @@ en:
       address_kanji_line1: "Street address kanji"
       male: male
       female: female
-      mcc: "Industry (Merchant Category Code)"
     form_bank:
       bank_account_number: "Bank account number"
       bank_routing_number: "Routing number"
@@ -2873,7 +2900,7 @@ en:
         digits_or_chars: "digits or A-Z chars"
     form_verification:
       personal_id_number: "Personal ID Number"
-      document: "Verification document"
+      document: "Proof of identity (passport, government-issued ID)"
       send_verification: "Send Verification"
       need_verification: "Need additional verification"
     form_pin:
@@ -2902,6 +2929,7 @@ en:
       search_results: "Search results - %{variable}"
       search_results_for: "Search results for: %{placeholder1} on %{placeholder2}"
       listing_description: "%{title} for %{price} by %{author} on %{marketplace}"
+      listing_description_without_price: "%{title} by %{author} on %{marketplace}"
       category_description: "%{category} on %{marketplace}"
       profile_title: "Profile of %{user} - %{marketplace}"
       profile_description: "Learn more about %{user} on %{marketplace}"

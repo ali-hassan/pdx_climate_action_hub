@@ -23,7 +23,7 @@ module EmailService::Store::Address
     from_model(
       MarketplaceSenderEmail
       .where(community_id: community_id, verification_status: :verified)
-      .order('created_at DESC')
+      .order('created_at DESC, id DESC')
       .limit(1)
       .first)
   end
@@ -36,7 +36,7 @@ module EmailService::Store::Address
     from_model(
       MarketplaceSenderEmail
       .where(community_id: community_id)
-      .order('created_at DESC')
+      .order('created_at DESC, id DESC')
       .limit(1)
       .first)
   end
@@ -58,7 +58,7 @@ module EmailService::Store::Address
 
   def set_verification_requested(community_id:, id:)
     Maybe(MarketplaceSenderEmail.where(community_id: community_id, id: id).first)
-      .update_attributes(
+      .update(
         verification_requested_at: Time.now,
         verification_status: :requested)
       .or_else(nil)
@@ -80,7 +80,7 @@ module EmailService::Store::Address
 
   def update(community_id:, id:, name:)
     Maybe(MarketplaceSenderEmail.where(community_id: community_id, id: id).first)
-      .update_attributes(name:  name).or_else(nil)
+      .update(name:  name).or_else(nil)
   end
 
   ## Privates
