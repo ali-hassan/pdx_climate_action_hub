@@ -305,6 +305,7 @@ class Community < ApplicationRecord
       UUIDUtils.parse_raw(self[:uuid])
     end
   end
+
   def uuid_object=(uuid)
     self.uuid = UUIDUtils.raw(uuid)
   end
