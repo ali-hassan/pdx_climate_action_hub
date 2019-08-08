@@ -316,14 +316,11 @@ class Community < ApplicationRecord
   end
 
   validates_format_of :twitter_handle, with: /\A[A-Za-z0-9_]{1,15}\z/, allow_nil: true
-
   validates :facebook_connect_id, numericality: { only_integer: true }, allow_nil: true
   validates :facebook_connect_id, length: {maximum: 16}, allow_nil: true
-
   validates_format_of :facebook_connect_secret, with: /\A[a-f0-9]{32}\z/, allow_nil: true
 
   attr_accessor :terms
-
   # Wrapper for the various attachment images url methods
   # which returns url of old image, while new one is processing.
   def stable_image_url(image_name, style = nil, options = {})
