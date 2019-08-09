@@ -1957,7 +1957,7 @@ en:
       listing_is_rejected: "Listing is rejected"
       approve_listing: "Approve listing"
       reject_listing: "Reject listing"
-      delete_listing: "Delete listing"
+      delete_listing: "Delete Post"
     map:
       open_in_google_maps: "Open in Google Maps"
     error:
