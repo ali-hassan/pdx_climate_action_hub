@@ -43,7 +43,11 @@ class SeoService
     when :listing_meta_title
       '{{listing_title}} - {{marketplace_name}}'
     when :listing_meta_description
-      I18n.t("seo_sections.placeholder.listing_description", title: '{{listing_title}}', price: '{{listing_price}}', author: '{{listing_author}}', marketplace: '{{marketplace_name}}', locale: locale)
+      if mode == 'default' || @listing.try(:price_cents).to_i > 0
+        I18n.t("seo_sections.placeholder.listing_description", title: '{{listing_title}}', price: '{{listing_price}}', author: '{{listing_author}}', marketplace: '{{marketplace_name}}', locale: locale)
+      else
+        I18n.t("seo_sections.placeholder.listing_description_without_price", title: '{{listing_title}}', author: '{{listing_author}}', marketplace: '{{marketplace_name}}', locale: locale)
+      end
     when :category_meta_title
       '{{category_name}} - {{marketplace_name}}'
     when :category_meta_description
@@ -57,6 +61,7 @@ class SeoService
 
   def title(default_value, extra_mode = nil, locale = I18n.locale)
     return @title if defined?(@title)
+
     @locale = locale
     custom_value =
       if mode == 'default' && extra_mode == :social
@@ -72,6 +77,7 @@ class SeoService
 
   def description(default_value, extra_mode = nil, locale = I18n.locale)
     return @description if defined?(@description)
+
     @locale = locale
     custom_value =
       if mode == 'default' && extra_mode == :social
@@ -153,7 +159,7 @@ class SeoService
     when 'listing_author'
       @listing ? PersonViewUtils.person_display_name(@listing.author, @community) : nil
     when 'listing_price'
-      if @listing && @listing.price
+      if @listing&.price
         if @listing.unit_type
           [
             MoneyViewUtils.to_humanized(@listing.price),
@@ -224,6 +230,6 @@ class SeoService
 
   def customization_value_or_default(feature)
     value = customization.send(feature)
-    value.present? ? value : placeholder(feature, locale)
+    value.presence || placeholder(feature, locale)
   end
 end

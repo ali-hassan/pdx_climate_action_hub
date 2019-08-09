@@ -3,7 +3,7 @@ ru:
     currency:
       format:
         separator: ","
-        delimiter: ","
+        delimiter: " "
         format: "%n%u"
   admin:
     categories:
@@ -228,6 +228,7 @@ ru:
         users_can_invite_new_users: "Все участники могут приглашать новых участников в этот проект."
         private: "Этот проект приватный (только зарегистрированные участники могут видеть содержимое)"
         require_verification_to_post_listings: "Только участники подтвержденные администратором могут размещать новые публикации"
+        allow_free_conversations: ~
         search_preferences: "Настройки поиска"
         default_search_type: "Тип поиска: %{select_search_type}"
         keyword_search: "Поиск по ключевому слову"
@@ -303,7 +304,7 @@ ru:
         user_didnt_complete_the_signup_process: ~
         pending_user: ~
       new_layout:
-        new_layout: "Новй макет"
+        new_layout: "Новый макет"
         description_roadmap_new: "Когда для вашего маркетплейса будут доступны новые компоненты макета, вы сможите выбрать, использовать новые или старые компоненты. Вы сможете переключать свои настройки в любое время с этой страницы. Рекомендуется всегда использовать новую версию, поскольку старые компоненты со временем могут быть отключены. В случае, если компонент, который вы используете в настоящее время, будет планироваться отключить, вам сообщат заранее."
         enabled_for_you: "Доступно для вас"
         enabled_for_all: "Доступно для всех"
@@ -574,6 +575,8 @@ ru:
         search_by_title_author_category: ~
         search: ~
         reset_search: ~
+        export_all_as_csv: ~
+        processing_export: ~
         status:
           all: ~
           selected_js: ~
@@ -906,6 +909,7 @@ ru:
       stripe_fee: ~
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
+      the_transaction_fee_must_be_lower_than_100: ~
       confirm_disable: ~
       commission_from_buyer_label: ~
       minimum_buyer_transaction_fee_label: ~
@@ -1466,6 +1470,7 @@ ru:
       buyer_cannot_pay_error: "PayPal отклонил платеж. Пожалуйста, свяжитесь с их отделом обслуживания клиентов для получения дополнительной информации: %{customer_service_link}"
       pending_review_error: "Платеж был представлен, но был помечен PayPal как «требующий рассмотрения». Когда PayPal завершит проверку, платеж будет автоматически авторизован."
       seller_express_checkout_disabled: "PayPal Express Checkout была отключена для учетной записи владельца каталога. Пожалуйста, свяжитесь с владельцем каталога и сообщите, что у него проблема с учетной записью и необходимо связаться с службой поддержки клиентов PayPal."
+      seller_express_checkout_disabled_no_free: ~
       generic_error: "В процессе платежа произошла ошибка. Мы не смогли завершить вашу PayPal оплату."
       cancel_error: "В процессе отмены произошла ошибка. Не смогли завершить отмену."
       accept_authorization_error: "Во время предавторизации платежа Paypal произошла ошибка. Пожалуйста, попробуйте снова."
@@ -1797,6 +1802,7 @@ ru:
       listing_updated_successfully: "Публикация обновлена успешно"
       listing_updated_availability_management_enabled: "Каталог успешно обновлен. Управление доступностью включено."
       listing_updated_availability_management_disabled: "Каталог успешно обновлен. Управление доступностью отключено."
+      listing_deleted: ~
       only_kassi_administrators_can_access_this_area: ~
       only_listing_author_can_close_a_listing: "Листинг может закрыть только автор"
       only_listing_author_can_edit_a_listing: "Листинг может редактировать только автор"
@@ -1863,6 +1869,7 @@ ru:
       user_does_not_have_email_to_delete: "У вас нет email адреса который вы пытаетесь удалить"
       email_deleted: "E-mail удален"
       listing_author_payment_details_missing: "Создатель публикации не добавил детали оплаты поэтому они не получат оплату прямо сейчас. Пожалуйста свяжитесь с автором."
+      listing_author_payment_details_missing_no_free: ~
       images_are_processing: "Мы обрабатываем ваши изображения. Подождите несколько минут, и они будут загружены на сайт."
       maintenance_mode:
         zero: "Сайт будет недоступен по причине проведения профилактических работ"
@@ -1901,6 +1908,7 @@ ru:
       you_cannot_send_a_new_comment_because_listing_is_closed: "Вы не можете оставить новые комментарии так как данная публикация закрыта."
       you_must: "Вы должны"
       subscribe_to_comments: "Сообщать мне о новых комментариях и обновлениях"
+    deleting_a_listing_cannot_be_undone: ~
     edit:
       edit_listing: "Редактировать публикацию"
     edit_links:
@@ -1916,6 +1924,7 @@ ru:
       listing_is_rejected: ~
       approve_listing: ~
       reject_listing: ~
+      delete_listing: ~
     map:
       open_in_google_maps: "Открыть карту Google"
     error:
@@ -2773,6 +2782,12 @@ ru:
     paypal_connected: ~
     paypal_can_accept: ~
     paypal_connected_give_permission: ~
+    stripe_account_restricted: ~
+    stripe_account_restricted_info: ~
+    stripe_account_restricted_soon: ~
+    stripe_account_restricted_soon_info: ~
+    stripe_account_pending_verification: ~
+    stripe_account_pending_verification_info: ~
     form_new:
       need_info: ~
       select_country: ~
@@ -2812,7 +2827,6 @@ ru:
       address_kanji_line1: ~
       male: ~
       female: ~
-      mcc: ~
     form_bank:
       bank_account_number: ~
       bank_routing_number: ~
@@ -2867,6 +2881,7 @@ ru:
       search_results: ~
       search_results_for: ~
       listing_description: ~
+      listing_description_without_price: ~
       category_description: ~
       profile_title: ~
       profile_description: ~

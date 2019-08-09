@@ -203,6 +203,7 @@ az-AZ:
         users_can_invite_new_users: ~
         private: ~
         require_verification_to_post_listings: ~
+        allow_free_conversations: ~
         search_preferences: ~
         default_search_type: ~
         keyword_search: ~
@@ -549,6 +550,8 @@ az-AZ:
         search_by_title_author_category: ~
         search: ~
         reset_search: ~
+        export_all_as_csv: ~
+        processing_export: ~
         status:
           all: ~
           selected_js: ~
@@ -861,6 +864,7 @@ az-AZ:
       stripe_fee: ~
       stripe_fee_notice: ~
       fee_should_be_less_than_minimum_price: ~
+      the_transaction_fee_must_be_lower_than_100: ~
       confirm_disable: ~
       commission_from_buyer_label: ~
       minimum_buyer_transaction_fee_label: ~
@@ -1421,6 +1425,7 @@ az-AZ:
       buyer_cannot_pay_error: ~
       pending_review_error: ~
       seller_express_checkout_disabled: ~
+      seller_express_checkout_disabled_no_free: ~
       generic_error: ~
       cancel_error: ~
       accept_authorization_error: ~
@@ -1752,6 +1757,7 @@ az-AZ:
       listing_updated_successfully: "Elan uğurla yeniləndi"
       listing_updated_availability_management_enabled: "Elan uğurla yeniləndi. Mövcudluğun idarə edilməsi aktivdir."
       listing_updated_availability_management_disabled: "Elan uğurla yeniləndi. Mövcudluğun idarə edilməsi aktiv deyil."
+      listing_deleted: ~
       only_kassi_administrators_can_access_this_area: ~
       only_listing_author_can_close_a_listing: "Bir elanın bağlama icazəsi yalnız onu yaratdığı istifadəçiyə malikdir"
       only_listing_author_can_edit_a_listing: "Bir elanın düzəltmə icazəsi yalnız onu yaratdığı istifadəçiyə malikdir"
@@ -1818,6 +1824,7 @@ az-AZ:
       user_does_not_have_email_to_delete: "Silinməyə çalışdığınız e-poçt ünvanınız yoxdur"
       email_deleted: "E-poçt ünvanı silinmişdir"
       listing_author_payment_details_missing: ~
+      listing_author_payment_details_missing_no_free: ~
       images_are_processing: "Şəkilləriniz hazırlanır. Zəhmət olmasa gözləyin."
       maintenance_mode:
         zero: "Saytımız offline rejiminə gedir."
@@ -1853,6 +1860,7 @@ az-AZ:
       you_cannot_send_a_new_comment_because_listing_is_closed: ~
       you_must: "Bu mütləqdir:"
       subscribe_to_comments: "Məni yeni şərhlər və yeniliklər haqqında bildir"
+    deleting_a_listing_cannot_be_undone: ~
     edit:
       edit_listing: "Elana düzəliş et"
     edit_links:
@@ -1868,6 +1876,7 @@ az-AZ:
       listing_is_rejected: ~
       approve_listing: ~
       reject_listing: ~
+      delete_listing: ~
     map:
       open_in_google_maps: "Google Maps-da aç"
     error:
@@ -2699,6 +2708,12 @@ az-AZ:
     paypal_connected: ~
     paypal_can_accept: ~
     paypal_connected_give_permission: ~
+    stripe_account_restricted: ~
+    stripe_account_restricted_info: ~
+    stripe_account_restricted_soon: ~
+    stripe_account_restricted_soon_info: ~
+    stripe_account_pending_verification: ~
+    stripe_account_pending_verification_info: ~
     form_new:
       need_info: ~
       select_country: ~
@@ -2738,7 +2753,6 @@ az-AZ:
       address_kanji_line1: ~
       male: ~
       female: ~
-      mcc: ~
     form_bank:
       bank_account_number: ~
       bank_routing_number: ~
@@ -2793,6 +2807,7 @@ az-AZ:
       search_results: ~
       search_results_for: ~
       listing_description: ~
+      listing_description_without_price: ~
       category_description: ~
       profile_title: ~
       profile_description: ~

@@ -5,12 +5,12 @@ jobs:
     # Call bash as interactive login shell to make sure nvm is loaded through .bashrc
     shell: /bin/bash -ileo pipefail
     docker:
-      - image: sharetribe/ruby:2.3.4-xenial-ci
+      - image: circleci/ruby:2.6.2-stretch-browsers-legacy
         environment:
           CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
           MOCHA_FILE: /tmp/circleci-test-results/mocha.xml
           DATABASE_URL: mysql2://root:very-secret@127.0.0.1/sharetribe_test
-          NODE_VERSION: 7.8.0
+          NODE_VERSION: 10.15.3
           NODE_ENV: test
           RAILS_ENV: test
           RACK_ENV: test
@@ -24,12 +24,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - bundler-cache-v3-{{ checksum "Gemfile.lock" }}
-            - bundler-cache-v3-
+            - bundler-cache-v4-{{ checksum "Gemfile.lock" }}
+            - bundler-cache-v4-
       - restore_cache:
           keys:
-            - node-cache-v4-{{ checksum "package.json" }}-{{ checksum "client/package.json" }}
-            - node-cache-v4-
+            - node-cache-v5-{{ checksum "package.json" }}-{{ checksum "client/package.json" }}
+            - node-cache-v5-
       - run:
           name: install system deps
           command: script/ci-install-deps.sh
@@ -40,12 +40,12 @@ jobs:
           name: npm install
           command: npm install
       - save_cache:
-          key: bundler-cache-v3-{{ checksum "Gemfile.lock" }}
+          key: bundler-cache-v4-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
             - ~/.bundle
       - save_cache:
-          key: node-cache-v4-{{ checksum "package.json" }}-{{ checksum "client/package.json" }}
+          key: node-cache-v5-{{ checksum "package.json" }}-{{ checksum "client/package.json" }}
           paths:
             - ~/.nvm
             - ~/.bashrc
@@ -79,8 +79,6 @@ jobs:
       - run:
           name: cucumber
           command: shopt -s globstar && bundle exec cucumber -p ci --format junit --out $CIRCLE_TEST_REPORTS/cucumber/junit.xml $(circleci tests glob features/**/*.feature | circleci tests split --split-by=timings)
-          environment:
-            PHANTOMJS: true
       - run:
           name: npm test
           command: if [[ "$CIRCLE_NODE_INDEX" == "0" ]] ; then npm test ; fi
@@ -89,6 +87,9 @@ jobs:
           path: /tmp/circleci-test-results
       - store_artifacts:
           path: /tmp/circleci-test-results
+      - store_artifacts:
+          path: ~/project/tmp/capybara
+          destination: test-screenshots
 workflows:
   version: 2
   test:

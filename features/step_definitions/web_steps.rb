@@ -13,6 +13,7 @@ module FillInHelpers
     # Highly inspired by Capybara's fill_in implementation
     # https://github.com/jnicklas/capybara/blob/80befdad73c791eeaea50a7cbe23f04a445a24bc/lib/capybara/node/actions.rb#L50
     raise "Must pass a hash containing 'with'" if not options.is_a?(Hash) or not options.has_key?(:with)
+
     with = options.delete(:with)
     first(:fillable_field, locator, options).set(with)
   end
@@ -21,6 +22,7 @@ module FillInHelpers
     # Highly inspired by Capybara's fill_in implementation
     # https://github.com/jnicklas/capybara/blob/80befdad73c791eeaea50a7cbe23f04a445a24bc/lib/capybara/node/actions.rb#L50
     raise "Must pass a hash containing 'with'" if not options.is_a?(Hash) or not options.has_key?(:with)
+
     with = options.delete(:with)
     results = all(:fillable_field, locator, options)
     if results.size >= n
@@ -187,7 +189,7 @@ end
 
 Then /^(?:|I )should see "([^"]*)"(?: within "([^"]*)")?$/ do |text, selector|
   with_scope(selector) do
-    expect(page).to have_content(text)
+    expect(page).to have_content(text, normalize_ws: true)
   end
 end
 
@@ -282,13 +284,13 @@ end
 # Use this keyword BEFORE the confirmation dialog appears
 Given /^I will(?:| (not)) confirm all following confirmation dialogs in this page if I am running PhantomJS$/ do |do_not_confirm|
   confirm = do_not_confirm != "not"
-  if ENV['PHANTOMJS'] then
+  if [:poltergeist, :selenium_chrome_headless, :selenium_chrome].include?(Capybara.current_driver)
     page.execute_script("window.__original_confirm = window.confirm; window.confirm = function() { return #{confirm}; };")
   end
 end
 
 When /^I confirm alert popup$/ do
-  unless ENV['PHANTOMJS']
+  unless [:poltergeist, :selenium_chrome_headless, :selenium_chrome].include?(Capybara.current_driver)
     # wait is necessary for firefox if alerts have slide-out animations
     wait = Selenium::WebDriver::Wait.new ignore: Selenium::WebDriver::Error::NoAlertPresentError
     alert = wait.until { page.driver.browser.switch_to.alert }
@@ -362,5 +364,11 @@ end
 
 Then(/^I should see disabled "([^"]*)" input$/) do |field|
   expect(!!find_field(field, disabled: true)).to eq true
+end
+
+Then /^(?:|I )should see "([^"]*)" within field "([^"]*)"(?: within "([^"]*)")?$/ do |text, field, selector|
+  with_scope(selector) do
+    expect(page).to have_field(field, with: text)
+  end
 end
 

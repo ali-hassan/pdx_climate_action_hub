@@ -278,6 +278,10 @@ Rails.application.routes.draw do
             get :approve
             get :reject
           end
+          collection do
+            get 'export'
+            get 'export_status'
+          end
         end
         resources :transactions, controller: :community_transactions, only: :index do
           collection do
@@ -369,6 +373,7 @@ Rails.application.routes.draw do
       member do
         post :follow
         delete :unfollow
+        delete :delete
       end
       collection do
         get :new_form_content

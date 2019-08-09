@@ -9,11 +9,11 @@ module SocialNetworkHelper
 
   def google_connect_in_use?
     true
-    # @current_community && @current_community.google_connect_enabled? && @current_community.google_connect_id
+    #@current_community&.google_connect_enabled? && @current_community&.google_connect_id
   end
 
   def linkedin_connect_in_use?
-    @current_community && @current_community.linkedin_connect_enabled? && @current_community.linkedin_connect_id
+    @current_community&.linkedin_connect_enabled? && @current_community&.linkedin_connect_id
   end
 end
 

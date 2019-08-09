@@ -1,4 +1,3 @@
-# encoding: utf-8
 # == Schema Information
 #
 # Table name: listings
@@ -80,34 +79,34 @@ class Listing < ApplicationRecord
   include ManageAvailabilityPerHour
 
   belongs_to :community
-  belongs_to :author, :class_name => "Person", :foreign_key => "author_id"
+  belongs_to :author, :class_name => "Person", :foreign_key => "author_id", :inverse_of => :listings
 
-  has_many :listing_images, -> { where("error IS NULL").order("position") }, :dependent => :destroy
+  has_many :listing_images, -> { where("error IS NULL").order("position") }, :dependent => :destroy, :inverse_of => :listing
 
-  has_many :conversations
+  has_many :conversations, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :custom_field_values, :dependent => :destroy
-  has_many :custom_dropdown_field_values, :class_name => "DropdownFieldValue"
-  has_many :custom_checkbox_field_values, :class_name => "CheckboxFieldValue"
+  has_many :custom_dropdown_field_values, :class_name => "DropdownFieldValue", :dependent => :destroy
+  has_many :custom_checkbox_field_values, :class_name => "CheckboxFieldValue", :dependent => :destroy
   has_many :unavailable_dates
 
   has_one :event, :dependent => :destroy #, :order => 'start_at DESC'
   accepts_nested_attributes_for :event, :allow_destroy => true, :reject_if => :all_blank
 
   has_one :location, :dependent => :destroy
-  has_one :origin_loc, -> { where('location_type = ?', 'origin_loc') }, :class_name => "Location", :dependent => :destroy
-  has_one :destination_loc, -> { where('location_type = ?', 'destination_loc') }, :class_name => "Location", :dependent => :destroy
+  has_one :origin_loc, -> { where('location_type = ?', 'origin_loc') }, :class_name => "Location", :dependent => :destroy, :inverse_of => :listing
+  has_one :destination_loc, -> { where('location_type = ?', 'destination_loc') }, :class_name => "Location", :dependent => :destroy, :inverse_of => :listing
   accepts_nested_attributes_for :origin_loc, :destination_loc
 
   has_and_belongs_to_many :followers, :class_name => "Person", :join_table => "listing_followers"
 
   belongs_to :category
-  has_many :working_time_slots, ->{ ordered },  dependent: :destroy
+  has_many :working_time_slots, ->{ ordered }, dependent: :destroy, inverse_of: :listing
   accepts_nested_attributes_for :working_time_slots, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :listing_shape
 
-  has_many :tx, class_name: 'Transaction'
+  has_many :tx, class_name: 'Transaction', :dependent => :destroy
   has_many :bookings, through: :tx
   has_many :bookings_per_hour, ->{ per_hour_blocked }, through: :tx, source: :booking
 
@@ -148,11 +147,19 @@ class Listing < ApplicationRecord
         pattern: "%#{pattern}%")
   end
 
+  HOMEPAGE_INDEX = "listings_homepage_query"
+  # Use this scope before any query part to give DB server an index hint
+  scope :use_index, ->(index) { from("#{self.table_name} USE INDEX (#{index})") }
+  scope :use_homepage_index, -> { use_index(HOMEPAGE_INDEX) }
+
   scope :status_open, ->   { where(open: true) }
   scope :status_closed, -> { where(open: false) }
   scope :status_expired, -> { where('valid_until < ?', DateTime.now) }
   scope :status_active, -> { where('valid_until > ? or valid_until is null', DateTime.now) }
+  scope :status_open_active, -> { status_open.status_active.approved }
   scope :currently_open, -> { exist.status_open.approved.where(["valid_until IS NULL OR valid_until > ?", DateTime.now]) }
+
+  scope :for_export, -> { includes(:listing_images).exist.order('created_at DESC') }
 
   APPROVALS = {
     APPROVED = 'approved'.freeze => 'approved'.freeze,
@@ -204,7 +211,7 @@ class Listing < ApplicationRecord
   end
   validates_length_of :description, :maximum => 5000, :allow_nil => true
   validates_presence_of :category
-  validates_inclusion_of :valid_until, :allow_nil => :true, :in => proc{ DateTime.now..DateTime.now + 7.months }
+  validates_inclusion_of :valid_until, :allow_nil => true, :in => proc{ DateTime.now..DateTime.now + 7.months }
   validates_numericality_of :price_cents, :only_integer => true, :greater_than_or_equal_to => 0, :message => "price must be numeric", :allow_nil => true
 
   def self.currently_open(status="open")
@@ -284,7 +291,7 @@ class Listing < ApplicationRecord
 
   def update_fields(params)
     update_attribute(:valid_until, nil) unless params[:valid_until]
-    update_attributes(params)
+    update(params)
   end
 
   def closed?

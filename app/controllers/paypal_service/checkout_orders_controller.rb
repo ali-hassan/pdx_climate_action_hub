@@ -3,7 +3,7 @@ class PaypalService::CheckoutOrdersController < ApplicationController
 
   before_action do
     unless PaypalHelper.community_ready_for_payments?(@current_community.id)
-      render :body => nil, :status => 400
+      render :body => nil, :status => :bad_request
     end
   end
 
@@ -26,6 +26,9 @@ class PaypalService::CheckoutOrdersController < ApplicationController
       flash[:error] = t("error_messages.paypal.generic_error")
       return redirect_to search_path
     end
+
+    # delayed jobs cleans up RequestStore under test
+    RequestStore.store[:feature_flags] = {} if Rails.env.test?
 
     render "paypal_service/success", layout: false, locals: {
              op_status_url: paypal_op_status_path(proc_status[:data][:process_token]),
@@ -95,7 +98,12 @@ class PaypalService::CheckoutOrdersController < ApplicationController
         flash[:error] = t("error_messages.paypal.transaction_cannot_complete")
         redirect_to person_listing_path(person_id: @current_user.id, id: listing_id)
       elsif response_data[:paypal_error_code] == "10425"
-        flash[:error] = t("error_messages.paypal.seller_express_checkout_disabled")
+        flash[:error] =
+          if @current_community.allow_free_conversations?
+            t("error_messages.paypal.seller_express_checkout_disabled")
+          else
+            t("error_messages.paypal.seller_express_checkout_disabled_no_free")
+          end
         redirect_to person_listing_path(person_id: @current_user.id, id: listing_id)
       elsif response_data[:error_code] == :"payment-review"
         flash[:warning] = t("error_messages.paypal.pending_review_error")

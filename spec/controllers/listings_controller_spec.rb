@@ -1,4 +1,3 @@
-# encoding: utf-8
 # == Schema Information
 #
 # Table name: listings
@@ -310,6 +309,7 @@ describe ListingsController, type: :controller do
     before :each do
       @request.host = "#{community.ident}.lvh.me"
       @request.env[:current_marketplace] = community
+      stub_thinking_sphinx
     end
 
     it 'If the community.pre_approved_listings is later disabled
@@ -415,21 +415,21 @@ describe ListingsController, type: :controller do
       valid_until = Time.current + 3.months
       ActionMailer::Base.deliveries = []
       post :create, params: {
-        "listing"=>{
-          "title"=>"Mock-Duck and Chard Pie served with Oscar Meyer Squash",
-          "price"=>"100",
-          "shipping_price"=>"0",
-          "shipping_price_additional"=>"0",
-          "delivery_methods"=>["pickup"],
-          "description"=>"",
-          "valid_until(1i)"=>valid_until.year,
-          "valid_until(2i)"=>valid_until.month,
-          "valid_until(3i)"=>valid_until.day,
-          "origin"=>"",
-          "origin_loc_attributes"=>{"address"=>"", "google_address"=>"", "latitude"=>"", "longitude"=>""},
-          "category_id"=>"1",
-          "listing_shape_id"=>sell_shape[:id],
-          "unit"=> {:unit_type=>"unit", :kind=>"quantity"}.to_json
+        "listing" => {
+          "title" => "Mock-Duck and Chard Pie served with Oscar Meyer Squash",
+          "price" => "100",
+          "shipping_price" => "0",
+          "shipping_price_additional" => "0",
+          "delivery_methods" => ["pickup"],
+          "description" => "",
+          "valid_until(1i)" => valid_until.year,
+          "valid_until(2i)" => valid_until.month,
+          "valid_until(3i)" => valid_until.day,
+          "origin" => "",
+          "origin_loc_attributes" => {"address"=>"", "google_address"=>"", "latitude"=>"", "longitude"=>""},
+          "category_id" => "1",
+          "listing_shape_id" => sell_shape[:id],
+          "unit" => {:unit_type=>"unit", :kind=>"quantity"}.to_json
         }
       }
       listing = assigns(:listing)
@@ -467,6 +467,20 @@ describe ListingsController, type: :controller do
                          price: Money.new(4567, "USD")
                         )
     }
+    let(:listing_without_price) {
+      FactoryGirl.create(:listing,
+                         community_id: community.id,
+                         author: person,
+                         transaction_process_id: sell_shape[:transaction_process_id],
+                         listing_shape_id: sell_shape[:id],
+                         shape_name_tr_key: sell_shape[:name_tr_key],
+                         action_button_tr_key: sell_shape[:action_button_tr_key],
+                         unit_type: nil,
+                         title: "Batman-s Top 10 Amazing Halo Tips",
+                         description: "O lewd purpose! O unworthy merit! Thou art th' Lord's fair zeal.",
+                         price_cents: 0
+                        )
+    }
 
     before :each do
       @request.host = "#{community.ident}.lvh.me"
@@ -482,6 +496,54 @@ describe ListingsController, type: :controller do
       expect(response.body).to match("<meta content='bike for \\$45.67 per hour by Proto T in Sharetribe' name='description'>")
       expect(response.body).to match("<meta content='bike for \\$45.67 per hour by Proto T in Sharetribe' name='twitter:description'>")
       expect(response.body).to match("<meta content='bike for \\$45.67 per hour by Proto T in Sharetribe' property='og:description'>")
+    end
+
+    it "shows renders custom meta tags with placeholders
+      for listing without price" do
+      get :show, params: {id: listing_without_price.id}
+      expect(response.body).to match("<title>Batman-s Top 10 Amazing Halo Tips - Sharetribe</title>")
+      expect(response.body).to match("<meta content='Batman-s Top 10 Amazing Halo Tips - Sharetribe' property='og:title'>")
+      expect(response.body).to match("<meta content='Batman-s Top 10 Amazing Halo Tips - Sharetribe' name='twitter:title'>")
+      expect(response.body).to match("<meta content='Batman-s Top 10 Amazing Halo Tips by Proto T on Sharetribe' name='description'>")
+      expect(response.body).to match("<meta content='Batman-s Top 10 Amazing Halo Tips by Proto T on Sharetribe' name='twitter:description'>")
+      expect(response.body).to match("<meta content='Batman-s Top 10 Amazing Halo Tips by Proto T on Sharetribe' property='og:description'>")
+    end
+  end
+
+  describe "delete" do
+    let(:community){ FactoryGirl.create(:community, :settings => {"locales" => ["en", "fi"]}) }
+    let(:offer_process) {
+      FactoryGirl.create(:transaction_process,
+                                               community_id: community.id,
+                                               process: :none)
+    }
+    let(:sell_shape) { create_shape(community.id, "Sell", offer_process) }
+    let(:person) { FactoryGirl.create(:person, member_of: community) }
+    let(:listing) {
+      FactoryGirl.create(:listing,
+                         community_id: community.id,
+                         author: person,
+                         transaction_process_id: sell_shape[:transaction_process_id],
+                         listing_shape_id: sell_shape[:id],
+                         shape_name_tr_key: sell_shape[:name_tr_key],
+                         action_button_tr_key: sell_shape[:action_button_tr_key],
+                         unit_type: 'hour',
+                         title: "bike",
+                         description: "A very nice bike",
+                         price: Money.new(4567, "USD")
+                        )
+    }
+
+    before :each do
+      @request.host = "#{community.ident}.lvh.me"
+      @request.env[:current_marketplace] = community
+    end
+
+    it 'author deletes listing' do
+      sign_in_for_spec(person)
+      delete :delete, params: {id: listing.id}
+      listing.reload
+      expect(listing.deleted).to eq true
     end
   end
 end

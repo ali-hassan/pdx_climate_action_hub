@@ -1,4 +1,3 @@
-# encoding: utf-8
 # == Schema Information
 #
 # Table name: communities
@@ -90,10 +89,10 @@
 #  small_cover_photo_processing               :boolean
 #  favicon_processing                         :boolean
 #  deleted                                    :boolean
-#  end_user_analytics                         :boolean          default(TRUE)
 #  google_connect_secret                      :string(255)
 #  google_connect_id                          :string(255)
 #  google_connect_enabled                     :boolean          default(TRUE)
+#  end_user_analytics                         :boolean          default(TRUE)
 #  footer_theme                               :integer          default("dark")
 #  footer_copyright                           :text(65535)
 #  footer_enabled                             :boolean          default(FALSE)
@@ -105,6 +104,7 @@
 #  linkedin_connect_id                        :string(255)
 #  linkedin_connect_secret                    :string(255)
 #  pre_approved_listings                      :boolean          default(FALSE)
+#  allow_free_conversations                   :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -158,7 +158,7 @@ describe Community, type: :model do
     end
 
     before(:each) do
-      @p1 = FactoryGirl.create(:person, :emails => [ FactoryGirl.create(:email, :address => "update_tester@example.com") ])
+      @p1 = FactoryGirl.create(:person, :emails => [FactoryGirl.create(:email, :address => "update_tester@example.com")])
       @p1.accepted_community = community
       @l1 = get_listing(2,2)
       @l2 = get_listing(3,3)

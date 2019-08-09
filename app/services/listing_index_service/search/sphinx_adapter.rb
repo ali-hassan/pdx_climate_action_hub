@@ -79,7 +79,7 @@ module ListingIndexService::Search
 
         with_all = {
           custom_dropdown_field_options: (grouped_by_operator[:or] || []).map { |v| v[:value] },
-          custom_checkbox_field_options: (grouped_by_operator[:and] || []).flat_map { |v| v[:value] },
+          custom_checkbox_field_options: (grouped_by_operator[:and] || []).flat_map { |v| v[:value] }
 #          event_id: search[:upcoming_events] ? [0..1000000] : [],
         }
 

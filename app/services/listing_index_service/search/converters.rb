@@ -29,7 +29,7 @@ module ListingIndexService::Search::Converters
       {
         latitude: m_location.latitude.or_else(nil),
         longitude: m_location.longitude.or_else(nil),
-        address: m_location.address.or_else(nil),
+        address: m_location.address.or_else(nil)
       }
     else
       {}
@@ -48,7 +48,7 @@ module ListingIndexService::Search::Converters
             avatar: {
               thumb: l.author.image.present? ? l.author.image.url(:thumb) : nil
             },
-            is_deleted: l.author.deleted?,
+            is_deleted: l.author.deleted?
           }.merge(num_of_reviews_hash(l, includes))
         }
       else

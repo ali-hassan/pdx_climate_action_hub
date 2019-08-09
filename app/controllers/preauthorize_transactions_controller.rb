@@ -1,4 +1,3 @@
-# coding: utf-8
 class PreauthorizeTransactionsController < ApplicationController
 
   before_action do |controller|
@@ -12,7 +11,7 @@ class PreauthorizeTransactionsController < ApplicationController
 
   def initiate
     params_validator = params_per_hour? ? TransactionService::Validation::NewPerHourTransactionParams : TransactionService::Validation::NewTransactionParams
-    validation_result = params_validator.validate(params).and_then { |params_entity|
+    validation_result = params_validator.validate(params.to_unsafe_hash).and_then { |params_entity|
       tx_params = add_defaults(
         params: params_entity,
         shipping_enabled: listing.require_shipping_address,
@@ -39,7 +38,7 @@ class PreauthorizeTransactionsController < ApplicationController
 
   def initiated
     params_validator = params_per_hour? ? TransactionService::Validation::NewPerHourTransactionParams : TransactionService::Validation::NewTransactionParams
-    validation_result = params_validator.validate(params).and_then { |params_entity|
+    validation_result = params_validator.validate(params.to_unsafe_hash).and_then { |params_entity|
       tx_params = add_defaults(
         params: params_entity,
         shipping_enabled: listing.require_shipping_address,
@@ -160,7 +159,12 @@ class PreauthorizeTransactionsController < ApplicationController
       })
 
     unless ready[:data][:result]
-      flash[:error] = t("layouts.notifications.listing_author_payment_details_missing")
+      flash[:error] =
+        if @current_community.allow_free_conversations?
+          t("layouts.notifications.listing_author_payment_details_missing")
+        else
+          t("layouts.notifications.listing_author_payment_details_missing_no_free")
+        end
 
       record_event(
         flash,
@@ -262,11 +266,11 @@ class PreauthorizeTransactionsController < ApplicationController
 
     render "listing_conversations/initiate",
            locals: {
-             start_on:   tx_params[:start_on],
-             end_on:     tx_params[:end_on],
+             start_on: tx_params[:start_on],
+             end_on: tx_params[:end_on],
              start_time: tx_params[:start_time],
-             end_time:   tx_params[:end_time],
-             per_hour:   tx_params[:per_hour],
+             end_time: tx_params[:end_time],
+             per_hour: tx_params[:per_hour],
              listing: listing,
              delivery_method: tx_params[:delivery],
              quantity: tx_params[:quantity],
@@ -326,11 +330,11 @@ class PreauthorizeTransactionsController < ApplicationController
       delivery_method: tx_params[:delivery],
       shipping_price: order.shipping_total,
       booking_fields: {
-        start_on:   tx_params[:start_on],
-        end_on:     tx_params[:end_on],
+        start_on: tx_params[:start_on],
+        end_on: tx_params[:end_on],
         start_time: tx_params[:start_time],
-        end_time:   tx_params[:end_time],
-        per_hour:   tx_params[:per_hour]
+        end_time: tx_params[:end_time],
+        per_hour: tx_params[:per_hour]
       })
 
     handle_tx_response(tx_response, params[:payment_type].to_sym)
