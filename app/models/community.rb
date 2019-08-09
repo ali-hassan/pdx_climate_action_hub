@@ -309,7 +309,6 @@ class Community < ApplicationRecord
   def uuid_object=(uuid)
     self.uuid = UUIDUtils.raw(uuid)
   end
-
   before_create :add_uuid
   def add_uuid
     self.uuid ||= UUIDUtils.create_raw
