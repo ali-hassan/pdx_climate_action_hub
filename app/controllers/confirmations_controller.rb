@@ -17,7 +17,10 @@ class ConfirmationsController < Devise::ConfirmationsController
   def create
     email = params.dig(:person, :email)
     to_confirm = create_or_find_email(email)
-
+    puts "params: #{params.inspect}"
+    puts "email: #{email}"
+    puts "to_confirm: #{to_confirm.inspect}"
+    puts "@current_community => #{@current_community.inspect}"
     if to_confirm
       Email.send_confirmation(to_confirm, @current_community)
       flash[:notice] = t("sessions.confirmation_pending.check_your_email")
