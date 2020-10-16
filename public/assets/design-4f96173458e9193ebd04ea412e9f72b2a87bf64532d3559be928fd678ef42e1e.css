@@ -1,0 +1,604 @@
+@charset "UTF-8";
+/*
+  This file contains all the basic imported mixin/variable files
+*/
+/*
+  -----------------------------------------
+  Color presets
+  -----------------------------------------
+  A good way to select hues:
+  1. Pick one hue (0–360)
+  2. Add it to, or substract it from one of
+     the following:
+     - 360/1.618 (split-complementary color)
+     - 360/2 (complementary color)
+     - 360/3 (triadic color)
+     - 360/4 (quad…tric color)
+     - 360/5 (pentatonic color)
+  -----------------------------------------
+  Values derived using the golden ratio:
+
+  100% / 1.618^1          = ~61.8%
+  100% / 1.618^2          = ~38.2%
+  100% / 1.618^3          = ~23.6%
+  100% / 1.618^3          = ~14.6%
+  100% / 1.618^3          =  ~9.0%
+  100% / 1.618^3          =  ~5.6%
+  100% - (100% / 1.618^6) = ~94.4%
+  100% - (100% / 1.618^5) = ~91.0%
+  100% - (100% / 1.618^6) = ~85.4%
+  100% - (100% / 1.618^6) = ~76.4%
+
+  Try using these values as the saturations
+  and lightnesses of colours you use.
+  The results are usually pleasing.
+  -----------------------------------------
+*/
+/*
+  --------------------------
+  Media query mixin
+  --------------------------
+  Usage:
+
+  @include media(tablet) {
+    .foo {color: red;}
+  }
+
+  or
+
+  .foo {
+    @include media(tablet) {
+      color: red;
+    }
+  }
+  --------------------------
+*/
+/**
+  http://css-tricks.com/snippets/css/retina-display-media-query/
+*/
+/*
+  --------------------------------------------
+  Em conversion functions
+  pixels to ems & baselines to ems
+  --------------------------------------------
+  Usage:
+  - em(6, 26) converts 6px to ems assuming the
+    font-size of the element is 26px. If the
+    element's font-size is the same as the
+    base font-size, you can omit the 2nd
+    argument: em(6)
+  - lines(0.5, 26) is a shorthand for
+    em(($line-height/2), 26), so em(12, 26)
+    in Sharetribe's case.
+  --------------------------------------------
+  Examples:
+    p {
+      font-size:
+      line-height: lines(1);
+      margin-bottom: lines(0.5);
+    }
+    h1 {
+      font-size: em(42);
+      line-height: lines(2, 42);
+      margin-bottom: lines(1, 42);
+    }
+  --------------------------------------------
+*/
+/*
+  --------------------------------------------------
+  Font-family mixins
+  FF Tisa: https://typekit.com/fonts/ff-tisa-web-pro
+  LFT Etica: https://typekit.com/fonts/lft-etica-web
+  --------------------------------------------------
+*/
+/*
+  ----------------------------------------------------------
+  Type presets
+  mostly calculated using a modular scale based on
+  the golden ratio: 1:1.618
+  http://modularscale.com/scale/?px1=16&px2=&ra1=1.618&ra2=0
+  ----------------------------------------------------------
+*/
+/**
+  Misc utils
+*/
+/**
+  Use icon-fix to correctly vertical align SS-pika icons
+
+  Deprecated: Use icon-fix-rel
+*/
+/**
+  Icon fix relative to the font-size
+*/
+/**
+  Some icons, e.g. dropdown icon needs to be a bit lower
+*/
+/**
+  Round notification badge
+*/
+/**
+  Include this mixin to make area without content clickable in IE.
+
+  See more: http://stackoverflow.com/questions/6914822/absolute-positioned-anchor-tag-with-no-text-not-clickable-in-ie
+*/
+/* Grid column that is 1/4 of total width */
+/**
+  Undo the mobile margin set by .wrapper
+  This is cubersome, because the .wrapper is in the main layout and not per page
+*/
+/*
+  Bottom border style to be used with text titles (e.g. under front-page filter titles)
+*/
+/*
+  Vertical centering using "ghost" element
+  Use for: Centering blocks with unknown height/width
+
+  http://css-tricks.com/centering-in-the-unknown/
+*/
+/*
+  Vertical centering using tables
+  Use for: Center multiline text
+
+  http://css-tricks.com/vertically-center-multi-lined-text/
+*/
+/**
+  Give `width` and `aspect-ratio` and get back height
+*/
+/**
+  Listing top-right overlay price tag
+*/
+/**
+  Use this mixin to get correct borders for button group when
+  it is selected/hovered
+
+  Classes added:
+  - `selected`
+
+  The logic and selectors for selected/hovered borders is a
+  bit complicated, that's why they are in their own mixin
+*/
+/**
+  Create a block element, which preserves given aspect ratio
+*/
+/**
+  Just a helper
+*/
+/**
+  Create a style for *too-wide* image,
+  e.g. image that is wider for the aspect ratio
+
+  - Takes all the *vertical* space available
+  - Presenving the aspect ratio
+*/
+/**
+  Create a style for *too-narrow* image,
+  e.g. image that is too narrow for the aspect ratio
+
+  - Takes all the *horizontal* space available
+  - Presenving the aspect ratio
+*/
+/* line 3, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-wrapper {
+  padding: 20px;
+}
+
+/* line 7, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-h1,
+.design-h2,
+.design-h3 {
+  margin-bottom: 0.75em;
+}
+
+/* line 13, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-h1 {
+  font-size: 2.625em;
+  line-height: 1.14286em;
+  font-weight: 700;
+}
+
+/* line 17, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-h2 {
+  font-size: 2.125em;
+  line-height: 1.05882em;
+  font-weight: 600;
+  border-bottom: 1px solid #CCC;
+}
+
+/* line 22, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-h3 {
+  font-size: 1.375em;
+  line-height: 1.09091em;
+  font-weight: 600;
+}
+
+/* line 26, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-section {
+  margin-bottom: 1.5em;
+}
+
+/* line 30, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-component {
+  border: 1px solid #CCC;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 35, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-example {
+  border-bottom: 1px solid #CCC;
+  padding: 0.75em;
+  overflow: hidden;
+  *zoom: 1;
+}
+
+/* line 41, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-code {
+  background-color: #FCFCFC;
+  padding: 0.75em;
+  font-size: 0.8125em;
+  line-height: 1.38462em;
+  -moz-border-radius-bottomleft: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow-x: scroll;
+}
+
+/* line 49, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-small-type {
+  font-size: 0.8125em;
+  line-height: 1.38462em;
+}
+
+/* line 52, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-normal-type {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+/* line 55, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-big-type {
+  font-size: 1.375em;
+  line-height: 1.09091em;
+  font-weight: 600;
+}
+
+/* line 58, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-large-type {
+  font-size: 1.625em;
+  line-height: 1.38462em;
+  font-weight: 600;
+}
+
+/* line 61, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-larger-type {
+  font-size: 2.125em;
+  line-height: 1.05882em;
+  font-weight: 600;
+}
+
+/* line 64, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-huge-type {
+  font-size: 2.625em;
+  line-height: 1.14286em;
+  font-weight: 700;
+}
+
+/* line 67, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-mega-type {
+  font-size: 4.25em;
+  line-height: 1.05882em;
+  font-weight: 700;
+}
+
+/* line 70, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-giga-type {
+  font-size: 6.875em;
+  line-height: 1.09091em;
+  font-weight: 700;
+}
+
+/* line 74, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-block-background-color, .design-block-background, .design-block, .design-mq-tiny-mobile, .design-mq-mobile, .design-mq-large-mobile, .design-mq-small-tablet, .design-mq-tablet, .design-mq-small-desktop, .design-mq-mid-desktop, .design-mq-desktop, .col-content, .design-fluid-thumbnail-grid-item-content, .design-fluid-thumbnail-grid-item-fixed-height, .design-fluid-thumbnail-grid-item-3x2, .design-aspect-ratio-content {
+  background-color: #e8e8e8;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* line 79, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-block-background, .design-block, .design-mq-tiny-mobile, .design-mq-mobile, .design-mq-large-mobile, .design-mq-small-tablet, .design-mq-tablet, .design-mq-small-desktop, .design-mq-mid-desktop, .design-mq-desktop, .col-content, .design-fluid-thumbnail-grid-item-content, .design-fluid-thumbnail-grid-item-fixed-height, .design-fluid-thumbnail-grid-item-3x2 {
+  min-height: 3em;
+}
+
+/* line 84, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-block-margin, .design-block, .design-mq-tiny-mobile, .design-mq-mobile, .design-mq-large-mobile, .design-mq-small-tablet, .design-mq-tablet, .design-mq-small-desktop, .design-mq-mid-desktop, .design-mq-desktop {
+  margin-bottom: 0.75em;
+}
+
+/* line 88, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-block, .design-mq-tiny-mobile, .design-mq-mobile, .design-mq-large-mobile, .design-mq-small-tablet, .design-mq-tablet, .design-mq-small-desktop, .design-mq-mid-desktop, .design-mq-desktop {
+  line-height: 3em;
+  text-align: center;
+}
+
+@media (max-width: 19.875em) {
+  /* line 100, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+  .design-mq-tiny-mobile {
+    background-color: #CAEBCC;
+    color: #40a946;
+  }
+}
+
+@media (min-width: 20em) {
+  /* line 104, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+  .design-mq-mobile {
+    background-color: #CAEBCC;
+    color: #40a946;
+  }
+}
+
+@media (min-width: 30em) {
+  /* line 108, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+  .design-mq-large-mobile {
+    background-color: #CAEBCC;
+    color: #40a946;
+  }
+}
+
+@media (min-width: 37.5em) {
+  /* line 112, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+  .design-mq-small-tablet {
+    background-color: #CAEBCC;
+    color: #40a946;
+  }
+}
+
+@media (min-width: 48em) {
+  /* line 116, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+  .design-mq-tablet {
+    background-color: #CAEBCC;
+    color: #40a946;
+  }
+}
+
+@media (min-width: 53.75em) {
+  /* line 120, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+  .design-mq-small-desktop {
+    background-color: #CAEBCC;
+    color: #40a946;
+  }
+}
+
+@media (min-width: 60em) {
+  /* line 124, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+  .design-mq-mid-desktop {
+    background-color: #CAEBCC;
+    color: #40a946;
+  }
+}
+
+@media (min-width: 63em) {
+  /* line 128, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+  .design-mq-desktop {
+    background-color: #CAEBCC;
+    color: #40a946;
+  }
+}
+
+/* line 41, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+.design-fluid-thumbnail-grid {
+  overflow: hidden;
+  *zoom: 1;
+  margin-right: -0.75em;
+}
+@media (min-width: 48em) {
+  /* line 41, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid {
+    margin-right: -1.5em;
+  }
+}
+
+/* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+.design-fluid-thumbnail-grid-item {
+  float: left;
+  padding-right: 0.75em;
+  margin-bottom: 0.75em;
+}
+@media (max-width: 19.875em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    width: 100%;
+  }
+}
+@media (min-width: 20em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    width: 100%;
+  }
+}
+@media (min-width: 30em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    width: 50%;
+  }
+}
+@media (min-width: 37.5em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    width: 50%;
+  }
+}
+@media (min-width: 48em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    width: 33.33333%;
+  }
+}
+@media (min-width: 53.75em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    width: 33.33333%;
+  }
+}
+@media (min-width: 60em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    width: 25%;
+  }
+}
+@media (min-width: 63em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    width: 20%;
+  }
+}
+@media (min-width: 48em) {
+  /* line 50, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_fluid-thumbnail-grid.scss */
+  .design-fluid-thumbnail-grid-item {
+    padding-right: 1.5em;
+    margin-bottom: 1.5em;
+  }
+}
+
+/* line 139, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-fluid-thumbnail-grid-item-content, .design-fluid-thumbnail-grid-item-fixed-height, .design-fluid-thumbnail-grid-item-3x2 {
+  width: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+/* line 146, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-fluid-thumbnail-grid-item-fixed-height {
+  height: 140px;
+  line-height: 140px;
+}
+
+/* line 156, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-max-width-300 {
+  width: 25%;
+  max-width: 300px;
+  float: left;
+  padding-right: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+/* line 164, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-aspect-ratio {
+  position: relative;
+  width: 100%;
+  padding-bottom: 66.66667%;
+}
+
+/* line 169, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-aspect-ratio-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+/* line 13, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_vertical-centering.scss */
+.no-androidprejellybean .design-aspect-ratio-content {
+  font-size: 0;
+}
+/* line 17, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_vertical-centering.scss */
+.design-aspect-ratio-content:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+/* line 25, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_vertical-centering.scss */
+.androidprejellybean .design-aspect-ratio-content:before {
+  margin-right: -0.25em;
+}
+
+/* line 175, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-vertical-centering-content-too-wide {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+}
+/* line 36, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_vertical-centering.scss */
+.no-androidprejellybean .design-vertical-centering-content-too-wide {
+  font-size: 16px;
+}
+
+/* line 179, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-vertical-centering-content-too-narrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
+/* line 36, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/mixins/_vertical-centering.scss */
+.no-androidprejellybean .design-vertical-centering-content-too-narrow {
+  font-size: 16px;
+}
+
+/* line 184, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-image-too-wide {
+  display: block;
+  margin: auto;
+  width: 100%;
+  height: auto;
+}
+
+/* line 188, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-image-too-narrow {
+  display: block;
+  margin: auto;
+  height: 100%;
+  width: auto;
+}
+
+/* line 192, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-sort-arrow {
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+/* line 197, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-sort-arrows {
+  margin: 0px 10px;
+  float: right;
+}
+
+/* line 202, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-sort-title {
+  margin: 0px 10px;
+  float: left;
+}
+/* line 204, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.design-sort-title.sub {
+  margin: 0px 30px;
+}
+
+/* line 210, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.thumbnail-stripe {
+  width: 310px;
+  overflow: hidden;
+  height: 60px;
+  outline: 1px solid red;
+  position: relative;
+}
+
+/* line 218, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.thumbnail-stripe-container {
+  width: 600px;
+}
+
+/* line 222, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.thumbnail-stripe-item {
+  width: 60px;
+  height: 60px;
+  background-color: #e8e8e8;
+  border: 6px solid white;
+  float: left;
+}
+/* line 229, /Users/alihassan/rick/shareoregon2/app/assets/stylesheets/design.scss */
+.thumbnail-stripe-item.selected {
+  background-color: #80cf85;
+}
