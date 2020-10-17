@@ -114,15 +114,15 @@ window.Mercury = {
       editable: {
         _regions:              ['full', 'markdown'],
         predefined:            {
-          style:               ['Style', null, { select: '/things-to-do/mercury/selects/style.html', preload: true }],
+          style:               ['Style', null, { select: '/mercury/selects/style.html', preload: true }],
           sep1:                ' ',
-          formatblock:         ['Block Format', null, { select: '/things-to-do/mercury/selects/formatblock.html', preload: true }],
+          formatblock:         ['Block Format', null, { select: '/mercury/selects/formatblock.html', preload: true }],
           sep2:                '-'
           },
         colors:                {
-          backColor:           ['Background Color', null, { palette: '/things-to-do/mercury/palettes/backcolor.html', context: true, preload: true, regions: ['full'] }],
+          backColor:           ['Background Color', null, { palette: '/mercury/palettes/backcolor.html', context: true, preload: true, regions: ['full'] }],
           sep1:                ' ',
-          foreColor:           ['Text Color', null, { palette: '/things-to-do/mercury/palettes/forecolor.html', context: true, preload: true, regions: ['full'] }],
+          foreColor:           ['Text Color', null, { palette: '/mercury/palettes/forecolor.html', context: true, preload: true, regions: ['full'] }],
           sep2:                '-'
           },
         decoration:            {
@@ -237,8 +237,8 @@ window.Mercury = {
     // **Note:** `:name` will be replaced with the snippet name in the urls (eg. /mercury/snippets/example/options.html)
     snippets: {
       method: 'POST',
-      optionsUrl: '/things-to-do/mercury/snippets/:name/options.html',
-      previewUrl: '/things-to-do/mercury/snippets/:name/preview.html'
+      optionsUrl: '/mercury/snippets/:name/options.html',
+      previewUrl: '/mercury/snippets/:name/preview.html'
       },
 
     // ## Image Uploading
@@ -270,7 +270,7 @@ window.Mercury = {
       allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
       maxFileSize: 1235242880,
       inputName: 'image[image]',
-      url: '/things-to-do/mercury/images',
+      url: '/mercury/images',
       handler: false
       },
 
@@ -307,7 +307,7 @@ window.Mercury = {
     // callback functions are executed within the scope of the given region, so you have access to all it's methods.
     behaviors: {
       //foreColor: function(selection, options) { selection.wrap('<span style="color:' + options.value.toHex() + '">', true) },
-      htmlEditor: function() { Mercury.modal('/things-to-do/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); }
+      htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); }
       },
 
     // ## Global Behaviors
@@ -363,7 +363,6 @@ window.Mercury = {
     // style the content and makes the pasted content look (and behave) the same as the original content.  This can be a
     // desired feature or an annoyance, so you can enable various sanitizing methods to clean the content when it's
     // pasted.
-      
     //
     // sanitize: Can be any of the following:
     // - false: no sanitizing is done, the content is pasted the exact same as it was copied by the user
