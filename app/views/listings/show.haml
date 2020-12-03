@@ -104,6 +104,20 @@
               .listing-description-youtube-wrapper
                 %iframe.listing-description-youtube-iframe{ title: t("listings.show.youtube_video_player"), width: 640, height:390, src: sanitize("https://www.youtube.com/embed/#{youtube_id}", tags:[]), frameborder: 0, allowfullscreen: true}
 
+    - unless (@listing.closed? && !current_user?(@listing.author)) || !@current_community.listing_comments_in_use
+      .view-item
+        #comments.discussion.overflow-allowed
+          %h2
+            = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
+            .text-with-icon
+              = t(".comments")
+              %span#comment_count= "(#{@listing.comments_count})"
+          #follow-links.follow-links
+            = render :partial => "follow_links"
+          #comment-list
+            = render :partial => "comment", :collection => @listing.comments
+          #comment-form
+            = render :partial => "comment_form"
 
 
     - @listing.custom_field_values.each do |custom_field_value|
@@ -123,23 +137,9 @@
                 = l @listing.created_at, :format => :short_date
 
 
-    - if !@current_community.private?
-      = render "social_buttons"
+    -#- if !@current_community.private?
+    -#  = render "social_buttons"
 
-    - unless (@listing.closed? && !current_user?(@listing.author)) || !@current_community.listing_comments_in_use
-      .view-item
-        #comments.discussion.overflow-allowed
-          %h2
-            = icon_tag("chat_bubble", ["icon-with_text icon-styling"])
-            .text-with-icon
-              = t(".comments")
-              %span#comment_count= "(#{@listing.comments_count})"
-          #follow-links.follow-links
-            = render :partial => "follow_links"
-          #comment-list
-            = render :partial => "comment", :collection => @listing.comments
-          #comment-form
-            = render :partial => "comment_form"
 
 
 
