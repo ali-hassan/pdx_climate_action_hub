@@ -130,7 +130,7 @@ module ApplicationHelper
       javascript_tag("$('#{target_id}').pageless(#{opts.to_json});")
     end
   end
-  
+
   # Class is selected if conversation type is currently selected
   def get_profile_extras_tab_class(tab_name)
     "inbox_tab_#{controller_name.eql?(tab_name) ? 'selected' : 'unselected'}"
