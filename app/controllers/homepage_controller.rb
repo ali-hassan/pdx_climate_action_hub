@@ -449,5 +449,4 @@ class HomepageController < ApplicationController
   def has_preauthorize_process?(processes)
     processes.any? { |p| p.process == :preauthorize }
   end
-
 end
