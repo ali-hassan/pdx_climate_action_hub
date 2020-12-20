@@ -154,7 +154,7 @@ class HomepageController < ApplicationController
                  seo_pagination_links: seo_pagination_links(params, @listings.current_page, @listings.total_pages))
       }.on_error { |e|
         flash[:error] = t("homepage.errors.search_engine_not_responding")
-        @listings = Listing.none.paginate(:per_page => 1, :page => 1)
+        @listings = Listing.none.paginate(:per_page => 15, :page => 1)
         render status: :internal_server_error,
                locals: locals.merge(
                  seo_pagination_links: seo_pagination_links(params, @listings.current_page, @listings.total_pages))
