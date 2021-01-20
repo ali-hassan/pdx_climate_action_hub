@@ -99,7 +99,7 @@ class HomepageController < ApplicationController
 
     search_result = find_listings(params: params,
                                   current_page: current_page,
-                                  listings_per_page: (current_page==1 && params[:category] == "learn" ? 170 : per_page),
+                                  listings_per_page: per_page,
                                   filter_params: compact_filter_params,
                                   includes: includes.to_set,
                                   location_search_in_use: location_in_use,
@@ -122,7 +122,7 @@ class HomepageController < ApplicationController
         @listings = listings # TODO Remove
 
         if @view_type == "grid" then
-          render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_in_use, width_class: " " }
+          render partial: "grid_item", collection: @listings.order("created_at asc"), as: :listing, locals: { show_distance: location_in_use, width_class: " " }
         elsif location_in_use
           render partial: "list_item_with_distance", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map, show_distance: location_in_use }
         else

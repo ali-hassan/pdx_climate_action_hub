@@ -163,7 +163,7 @@
               - else
                 = render partial: "list_item", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map }
           .home-loading-more
-            =# will_paginate(@listings)
+            = will_paginate(@listings)
             - item_container = '.home-fluid-thumbnail-grid'
             = pageless(@listings.total_pages, item_container, current_search_path_without_page, t('.loading_more_content'), current_page)
       - else
