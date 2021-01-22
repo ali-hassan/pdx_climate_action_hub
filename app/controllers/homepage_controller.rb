@@ -99,7 +99,7 @@ class HomepageController < ApplicationController
 
     search_result = find_listings(params: params,
                                   current_page: current_page,
-                                  listings_per_page: 20,
+                                  listings_per_page: per_page,
                                   filter_params: compact_filter_params,
                                   includes: includes.to_set,
                                   location_search_in_use: location_in_use,
