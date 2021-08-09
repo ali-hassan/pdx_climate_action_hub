@@ -207,10 +207,10 @@
 
       .row
         .col-12
-          - unless @near_by_listings.empty? rescue []
-            .row
-              %h5 Things to Do Nearby:
-            .row
-              .col-12
-                = render :partial => "listings/near_by_listings_grid", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id } }
+          -#- unless @near_by_listings.empty? rescue []
+          -#  .row
+          -#    %h5 Things to Do Nearby:
+          -#  .row
+          -#    .col-12
+          -#      = render :partial => "listings/near_by_listings_grid", :locals => { person: @person, limit: @per_page, listings:  @near_by_listings.delete_if { |list| list.id == @listing.id } }
           = render :partial => "origin", :locals => { :origin_loc => @listing.origin_loc }
