@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.6.5'
+ruby '2.6.2'
 
 gem 'rails', '5.2.3'
 
@@ -180,7 +180,7 @@ gem 'memoist'
 gem 'biz'
 gem 'ffi', '>= 1.9.25'
 gem 'rubyzip', '~> 1.2.2'
-gem 'bootsnap', require: false
+gem 'bootsnap', '1.4.3'
 gem 'daemons'
 
 group :deployment do
